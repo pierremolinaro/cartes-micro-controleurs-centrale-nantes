@@ -1,5 +1,5 @@
-#include "LiquidCrystal.h"
-#include "TimerOne.h"
+#include <LiquidCrystal.h>
+#include <TimerOne.h>
 
 LiquidCrystal lcd (18, 17, 16, 15, 14, 19); //liaison 4 bits de données
 

@@ -1,4 +1,4 @@
-#include "LiquidCrystal.h"
+#include <LiquidCrystal.h>
 
 LiquidCrystal lcd (18, 17, 16, 15, 14, 19); //liaison 4 bits de données
 
