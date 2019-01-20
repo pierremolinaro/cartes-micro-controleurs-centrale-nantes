@@ -13,7 +13,7 @@
 	<key>BOARD-LINE-WIDTH-UNIT</key>
 	<integer>90000</integer>
 	<key>BOARD-WIDTH</key>
-	<integer>1215000</integer>
+	<integer>1170000</integer>
 	<key>BOARD-WIDTH-UNIT</key>
 	<integer>90000</integer>
 	<key>COMPONENT-NAMES-BACK</key>
@@ -26,18 +26,18 @@
 	<array/>
 	<key>DRILLS</key>
 	<array>
-		<string>617700 659400 617700 659400 28575</string>
-		<string>471487 885825 471487 885825 73152</string>
-		<string>242887 885825 242887 885825 73152</string>
-		<string>471487 200026 471487 200026 73152</string>
-		<string>928687 885825 928687 885825 73152</string>
-		<string>928687 200026 928687 200026 73152</string>
-		<string>700087 885825 700087 885825 73152</string>
-		<string>242887 200026 242887 200026 73152</string>
-		<string>700087 200026 700087 200026 73152</string>
-		<string>611100 457200 611100 457200 28575</string>
 		<string>501000 549900 501000 549900 28575</string>
+		<string>617700 659400 617700 659400 28575</string>
 		<string>719100 568200 719100 568200 28575</string>
+		<string>928687 200026 928687 200026 73152</string>
+		<string>700087 200026 700087 200026 73152</string>
+		<string>471487 200026 471487 200026 73152</string>
+		<string>471487 885825 471487 885825 73152</string>
+		<string>242887 200026 242887 200026 73152</string>
+		<string>928687 885825 928687 885825 73152</string>
+		<string>242887 885825 242887 885825 73152</string>
+		<string>700087 885825 700087 885825 73152</string>
+		<string>611100 457200 611100 457200 28575</string>
 	</array>
 	<key>LINES-BACK</key>
 	<array/>
@@ -47,6 +47,26 @@
 	<array/>
 	<key>PACKAGES-FRONT</key>
 	<array>
+		<string>360808 314312 831724 314312 15875</string>
+		<string>360808 314312 360808 785227 15875</string>
+		<string>753101 452858 741758 460391 15875</string>
+		<string>741758 460391 728854 462902 15875</string>
+		<string>728854 462902 715951 460391 15875</string>
+		<string>715951 460391 704608 452858 15875</string>
+		<string>704608 452858 697075 441515 15875</string>
+		<string>697075 441515 694564 428612 15875</string>
+		<string>694564 428612 697075 415708 15875</string>
+		<string>697075 415708 704608 404365 15875</string>
+		<string>704608 404365 715951 396832 15875</string>
+		<string>715951 396832 728854 394321 15875</string>
+		<string>728854 394321 741758 396832 15875</string>
+		<string>741758 396832 753101 404365 15875</string>
+		<string>753101 404365 760634 415708 15875</string>
+		<string>760634 415708 763145 428612 15875</string>
+		<string>763145 428612 760634 441515 15875</string>
+		<string>760634 441515 753101 452858 15875</string>
+		<string>360808 785227 831724 785227 15875</string>
+		<string>831724 314312 831724 785227 15875</string>
 		<string>71436 1000126 1100137 1000126 15875</string>
 		<string>1100137 1000126 1100137 85725 15875</string>
 		<string>71436 485775 71436 85725 15875</string>
@@ -68,26 +88,6 @@
 		<string>123675 496324 108941 490687 15875</string>
 		<string>108941 490687 91528 487059 15875</string>
 		<string>91528 487059 71436 485775 15875</string>
-		<string>360808 314312 831724 314312 15875</string>
-		<string>360808 314312 360808 785227 15875</string>
-		<string>753101 452858 741758 460391 15875</string>
-		<string>741758 460391 728854 462902 15875</string>
-		<string>728854 462902 715951 460391 15875</string>
-		<string>715951 460391 704608 452858 15875</string>
-		<string>704608 452858 697075 441515 15875</string>
-		<string>697075 441515 694564 428612 15875</string>
-		<string>694564 428612 697075 415708 15875</string>
-		<string>697075 415708 704608 404365 15875</string>
-		<string>704608 404365 715951 396832 15875</string>
-		<string>715951 396832 728854 394321 15875</string>
-		<string>728854 394321 741758 396832 15875</string>
-		<string>741758 396832 753101 404365 15875</string>
-		<string>753101 404365 760634 415708 15875</string>
-		<string>760634 415708 763145 428612 15875</string>
-		<string>763145 428612 760634 441515 15875</string>
-		<string>760634 441515 753101 452858 15875</string>
-		<string>360808 785227 831724 785227 15875</string>
-		<string>831724 314312 831724 785227 15875</string>
 	</array>
 	<key>PADS-BACK</key>
 	<array>
@@ -101,62 +101,6 @@
 			<key>WIDTH</key>
 			<integer>118872</integer>
 			<key>X</key>
-			<integer>471487</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>242887</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>471487</integer>
-			<key>Y</key>
-			<integer>200026</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>928687</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
 			<integer>928687</integer>
 			<key>Y</key>
 			<integer>200026</integer>
@@ -172,6 +116,34 @@
 			<integer>118872</integer>
 			<key>X</key>
 			<integer>700087</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>471487</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>471487</integer>
 			<key>Y</key>
 			<integer>885825</integer>
 		</dict>
@@ -199,125 +171,41 @@
 			<key>WIDTH</key>
 			<integer>118872</integer>
 			<key>X</key>
+			<integer>928687</integer>
+			<key>Y</key>
+			<integer>885825</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>242887</integer>
+			<key>Y</key>
+			<integer>885825</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
 			<integer>700087</integer>
 			<key>Y</key>
-			<integer>200026</integer>
+			<integer>885825</integer>
 		</dict>
 	</array>
 	<key>PADS-FRONT</key>
 	<array>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>471487</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>242887</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>471487</integer>
-			<key>Y</key>
-			<integer>200026</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>928687</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>928687</integer>
-			<key>Y</key>
-			<integer>200026</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>700087</integer>
-			<key>Y</key>
-			<integer>885825</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>RECT</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>242887</integer>
-			<key>Y</key>
-			<integer>200026</integer>
-		</dict>
-		<dict>
-			<key>HEIGHT</key>
-			<integer>228600</integer>
-			<key>ROTATION</key>
-			<integer>0</integer>
-			<key>SHAPE</key>
-			<string>ROUND</string>
-			<key>WIDTH</key>
-			<integer>118872</integer>
-			<key>X</key>
-			<integer>700087</integer>
-			<key>Y</key>
-			<integer>200026</integer>
-		</dict>
 		<dict>
 			<key>HEIGHT</key>
 			<integer>153000</integer>
@@ -330,7 +218,7 @@
 			<key>X</key>
 			<integer>928654</integer>
 			<key>Y</key>
-			<integer>485761</integer>
+			<integer>600062</integer>
 		</dict>
 		<dict>
 			<key>HEIGHT</key>
@@ -344,7 +232,7 @@
 			<key>X</key>
 			<integer>261754</integer>
 			<key>Y</key>
-			<integer>714361</integer>
+			<integer>600062</integer>
 		</dict>
 		<dict>
 			<key>HEIGHT</key>
@@ -356,7 +244,7 @@
 			<key>WIDTH</key>
 			<integer>58500</integer>
 			<key>X</key>
-			<integer>928654</integer>
+			<integer>261754</integer>
 			<key>Y</key>
 			<integer>371462</integer>
 		</dict>
@@ -386,7 +274,7 @@
 			<key>X</key>
 			<integer>261754</integer>
 			<key>Y</key>
-			<integer>600062</integer>
+			<integer>714361</integer>
 		</dict>
 		<dict>
 			<key>HEIGHT</key>
@@ -414,7 +302,7 @@
 			<key>X</key>
 			<integer>928654</integer>
 			<key>Y</key>
-			<integer>600062</integer>
+			<integer>485761</integer>
 		</dict>
 		<dict>
 			<key>HEIGHT</key>
@@ -426,9 +314,121 @@
 			<key>WIDTH</key>
 			<integer>58500</integer>
 			<key>X</key>
-			<integer>261754</integer>
+			<integer>928654</integer>
 			<key>Y</key>
 			<integer>371462</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>928687</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>700087</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>471487</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>471487</integer>
+			<key>Y</key>
+			<integer>885825</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>RECT</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>242887</integer>
+			<key>Y</key>
+			<integer>200026</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>928687</integer>
+			<key>Y</key>
+			<integer>885825</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>242887</integer>
+			<key>Y</key>
+			<integer>885825</integer>
+		</dict>
+		<dict>
+			<key>HEIGHT</key>
+			<integer>228600</integer>
+			<key>ROTATION</key>
+			<integer>0</integer>
+			<key>SHAPE</key>
+			<string>ROUND</string>
+			<key>WIDTH</key>
+			<integer>118872</integer>
+			<key>X</key>
+			<integer>700087</integer>
+			<key>Y</key>
+			<integer>885825</integer>
 		</dict>
 	</array>
 	<key>TEXTS-LAYOUT-BACK</key>
@@ -441,47 +441,47 @@
 	<array/>
 	<key>TRACKS-BACK</key>
 	<array>
-		<string>719100 219000 719100 568200 20400</string>
+		<string>617700 803400 617700 659400 20400</string>
 		<string>471487 200026 471600 317700 20400</string>
-		<string>471487 885826 471600 579300 20400</string>
+		<string>700087 200026 719100 219000 20400</string>
 		<string>700087 885826 617700 803400 20400</string>
 		<string>471600 317700 611100 457200 20400</string>
-		<string>700087 200026 719100 219000 20400</string>
-		<string>617700 803400 617700 659400 20400</string>
 		<string>471600 579300 501000 549900 20400</string>
+		<string>471487 885826 471600 579300 20400</string>
+		<string>719100 219000 719100 568200 20400</string>
 	</array>
 	<key>TRACKS-FRONT</key>
 	<array>
-		<string>436800 485700 501000 549900 20400</string>
-		<string>381600 600000 441000 659400 20400</string>
-		<string>151800 794700 242887 885826 20400</string>
-		<string>750900 600000 719100 568200 20400</string>
-		<string>247200 200100 418500 371400 20400</string>
-		<string>639600 485700 611100 457200 20400</string>
-		<string>418500 371400 928655 371462 20400</string>
 		<string>261755 371462 157500 371400 20400</string>
-		<string>781200 738300 285900 738300 20400</string>
-		<string>151800 377100 151800 794700 20400</string>
 		<string>1038900 660600 1038900 310200 20400</string>
+		<string>151800 377100 151800 794700 20400</string>
+		<string>285900 738300 261755 714362 20400</string>
+		<string>261755 485762 436800 485700 20400</string>
+		<string>418500 371400 928655 371462 20400</string>
+		<string>261755 600062 381600 600000 20400</string>
 		<string>441000 659400 617700 659400 20400</string>
 		<string>242887 200026 247200 200100 20400</string>
-		<string>157500 371400 151800 377100 20400</string>
-		<string>261755 485762 436800 485700 20400</string>
-		<string>1038900 310200 928687 200026 20400</string>
+		<string>750900 600000 719100 568200 20400</string>
 		<string>928655 485762 639600 485700 20400</string>
-		<string>261755 600062 381600 600000 20400</string>
+		<string>639600 485700 611100 457200 20400</string>
 		<string>928655 714362 985200 714300 20400</string>
+		<string>151800 794700 242887 885826 20400</string>
+		<string>1038900 310200 928687 200026 20400</string>
+		<string>381600 600000 441000 659400 20400</string>
+		<string>247200 200100 418500 371400 20400</string>
+		<string>781200 738300 285900 738300 20400</string>
 		<string>928687 885826 781200 738300 20400</string>
-		<string>285900 738300 261755 714362 20400</string>
 		<string>928655 600062 750900 600000 20400</string>
 		<string>985200 714300 1038900 660600 20400</string>
+		<string>436800 485700 501000 549900 20400</string>
+		<string>157500 371400 151800 377100 20400</string>
 	</array>
 	<key>VIAS</key>
 	<array>
-		<string>617700 659400 91440</string>
-		<string>611100 457200 91440</string>
 		<string>501000 549900 91440</string>
+		<string>617700 659400 91440</string>
 		<string>719100 568200 91440</string>
+		<string>611100 457200 91440</string>
 	</array>
 </dict>
 </plist>
