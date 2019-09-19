@@ -1,0 +1,428 @@
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#                                                                                                                      *
+#           P R O G R A M M E    P O U R   L E    P I C    1 6 F 6 9 0    D E    L A    C A R T E                      *
+#                                                                                                                      *
+#                 A D A F R U I T    F E A T H E R    M 0    W I F I    A T W I N C    1 5 0 0                         *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+# RA0 : entrée logique, poussoir P0, actif bas                                                                         *
+# RA1 : entrée logique, poussoir P1, actif bas                                                                         *
+# RA2 : sortie logique, poussoir P2, actif bas                                                                         *
+# RA3 : utilisé pour le RESET                                                                                          *
+# RA4 : inutilisé                                                                                                      *
+# RA5 : inutilisé                                                                                                      *
+#                                                                                                                      *
+# RB4 : inutilisé                                                                                                      *
+# RB5 : entrée série asynchrone, en provenance du Feather                                                              *
+# RB6 : inutilisé                                                                                                      *
+# RB7 : sortie série asynchrone, vers le Feather                                                                       *
+#                                                                                                                      *
+# RC0 : LED 0 (rouge, active haute)                                                                                    *
+# RC1 : LED 1 (verte, active haute)                                                                                    *
+# RC2 : LED 2 (jaune, active haute)                                                                                    *
+# RC3 : LED 3 (bleue, active haute)                                                                                    *
+# RC4 : inutilisé                                                                                                      *
+# RC5 : clic de l'encodeur (actif bas)                                                                                 *
+# RC6 : entrée A de l'encodeur (actif bas)                                                                             *
+# RC7 : entrée B de l'encodeur (actif bas)                                                                             *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+midrange carte_adafruit_feather_m0_wifi_atwinc1500_firmware_16F690_prototype "16F690" :
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     C O N F I G U R A T I O N                                                                                        *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+configuration {
+  BOREN : Disabled
+  CP : Disabled
+  CPD : Disabled
+  FCMEN : Disabled
+  IESO : Disabled
+  MCLRE : Enabled
+  OSC : "INTOSCIO oscillator: I/O function on RA4/OSC2/CLKOUT pin, I/O function on RA5/OSC1/CLKIN"
+  PWRTE : Enabled
+  WDTE : Disabled
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     R A M                                                                                                            *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+ram gpr0 {
+#--- Réception série : gestion du buffer de réception (80 octets en page 1
+  byte nombre_dans_buffer_reception
+  byte pointeur_ecriture # Utilise par le sp d'interruption
+  byte pointeur_lecture # Utilise par le programme principal
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+ram gprnobnk {
+#--- Pour sauvegarder le contexte lors d'une interruption
+  byte saveIT1
+  byte saveIT2
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     I N T E R R U P T                                                                                                *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+interrupt contextsave saveIT1, saveIT2 {
+#--- Ecrire le pointeur d'écriture dans FSR
+  movf  pointeur_ecriture, W
+  movwf FSR
+#--- Effectuer le transfert
+  movf  RCREG, W
+  movwf INDF
+#--- Incrémenter le pointeur d'écriture
+  incf pointeur_ecriture
+#--- Si le pointeur d'écriture atteint 0xF0, le ramener à 0xA0
+  movf  pointeur_ecriture, W
+  sublw 0xF0
+  if (STATUS.Z)
+    movlw 0xA0
+    movwf pointeur_ecriture
+  end
+#--- Incrémenter le nombre de caractères dans le buffer
+  incf  nombre_dans_buffer_reception
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     M A I N                                                                                                          *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+noreturn routine main bank:requires 0 {
+#--- Effacer les données
+  movlw   0xA0 # Adresse début du buffer de réception
+  movwf   pointeur_ecriture
+  movwf   pointeur_lecture
+  clrf    nombre_dans_buffer_reception
+  clrf    étatCourantEntrées
+  clrf    émettreEntrées
+  clrf    incrémentEncodeur
+  movlw   0xFF
+  movwf   étatEncodeurA
+#--- Effacer les ports de sortie
+  clrf    PORTA
+  clrf    PORTB
+  clrf    PORTC
+#--- Aucune entrée analogique
+  banksel 2
+  clrf    ANSEL    # Page 61
+  clrf    ANSELH   # Page 61
+#---- Par défaut, l'oscillateur interne est à 4 MHz : passage à 8 MHz (attention au réglage de la liaison série)
+  banksel 1
+  bsf     OSCCON.IOSCF [0]
+#--- Activer les fonctions WPUA et WPUB (weak pull-ups sur les ports A et B)
+  bcf     OPTION_REG.nRABPU
+#--- Programmer le port A : tous les ports en entrée (RA3 est inaccessible, utilisé pour le RESET)
+  movlw   0xFF
+  movwf   TRISA
+#--- Activer les Weak pull-ups sur le port A
+  movwf   WPUA
+#--- Programmer le port B : seul RB7 est en sortie (0 1 1 1  x x x x)
+  movlw   0x7F
+  movwf   TRISB
+#--- Activer les Weak pull-ups sur le port B (sauf RB7)
+  banksel 2
+  movwf   WPUB
+  banksel 1
+#--- Programmer le port C : RC4 à RC7 en entrée (1 1 1 1 0 0 0 0)
+  movlw   0xF0
+  movwf   TRISC
+#----------- Programmer la liaison série (19200 bauds)
+#--- 1. Fixer la vitesse de transmission (page 164)
+  movlw  25 # En fait 19231 bauds
+  movwf SPBRG
+  bsf   TXSTA.BRGH # BRGH = 1, SYNC et BRG16 à 0 par défaut
+#--- 2. Activer le mode asynchrone
+  banksel 0
+  bsf   RCSTA.SPEN # SPEN à 1, SYNC à 0 par défaut
+  bsf   RCSTA.CREN
+#--- 3. Activer la réception
+  bsf   RCSTA.CREN
+#--- 4. Activer la transmission
+  banksel 1
+  bsf   TXSTA.TXEN
+  banksel 0
+#--- Activer l'interruption de réception série (page 39)
+  banksel 1
+  bsf     PIE1.RCIE
+  banksel 0
+#--- Autoriser les interruptions (pages 38 et 205)
+  bsf    INTCON.PEIE 
+  bsf    INTCON.GIE 
+#----------- Boucle infinie
+  forever
+  #---------------------------- Gérer l'encodeur
+    call ENCODEUR
+  #---------------------------- tester si il y a un caractère dans le buffer de réception
+    call RÉCEPTION_SÉRIE
+  #---------------------------- tester si il y a un nouvel état à émettre
+    call ÉMISSION_SÉRIE
+  
+  #--- Temporaire
+#    movlw 4 # allumer LED 0
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 5 # allumer LED 1
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 6 # allumer LED 2
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 7 # allumer LED 3
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 0 # éteindre LED 0
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 1 # éteindre LED 1
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 2 # éteindre LED 2
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+#    movlw 3 # éteindre LED 3
+#    call TRAITER_COMMANDE_LEDS
+#    call delai
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#ram gpr0 {
+#  byte delai_H
+#  byte delai_L
+#}
+#
+#
+#routine delai bank:requires 0 ensures 0 {
+#  clrf delai_H
+#  clrf delai_L
+#  do
+#    do
+#    while (decf delai_L NZ)
+#    end
+#  while (decf delai_H NZ)
+#  end
+#}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#      ENCODEUR                                                                                                        *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#! Encodeur
+
+
+ram gpr0 {
+  byte incrémentEncodeur # Initialisé à 0 dans main, nombre signé
+  byte étatEncodeurA     # Initialisé à 0xFF dans main
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+routine ENCODEUR bank:requires 0 ensures 0 {
+  if (étatEncodeurA.0 & !PORTA.5) # Front sur A
+    if (!PORTA.4) # incrémenter
+      incf incrémentEncodeur
+    else # Décrémenter
+      decf incrémentEncodeur
+    end
+  end
+#--- Mettre à jour l'état mémorisé de l'encodeur A
+  if (PORTA.5) 
+    bsf étatEncodeurA.0
+  else
+    bcf étatEncodeurA.0
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#      ÉMISSION SÉRIE                                                                                                  *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#! Émission série
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+# La donnée série est émise à chaque changement des entrées
+# Bit 0 : 0 --> poussoir P0 relâché, 1 --> appuyé
+# Bit 1 : 0 --> poussoir P1 relâché, 1 --> appuyé
+# Bit 2 : 0 --> poussoir P2 relâché, 1 --> appuyé
+# Bit 3 : 0 --> encodeur clic relâché, 1 --> appuyé
+# bit 4 : incrément encodeur: 0 --> +0, 1 --> +1
+# bit 5 : décrément encodeur: 0 --> -0, 1 --> -1
+# bit 6 et 7 : toujours à zéro
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+ram gpr0 {
+  byte étatCourantEntrées # Initialisé à 0 dans main
+  byte nouvelÉtatEntrées
+  byte émettreEntrées  # Initialisé à 0 dans main (seul le bit 0 est utilisé)
+  byte donnéeÀÉmettre
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+routine ÉMISSION_SÉRIE bank:requires 0 ensures 0 {
+#--- D'abord, tester si le buffer d'émission est vide
+  banksel 1
+  if (TXSTA.TRMT) # Transmit Shift Register empty
+    banksel 0
+  #--- Acquérir les entrées
+    comf PORTA, W
+    andlw 0x07
+    if !PORTB.4 : iorlw 0x08 # Clic encodeur
+    movwf nouvelÉtatEntrées
+    xorwf étatCourantEntrées, W
+    if !STATUS.Z : bsf émettreEntrées.0 # Changement
+  #--- Changement encodeur ?
+    movf incrémentEncodeur, W
+    if !STATUS.Z : bsf émettreEntrées.0 # Changement
+  #--- Émettre les nouvelles entrées ?
+    if (émettreEntrées.0)
+      bcf   émettreEntrées.0
+    #--- Mémoriser le nouvel état des entrées
+      movf  nouvelÉtatEntrées, W
+      movwf étatCourantEntrées
+      movwf donnéeÀÉmettre
+    #--- Entrer l'incrément ou de le décrément de l'encodeur
+      if (incrémentEncodeur.7) # Nombre négatif
+        incf incrémentEncodeur # L'incrémenter
+        bsf  donnéeÀÉmettre.4
+      else
+        movf incrémentEncodeur, W
+        if (!STATUS.Z) # Nombre non nul, donc positif en tenant compte du test précédent
+          decf incrémentEncodeur # L'incrémenter
+          bsf  donnéeÀÉmettre.5
+        end
+      end
+      movf  donnéeÀÉmettre, W
+      movwf TXREG # Transmettre le nouvel état
+    end
+  else
+    banksel 0
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#      RÉCEPTION SÉRIE                                                                                                 *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#! Réception série
+
+routine RÉCEPTION_SÉRIE bank:requires 0 ensures 0 {
+  movf nombre_dans_buffer_reception # Pour modifier Z
+  if (! STATUS.Z)
+  #--- Masquer les interruptions (pour pouvoir utilisé FSR, partagé avec le sp d'it
+    bcf    INTCON.GIE
+    nop
+    #--- Ecrire le pointeur de lecture dans FSR
+      movf  pointeur_lecture, W
+      movwf FSR
+    #--- Donnée du buffer -> W
+      movf  INDF, W
+  #--- Démasquer les interruptions
+    bsf    INTCON.GIE
+  #--- Traiter la donnée reçue (W contient la commande)
+    call   TRAITER_COMMANDE_LEDS
+  #--- Décrémenter le nombre dans le buffer
+    decf nombre_dans_buffer_reception
+  #--- Incrémenter le pointeur de lecture
+    incf pointeur_lecture
+  #--- Si le pointeur de lecture atteint 0xF0, le ramener à 0xA0
+    movf  pointeur_lecture, W
+    sublw 0xF0
+    if (STATUS.Z)
+      movlw 0xA0
+      movwf pointeur_lecture
+    end
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#                   COMMANDE LED                                                                                       *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#! Commande LED
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+ram gpr0 {
+  byte tempCommandeLed
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+# Lors de l'appel, W contient la commande à appliquer :
+#   - bits 7 à 3 : doivent être à 0
+#   - bit 2 : 1 --> allumer, 0 --> éteindre
+#   - bits 1 et 0 : 00 --> led 0 (rouge), 01 --> led 1 (verte), 10 --> led 2 (jaune), 11 --> led 3 (bleue)
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+# RC0 : LED 0 (rouge, active haute)                                                                                    *
+# RC1 : LED 1 (verte, active haute)                                                                                    *
+# RC2 : LED 2 (jaune, active haute)                                                                                    *
+# RC3 : LED 3 (bleue, active haute)                                                                                    *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+routine TRAITER_COMMANDE_LEDS bank:requires 0 ensures 0 {
+#--- Mémoriser la commande
+  movwf tempCommandeLed
+#--- Tester les bits 7 à 3, vérifier qu'ils sont à zéro
+  andlw 0b_1111_1000
+  if (STATUS.Z)
+  #--- Éteindre, ou allumer ?
+    if (tempCommandeLed.2) # Allumer
+      if (tempCommandeLed.1) # led 2 ou 3
+        if (tempCommandeLed.0) # led 3
+          bsf PORTC.3
+        else # led 2
+          bsf PORTC.2
+        end
+      else # led 0 ou 1
+        if (tempCommandeLed.0) # led 1
+          bsf PORTC.1
+        else # led 0
+          bsf PORTC.0
+        end
+      end
+    else # Éteindre
+      if (tempCommandeLed.1) # led 2 ou 3
+        if (tempCommandeLed.0) # led 3
+          bcf PORTC.3
+        else # led 2
+          bcf PORTC.2
+        end
+      else # led 0 ou 1
+        if (tempCommandeLed.0) # led 1
+          bcf PORTC.1
+        else # led 0
+          bcf PORTC.0
+        end
+      end
+    end
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+end

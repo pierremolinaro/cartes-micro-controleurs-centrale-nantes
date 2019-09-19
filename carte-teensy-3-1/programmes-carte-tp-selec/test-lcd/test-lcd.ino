@@ -20,4 +20,3 @@ void loop() {
  // gCompteur ++ ;
   digitalWrite (13, !digitalRead (13)) ; // Led Teensy
 }
-
