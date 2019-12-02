@@ -1,0 +1,1041 @@
+***********************************************************************************************************************
+*                                            MICROCONTROLLER CONFIGURATION                                            *
+***********************************************************************************************************************
+
+Register 'CONFIG1H' at 0x300001 set to 0x38
+  setting 'FCMEN' set to 0x0 ("Disabled")
+  setting 'FOSC' set to 0x8 ("Internal RC oscillator")
+  setting 'IESO' set to 0x0 ("Disabled")
+  setting 'PLLCFG' set to 0x10 ("Enabled")
+
+Register 'CONFIG1L' at 0x300000 set to 0x33
+  setting 'INTOSCSEL' set to 0x0 ("LF-INTOSC in Low-power mode during Sleep")
+  setting 'RETEN' set to 0x1 ("Disabled")
+  setting 'SOSCSEL' set to 0x10 ("Digital (SCLKI) mode")
+  setting 'XINST' set to 0x0 ("Disabled")
+
+Register 'CONFIG2H' at 0x300003 set to 0x0
+  setting 'WDTEN' set to 0x0 ("WDT disabled in hardware; SWDTEN bit disabled")
+  setting 'WDTPS' set to 0x0 ("1:1")
+
+Register 'CONFIG2L' at 0x300002 set to 0x59
+  setting 'BOREN' set to 0x0 ("Disabled in hardware, SBOREN disabled")
+  setting 'BORPWR' set to 0x40 ("BORMV set to high power level")
+  setting 'BORV' set to 0x18 ("1.8V")
+  setting 'PWRTEN' set to 0x1 ("Disabled")
+
+Register 'CONFIG3H' at 0x300005 set to 0x76
+  setting 'CANMX' set to 0x0 ("ECAN TX and RX pins are located on RC6 and RC7, respectively")
+  setting 'MCLRE' set to 0x0 ("MCLR Disabled, RG5 Enabled")
+  setting 'MSSPMSK' set to 0x0 ("5 bit address masking mode")
+
+Register 'CONFIG4L' at 0x300006 set to 0xEE
+  setting 'BBSIZ' set to 0x0 ("1K word Boot Block size")
+  setting 'DEBUG' set to 0x80 ("Disabled")
+  setting 'STVREN' set to 0x0 ("Disabled")
+
+Register 'CONFIG5H' at 0x300009 set to 0xFF
+  setting 'CPB' set to 0x40 ("Disabled")
+  setting 'CPD' set to 0x80 ("Disabled")
+
+Register 'CONFIG5L' at 0x300008 set to 0xF
+  setting 'CP0' set to 0x1 ("Disabled")
+  setting 'CP1' set to 0x2 ("Disabled")
+  setting 'CP2' set to 0x4 ("Disabled")
+  setting 'CP3' set to 0x8 ("Disabled")
+
+Register 'CONFIG6H' at 0x30000B set to 0xFF
+  setting 'WRTB' set to 0x40 ("Disabled")
+  setting 'WRTC' set to 0x20 ("Disabled")
+  setting 'WRTD' set to 0x80 ("Disabled")
+
+Register 'CONFIG6L' at 0x30000A set to 0xF
+  setting 'WRT0' set to 0x1 ("Disabled")
+  setting 'WRT1' set to 0x2 ("Disabled")
+  setting 'WRT2' set to 0x4 ("Disabled")
+  setting 'WRT3' set to 0x8 ("Disabled")
+
+Register 'CONFIG7H' at 0x30000D set to 0x7F
+  setting 'EBTRB' set to 0x40 ("Disabled")
+
+Register 'CONFIG7L' at 0x30000C set to 0xF
+  setting 'EBTR0' set to 0x1 ("Disabled")
+  setting 'EBTR1' set to 0x2 ("Disabled")
+  setting 'EBTR2' set to 0x4 ("Disabled")
+  setting 'EBTR3' set to 0x8 ("Disabled")
+
+***********************************************************************************************************************
+*                                                 DECLARED VARIABLES                                                  *
+***********************************************************************************************************************
+
+                                Variable Address
+                                   tempo 0x0
+
+***********************************************************************************************************************
+*                                                      CONSTANTS                                                      *
+***********************************************************************************************************************
+
+                                Constant Value
+                                RAM_SIZE 3648
+                                ROM_SIZE 65536
+
+***********************************************************************************************************************
+*                                          INTERMEDIATE BLOCK REPRESENTATION                                          *
+***********************************************************************************************************************
+
+LABEL .START, ORG 0x0:
+  (JUMP main)
+
+LABEL main:
+  BSF OSCCON, 4
+  BSF OSCTUNE, 6
+  MOVLB 0xF
+  CLRF ANCON0
+  CLRF ANCON1
+  SETF LATC
+  CLRF TRISC
+  BCF INTCON2, 7
+  SETF WPUB
+  SETF TRISB
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  CLRF tempo
+  (JUMP .L0)
+
+LABEL .L0:
+  DECF tempo, F Z ? JUMP .L2 : (JUMP .L1)
+
+LABEL .L1:
+  MOVLW 0x0 ; 0
+  (JUMP .L3)
+
+LABEL .L3:
+  ADDLW 0x1 ; 1
+  NZ ? (.L4) : .L5
+
+LABEL .L4:
+  JUMP .L3
+
+LABEL .L5:
+  JUMP .L0
+
+LABEL .L2:
+  (JUMP .L6)
+
+LABEL .L6:
+  PORTB.0 ? (JUMP .L7) : JUMP .L8
+
+LABEL .L7:
+  MOVLW 0x1 ; 1
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x4 ; 4
+  MOVWF LATA
+  (JUMP .L10)
+
+LABEL .L10:
+  PORTB.0 ? (JUMP .L11) : JUMP .L12
+
+LABEL .L11:
+  JUMP .L10
+
+LABEL .L12:
+  JUMP .L9
+
+LABEL .L8:
+  PORTB.1 ? (JUMP .L13) : JUMP .L14
+
+LABEL .L13:
+  MOVLW 0x2 ; 2
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L16)
+
+LABEL .L16:
+  PORTB.1 ? (JUMP .L17) : JUMP .L18
+
+LABEL .L17:
+  JUMP .L16
+
+LABEL .L18:
+  JUMP .L15
+
+LABEL .L14:
+  PORTB.2 ? (JUMP .L19) : JUMP .L20
+
+LABEL .L19:
+  MOVLW 0x4 ; 4
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x1 ; 1
+  MOVWF LATA
+  (JUMP .L22)
+
+LABEL .L22:
+  PORTB.2 ? (JUMP .L23) : JUMP .L24
+
+LABEL .L23:
+  JUMP .L22
+
+LABEL .L24:
+  JUMP .L21
+
+LABEL .L20:
+  PORTB.3 ? (JUMP .L25) : JUMP .L26
+
+LABEL .L25:
+  MOVLW 0x8 ; 8
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L28)
+
+LABEL .L28:
+  PORTB.3 ? (JUMP .L29) : JUMP .L30
+
+LABEL .L29:
+  JUMP .L28
+
+LABEL .L30:
+  JUMP .L27
+
+LABEL .L26:
+  PORTB.4 ? (JUMP .L31) : JUMP .L32
+
+LABEL .L31:
+  MOVLW 0x10 ; 16
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x20 ; 32
+  MOVWF LATA
+  (JUMP .L34)
+
+LABEL .L34:
+  PORTB.4 ? (JUMP .L35) : JUMP .L36
+
+LABEL .L35:
+  JUMP .L34
+
+LABEL .L36:
+  JUMP .L33
+
+LABEL .L32:
+  PORTB.5 ? (JUMP .L37) : JUMP .L38
+
+LABEL .L37:
+  MOVLW 0x20 ; 32
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L40)
+
+LABEL .L40:
+  PORTB.5 ? (JUMP .L41) : JUMP .L42
+
+LABEL .L41:
+  JUMP .L40
+
+LABEL .L42:
+  JUMP .L39
+
+LABEL .L38:
+  PORTB.6 ? (JUMP .L43) : JUMP .L44
+
+LABEL .L43:
+  MOVLW 0x40 ; 64
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L46)
+
+LABEL .L46:
+  PORTB.6 ? (JUMP .L47) : JUMP .L48
+
+LABEL .L47:
+  JUMP .L46
+
+LABEL .L48:
+  JUMP .L45
+
+LABEL .L44:
+  PORTB.7 ? (JUMP .L49) : JUMP .L50
+
+LABEL .L49:
+  MOVLW 0x80 ; 128
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  (JUMP .L52)
+
+LABEL .L52:
+  PORTB.7 ? (JUMP .L53) : JUMP .L54
+
+LABEL .L53:
+  JUMP .L52
+
+LABEL .L54:
+  JUMP .L51
+
+LABEL .L50:
+  (JUMP .L51)
+
+LABEL .L51:
+  (JUMP .L45)
+
+LABEL .L45:
+  (JUMP .L39)
+
+LABEL .L39:
+  (JUMP .L33)
+
+LABEL .L33:
+  (JUMP .L27)
+
+LABEL .L27:
+  (JUMP .L21)
+
+LABEL .L21:
+  (JUMP .L15)
+
+LABEL .L15:
+  (JUMP .L9)
+
+LABEL .L9:
+  SETF LATC
+  SETF TRISA
+  JUMP .L6
+
+LABEL _computed_goto_4:
+  ADDWF WREG, W
+  (JUMP _computed_goto_2)
+
+LABEL _computed_goto_2:
+  ADDWF WREG, W
+  ADDWF TOSL, F
+  MOVLW 0x0 ; 0
+  ADDWFC TOSH, F
+  ADDWFC TOSU, F
+  RETURN
+
+***********************************************************************************************************************
+*                                          BLOCK REPRESENTATION OPTIMIZATION                                          *
+***********************************************************************************************************************
+
+Optimization flags:
+  [D] Dead code elimination: always enabled
+  [E] Empty routine elimination: enabled
+  [e] In Computed RCALL, empty routine call replaced by BLANK: enabled
+  [I] Call to one instruction routine replaced by instruction: enabled
+  [i] In Computed RCALL, rcall to one instruction routine replaced by instruction: enabled
+  [J] JSR followed by RETURN replaced by JUMP: enabled
+  [M] MOVLW followed by RETURN replaced by RETLW: enabled
+  [P] JUMP propagation: always enabled
+  [R] Call to RETLW replaced by MOVLW: enabled
+  [U] Useless test elimination: always enabled
+
+--- Pass 1 (59 blocks)
+  [P] .L0: JUMP .L2 -> JUMP .L6
+  [P] .L10: JUMP .L11 -> JUMP .L10
+  [P] .L10: JUMP .L12 -> JUMP .L9
+  [P] .L16: JUMP .L17 -> JUMP .L16
+  [P] .L16: JUMP .L18 -> JUMP .L15
+  [P] .L18: JUMP .L15 -> JUMP .L9
+  [P] .L22: JUMP .L23 -> JUMP .L22
+  [P] .L22: JUMP .L24 -> JUMP .L21
+  [P] .L24: JUMP .L21 -> JUMP .L15
+  [P] .L28: JUMP .L29 -> JUMP .L28
+  [P] .L28: JUMP .L30 -> JUMP .L27
+  [P] .L30: JUMP .L27 -> JUMP .L21
+  [P] .L34: JUMP .L35 -> JUMP .L34
+  [P] .L34: JUMP .L36 -> JUMP .L33
+  [P] .L36: JUMP .L33 -> JUMP .L27
+  [P] .L40: JUMP .L41 -> JUMP .L40
+  [P] .L40: JUMP .L42 -> JUMP .L39
+  [P] .L42: JUMP .L39 -> JUMP .L33
+  [P] .L46: JUMP .L47 -> JUMP .L46
+  [P] .L46: JUMP .L48 -> JUMP .L45
+  [P] .L48: JUMP .L45 -> JUMP .L39
+  [P] .L44: JUMP .L50 -> JUMP .L51
+  [P] .L52: JUMP .L53 -> JUMP .L52
+  [P] .L52: JUMP .L54 -> JUMP .L51
+  [P] .L54: JUMP .L51 -> JUMP .L45
+  [P] .L50: JUMP .L51 -> JUMP .L45
+  [P] .L51: JUMP .L45 -> JUMP .L39
+  [P] .L45: JUMP .L39 -> JUMP .L33
+  [P] .L39: JUMP .L33 -> JUMP .L27
+  [P] .L33: JUMP .L27 -> JUMP .L21
+  [P] .L27: JUMP .L21 -> JUMP .L15
+  [P] .L21: JUMP .L15 -> JUMP .L9
+  [D] _computed_goto_4: not referenced, deleted
+  [D] _computed_goto_2: not referenced, deleted
+
+--- Pass 2 (57 blocks)
+  [D] .L2: not referenced, deleted
+  [D] .L11: not referenced, deleted
+  [D] .L12: not referenced, deleted
+  [P] .L16: JUMP .L15 -> JUMP .L9
+  [D] .L17: not referenced, deleted
+  [D] .L18: not referenced, deleted
+  [P] .L22: JUMP .L21 -> JUMP .L9
+  [D] .L23: not referenced, deleted
+  [D] .L24: not referenced, deleted
+  [P] .L28: JUMP .L27 -> JUMP .L15
+  [D] .L29: not referenced, deleted
+  [D] .L30: not referenced, deleted
+  [P] .L34: JUMP .L33 -> JUMP .L21
+  [D] .L35: not referenced, deleted
+  [D] .L36: not referenced, deleted
+  [P] .L40: JUMP .L39 -> JUMP .L27
+  [D] .L41: not referenced, deleted
+  [D] .L42: not referenced, deleted
+  [P] .L46: JUMP .L45 -> JUMP .L33
+  [D] .L47: not referenced, deleted
+  [D] .L48: not referenced, deleted
+  [P] .L44: JUMP .L51 -> JUMP .L39
+  [P] .L52: JUMP .L51 -> JUMP .L39
+  [D] .L53: not referenced, deleted
+  [D] .L54: not referenced, deleted
+  [D] .L50: not referenced, deleted
+  [P] .L51: JUMP .L39 -> JUMP .L27
+  [P] .L45: JUMP .L33 -> JUMP .L21
+  [P] .L39: JUMP .L27 -> JUMP .L15
+  [P] .L33: JUMP .L21 -> JUMP .L9
+  [P] .L27: JUMP .L15 -> JUMP .L9
+
+--- Pass 3 (39 blocks)
+  [P] .L28: JUMP .L15 -> JUMP .L9
+  [P] .L34: JUMP .L21 -> JUMP .L9
+  [P] .L40: JUMP .L27 -> JUMP .L9
+  [P] .L46: JUMP .L33 -> JUMP .L9
+  [P] .L44: JUMP .L39 -> JUMP .L15
+  [P] .L52: JUMP .L39 -> JUMP .L15
+  [D] .L51: not referenced, deleted
+  [D] .L45: not referenced, deleted
+  [P] .L39: JUMP .L15 -> JUMP .L9
+
+--- Pass 4 (37 blocks)
+  [P] .L44: JUMP .L15 -> JUMP .L9
+  [P] .L52: JUMP .L15 -> JUMP .L9
+  [D] .L39: not referenced, deleted
+  [D] .L33: not referenced, deleted
+  [D] .L27: not referenced, deleted
+  [D] .L21: not referenced, deleted
+
+--- Pass 5 (33 blocks)
+  [D] .L15: not referenced, deleted
+
+--- Pass 6 (32 blocks)
+  No optimization.
+
+***********************************************************************************************************************
+*                                     OPTIMIZED INTERMEDIATE BLOCK REPRESENTATION                                     *
+***********************************************************************************************************************
+
+LABEL .START, ORG 0x0:
+  (JUMP main)
+
+LABEL main:
+  BSF OSCCON, 4
+  BSF OSCTUNE, 6
+  MOVLB 0xF
+  CLRF ANCON0
+  CLRF ANCON1
+  SETF LATC
+  CLRF TRISC
+  BCF INTCON2, 7
+  SETF WPUB
+  SETF TRISB
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  CLRF tempo
+  (JUMP .L0)
+
+LABEL .L0:
+  DECF tempo, F Z ? JUMP .L6 : (JUMP .L1)
+
+LABEL .L1:
+  MOVLW 0x0 ; 0
+  (JUMP .L3)
+
+LABEL .L3:
+  ADDLW 0x1 ; 1
+  NZ ? (.L4) : .L5
+
+LABEL .L4:
+  JUMP .L3
+
+LABEL .L5:
+  JUMP .L0
+
+LABEL .L6:
+  PORTB.0 ? (JUMP .L7) : JUMP .L8
+
+LABEL .L7:
+  MOVLW 0x1 ; 1
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x4 ; 4
+  MOVWF LATA
+  (JUMP .L10)
+
+LABEL .L10:
+  PORTB.0 ? JUMP .L10 : JUMP .L9
+
+LABEL .L8:
+  PORTB.1 ? (JUMP .L13) : JUMP .L14
+
+LABEL .L13:
+  MOVLW 0x2 ; 2
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L16)
+
+LABEL .L16:
+  PORTB.1 ? JUMP .L16 : JUMP .L9
+
+LABEL .L14:
+  PORTB.2 ? (JUMP .L19) : JUMP .L20
+
+LABEL .L19:
+  MOVLW 0x4 ; 4
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x1 ; 1
+  MOVWF LATA
+  (JUMP .L22)
+
+LABEL .L22:
+  PORTB.2 ? JUMP .L22 : JUMP .L9
+
+LABEL .L20:
+  PORTB.3 ? (JUMP .L25) : JUMP .L26
+
+LABEL .L25:
+  MOVLW 0x8 ; 8
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L28)
+
+LABEL .L28:
+  PORTB.3 ? JUMP .L28 : JUMP .L9
+
+LABEL .L26:
+  PORTB.4 ? (JUMP .L31) : JUMP .L32
+
+LABEL .L31:
+  MOVLW 0x10 ; 16
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x20 ; 32
+  MOVWF LATA
+  (JUMP .L34)
+
+LABEL .L34:
+  PORTB.4 ? JUMP .L34 : JUMP .L9
+
+LABEL .L32:
+  PORTB.5 ? (JUMP .L37) : JUMP .L38
+
+LABEL .L37:
+  MOVLW 0x20 ; 32
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L40)
+
+LABEL .L40:
+  PORTB.5 ? JUMP .L40 : JUMP .L9
+
+LABEL .L38:
+  PORTB.6 ? (JUMP .L43) : JUMP .L44
+
+LABEL .L43:
+  MOVLW 0x40 ; 64
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L46)
+
+LABEL .L46:
+  PORTB.6 ? JUMP .L46 : JUMP .L9
+
+LABEL .L44:
+  PORTB.7 ? (JUMP .L49) : JUMP .L9
+
+LABEL .L49:
+  MOVLW 0x80 ; 128
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  (JUMP .L52)
+
+LABEL .L52:
+  PORTB.7 ? JUMP .L52 : (JUMP .L9)
+
+LABEL .L9:
+  SETF LATC
+  SETF TRISA
+  JUMP .L6
+
+***********************************************************************************************************************
+*                                             BLOCK ORDERING OPTIMIZATION                                             *
+***********************************************************************************************************************
+
+Block ordering optimization:
+  count before optimization: 10
+  count after optimization: 10
+
+***********************************************************************************************************************
+*                                 ORDERED OPTIMIZED INTERMEDIATE BLOCK REPRESENTATION                                 *
+***********************************************************************************************************************
+
+LABEL .START, ORG 0x0:
+  (JUMP main)
+
+LABEL main:
+  BSF OSCCON, 4
+  BSF OSCTUNE, 6
+  MOVLB 0xF
+  CLRF ANCON0
+  CLRF ANCON1
+  SETF LATC
+  CLRF TRISC
+  BCF INTCON2, 7
+  SETF WPUB
+  SETF TRISB
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  CLRF tempo
+  (JUMP .L0)
+
+LABEL .L0:
+  DECF tempo, F Z ? JUMP .L6 : (JUMP .L1)
+
+LABEL .L1:
+  MOVLW 0x0 ; 0
+  (JUMP .L3)
+
+LABEL .L3:
+  ADDLW 0x1 ; 1
+  NZ ? .L4 : (.L5)
+
+LABEL .L5:
+  JUMP .L0
+
+LABEL .L4:
+  JUMP .L3
+
+LABEL .L6:
+  PORTB.0 ? JUMP .L7 : (JUMP .L8)
+
+LABEL .L8:
+  PORTB.1 ? JUMP .L13 : (JUMP .L14)
+
+LABEL .L14:
+  PORTB.2 ? JUMP .L19 : (JUMP .L20)
+
+LABEL .L20:
+  PORTB.3 ? JUMP .L25 : (JUMP .L26)
+
+LABEL .L26:
+  PORTB.4 ? JUMP .L31 : (JUMP .L32)
+
+LABEL .L32:
+  PORTB.5 ? JUMP .L37 : (JUMP .L38)
+
+LABEL .L38:
+  PORTB.6 ? JUMP .L43 : (JUMP .L44)
+
+LABEL .L44:
+  PORTB.7 ? (JUMP .L49) : JUMP .L9
+
+LABEL .L49:
+  MOVLW 0x80 ; 128
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x80 ; 128
+  MOVWF LATA
+  (JUMP .L52)
+
+LABEL .L52:
+  PORTB.7 ? JUMP .L52 : JUMP .L9
+
+LABEL .L43:
+  MOVLW 0x40 ; 64
+  MOVWF LATC
+  MOVLW 0x3F ; 63
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L46)
+
+LABEL .L46:
+  PORTB.6 ? JUMP .L46 : JUMP .L9
+
+LABEL .L37:
+  MOVLW 0x20 ; 32
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x40 ; 64
+  MOVWF LATA
+  (JUMP .L40)
+
+LABEL .L40:
+  PORTB.5 ? JUMP .L40 : JUMP .L9
+
+LABEL .L31:
+  MOVLW 0x10 ; 16
+  MOVWF LATC
+  MOVLW 0x9F ; 159
+  MOVWF TRISA
+  MOVLW 0x20 ; 32
+  MOVWF LATA
+  (JUMP .L34)
+
+LABEL .L34:
+  PORTB.4 ? JUMP .L34 : JUMP .L9
+
+LABEL .L25:
+  MOVLW 0x8 ; 8
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L28)
+
+LABEL .L28:
+  PORTB.3 ? JUMP .L28 : JUMP .L9
+
+LABEL .L19:
+  MOVLW 0x4 ; 4
+  MOVWF LATC
+  MOVLW 0xFC ; 252
+  MOVWF TRISA
+  MOVLW 0x1 ; 1
+  MOVWF LATA
+  (JUMP .L22)
+
+LABEL .L22:
+  PORTB.2 ? JUMP .L22 : JUMP .L9
+
+LABEL .L13:
+  MOVLW 0x2 ; 2
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x2 ; 2
+  MOVWF LATA
+  (JUMP .L16)
+
+LABEL .L16:
+  PORTB.1 ? JUMP .L16 : JUMP .L9
+
+LABEL .L7:
+  MOVLW 0x1 ; 1
+  MOVWF LATC
+  MOVLW 0xF9 ; 249
+  MOVWF TRISA
+  MOVLW 0x4 ; 4
+  MOVWF LATA
+  (JUMP .L10)
+
+LABEL .L10:
+  PORTB.0 ? JUMP .L10 : (JUMP .L9)
+
+LABEL .L9:
+  SETF LATC
+  SETF TRISA
+  JUMP .L6
+
+***********************************************************************************************************************
+*                                            CLUSTER ORDERING OPTIMIZATION                                            *
+***********************************************************************************************************************
+
+Cluster ordering optimization (1 cluster):
+
+Pass 1:
+
+***********************************************************************************************************************
+*                                                RELATIVES RESOLUTION                                                 *
+***********************************************************************************************************************
+
+Pass 1:
+  No conversion.
+
+***********************************************************************************************************************
+*                                                 STACK COMPUTATIONS                                                  *
+***********************************************************************************************************************
+
+Levels Routine
+     0 .START
+
+***********************************************************************************************************************
+*                                                   CODE GENERATION                                                   *
+***********************************************************************************************************************
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00000                         ORG 0x0                                            LABEL .START, ORG 0x0
+00000                         .START:                                            
+00000                                                                            (JUMP main)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00000                         main:                                              LABEL main
+00000  88D3                       BSF OSCCON, 4                                  BSF OSCCON, 4
+00002  8C9B                       BSF OSCTUNE, 6                                 BSF OSCTUNE, 6
+00004  010F                       MOVLB 0xF                                      MOVLB 0xF
+00006  6B5D                       CLRF ANCON0                                    CLRF ANCON0
+00008  6B5C                       CLRF ANCON1                                    CLRF ANCON1
+0000A  688B                       SETF LATC                                      SETF LATC
+0000C  6A94                       CLRF TRISC                                     CLRF TRISC
+0000E  9EF1                       BCF INTCON2, 7                                 BCF INTCON2, 7
+00010  695B                       SETF WPUB                                      SETF WPUB
+00012  6893                       SETF TRISB                                     SETF TRISB
+00014  0E3F                       MOVLW 0x3F ; 63                                MOVLW 0x3F ; 63
+00016  6E92                       MOVWF TRISA                                    MOVWF TRISA
+00018  0E80                       MOVLW 0x80 ; 128                               MOVLW 0x80 ; 128
+0001A  6E89                       MOVWF LATA                                     MOVWF LATA
+0001C  6A00                       CLRF tempo                                     CLRF tempo
+0001E                                                                            (JUMP .L0)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0001E                         .L0:                                               LABEL .L0
+0001E  4E00                       DCFSNZ tempo, F                                DECF tempo, F Z ? JUMP .L6 : (JUMP .L1)
+00020  D005                       BRA .L6                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00022                         .L1:                                               LABEL .L1
+00022  0E00                       MOVLW 0x0 ; 0                                  MOVLW 0x0 ; 0
+00024                                                                            (JUMP .L3)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00024                         .L3:                                               LABEL .L3
+00024  0F01                       ADDLW 0x1 ; 1                                  ADDLW 0x1 ; 1
+00026  E101                       BNZ .L4                                        NZ ? .L4 : (.L5)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00028                         .L5:                                               LABEL .L5
+00028  D7FA                       BRA .L0                                        JUMP .L0
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0002A                         .L4:                                               LABEL .L4
+0002A  D7FC                       BRA .L3                                        JUMP .L3
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0002C                         .L6:                                               LABEL .L6
+0002C  A081                       BTFSS PORTB, 0                                 PORTB.0 ? JUMP .L7 : (JUMP .L8)
+0002E  D04D                       BRA .L7                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00030                         .L8:                                               LABEL .L8
+00030  A281                       BTFSS PORTB, 1                                 PORTB.1 ? JUMP .L13 : (JUMP .L14)
+00032  D042                       BRA .L13                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00034                         .L14:                                              LABEL .L14
+00034  A481                       BTFSS PORTB, 2                                 PORTB.2 ? JUMP .L19 : (JUMP .L20)
+00036  D037                       BRA .L19                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00038                         .L20:                                              LABEL .L20
+00038  A681                       BTFSS PORTB, 3                                 PORTB.3 ? JUMP .L25 : (JUMP .L26)
+0003A  D02C                       BRA .L25                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0003C                         .L26:                                              LABEL .L26
+0003C  A881                       BTFSS PORTB, 4                                 PORTB.4 ? JUMP .L31 : (JUMP .L32)
+0003E  D021                       BRA .L31                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00040                         .L32:                                              LABEL .L32
+00040  AA81                       BTFSS PORTB, 5                                 PORTB.5 ? JUMP .L37 : (JUMP .L38)
+00042  D016                       BRA .L37                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00044                         .L38:                                              LABEL .L38
+00044  AC81                       BTFSS PORTB, 6                                 PORTB.6 ? JUMP .L43 : (JUMP .L44)
+00046  D00B                       BRA .L43                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00048                         .L44:                                              LABEL .L44
+00048  BE81                       BTFSC PORTB, 7                                 PORTB.7 ? (JUMP .L49) : JUMP .L9
+0004A  D047                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0004C                         .L49:                                              LABEL .L49
+0004C  0E80                       MOVLW 0x80 ; 128                               MOVLW 0x80 ; 128
+0004E  6E8B                       MOVWF LATC                                     MOVWF LATC
+00050  0E3F                       MOVLW 0x3F ; 63                                MOVLW 0x3F ; 63
+00052  6E92                       MOVWF TRISA                                    MOVWF TRISA
+00054  0E80                       MOVLW 0x80 ; 128                               MOVLW 0x80 ; 128
+00056  6E89                       MOVWF LATA                                     MOVWF LATA
+00058                                                                            (JUMP .L52)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00058                         .L52:                                              LABEL .L52
+00058  AE81                       BTFSS PORTB, 7                                 PORTB.7 ? JUMP .L52 : JUMP .L9
+0005A  D7FE                       BRA .L52                                       
+0005C  D03E                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0005E                         .L43:                                              LABEL .L43
+0005E  0E40                       MOVLW 0x40 ; 64                                MOVLW 0x40 ; 64
+00060  6E8B                       MOVWF LATC                                     MOVWF LATC
+00062  0E3F                       MOVLW 0x3F ; 63                                MOVLW 0x3F ; 63
+00064  6E92                       MOVWF TRISA                                    MOVWF TRISA
+00066  0E40                       MOVLW 0x40 ; 64                                MOVLW 0x40 ; 64
+00068  6E89                       MOVWF LATA                                     MOVWF LATA
+0006A                                                                            (JUMP .L46)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0006A                         .L46:                                              LABEL .L46
+0006A  AC81                       BTFSS PORTB, 6                                 PORTB.6 ? JUMP .L46 : JUMP .L9
+0006C  D7FE                       BRA .L46                                       
+0006E  D035                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00070                         .L37:                                              LABEL .L37
+00070  0E20                       MOVLW 0x20 ; 32                                MOVLW 0x20 ; 32
+00072  6E8B                       MOVWF LATC                                     MOVWF LATC
+00074  0E9F                       MOVLW 0x9F ; 159                               MOVLW 0x9F ; 159
+00076  6E92                       MOVWF TRISA                                    MOVWF TRISA
+00078  0E40                       MOVLW 0x40 ; 64                                MOVLW 0x40 ; 64
+0007A  6E89                       MOVWF LATA                                     MOVWF LATA
+0007C                                                                            (JUMP .L40)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0007C                         .L40:                                              LABEL .L40
+0007C  AA81                       BTFSS PORTB, 5                                 PORTB.5 ? JUMP .L40 : JUMP .L9
+0007E  D7FE                       BRA .L40                                       
+00080  D02C                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00082                         .L31:                                              LABEL .L31
+00082  0E10                       MOVLW 0x10 ; 16                                MOVLW 0x10 ; 16
+00084  6E8B                       MOVWF LATC                                     MOVWF LATC
+00086  0E9F                       MOVLW 0x9F ; 159                               MOVLW 0x9F ; 159
+00088  6E92                       MOVWF TRISA                                    MOVWF TRISA
+0008A  0E20                       MOVLW 0x20 ; 32                                MOVLW 0x20 ; 32
+0008C  6E89                       MOVWF LATA                                     MOVWF LATA
+0008E                                                                            (JUMP .L34)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+0008E                         .L34:                                              LABEL .L34
+0008E  A881                       BTFSS PORTB, 4                                 PORTB.4 ? JUMP .L34 : JUMP .L9
+00090  D7FE                       BRA .L34                                       
+00092  D023                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+00094                         .L25:                                              LABEL .L25
+00094  0E08                       MOVLW 0x8 ; 8                                  MOVLW 0x8 ; 8
+00096  6E8B                       MOVWF LATC                                     MOVWF LATC
+00098  0EFC                       MOVLW 0xFC ; 252                               MOVLW 0xFC ; 252
+0009A  6E92                       MOVWF TRISA                                    MOVWF TRISA
+0009C  0E02                       MOVLW 0x2 ; 2                                  MOVLW 0x2 ; 2
+0009E  6E89                       MOVWF LATA                                     MOVWF LATA
+000A0                                                                            (JUMP .L28)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000A0                         .L28:                                              LABEL .L28
+000A0  A681                       BTFSS PORTB, 3                                 PORTB.3 ? JUMP .L28 : JUMP .L9
+000A2  D7FE                       BRA .L28                                       
+000A4  D01A                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000A6                         .L19:                                              LABEL .L19
+000A6  0E04                       MOVLW 0x4 ; 4                                  MOVLW 0x4 ; 4
+000A8  6E8B                       MOVWF LATC                                     MOVWF LATC
+000AA  0EFC                       MOVLW 0xFC ; 252                               MOVLW 0xFC ; 252
+000AC  6E92                       MOVWF TRISA                                    MOVWF TRISA
+000AE  0E01                       MOVLW 0x1 ; 1                                  MOVLW 0x1 ; 1
+000B0  6E89                       MOVWF LATA                                     MOVWF LATA
+000B2                                                                            (JUMP .L22)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000B2                         .L22:                                              LABEL .L22
+000B2  A481                       BTFSS PORTB, 2                                 PORTB.2 ? JUMP .L22 : JUMP .L9
+000B4  D7FE                       BRA .L22                                       
+000B6  D011                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000B8                         .L13:                                              LABEL .L13
+000B8  0E02                       MOVLW 0x2 ; 2                                  MOVLW 0x2 ; 2
+000BA  6E8B                       MOVWF LATC                                     MOVWF LATC
+000BC  0EF9                       MOVLW 0xF9 ; 249                               MOVLW 0xF9 ; 249
+000BE  6E92                       MOVWF TRISA                                    MOVWF TRISA
+000C0  0E02                       MOVLW 0x2 ; 2                                  MOVLW 0x2 ; 2
+000C2  6E89                       MOVWF LATA                                     MOVWF LATA
+000C4                                                                            (JUMP .L16)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000C4                         .L16:                                              LABEL .L16
+000C4  A281                       BTFSS PORTB, 1                                 PORTB.1 ? JUMP .L16 : JUMP .L9
+000C6  D7FE                       BRA .L16                                       
+000C8  D008                       BRA .L9                                        
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000CA                         .L7:                                               LABEL .L7
+000CA  0E01                       MOVLW 0x1 ; 1                                  MOVLW 0x1 ; 1
+000CC  6E8B                       MOVWF LATC                                     MOVWF LATC
+000CE  0EF9                       MOVLW 0xF9 ; 249                               MOVLW 0xF9 ; 249
+000D0  6E92                       MOVWF TRISA                                    MOVWF TRISA
+000D2  0E04                       MOVLW 0x4 ; 4                                  MOVLW 0x4 ; 4
+000D4  6E89                       MOVWF LATA                                     MOVWF LATA
+000D6                                                                            (JUMP .L10)
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000D6                         .L10:                                              LABEL .L10
+000D6  A081                       BTFSS PORTB, 0                                 PORTB.0 ? JUMP .L10 : (JUMP .L9)
+000D8  D7FE                       BRA .L10                                       
+
+Addr.  Code       Duration    Assembly                                           Intermediate Representation
+000DA                         .L9:                                               LABEL .L9
+000DA  688B                       SETF LATC                                      SETF LATC
+000DC  6892                       SETF TRISA                                     SETF TRISA
+000DE  D7A6                       BRA .L6                                        JUMP .L6
+
+***********************************************************************************************************************
+*                                                       TIMINGS                                                       *
+***********************************************************************************************************************
+
+                                                                                               Label: min ... max
+
+***********************************************************************************************************************
+

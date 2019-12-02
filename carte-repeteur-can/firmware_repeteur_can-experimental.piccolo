@@ -1,0 +1,332 @@
+pic18 firmware_repeteur_can "18F26K80" :
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#        C A R T E    R É P É T E U R    C A N                                                                         *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+# Version 1.0 : à partir du 23 novembre 2019                                                                           *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#    A F F E C T A T I O N    D E S    E N T R É E S / S O R T I E S                                                   *
+#                                                                                                                      *
+# RA0 : sortie charlieplexing #0 ;                                                                                     *
+# RA1 : sortie charlieplexing #0 ;                                                                                     *
+# RA2 : sortie charlieplexing #0 ;                                                                                     *
+# RA3 : nc                                                                                                             *
+# RA4 : condensateur tantal 10µF ;                                                                                     *
+# RA5 : sortie charlieplexing #1 ;                                                                                     *
+# RA6 : sortie charlieplexing #1 ;                                                                                     *
+# RA7 : sortie charlieplexing #1 ;                                                                                     *
+#                                                                                                                      *
+# RB0 : CAN RX accessoires 0 ;                                                                                         *
+# RB1 : CAN RX accessoires 1 ;                                                                                         *
+# RB2 : CAN RX accessoires 2 ;                                                                                         *
+# RB3 : CAN RX accessoires 3 ;                                                                                         *
+# RB4 : CAN RX poste 0 ;                                                                                               *
+# RB5 : CAN RX poste 1 ;                                                                                               *
+# RB6 : CAN RX poste 2 ;                                                                                               *
+# RB7 : CAN RX poste 3 ;                                                                                               *
+#                                                                                                                      *
+# RC0 : CAN TX accessoires 0 ;                                                                                         *
+# RC1 : CAN TX accessoires 1 ;                                                                                         *
+# RC2 : CAN TX accessoires 2 ;                                                                                         *
+# RC3 : CAN TX accessoires 3 ;                                                                                         *
+# RC4 : CAN TX poste 0 ;                                                                                               *
+# RC5 : CAN TX poste 1 ;                                                                                               *
+# RC6 : CAN TX poste 2 ;                                                                                               *
+# RC7 : CAN TX poste 3 ;                                                                                               *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     C O N T R Ô L E   D E S   L E D S                                                                                *
+#                                                                                                                      *
+#          Port     LED  Port à mettre à 1  Port à mettre à 0                                                          *
+# Accessoires 0      D4  RA2                RA1                                                                        *
+# Accessoires 1      D1  RA1                RA2                                                                        *
+# Accessoires 2      D2  RA0                RA1                                                                        *
+# Accessoires 3      D3  RA1                RA0                                                                        *
+#       Poste 0      D7  RA5                RA6                                                                        *
+#       Poste 1      D9  RA6                RA5                                                                        *
+#       Poste 2      D6  RA6                RA7                                                                        *
+#       Poste 3      D8  RA7                RA6                                                                         *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     C O N F I G U R A T I O N                                                                                        *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+configuration {
+  MCLRE: "MCLR Disabled, RG5 Enabled"
+  BBSIZ : "1K word Boot Block size"
+  BOREN : "Disabled in hardware, SBOREN disabled"
+  BORPWR : "BORMV set to high power level"
+  BORV : "1.8V"
+  CANMX : "ECAN TX and RX pins are located on RC6 and RC7, respectively"
+  CP0 : Disabled
+  CP1 : Disabled
+  CP2 : Disabled
+  CP3 : Disabled
+  DEBUG : Disabled
+  EBTR0 : Disabled
+  EBTR1 : Disabled
+  EBTR2 : Disabled
+  EBTR3 : Disabled
+  INTOSCSEL : "LF-INTOSC in Low-power mode during Sleep"
+  MSSPMSK : "5 bit address masking mode"
+  PWRTEN : Disabled
+  RETEN : Disabled
+  SOSCSEL : "Digital (SCLKI) mode"
+  STVREN : Disabled
+  WDTEN : "WDT disabled in hardware; SWDTEN bit disabled"
+  WRT0 : Disabled
+  WRT1 : Disabled
+  WRT2 : Disabled
+  WRT3 : Disabled
+  WDTPS : "1:1"
+  CPB : Disabled
+  CPD : Disabled
+  WRTB : Disabled
+  WRTC : Disabled
+  WRTD : Disabled
+  EBTRB : Disabled
+  FCMEN : Disabled
+  IESO : Disabled
+  XINST : Disabled
+#--- Sélection de l'oscillateur
+  FOSC : "Internal RC oscillator" # RA6 est un port d'E/S, horloge 8 MHz au démarrage
+  PLLCFG : Enabled # Ce paramètre est ignoré
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#        A C C E S S    R A M                                                                                          *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+ram accessram {
+  byte compteur
+  byte masque
+}
+
+ram gpr1 { byte accessoires0Actif [256] }
+
+ram gpr2 { byte accessoires1Actif [256] }
+unused byte accessoires1Actif
+
+ram gpr3 { byte accessoires2Actif [256] }
+unused byte accessoires2Actif
+
+ram gpr4 { byte accessoires3Actif [256] }
+unused byte accessoires3Actif
+
+ram gpr5 { byte poste0Actif [256] }
+unused byte poste0Actif
+
+ram gpr6 { byte poste1Actif [256] }
+unused byte poste1Actif
+
+ram gpr7 { byte poste2Actif [256] }
+unused byte poste2Actif
+
+ram gpr8 { byte poste3Actif [256] }
+unused byte poste3Actif
+
+ram gpr9 { byte tousInactifs [256] }
+unused byte tousInactifs
+
+ram gpr10 {
+  byte sorties [10] 
+}
+
+ram gpr11 {
+  byte leds [20] 
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+#                                                                                                                      *
+#     M A I N                                                                                                          *
+#                                                                                                                      *
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+#! Main
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+noreturn routine main bank:requires 0 {
+#---- Configurer l'horloge
+#     À la mise sous tension celle-ci est de 8 MHz
+  bsf OSCCON.4 # Passage à 16 MHz
+  bsf OSCTUNE.PLLEN # Activation de la PLL : l'horloge est à 64 MHz
+#--- Aucune entrée analogique
+  banksel  15
+  clrf     ANCON0
+  clrf     ANCON1
+#--- Configurer le port C en sortie, sortir 1
+  setf LATC
+  clrf TRISC
+#--- Configurer le port B en entrée, activer les pullup
+  bcf  INTCON2.nRBPU
+  setf WPUB
+  setf TRISB
+#--- Configurer le port A en sortie (leds)
+  clrf TRISA
+#--- Remplir les bancs 1 (accessoires 0 actif) à 8 (accessoires 7 actif)
+  movlw 1
+  movwf masque
+  lfsr  0, accessoires0Actif
+  do (ÉTAT : 0 ... 7)
+    setf compteur # 255 itérations
+    do
+    while (compteur NZ)
+      decf compteur
+      movf masque, W
+      andwf FSR0L, W
+      if (Z) # Bit à 0, on reste dans l'état
+        movlw ÉTAT+1 # On reste dans le même état
+        movwf POSTINC0
+      else
+        movlw 1
+        movwf INDF0
+        movf  FSR0L, W
+        do
+        while (!WREG.0)
+          rrncf WREG # Rotation à droite pour trouver le premier bit à zéro
+          incf  INDF0 # On incrémente le n° d'état
+        end
+        movf POSTINC0, W # Juste pour incrémenter le pointeur
+      end
+    end
+    movlw 9 # État repos
+    movwf POSTINC0 # Aucun inactif
+    rlncf masque
+  end
+#--- Remplir le banc 9 (état repos)
+  setf compteur # 255 itérations
+  do
+  while (compteur NZ)
+    decf compteur
+    movlw 1 # A priori on reste dans le même état
+    movwf INDF0
+    movf FSR0L, W
+    do
+    while (!WREG.0)
+      rrncf WREG # Rotation à droite pour trouver le premier bit à zéro
+      incf  INDF0 # On incrémente le n° d'état
+    end
+    movf POSTINC0, W # Juste pour incrémenter le pointeur
+  end
+  movlw 9 # État repos
+  movwf POSTINC0 # Aucun inactif
+#--- Vérifier que FSR0 == 0xA00
+  if (FSR0L NZ)
+    movlw 0x3F # TRISA pour état 7
+    movwf TRISA
+    movlw 0x80 # LATA pour état 7
+    movwf LATA
+    forever
+    end
+  end
+  movlw 0x0A
+  xorwf FSR0H, W
+  if (NZ)
+    movlw 0x3F # TRISA pour état 6
+    movwf TRISA
+    movlw 0x40 # LATA pour état 6
+    movwf LATA
+    forever
+    end
+  end
+#------------------------ Tableau des sorties
+  lfsr  0, sorties
+  setf  POSTINC0 # Entrée 0, jamais exploitée, les états vont de 1 à 9
+  movlw 0x01 # État 0, seul le bit 0 est à 1
+  movwf POSTINC0
+  movlw 0x02 # État 1, seul le bit 1 est à 1
+  movwf POSTINC0
+  movlw 0x04 # État 2, seul le bit 2 est à 1
+  movwf POSTINC0
+  movlw 0x08 # État 3, seul le bit 3 est à 1
+  movwf POSTINC0
+  movlw 0x10 # État 4, seul le bit 4 est à 1
+  movwf POSTINC0
+  movlw 0x20 # État 5, seul le bit 5 est à 1
+  movwf POSTINC0
+  movlw 0x40 # État 6, seul le bit 6 est à 1
+  movwf POSTINC0
+  movlw 0x80 # État 7, seul le bit 7 est à 1
+  movwf POSTINC0
+  setf  POSTINC0 # État repos, toutes les sorties à 1
+#------------------------ Tableau des leds
+  lfsr   0, leds
+  setf  POSTINC0 # Entrée 0, jamais exploitée, les états vont de 1 à 9
+  setf  POSTINC0 # Entrée 0, jamais exploitée, les états vont de 1 à 9
+# Accessoires 0      D4  RA2                RA1                                                                        *
+  movlw 0xF9 # TRISA pour état 0
+  movwf POSTINC0
+  movlw 0x04 # LATA pour état 0
+  movwf POSTINC0
+# Accessoires 1      D1  RA1                RA2                                                                        *
+  movlw 0xF9 # TRISA pour état 1
+  movwf POSTINC0
+  movlw 0x02 # LATA pour état 1
+  movwf POSTINC0
+# Accessoires 2      D2  RA0                RA1                                                                        *
+  movlw 0xFC # TRISA pour état 2
+  movwf POSTINC0
+  movlw 0x01 # LATA pour état 2
+  movwf POSTINC0
+# Accessoires 3      D3  RA1                RA0                                                                        *
+  movlw 0xFC # TRISA pour état 3
+  movwf POSTINC0
+  movlw 0x02 # LATA pour état 3
+  movwf POSTINC0
+#       Poste 0      D7  RA5                RA6                                                                        *
+  movlw 0x9F # TRISA pour état 4
+  movwf POSTINC0
+  movlw 0x20 # LATA pour état 4
+  movwf POSTINC0
+#       Poste 1      D9  RA6                RA5                                                                        *
+  movlw 0x9F # TRISA pour état 5
+  movwf POSTINC0
+  movlw 0x40 # LATA pour état 5
+  movwf POSTINC0
+#       Poste 2      D6  RA6                RA7                                                                        *
+  movlw 0x3F # TRISA pour état 6
+  movwf POSTINC0
+  movlw 0x40 # LATA pour état 6
+  movwf POSTINC0
+#       Poste 3      D8  RA7                RA6                                                                         *
+  movlw 0x3F # TRISA pour état 7
+  movwf POSTINC0
+  movlw 0x80 # LATA pour état 7
+  movwf POSTINC0
+#--- Etat repos
+  setf  POSTINC0
+  setf  POSTINC0
+#------------------------ Boucle infinie
+  lfsr   1, sorties
+  lfsr   2, leds
+  movlw  9 # État initial : repos
+  forever # W contient l'état courant
+  #--- Mettre à jour les leds
+    movwf FSR2L
+    addwf FSR2L
+    movff POSTINC2, TRISA
+    movff INDF2, LATA
+  #--- Calculer l'état suivant
+    movwf FSR0H
+    movff PORTB, FSR0L
+    movf  INDF0, W
+  #--- Écrire la sortie
+    movwf FSR1L
+    movff INDF1, LATC
+  end
+}
+
+#——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*
+
+end
