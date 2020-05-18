@@ -9,7 +9,7 @@ void setup() {
   pinMode (5, OUTPUT) ;
   pinMode (6, OUTPUT) ;
   pinMode (7, OUTPUT) ;
-  pinMode (13, OUTPUT) ;
+  pinMode (LED_BUILTIN, OUTPUT) ;
   pinMode (8, INPUT_PULLUP) ;
   pinMode (9, INPUT_PULLUP) ;
   pinMode (10, INPUT_PULLUP) ;
@@ -44,7 +44,7 @@ void encoderHandler (void) {
   gClignotement ++ ;
   if (gClignotement == 250) {
     gClignotement = 0 ;
-    digitalWrite (13, !digitalRead (13)) ;
+    digitalWrite (LED_BUILTIN, !digitalRead (LED_BUILTIN)) ;
   }
 }
 
@@ -66,9 +66,8 @@ void loop() {
   if (gEncodeurCache != gEncodeur) {
     gEncodeurCache = gEncodeur ;
     lcd.setCursor (0, 1) ;
-    lcd.print ("  ") ;
-    lcd.setCursor (0, 1) ;
     lcd.print (gEncodeurCache) ;
+    lcd.print (" ") ;
   }
   analogWrite (23, gPWM) ;
   gPWM = (gPWM + 3) % 64 ;
