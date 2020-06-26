@@ -1,0 +1,84 @@
+4 * Vis M3, 10 mm, plastique
+  https://fr.farnell.com/wurth-elektronik/97791003111/vis-tete-bombee-a-fente-m3-10mm/dp/3105534?st=vis%20M3
+
+8 * écrous M3mm plastique
+  https://fr.farnell.com/ettinger/02-05-036/ecrou-hex-nylon-6-m3/dp/2494507?st=%C3%A9crou%20M3
+
+17 br -> header 40 x 1, 100 mils
+  https://fr.farnell.com/harwin/m20-9774046/connecteur-header-40-voies-2-54mm/dp/3226006
+  Adaptateur -> 3
+  CAD -> 3
+  DAC -> 3
+  PWM -> 3, 3, 2
+
+4 * header 6 * 2, droit, 100 mils
+  https://fr.farnell.com/harwin/m20-9980646/embase-2-rangees-6-voies/dp/1022238
+
+4 * header 6 * 2, coudés, 100 mils
+  https://fr.farnell.com/samtec/tsw-106-08-t-d-ra/header-2-54mm-tht-r-a-12way/dp/2032873
+
+9 * capa 100 nF, 200 mils
+  https://fr.farnell.com/vishay/bfc237011104/condensateur-0-1-f-63v-10-pet/dp/1215508
+
+3 * supports DIL08
+  https://fr.farnell.com/multicomp/2227mc-08-03-18-f1/support-ci-dil-7-62mm-8voies/dp/1103844
+
+1 * support DIL14
+  https://fr.farnell.com/multicomp/2227mc-14-03-10-f1/support-ci-dil-7-62mm-14voies/dp/1103845
+
+1 * support DIL4
+  ?????
+
+2 * MCP3002
+  https://fr.farnell.com/microchip/mcp3002-i-p/convert-a-n-10bit-2-7v-2ch-spi/dp/1852015
+
+1 * MCP4902
+  https://fr.farnell.com/microchip/mcp4902-e-p/dac-8-bits-40-a-125-c/dp/3380272
+
+1 * MCP601
+  https://fr.farnell.com/microchip/mcp601-i-p/ic-cmos-op-amp/dp/1084271
+
+9 * 10 kΩ
+  https://fr.farnell.com/multicomp/mcf-0-25w-10k/resistance-couche-carbon-10k-0/dp/9339060
+
+3 * 150 Ω
+  https://fr.farnell.com/multicomp/mcf-0-25w-150r/resistance-0-25w-5-150r/dp/9339175
+
+11 * 470 Ω
+  https://fr.farnell.com/multicomp/mcf-0-25w-470r/resistance-0-25w-5-470r/dp/9339175
+
+1 * 15 Ω
+  https://fr.farnell.com/te-connectivity/cfr16j15r/resistance-carbon-15r-0-25w-5/dp/2329484
+
+1 * 2,2 kΩ
+  https://fr.farnell.com/multicomp/mcf-0-25w-2k2/resistance-couche-carbon-2k2-0/dp/9339302
+
+2 * 4,7 kΩ
+  https://fr.farnell.com/multicomp/mcf-0-25w-4k7/resistance-couche-carbon-4k7-0/dp/9339540
+
+1 * IRFD9024
+ https://fr.farnell.com/vishay/irfd9024pbf/transistor-mosfet-canal-p-boitier/dp/9103228
+
+2 * BC337
+ https://fr.farnell.com/multicomp/bc337/transistor-npn-to-92/dp/1574379
+
+2 * 1N4148
+ https://fr.farnell.com/vishay/1n4148-tap/diode-faible-signal-100v-do204/dp/2889103
+
+3 * BA159
+  ??
+
+2 * leds vertes
+  https://fr.farnell.com/broadcom-limited/hlmp-y502-f0000/led-3mm-green-40mcd-573nm/dp/1863180
+
+1 * led jaune (1,8V, 2 mA)
+  https://fr.farnell.com/broadcom-limited/hlmp-1719/led-3mm-jaune/dp/1003208
+
+1 * led rouge
+  https://fr.farnell.com/multicomp/mcl034pd/led-3mm-70-rouge/dp/1581112
+
+2 * poussoirs
+  ??
+
+1 * encodeur EC11
+  https://fr.farnell.com/alps/ec11e15204a3/encodeur-vertical-30-crans-15/dp/1520804
