@@ -20,8 +20,8 @@ void setup () {
 static uint32_t gInstantClignotement = 0 ;
 static uint32_t gInstantLectureAnalogique = 0 ;
 static int32_t  gValeurEncodeur = -1 ;
-static uint16_t gEntreeAnalogique0 = 0 ;
-static uint16_t gEntreeAnalogique1 = 0 ;
+static uint16_t gEntreeAnalogique0 = UINT16_MAX ;
+static uint16_t gEntreeAnalogique1 = UINT16_MAX ;
 
 //--------------------------------------------------------
 
@@ -38,20 +38,20 @@ void loop () {
   if (gValeurEncodeur != encodeur) {
     gValeurEncodeur = encodeur ;
     const uint8_t commande = (uint8_t (encodeur) << 2) | (uint8_t (encodeur) >> 4) ;
-    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE::S0, commande) ;
-    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE::S1, commande) ;
+    actionSortieAnalogique (SORTIE_ANALOGIQUE::S0, commande) ;
+    actionSortieAnalogique (SORTIE_ANALOGIQUE::S1, commande) ;
     lcd.setCursor (7, 1) ;
     lcd.print ("             ") ;
     lcd.setCursor (7, 1) ;
     lcd.print (commande) ;
     lcd.print (" -> ") ;
-    lcd.print (float (commande) * 0.04125) ;
+    lcd.print (float (commande) * 0.041412) ;
     lcd.print ("V") ;
   }
 //--- Troisième action : lire les entrées analogiques
   if (gInstantLectureAnalogique <= millis ()) {
     gInstantLectureAnalogique += 500 ;
-    const uint16_t entree0 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE::E0) ;
+    const uint16_t entree0 = lireEntreeAnalogique (ENTREE_ANALOGIQUE::E0) ;
     if (gEntreeAnalogique0 != entree0) {
       gEntreeAnalogique0 = entree0 ;
       lcd.setCursor (4, 2) ;
@@ -59,10 +59,10 @@ void loop () {
       lcd.setCursor (4, 2) ;
       lcd.print (entree0) ;
       lcd.print (" -> ") ;
-      lcd.print (float (entree0) * 0.010323) ;
+      lcd.print (float (entree0) * 0.0103226) ;
       lcd.print ("V") ;
     }
-    const uint16_t entree1 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE::E1) ;
+    const uint16_t entree1 = lireEntreeAnalogique (ENTREE_ANALOGIQUE::E1) ;
     if (gEntreeAnalogique1 != entree1) {
       gEntreeAnalogique1 = entree1 ;
       lcd.setCursor (4, 3) ;
@@ -70,7 +70,7 @@ void loop () {
       lcd.setCursor (4, 3) ;
       lcd.print (entree1) ;
       lcd.print (" -> ") ;
-      lcd.print (float (entree1) * 0.010323) ;
+      lcd.print (float (entree1) * 0.0103226) ;
       lcd.print ("V") ;
     }
   }

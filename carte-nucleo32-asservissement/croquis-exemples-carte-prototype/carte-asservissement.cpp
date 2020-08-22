@@ -347,71 +347,31 @@ void actionSortieLogique (const SORTIE_LOGIQUE inSortieLogique, const bool inVal
 }
 
 //-------------------------------------------------------------------------------------------------
-// SORTIES ANALOGIQUES UNIPOLAIRES
+// SORTIES ANALOGIQUES
 //-------------------------------------------------------------------------------------------------
 
-void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) {
+void actionSortieAnalogique (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) {
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE::S0 :
-    desactivationGPA (1 << 7) ; // Mode unipolaire (led éteinte)
     analogWrite (PA4, inValue);
     break ;
   case SORTIE_ANALOGIQUE::S1 :
-    desactivationGPB (1 << 7) ; // Mode unipolaire (led éteinte)
     analogWrite (PA5, inValue);
     break ;
   }
 }
 
 //-------------------------------------------------------------------------------------------------
-// ENTRÉES ANALOGIQUES BIPOLAIRES
+// ENTRÉES ANALOGIQUES
 //-------------------------------------------------------------------------------------------------
 
-uint16_t lireEntreeAnalogiqueUnipolaire (const ENTREE_ANALOGIQUE inEntreeAnalogique) {
+uint16_t lireEntreeAnalogique (const ENTREE_ANALOGIQUE inEntreeAnalogique) {
   uint16_t result = 0 ;
   switch (inEntreeAnalogique) {
   case ENTREE_ANALOGIQUE::E0 :
-    desactivationGPA (1 << 6) ; // Mode unipolaire (led éteinte)
     result = analogRead (PA0) ;
     break ;
   case ENTREE_ANALOGIQUE::E1 :
-    desactivationGPB (1 << 6) ; // Mode unipolaire (led éteinte)
-    result = analogRead (PA3) ;
-    break ;
-  }
-  return result ;
-}
-
-//-------------------------------------------------------------------------------------------------
-// SORTIES ANALOGIQUES UNIPOLAIRES
-//-------------------------------------------------------------------------------------------------
-
-void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) {
-  switch (inSortieAnalogique) {
-  case SORTIE_ANALOGIQUE::S0 :
-    activationGPA (1 << 7) ; // Mode bipolaire (led allumée)
-    analogWrite (PA4, inValue);
-    break ;
-  case SORTIE_ANALOGIQUE::S1 :
-    activationGPB (1 << 7) ; // Mode bipolaire (led allumée)
-    analogWrite (PA5, inValue);
-    break ;
-  }
-}
-
-//-------------------------------------------------------------------------------------------------
-// ENTRÉES ANALOGIQUES BIPOLAIRES
-//-------------------------------------------------------------------------------------------------
-
-uint16_t lireEntreeAnalogiqueBipolaire (const ENTREE_ANALOGIQUE inEntreeAnalogique) {
-  uint16_t result = 0 ;
-  switch (inEntreeAnalogique) {
-  case ENTREE_ANALOGIQUE::E0 :
-    activationGPA (1 << 6) ; // Mode bipolaire (led allumée)
-    result = analogRead (PA0) ;
-    break ;
-  case ENTREE_ANALOGIQUE::E1 :
-    activationGPB (1 << 6) ; // Mode bipolaire (led allumée)
     result = analogRead (PA3) ;
     break ;
   }

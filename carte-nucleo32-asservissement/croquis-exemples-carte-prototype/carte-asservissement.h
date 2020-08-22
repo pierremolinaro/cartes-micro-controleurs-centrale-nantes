@@ -73,20 +73,38 @@ void actionSortieLogique (const SORTIE_LOGIQUE inSortieLogique, const bool inVal
 // SORTIES ANALOGIQUES
 //-------------------------------------------------------------------------------------------------
 
-enum class SORTIE_ANALOGIQUE : uint8_t {S0, S1} ;
+//enum class SORTIE_ANALOGIQUE {
+//  SU0, // Sortie analogique unipolaire 0
+//  SU1, // Sortie analogique unipolaire 1
+//  SB0, // Sortie analogique bipolaire 0
+//  SB1  // Sortie analogique bipolaire 1
+//} ;
 
-void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) ;
 
-void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) ;
+enum class SORTIE_ANALOGIQUE {
+  S0, // Sortie analogique 0
+  S1  // Sortie analogique 1
+} ;
+
+void actionSortieAnalogique (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) ;
 
 //-------------------------------------------------------------------------------------------------
 // ENTRÉES ANALOGIQUES
 //-------------------------------------------------------------------------------------------------
 
-enum class ENTREE_ANALOGIQUE : uint8_t {E0, E1} ;
+//enum class ENTREE_ANALOGIQUE {
+//  EU0, // Entrée analogique unipolaire 0
+//  EU1, // Entrée analogique unipolaire 1
+//  EB0, // Entrée analogique bipolaire 0
+//  EB1  // Entrée analogique bipolaire 1
+//} ;
 
-uint16_t lireEntreeAnalogiqueUnipolaire (const ENTREE_ANALOGIQUE inEntreeAnalogique) ;
 
-uint16_t lireEntreeAnalogiqueBipolaire (const ENTREE_ANALOGIQUE inEntreeAnalogique) ;
+enum class ENTREE_ANALOGIQUE {
+  E0, // Entrée analogique 0
+  E1  // Entrée analogique 1
+} ;
+
+uint16_t lireEntreeAnalogique (const ENTREE_ANALOGIQUE inEntreeAnalogique) ;
 
 //-------------------------------------------------------------------------------------------------
