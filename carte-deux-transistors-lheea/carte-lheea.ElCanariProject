@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1440,"WindowHeight":850}
+{"WindowHeight":850,"WindowWidth":1440}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
@@ -352,7 +352,7 @@ F
 F
 2
 5
-3E
+0
 NPc
 NPc
 NPc
@@ -365,7 +365,7 @@ NPc
 Isee
 NPc
 Default
-6
+5
 4
 Interface Puissance
 1.0
