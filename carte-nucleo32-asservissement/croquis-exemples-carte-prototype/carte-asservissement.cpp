@@ -353,10 +353,10 @@ void actionSortieLogique (const SORTIE_LOGIQUE inSortieLogique, const bool inVal
 void actionSortieAnalogique (const SORTIE_ANALOGIQUE inSortieAnalogique, const uint8_t inValue) {
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE::S0 :
-    analogWrite (PA4, inValue);
+    analogWrite (PA4, inValue) ;
     break ;
   case SORTIE_ANALOGIQUE::S1 :
-    analogWrite (PA5, inValue);
+    analogWrite (PA5, inValue) ;
     break ;
   }
 }
