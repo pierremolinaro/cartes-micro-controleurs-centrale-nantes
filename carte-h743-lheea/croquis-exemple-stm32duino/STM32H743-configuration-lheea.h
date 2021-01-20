@@ -1,13 +1,6 @@
 #pragma once
 #include <LiquidCrystal.h>
 
-//#define REQUIRED_BOARD ("NUCLEO_H743ZI2")
-//#ifndef BOARD_NAME
-//  #error "Carte inconnue, sélectionner 'Nucleo H743ZI2'"
-//#elif BOARD_NAME == REQUIRED_BOARD
-//  #error "Mauvaise sélection de carte, sélectionner 'Nucleo H743ZI2'"
-//#endif
-
 //--------------------------------------------------------------------------------------------------
 
 extern LiquidCrystal lcd ;
@@ -56,8 +49,30 @@ void fixerGammeEncodeur (const int32_t inBorneInf, const int32_t inBorneSup) ;
 
 int32_t valeurEncodeur (void) ;
 
-//--------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------
+// SORTIES TOR
+//-------------------------------------------------------------------------------------------------
 
 void activerSortieTOR (const uint32_t inIndex, const bool inValue) ;
+
+//-------------------------------------------------------------------------------------------------
+// SORTIE ANALOGIQUE
+// Sortie directe :
+//   0 -> 0V
+//   255 -> 3,3V
+//   inValue -> 3,3V *  inValue / 255
+// Sortie amplifiée : dépend du réglage du potentiomètre
+//-------------------------------------------------------------------------------------------------
+
+void commanderSortieAnalogique (const uint8_t inValue) ;
+
+//-------------------------------------------------------------------------------------------------
+// ENTRÉES ANALOGIQUES
+// Attention, la tension qui parvient au micro-contrôleur est réglage par potentiomètre :
+//   0V -> 0
+//   3,3V -> 4095
+//-------------------------------------------------------------------------------------------------
+
+uint16_t lireEntreeAnalogique (const uint32_t inNumeroEntree) ; // 0 ... 3
 
 //--------------------------------------------------------------------------------------------------

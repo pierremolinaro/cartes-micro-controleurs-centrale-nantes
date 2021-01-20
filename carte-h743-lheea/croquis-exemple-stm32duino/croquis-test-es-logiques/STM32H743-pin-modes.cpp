@@ -1,1 +1,0 @@
-../STM32H743-pin-modes.cpp

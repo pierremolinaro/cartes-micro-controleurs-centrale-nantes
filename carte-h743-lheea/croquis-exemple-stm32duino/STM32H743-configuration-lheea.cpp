@@ -224,7 +224,6 @@ static void configurerSortiesTOR (void) {
   for (uint32_t i=0 ; i<10 ; i++) {
     pinMode (SORTIES_TOR [i], OUTPUT) ;
   }
-//  setDigitalOutputMode (DigitalOutputPin::PG9_PUSH_PULL) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -233,9 +232,50 @@ void activerSortieTOR (const uint32_t inIndex, const bool inValue) {
   if (inIndex < 10) {
     digitalWrite (SORTIES_TOR [inIndex], inValue) ;
   }
-//  if (inIndex == 7) {
-//    digitalWrite (DigitalOutputPin::PG9_PUSH_PULL, inValue) ;
-//  }
+}
+
+//-------------------------------------------------------------------------------------------------
+// SORTIE ANALOGIQUE
+// Sortie directe :
+//   0 -> 0V
+//   255 -> 3,3V
+//   inValue -> 3,3V *  inValue / 255
+// Sortie amplifiée : dépend du réglage du potentiomètre
+//-------------------------------------------------------------------------------------------------
+
+void commanderSortieAnalogique (const uint8_t inValue) {
+  analogWrite (PA4, inValue) ;   
+}
+
+//-------------------------------------------------------------------------------------------------
+// ENTRÉES ANALOGIQUES
+// Attention, la tension qui parvient au micro-contrôleur est réglage par potentiomètre :
+//   0V -> 0
+//   3,3V -> 4095
+//-------------------------------------------------------------------------------------------------
+
+uint16_t lireEntreeAnalogique (const uint32_t inNumeroEntree) { // 0 ... 3
+  uint16_t resultat = 0 ;
+  switch (inNumeroEntree) {
+  case 0 :
+    resultat = adc_read_value (PA_6, 12) ;
+    break ;
+  case 1 :
+    //resultat = analogRead (PB1) ;
+    resultat = adc_read_value (PB_1, 12) ;
+    break ;
+  case 2 :
+    // resultat= analogRead (PC3) ;
+    resultat = adc_read_value (PC_3, 12) ;
+    break ;
+  case 3 :
+    // resultat = analogRead (PF11) ;
+    resultat = adc_read_value (PF_11, 12) ;
+    break ;
+  default :
+    break ;
+  }
+  return resultat ;
 }
 
 //--------------------------------------------------------------------------------------------------
