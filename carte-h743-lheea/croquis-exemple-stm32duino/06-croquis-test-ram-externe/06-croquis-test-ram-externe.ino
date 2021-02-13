@@ -38,7 +38,6 @@ void loop() {
 
 //--------------------------------------------------------------------------------------------------
 
-static const uint32_t TAILLE_RAM_EXTERNE = 4 * 512 * 1024 ;
 static uint8_t gIncrement = 1 ;
 
 //--------------------------------------------------------------------------------------------------
@@ -46,16 +45,14 @@ static uint8_t gIncrement = 1 ;
 static uint32_t testRamExterne (void) {
   gIncrement += 2 ;
   uint8_t valeur = gIncrement ;
-  for (uint32_t i = 0 ; i<TAILLE_RAM_EXTERNE ; i++) {
-    uint8_t * addresse = (uint8_t *) (0x6000'0000 + i) ;
-    *addresse = valeur ;
+  for (uint32_t i = 0 ; i<EXTERNAL_SRAM_SIZE ; i++) {
+    writeByteAtIndex (valeur, i) ;
     valeur += gIncrement ;
   }
   valeur = gIncrement ;
   uint32_t nombreErreurs = 0 ;
-  for (uint32_t i = 0 ; i<TAILLE_RAM_EXTERNE ; i++) {
-    uint8_t * addresse = (uint8_t *) (0x6000'0000 + i) ;
-    const uint8_t valeurLue = *addresse ;
+  for (uint32_t i = 0 ; i<EXTERNAL_SRAM_SIZE ; i++) {
+    const uint8_t valeurLue = readByteAtIndex (i) ;
     if (valeurLue != valeur) {
        nombreErreurs += 1 ;
     }

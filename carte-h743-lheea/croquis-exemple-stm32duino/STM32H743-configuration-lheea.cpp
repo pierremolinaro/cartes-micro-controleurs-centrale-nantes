@@ -298,10 +298,6 @@ static void configurerEntreesSortiesLogiques () {
   pinMode (ENCODEUR_A, INPUT_PULLUP) ;
   pinMode (ENCODEUR_B, INPUT_PULLUP) ;
   pinMode (ENCODEUR_CLIC, INPUT_PULLUP) ;
- // pinMode (PA6, ANALOG_INPUT
-//  Serial.println (PC8) ;
-//  Serial.println (ENCODEUR_A) ;
-//  Serial.println (digitalPinToInterrupt (ENCODEUR_A)) ;
   attachInterrupt (digitalPinToInterrupt (ENCODEUR_A), appuiEncodeur, FALLING) ;
 }
 
@@ -420,6 +416,205 @@ uint16_t lireEntreeAnalogique (const uint32_t inNumeroEntree) { // 0 ... 3
   return resultat ;
 }
 
+//-------------------------------------------------------------------------------------------------
+// SPI
+//-------------------------------------------------------------------------------------------------
+// La configuration du SPI sous stm32duino est TRÈS particulière.
+// Voir https://github.com/stm32duino/wiki/wiki/API#spi
+//
+// Par défaut, pour compatibilité avec Arduino, utiliser le nom SPI configure les signaux MOSI,
+// MISO, et SCK de façon à avoir la disposition que l'Arduino nano.
+//  #include <SPI.h>
+//  ...
+//  void setup () {
+//    SPI.begin () ;
+//    ....
+//
+// Pour changer les broches par défaut, il faut appeler setMISO, setMOSI, setSCLK, setSSEL, avant
+// d'appeler SPI.begin (). C'est ce qui est fait ici. Évidemment, il faut choisir pour les broches
+// en fonction de ce que permet le micro-contrôleur.
+//
+// Si l'on veut des liaisons SPI supplémentaires, il faut créer des nouvelles instances de SPIClass
+// avec en arguments MOSI, MISO, SCK et SS :
+//  SPIClass mySPI (myMOSI, myMISO, mySCK, mySS) ;
+//
+// Et c'est là l'approche particulière : alors que la plupart des systèmes de type Arduino
+// définissent SPI2, SPI3, … en stm32duino la fonction begin devine le module qui sera
+// effectivement utilisé grâce au choix des broches MOSI, MISO, SCK et SS.
+//
+//-------------------------------------------------------------------------------------------------
+
+static const PinName SPI1_MOSI = PB_5 ;
+static const PinName SPI1_MISO = PB_4 ;
+static const PinName SPI1_CS   = PG_10 ;
+static const PinName SPI1_SCK  = PA_5 ;
+
+static const uint8_t SPI2_MOSI = PB15 ;
+static const uint8_t SPI2_MISO = PC2 ;
+static const uint8_t SPI2_CS   = PB12 ;
+static const uint8_t SPI2_SCK  = PB10 ;
+
+static const uint8_t SPI3_MOSI = PC12 ;
+static const uint8_t SPI3_MISO = PC11 ;
+static const uint8_t SPI3_CS   = PA15 ;
+static const uint8_t SPI3_SCK  = PC10 ;
+
+static const uint8_t SPI5_MOSI = PF9 ;
+static const uint8_t SPI5_MISO = PF8 ;
+static const uint8_t SPI5_CS   = PF6 ;
+static const uint8_t SPI5_SCK  = PF7 ;
+
+//-------------------------------------------------------------------------------------------------
+
+static SPIClass mySPI2 (SPI2_MOSI, SPI2_MISO, SPI2_SCK, SPI2_CS) ;
+static SPIClass mySPI3 (SPI3_MOSI, SPI3_MISO, SPI3_SCK, SPI3_CS) ;
+static SPIClass mySPI5 (SPI5_MOSI, SPI5_MISO, SPI5_SCK, SPI5_CS) ;
+
+//-------------------------------------------------------------------------------------------------
+
+static void configurerSPI (void) {
+//--- Configurer SPI1
+  SPI.setMOSI (SPI1_MOSI) ;
+  SPI.setMISO (SPI1_MISO) ;
+  SPI.setSCLK (SPI1_SCK) ;
+  SPI.setSSEL (SPI1_CS) ;
+  SPI.begin () ;
+//--- Configurer SPI2
+  mySPI2.begin () ;
+//--- Configurer SPI3
+  mySPI3.begin () ;
+//--- Configurer SPI5
+  mySPI5.begin () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+// EEPROM EXTERNE 
+//--------------------------------------------------------------------------------------------------
+
+static uint32_t eepromSPIMaxFrequency (const SPI_EEPROM_TYPE inEEPROMType) {
+  uint32_t result = 0 ;
+  switch (inEEPROMType) {
+  case SPI_EEPROM_TYPE::MCP25LC256 : result = 10 * 1000 * 1000 ; break ; // 10 MHz
+  case SPI_EEPROM_TYPE::MCP25LC512 : result = 20 * 1000 * 1000 ; break ; // 20 MHz
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+SPIEEPROM::SPIEEPROM (const MySPI inSPI,
+                      const SPI_EEPROM_TYPE inEEPROMType) :
+mSPISettings (eepromSPIMaxFrequency (inEEPROMType), MSBFIRST, SPI_MODE0),
+mSPI (inSPI),
+mEEPROMType (inEEPROMType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+SPIClass* SPIEEPROM::spiPtr (void) {
+  SPIClass * result = nullptr ;
+  switch (mSPI) {
+  case MySPI::spi1 : result = &SPI ; break ;
+  case MySPI::spi2 : result = &mySPI2 ; break ;
+  case MySPI::spi3 : result = &mySPI3 ; break ;
+  case MySPI::spi5 : result = &mySPI5 ; break ;  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t SPIEEPROM::eepromPageSize (void) const {
+  uint32_t result = 0 ;
+  switch (mEEPROMType) {
+  case SPI_EEPROM_TYPE::MCP25LC256 : result = 64 ; break ;
+  case SPI_EEPROM_TYPE::MCP25LC512 : result = 128 ; break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIEEPROM::begin (void) {
+  spiPtr ()->beginTransaction (mSPISettings) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ void SPIEEPROM::eepromRead (const uint32_t inAddress,
+                             uint8_t outBuffer[],
+                             const uint32_t inLength) {
+   while (eepromIsBusy ()) {
+     delay (1) ;
+   }
+   uint8_t * localBuffer = new uint8_t [inLength + 3] ;
+   localBuffer [0] = 0x03 ; // Read data instruction
+   localBuffer [1] = uint8_t (inAddress >> 8) ; // Adresse, poids fort
+   localBuffer [2] = uint8_t (inAddress) ; // Adresse, poids faible
+   spiPtr ()->transfer (localBuffer, localBuffer, inLength + 3) ; // Les données
+   for (uint32_t i=0 ; i<inLength ; i++) {
+     outBuffer [i] = localBuffer [i+3] ;
+   }
+   delete [] localBuffer ;
+ }
+
+//--------------------------------------------------------------------------------------------------
+
+uint8_t SPIEEPROM::eepromStatus (void) {
+  const uint16_t v = spiPtr ()->transfer16 (0x0500) ; // Read STATUS instruction
+  // Serial.print ("Status ") ; Serial.println (uint8_t (v), HEX) ;
+  return uint8_t (v) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool SPIEEPROM::eepromIsBusy (void) {
+  return (eepromStatus () & 0x01) != 0 ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIEEPROM::eepromWriteEnable (void) {
+  spiPtr ()->transfer (0x06) ; // Write Enable Instruction 
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ void SPIEEPROM::eepromWrite (const uint32_t inAddress,
+                              const uint8_t inBuffer[],
+                              const uint32_t inLength) {
+
+   if (inLength > 0) {
+     // Serial.print ("WRITE AT ") ; Serial.print (inAddress, HEX) ; Serial.print (" ") ; Serial.println (inLength) ;
+     const uint32_t pageSize = eepromPageSize () ;
+     uint32_t address = inAddress ;
+     uint32_t length = inLength ;
+     uint32_t idx = 0 ;
+     while (length > 0) {
+       const uint32_t firstPage = address / pageSize ;
+       const uint32_t lastPage = (address + length - 1) / pageSize ;
+       const uint32_t lg = (firstPage == lastPage) ? length : (pageSize - (address % pageSize)) ;
+       // Serial.print ("   ") ; Serial.print (address, HEX) ; Serial.print (" ") ; Serial.println (lg) ;
+       while (eepromIsBusy ()) {
+         delay (1) ;
+       }
+       eepromWriteEnable () ;
+       uint8_t * localBuffer = new uint8_t [lg + 3] ;
+       localBuffer [0] = 0x02 ; // Write data instruction
+       localBuffer [1] = uint8_t (address >> 8) ; // Adresse, poids fort
+       localBuffer [2] = uint8_t (address) ; // Adresse, poids faible
+       for (uint32_t i=0 ; i<lg ; i++) {
+         localBuffer [3+i] = inBuffer [idx + i] ;
+       }
+       spiPtr ()->transfer (localBuffer, localBuffer, lg + 3) ;
+       delete [] localBuffer ;
+       address += lg ;
+       length -= lg ;
+       idx += lg ;
+     }
+   }
+ }
+
 //--------------------------------------------------------------------------------------------------
 //   CONFIGURATION CARTE H743 LHEEA
 //--------------------------------------------------------------------------------------------------
@@ -430,6 +625,7 @@ void configurerCarteH743LHEEA (void) {
   configurerSortiesTOR () ;
   analogReadResolution (12) ;
   configurerAccessRAMExterne () ;
+  configurerSPI () ;
 }
 
 //--------------------------------------------------------------------------------------------------
