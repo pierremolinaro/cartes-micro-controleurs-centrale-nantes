@@ -137,9 +137,17 @@ enum class MySPI { spi1, spi2, spi3, spi5} ;
 //--------------------------------------------------------------------------------------------------
 
 enum class SPI_EEPROM_TYPE {
-  MCP25LC256, // 512 pages de 64 octets
-  MCP25LC512  // 512 pages de 128 octets
+  MCP25LC256, // 512 pages de 64 octets -> 32 kio
+  MCP25LC512  // 512 pages de 128 octets -> 64 kio
 } ;
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t eepromPageSize (const SPI_EEPROM_TYPE inEEPROM) ;
+
+uint32_t eepromMaxFrequency (const SPI_EEPROM_TYPE inEEPROMType) ;
+
+uint32_t eepromCapacity (const SPI_EEPROM_TYPE inEEPROMType) ;
 
 //--------------------------------------------------------------------------------------------------
 // EEPROM EXTERNE
@@ -180,6 +188,7 @@ class SPIEEPROM {
 
 //---
   public: uint32_t eepromPageSize (void) const ;
+  public: uint32_t eepromCapacity (void) const ;
 
 //--- Private method
   private: SPIClass* spiPtr (void) ;
@@ -224,312 +233,7 @@ template <typename T> class VarInEEPROM {
 
 //--- IsLoaded ?
   public: bool IsLoaded (void) const { return this->mLoaded ; }
-    
-//    // ***
-//    // *** Allows the variable to be used on the left side of
-//    // *** the equal sign.
-//    // ***
-//    T operator = (T const& value) const
-//    {
-//      this->set(value);
-//      return this->get();
-//    }
-//
-//    // ***
-//    // *** Allows the variable to be used on the right side of
-//    // *** the equal sign.
-//    // ***
-//    operator T()
-//    {
-//      return this->get();
-//    }
-//
-//    // ***
-//    // *** ++ postfix
-//    // ***
-//    T operator ++ (int)
-//    {
-//      T oldValue = this->get();
-//      T newValue = oldValue + 1;
-//      this->set(newValue);
-//      return oldValue;
-//    }
-//
-//    // ***
-//    // *** ++ prefix
-//    // ***
-//    T operator ++ ()
-//    {
-//      T newValue = this->get() + 1;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** -- postifx
-//    // ***
-//    T operator -- (int)
-//    {
-//      T oldValue = this->get();
-//      T newValue = oldValue - 1;
-//      this->set(newValue);
-//      return oldValue;
-//    }
-//
-//    // ***
-//    // *** -- prefix
-//    // ***
-//    T operator -- ()
-//    {
-//      T newValue = this->get() - 1;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** += operator
-//    // ***
-//    T operator += (T const& value) const
-//    {
-//      T newValue = this->get() + value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** -= operator
-//    // ***
-//    T operator -= (T const& value) const
-//    {
-//      T newValue = this->get() - value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** *= operator
-//    // ***
-//    T operator *= (T const& value) const
-//    {
-//      T newValue = this->get() * value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** /= operator
-//    // ***
-//    T operator /= (T const& value) const
-//    {
-//      T newValue = this->get() / value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** %= operator
-//    // ***
-//    T operator %= (T const& value) const
-//    {
-//      T newValue = this->get() % value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** &= operator
-//    // ***
-//    T operator &= (T const& value) const
-//    {
-//      T newValue = this->get() & value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** |= operator
-//    // ***
-//    T operator |= (T const& value) const
-//    {
-//      T newValue = this->get() | value;
-//      this->set(newValue);
-//      return newValue;
-//    }
-//
-//    // ***
-//    // *** > operator
-//    // ***
-//    bool operator > (T const& value) const
-//    {
-//      return this->get() > value;
-//    }
-//
-//    // ***
-//    // *** < operator
-//    // ***
-//    bool operator < (T const& value) const
-//    {
-//      return this->get() < value;
-//    }
-//
-//    // ***
-//    // *** >= operator
-//    // ***
-//    bool operator >= (T const& value) const
-//    {
-//      return this->get() >= value;
-//    }
-//
-//    // ***
-//    // *** <= operator
-//    // ***
-//    bool operator <= (T const& value) const
-//    {
-//      return this->get() <= value;
-//    }
-//
-//    // ***
-//    // *** == operator
-//    // ***
-//    bool operator == (T const& value) const
-//    {
-//      return this->get() == value;
-//    }
-//
-//    // ***
-//    // *** Get the value from EEPROM.
-//    // ***
-//    T get()
-//    {
-//      T returnValue;
-//
-//      // ***
-//      // *** Check if the variable has been set or not
-//      // *** by comparing the value to the not set value
-//      // *** specified in the constructor.
-//      // ***
-//      if (this->isInitialized())
-//      {
-//        // ***
-//        // *** Get the variable from EEPROM
-//        // *** using the address this->mAddress.
-//        // ***
-//        EEPROM.get(this->mAddress, returnValue);
-//      }
-//      else
-//      {
-//        // ***
-//        // *** Return the default value specified in
-//        // *** the constructor.
-//        // ***
-//        returnValue = this->_defaultValue;
-//      }
-//
-//      return returnValue;
-//    }
-//
-//    // ***
-//    // *** Save the value to EEPROM.
-//    // ***
-//    void set(T const& value) const
-//    {
-//      // ***
-//      // *** Set the value in EEPROM using the
-//      // *** update method.
-//      // ***
-//      EEPROM.put(this->mAddress, value);
-//
-//      // ***
-//      // *** Write the checksum.
-//      // ***
-//      uint8_t checksum = Checksum<T>::get(value);
-//      EEPROM.update(this->checksumAddress(), checksum);
-//    }
-//
-//    // ***
-//    // *** Determines if the variable has been
-//    // *** initialized or not by comparing the
-//    // *** stored hecksum to the actual checksum
-//    // *** of the bytes stored.
-//    // ***
-//    bool isInitialized()
-//    {
-//      return (this->checksum() == this->checksumByte());
-//    }
-//
-//    // ***
-//    // *** Returns the number of EEPROM bytes
-//    // *** used by this instance.
-//    // ***
-//    uint16_t length()
-//    {
-//      // ***
-//      // *** The extra byte is the checksum byte.
-//      // ***
-//      return sizeof(T) + 1;
-//    }
-//
-//    // ***
-//    // *** Unset the variable (return the EEPROM values
-//    // *** back to 0xff).
-//    // ***
-//    void unset(byte unsetValue = 0xff)
-//    {
-//      for ( int i = 0; i < this->length(); i++)
-//      {
-//        EEPROM.update(this->mAddress + i, unsetValue);
-//      }
-//    }
-//
-//    // ***
-//    // *** Gets the address of the checksum byte.
-//    // ***
-//    uint16_t checksumAddress()
-//    {
-//      return this->mAddress + this->length() - 1;
-//    }
-//
-//    // ***
-//    // *** Gets the stored checksum byte.
-//    // ***
-//    uint16_t checksumByte()
-//    {
-//      return EEPROM.read(this->checksumAddress());
-//    }
-//
-//    // ***
-//    // *** Calcuate the checksum of the
-//    // *** data in the EEPROM for this instance.
-//    // ***
-//    uint8_t checksum()
-//    {
-//      byte data[MAX_VARIABLE_LENGTH];
-//      this->copyTo(data, sizeof(T));
-//      return Checksum<T>::get(data, sizeof(T));
-//    }
-//
-//    // ***
-//    // *** Copy the EEPROM bytes of this instance to
-//    // *** a byte array.
-//    // ***
-//    void copyTo(byte* data, uint32_t length)
-//    {
-//      for (int i = 0; i < length; i++)
-//      {
-//        data[i] = EEPROM[this->mAddress + i];
-//      }
-//    }
-//
-//    uint16_t getAddress()
-//    {
-//      return this->mAddress;
-//    }
-//
-//    T getDefaultValue()
-//    {
-//      return this->_defaultValue;
-//    }
-
+ 
 //--- No copy
   private: VarInEEPROM (const VarInEEPROM <T> &) = delete ;
   private: VarInEEPROM & operator = (const VarInEEPROM <T> &) = delete ;
@@ -539,6 +243,77 @@ template <typename T> class VarInEEPROM {
   private: uint32_t mAddress ;
   private: T mValue ;
   private: bool mLoaded ;
+} ;
+
+//--------------------------------------------------------------------------------------------------
+// FLASH EXTERNE
+//--------------------------------------------------------------------------------------------------
+
+enum class SPI_FLASH_TYPE {
+  SST26VF064B, // 8 Mio
+  IS25LP128  // 16 Mio
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t flashPageSize (const SPI_FLASH_TYPE inFlashType) ;
+
+uint32_t flashSectorSize (const SPI_FLASH_TYPE inFlashType) ;
+
+uint32_t flashCapacity (const SPI_FLASH_TYPE inFlashType) ;
+
+uint32_t flashMaxFrequency (const SPI_FLASH_TYPE inFlashType) ;
+
+//--------------------------------------------------------------------------------------------------
+
+class SPIFLASH {
+
+//--- Constructor
+  public: SPIFLASH (const MySPI inSPI,
+                    const SPI_FLASH_TYPE inFlashType) ;
+
+//--- Begin
+  public: void begin (void) ;
+
+//--- Private properties
+  private: const SPISettings mSPISettings ;
+  private: MySPI mSPI ;
+  private: const SPI_FLASH_TYPE mFlashType ;
+
+//--- Read FLASH
+  public: void flashRead (const uint32_t inAddress,
+                          uint8_t outBuffer[],
+                          const uint32_t inLength) ;
+
+//--- status
+  public: uint8_t flashStatus (void) ;
+
+//--- isBusy
+  public: bool flashIsBusy (void) ;
+
+//--- Enable Write EEPROM
+  protected: void flashWriteEnable (void) ;
+
+//--- Write FLASH
+  public: void flashWrite (const uint32_t inAddress,
+                           const uint8_t inBuffer[],
+                           const uint32_t inLength) ;
+
+//--- Erase
+  public: void flashEraseSector (const uint32_t inSector) ;
+  public: void flashEraseChip (void) ;
+  
+//---
+  public: uint32_t flashCapacity (void) const ;
+  public: uint32_t flashPageSize (void) const ;
+  public: uint32_t flashSectorSize (void) const ;
+
+//--- Private method
+  private: SPIClass* spiPtr (void) ;
+
+//--- No copy
+  private: SPIFLASH (const SPIFLASH &) = delete ;
+  private: SPIFLASH & operator = (const SPIFLASH &) = delete ;
 } ;
 
 //--------------------------------------------------------------------------------------------------

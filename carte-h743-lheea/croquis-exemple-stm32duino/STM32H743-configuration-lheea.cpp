@@ -491,7 +491,18 @@ static void configurerSPI (void) {
 // EEPROM EXTERNE 
 //--------------------------------------------------------------------------------------------------
 
-static uint32_t eepromSPIMaxFrequency (const SPI_EEPROM_TYPE inEEPROMType) {
+uint32_t eepromPageSize (const SPI_EEPROM_TYPE inEEPROM) {
+  uint32_t result = 0 ;
+  switch (inEEPROM) {
+  case SPI_EEPROM_TYPE::MCP25LC256 : result = 64 ; break ;
+  case SPI_EEPROM_TYPE::MCP25LC512 : result = 128 ; break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t eepromMaxFrequency (const SPI_EEPROM_TYPE inEEPROMType) {
   uint32_t result = 0 ;
   switch (inEEPROMType) {
   case SPI_EEPROM_TYPE::MCP25LC256 : result = 10 * 1000 * 1000 ; break ; // 10 MHz
@@ -502,9 +513,20 @@ static uint32_t eepromSPIMaxFrequency (const SPI_EEPROM_TYPE inEEPROMType) {
 
 //--------------------------------------------------------------------------------------------------
 
+uint32_t eepromCapacity (const SPI_EEPROM_TYPE inEEPROMType) {
+  uint32_t result = 0 ;
+  switch (inEEPROMType) {
+  case SPI_EEPROM_TYPE::MCP25LC256 : result = 32 * 1024 ; break ; // 32 kio
+  case SPI_EEPROM_TYPE::MCP25LC512 : result = 64 * 1024 ; break ; // 64 kio
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
 SPIEEPROM::SPIEEPROM (const MySPI inSPI,
                       const SPI_EEPROM_TYPE inEEPROMType) :
-mSPISettings (eepromSPIMaxFrequency (inEEPROMType), MSBFIRST, SPI_MODE0),
+mSPISettings (eepromMaxFrequency (inEEPROMType), MSBFIRST, SPI_MODE0),
 mSPI (inSPI),
 mEEPROMType (inEEPROMType) {
 }
@@ -525,12 +547,13 @@ SPIClass* SPIEEPROM::spiPtr (void) {
 //--------------------------------------------------------------------------------------------------
 
 uint32_t SPIEEPROM::eepromPageSize (void) const {
-  uint32_t result = 0 ;
-  switch (mEEPROMType) {
-  case SPI_EEPROM_TYPE::MCP25LC256 : result = 64 ; break ;
-  case SPI_EEPROM_TYPE::MCP25LC512 : result = 128 ; break ;
-  }
-  return result ;
+  return ::eepromPageSize (mEEPROMType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t SPIEEPROM::eepromCapacity (void) const {
+  return ::eepromCapacity (mEEPROMType) ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -614,6 +637,206 @@ void SPIEEPROM::eepromWriteEnable (void) {
      }
    }
  }
+
+//--------------------------------------------------------------------------------------------------
+// FLASH EXTERNE 
+//--------------------------------------------------------------------------------------------------
+
+uint32_t flashPageSize (const SPI_FLASH_TYPE inFlashType) {
+  uint32_t result = 0 ;
+  switch (inFlashType) {
+  case SPI_FLASH_TYPE::SST26VF064B : result = 256 ; break ;
+  case SPI_FLASH_TYPE::IS25LP128   : result = 256 ; break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t flashSectorSize (const SPI_FLASH_TYPE inFlashType) {
+  uint32_t result = 0 ;
+  switch (inFlashType) {
+  case SPI_FLASH_TYPE::SST26VF064B : result = 4096 ; break ;
+  case SPI_FLASH_TYPE::IS25LP128   : result = 4096 ; break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t flashCapacity (const SPI_FLASH_TYPE inFlashType) {
+  uint32_t result = 0 ;
+  switch (inFlashType) {
+  case SPI_FLASH_TYPE::SST26VF064B : result =  8 * 1024 * 1024 ; break ; //  8 Mio
+  case SPI_FLASH_TYPE::IS25LP128   : result = 16 * 1024 * 1024 ; break ; // 16 Mio
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t flashMaxFrequency (const SPI_FLASH_TYPE inFlashType) {
+  uint32_t result = 0 ;
+  switch (inFlashType) {
+  case SPI_FLASH_TYPE::SST26VF064B : result = 40 * 1000 * 1000 ; break ; // 40 MHz
+  case SPI_FLASH_TYPE::IS25LP128   : result = 40 * 1000 * 1000 ; break ; // 40 MHz
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+SPIFLASH::SPIFLASH (const MySPI inSPI,
+                    const SPI_FLASH_TYPE inFlashType) :
+mSPISettings (flashMaxFrequency (inFlashType), MSBFIRST, SPI_MODE0),
+mSPI (inSPI),
+mFlashType (inFlashType) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+SPIClass* SPIFLASH::spiPtr (void) {
+  SPIClass * result = nullptr ;
+  switch (mSPI) {
+  case MySPI::spi1 : result = &SPI ; break ;
+  case MySPI::spi2 : result = &mySPI2 ; break ;
+  case MySPI::spi3 : result = &mySPI3 ; break ;
+  case MySPI::spi5 : result = &mySPI5 ; break ;  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t SPIFLASH::flashPageSize (void) const {
+  return ::flashPageSize (mFlashType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t SPIFLASH::flashSectorSize (void) const {
+  return ::flashSectorSize (mFlashType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint32_t SPIFLASH::flashCapacity (void) const {
+  return ::flashCapacity (mFlashType) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIFLASH::begin (void) {
+  spiPtr ()->beginTransaction (mSPISettings) ;
+//--- GLOBAL BLOCK-PROTECTION UNLOCK
+  spiPtr ()->transfer (0x98) ; // Global block protection Unlock Instruction 
+
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ void SPIFLASH::flashRead (const uint32_t inAddress,
+                           uint8_t outBuffer[],
+                           const uint32_t inLength) {
+   while (flashIsBusy ()) {
+     delay (1) ;
+   }
+   uint8_t * localBuffer = new uint8_t [inLength + 4] ;
+   localBuffer [0] = 0x03 ; // Read data instruction
+   localBuffer [1] = uint8_t (inAddress >> 16) ; // Adresse, poids fort
+   localBuffer [2] = uint8_t (inAddress >> 8) ; // Adresse, bits 8 à 15
+   localBuffer [3] = uint8_t (inAddress) ; // Adresse, poids faible
+   spiPtr ()->transfer (localBuffer, localBuffer, inLength + 4) ; // Les données
+   for (uint32_t i=0 ; i<inLength ; i++) {
+     outBuffer [i] = localBuffer [i+4] ;
+   }
+   delete [] localBuffer ;
+ }
+
+//--------------------------------------------------------------------------------------------------
+
+uint8_t SPIFLASH::flashStatus (void) {
+  const uint16_t v = spiPtr ()->transfer16 (0x0500) ; // Read STATUS instruction
+  // Serial.print ("Status ") ; Serial.println (uint8_t (v), HEX) ;
+  return uint8_t (v) ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool SPIFLASH::flashIsBusy (void) {
+  return (flashStatus () & 0x01) != 0 ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIFLASH::flashWriteEnable (void) {
+  spiPtr ()->transfer (0x06) ; // Write Enable Instruction 
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIFLASH::flashWrite (const uint32_t inAddress,
+                           const uint8_t inBuffer[],
+                           const uint32_t inLength) {
+
+  if (inLength > 0) {
+    // Serial.print ("WRITE AT ") ; Serial.print (inAddress, HEX) ; Serial.print (" ") ; Serial.println (inLength) ;
+    const uint32_t pageSize = flashPageSize () ;
+    uint32_t address = inAddress ;
+    uint32_t length = inLength ;
+    uint32_t idx = 0 ;
+    while (length > 0) {
+      const uint32_t firstPage = address / pageSize ;
+      const uint32_t lastPage = (address + length - 1) / pageSize ;
+      const uint32_t lg = (firstPage == lastPage) ? length : (pageSize - (address % pageSize)) ;
+      // Serial.print ("   ") ; Serial.print (address, HEX) ; Serial.print (" ") ; Serial.println (lg) ;
+      while (flashIsBusy ()) {
+        delay (1) ;
+      }
+      flashWriteEnable () ;
+      uint8_t * localBuffer = new uint8_t [lg + 4] ;
+      localBuffer [0] = 0x02 ; // Write data instruction
+      localBuffer [1] = uint8_t (inAddress >> 16) ; // Adresse, poids fort
+      localBuffer [2] = uint8_t (inAddress >> 8) ; // Adresse, bits 8 à 15
+      localBuffer [3] = uint8_t (inAddress) ; // Adresse, poids faible
+      for (uint32_t i=0 ; i<lg ; i++) {
+        localBuffer [4+i] = inBuffer [idx + i] ;
+      }
+      spiPtr ()->transfer (localBuffer, localBuffer, lg + 4) ;
+      delete [] localBuffer ;
+      address += lg ;
+      length -= lg ;
+      idx += lg ;
+    }
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIFLASH::flashEraseSector (const uint32_t inSector) {
+  while (flashIsBusy ()) {
+    delay (1) ;
+  }
+  flashWriteEnable () ;
+  const uint32_t address = inSector * ::flashSectorSize (mFlashType) ;
+  uint8_t * localBuffer = new uint8_t [4] ;
+  localBuffer [0] = 0x20 ; // Sector erase instruction
+  localBuffer [1] = uint8_t (address >> 16) ; // Adresse, poids fort
+  localBuffer [2] = uint8_t (address >> 8) ; // Adresse, bits 8 à 15
+  localBuffer [3] = uint8_t (address) ; // Adresse, poids faible
+  spiPtr ()->transfer (localBuffer, localBuffer, 4) ;
+  delete [] localBuffer ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void SPIFLASH::flashEraseChip (void) {
+  while (flashIsBusy ()) {
+    delay (1) ;
+  }
+  flashWriteEnable () ;
+  spiPtr ()->transfer (0xC7) ; // Chip erase instruction
+}
 
 //--------------------------------------------------------------------------------------------------
 //   CONFIGURATION CARTE H743 LHEEA
