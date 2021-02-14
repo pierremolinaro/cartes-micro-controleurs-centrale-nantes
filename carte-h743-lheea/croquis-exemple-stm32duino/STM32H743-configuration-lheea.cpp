@@ -730,7 +730,7 @@ void SPIFLASH::begin (void) {
   spiPtr ()->beginTransaction (mSPISettings) ;
 //--- GLOBAL BLOCK-PROTECTION UNLOCK
   spiPtr ()->transfer (0x98) ; // Global block protection Unlock Instruction 
-
+  spiPtr ()->transfer (0x98) ; // Global block protection Unlock Instruction 
 }
 
 //--------------------------------------------------------------------------------------------------
