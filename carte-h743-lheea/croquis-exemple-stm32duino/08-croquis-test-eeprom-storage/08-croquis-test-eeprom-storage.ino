@@ -14,7 +14,7 @@ static VarInEEPROM <uint32_t> gVar3 (mySPIEEPROM, 126) ;
 void setup() {
   Serial.begin (38400) ;
   configurerCarteH743LHEEA () ;
-  mySPIEEPROM.begin () ;
+  mySPIEEPROM.begin () ;  // Appeler après la configuration de la carte 
   lcd.print ("Test EEPROM storage") ;
 }
 

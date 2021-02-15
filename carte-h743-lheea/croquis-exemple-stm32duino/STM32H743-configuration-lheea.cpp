@@ -479,12 +479,12 @@ static void configurerSPI (void) {
   SPI.setSCLK (SPI1_SCK) ;
   SPI.setSSEL (SPI1_CS) ;
   SPI.begin () ;
-//--- Configurer SPI2
-  mySPI2.begin () ;
 //--- Configurer SPI3
   mySPI3.begin () ;
 //--- Configurer SPI5
   mySPI5.begin () ;
+//--- Configurer SPI2
+  mySPI2.begin () ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -678,8 +678,8 @@ uint32_t flashCapacity (const SPI_FLASH_TYPE inFlashType) {
 uint32_t flashMaxFrequency (const SPI_FLASH_TYPE inFlashType) {
   uint32_t result = 0 ;
   switch (inFlashType) {
-  case SPI_FLASH_TYPE::SST26VF064B : result = 40 * 1000 * 1000 ; break ; // 40 MHz
-  case SPI_FLASH_TYPE::IS25LP128   : result = 40 * 1000 * 1000 ; break ; // 40 MHz
+  case SPI_FLASH_TYPE::SST26VF064B : result = 40 * 1000 * 1000 ; break ; // 30 MHz
+  case SPI_FLASH_TYPE::IS25LP128   : result = 40 * 1000 * 1000 ; break ; // 30 MHz
   }
   return result ;
 }
@@ -729,7 +729,7 @@ uint32_t SPIFLASH::flashCapacity (void) const {
 void SPIFLASH::begin (void) {
   spiPtr ()->beginTransaction (mSPISettings) ;
 //--- GLOBAL BLOCK-PROTECTION UNLOCK
-  spiPtr ()->transfer (0x98) ; // Global block protection Unlock Instruction 
+  flashWriteEnable () ;
   spiPtr ()->transfer (0x98) ; // Global block protection Unlock Instruction 
 }
 
@@ -757,7 +757,7 @@ void SPIFLASH::begin (void) {
 
 uint8_t SPIFLASH::flashStatus (void) {
   const uint16_t v = spiPtr ()->transfer16 (0x0500) ; // Read STATUS instruction
-  // Serial.print ("Status ") ; Serial.println (uint8_t (v), HEX) ;
+  // Serial.print ("Flash Status ") ; Serial.println (uint8_t (v), HEX) ;
   return uint8_t (v) ;
 }
 

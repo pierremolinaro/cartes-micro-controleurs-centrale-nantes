@@ -9,7 +9,7 @@ static SPIEEPROM mySPIEEPROM (MySPI::spi1, SPI_EEPROM_TYPE::MCP25LC256) ;
 void setup() {
   Serial.begin (38400) ;
   configurerCarteH743LHEEA () ;
-  mySPIEEPROM.begin () ;
+  mySPIEEPROM.begin () ; // Appeler après la configuration de la carte 
   lcd.print ("Test EEPROM externe") ;
 }
 

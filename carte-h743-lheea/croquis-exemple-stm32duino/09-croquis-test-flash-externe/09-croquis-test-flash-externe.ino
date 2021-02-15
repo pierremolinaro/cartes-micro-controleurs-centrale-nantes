@@ -9,7 +9,7 @@ static SPIFLASH myFlash (MySPI::spi2, SPI_FLASH_TYPE::SST26VF064B) ;
 void setup() {
   Serial.begin (38400) ;
   configurerCarteH743LHEEA () ;
-  myFlash.begin () ;
+  myFlash.begin () ; // Appeler après la configuration de la carte 
   lcd.print ("Test FLASH externe") ;
 }
 
