@@ -1,4 +1,3 @@
-//#include "STM32H743-pin-modes.h"
 #include "STM32H743-configuration-lheea.h"
 
 //--------------------------------------------------------------------------------------------------
@@ -450,7 +449,7 @@ static const PinName SPI1_CS   = PG_10 ;
 static const PinName SPI1_SCK  = PA_5 ;
 
 static const uint8_t SPI2_MOSI = PB15 ;
-static const uint8_t SPI2_MISO = PC2 ;
+static const uint8_t SPI2_MISO = PC2_C ;
 static const uint8_t SPI2_CS   = PB12 ;
 static const uint8_t SPI2_SCK  = PB10 ;
 

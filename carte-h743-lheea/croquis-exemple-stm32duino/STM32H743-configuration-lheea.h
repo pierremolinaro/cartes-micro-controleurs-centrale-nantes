@@ -1,4 +1,13 @@
 #pragma once
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef ARDUINO_NUCLEO_H743ZI2
+  #error "Sélection de carte invalide: sélectionner Board Part Number : Nucleo H743ZI2".
+#endif
+
+//--------------------------------------------------------------------------------------------------
+
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 #include <SPI.h>
