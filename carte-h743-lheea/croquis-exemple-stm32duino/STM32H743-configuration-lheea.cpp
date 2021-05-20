@@ -259,7 +259,6 @@ static void configurerAccessRAMExterne (void) {
     | REG_FMC_BCR1_WREN // Autoriser les écritures
     | REG_FMC_BCR1_MBKEN // Autoriser les accès
   ;
- // SCB_DisableDCache () ;
   MPU_Config () ;
 }
 
