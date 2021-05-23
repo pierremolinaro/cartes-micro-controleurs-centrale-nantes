@@ -1,0 +1,521 @@
+***********************************************************************************************************************
+*                                            MICROCONTROLLER CONFIGURATION                                            *
+***********************************************************************************************************************
+
+Register 'CONFIG' at 0x2007 set to 0xE4
+  setting 'BOREN' set to 0x0 ("Disabled")
+  setting 'CP' set to 0x40 ("Disabled")
+  setting 'CPD' set to 0x80 ("Disabled")
+  setting 'FCMEN' set to 0x0 ("Disabled")
+  setting 'IESO' set to 0x0 ("Disabled")
+  setting 'MCLRE' set to 0x20 ("Enabled")
+  setting 'OSC' set to 0x4 ("INTOSCIO oscillator: I/O function on RA4/OSC2/CLKOUT pin, I/O function on RA5/OSC1/CLKIN")
+  setting 'PWRTE' set to 0x0 ("Enabled")
+  setting 'WDTE' set to 0x0 ("Disabled")
+
+***********************************************************************************************************************
+*                                                 DECLARED VARIABLES                                                  *
+***********************************************************************************************************************
+
+                                Variable Address
+                          donnéeÀÉmettre 0x28
+                       incrémentEncodeur 0x23
+            nombre_dans_buffer_reception 0x20
+                       nouvelÉtatEntrées 0x26
+                       pointeur_ecriture 0x21
+                        pointeur_lecture 0x22
+                                 saveIT1 0x70, 0xF0, 0x170, 0x1F0
+                                 saveIT2 0x71, 0xF1, 0x171, 0x1F1
+                         tempCommandeLed 0x29
+                          émettreEntrées 0x27
+                      étatCourantEntrées 0x25
+                           étatEncodeurA 0x24
+
+***********************************************************************************************************************
+*                                                      CONSTANTS                                                      *
+***********************************************************************************************************************
+
+                                Constant Value
+                                ROM_SIZE 4096
+
+***********************************************************************************************************************
+*                                                  INTERRUPT ROUTINE                                                  *
+***********************************************************************************************************************
+
+PCLATH should be saved ?
+  No, program uses only page 0.
+
+***********************************************************************************************************************
+*                                                IPIC INSTRUCTION LIST                                                *
+***********************************************************************************************************************
+
+Generated intermediate code:
+    0: JUMP main
+    1: ORG 0x4
+    2: MOVWF saveIT1
+    3: SWAPF STATUS, W
+    4: CLRF STATUS
+    5: MOVWF saveIT2
+    6: MOVF pointeur_ecriture, W
+    7: MOVWF FSR
+    8: MOVF RCREG, W
+    9: MOVWF INDF
+   10: INCF pointeur_ecriture
+   11: MOVF pointeur_ecriture, W
+   12: SUBLW 0xF0
+   13: BTFSS STATUS, 2
+   14: JUMP .L0
+   15: MOVLW 0xA0
+   16: MOVWF pointeur_ecriture
+   17: .L0:
+   18: INCF nombre_dans_buffer_reception
+   19: SWAPF saveIT2, W
+   20: MOVWF STATUS
+   21: SWAPF saveIT1
+   22: SWAPF saveIT1, W
+   23: RETFIE
+   24: main:
+   25: MOVLW 0xA0
+   26: MOVWF pointeur_ecriture
+   27: MOVWF pointeur_lecture
+   28: CLRF nombre_dans_buffer_reception
+   29: CLRF étatCourantEntrées
+   30: CLRF émettreEntrées
+   31: CLRF incrémentEncodeur
+   32: MOVLW 0xFF
+   33: MOVWF étatEncodeurA
+   34: CLRF PORTA
+   35: CLRF PORTB
+   36: CLRF PORTC
+   37: BSF STATUS, 6
+   38: CLRF ANSEL
+   39: CLRF ANSELH
+   40: BSF STATUS, 5
+   41: BCF STATUS, 6
+   42: BSF OSCCON, 4
+   43: BCF OPTION_REG, 7
+   44: MOVLW 0xFF
+   45: MOVWF TRISA
+   46: MOVWF WPUA
+   47: MOVLW 0x7F
+   48: MOVWF TRISB
+   49: BCF STATUS, 5
+   50: BSF STATUS, 6
+   51: MOVWF WPUB
+   52: BSF STATUS, 5
+   53: BCF STATUS, 6
+   54: MOVLW 0xF0
+   55: MOVWF TRISC
+   56: MOVLW 0x19
+   57: MOVWF SPBRG
+   58: BSF TXSTA, 2
+   59: BCF STATUS, 5
+   60: BSF RCSTA, 7
+   61: BSF RCSTA, 4
+   62: BSF RCSTA, 4
+   63: BSF STATUS, 5
+   64: BSF TXSTA, 5
+   65: BCF STATUS, 5
+   66: BSF STATUS, 5
+   67: BSF PIE1, 5
+   68: BCF STATUS, 5
+   69: BSF INTCON, 6
+   70: BSF INTCON, 7
+   71: .L2:
+   72: CALL ENCODEUR
+   73: CALL RÉCEPTION_SÉRIE
+   74: CALL ÉMISSION_SÉRIE
+   75: GOTO .L2
+   76: ENCODEUR:
+   77: BTFSS étatEncodeurA, 0
+   78: JUMP .L3
+   79: BTFSC PORTA, 5
+   80: JUMP .L3
+   81: BTFSC PORTA, 4
+   82: JUMP .L5
+   83: INCF incrémentEncodeur
+   84: GOTO .L6
+   85: .L5:
+   86: DECF incrémentEncodeur
+   87: .L6:
+   88: .L3:
+   89: BTFSS PORTA, 5
+   90: JUMP .L7
+   91: BSF étatEncodeurA, 0
+   92: GOTO .L8
+   93: .L7:
+   94: BCF étatEncodeurA, 0
+   95: .L8:
+   96: RETURN
+   97: ÉMISSION_SÉRIE:
+   98: BSF STATUS, 5
+   99: BTFSS TXSTA, 1
+  100: JUMP .L9
+  101: BCF STATUS, 5
+  102: COMF PORTA, W
+  103: ANDLW 0x7
+  104: BTFSS PORTB, 4
+  105: IORLW 0x8
+  106: MOVWF nouvelÉtatEntrées
+  107: XORWF étatCourantEntrées, W
+  108: BTFSS STATUS, 2
+  109: BSF émettreEntrées, 0
+  110: MOVF incrémentEncodeur, W
+  111: BTFSS STATUS, 2
+  112: BSF émettreEntrées, 0
+  113: BTFSS émettreEntrées, 0
+  114: JUMP .L11
+  115: BCF émettreEntrées, 0
+  116: MOVF nouvelÉtatEntrées, W
+  117: MOVWF étatCourantEntrées
+  118: MOVWF donnéeÀÉmettre
+  119: BTFSS incrémentEncodeur, 7
+  120: JUMP .L13
+  121: INCF incrémentEncodeur
+  122: BSF donnéeÀÉmettre, 4
+  123: GOTO .L14
+  124: .L13:
+  125: MOVF incrémentEncodeur, W
+  126: BTFSC STATUS, 2
+  127: JUMP .L15
+  128: DECF incrémentEncodeur
+  129: BSF donnéeÀÉmettre, 5
+  130: .L15:
+  131: .L14:
+  132: MOVF donnéeÀÉmettre, W
+  133: MOVWF TXREG
+  134: .L11:
+  135: GOTO .L10
+  136: .L9:
+  137: BCF STATUS, 5
+  138: .L10:
+  139: RETURN
+  140: RÉCEPTION_SÉRIE:
+  141: MOVF nombre_dans_buffer_reception
+  142: BTFSC STATUS, 2
+  143: JUMP .L17
+  144: BCF INTCON, 7
+  145: NOP
+  146: MOVF pointeur_lecture, W
+  147: MOVWF FSR
+  148: MOVF INDF, W
+  149: BSF INTCON, 7
+  150: CALL TRAITER_COMMANDE_LEDS
+  151: DECF nombre_dans_buffer_reception
+  152: INCF pointeur_lecture
+  153: MOVF pointeur_lecture, W
+  154: SUBLW 0xF0
+  155: BTFSS STATUS, 2
+  156: JUMP .L19
+  157: MOVLW 0xA0
+  158: MOVWF pointeur_lecture
+  159: .L19:
+  160: .L17:
+  161: RETURN
+  162: TRAITER_COMMANDE_LEDS:
+  163: MOVWF tempCommandeLed
+  164: ANDLW 0xF8
+  165: BTFSS STATUS, 2
+  166: JUMP .L21
+  167: BTFSS tempCommandeLed, 2
+  168: JUMP .L23
+  169: BTFSS tempCommandeLed, 1
+  170: JUMP .L25
+  171: BTFSS tempCommandeLed, 0
+  172: JUMP .L27
+  173: BSF PORTC, 3
+  174: GOTO .L28
+  175: .L27:
+  176: BSF PORTC, 2
+  177: .L28:
+  178: GOTO .L26
+  179: .L25:
+  180: BTFSS tempCommandeLed, 0
+  181: JUMP .L29
+  182: BSF PORTC, 1
+  183: GOTO .L30
+  184: .L29:
+  185: BSF PORTC, 0
+  186: .L30:
+  187: .L26:
+  188: GOTO .L24
+  189: .L23:
+  190: BTFSS tempCommandeLed, 1
+  191: JUMP .L31
+  192: BTFSS tempCommandeLed, 0
+  193: JUMP .L33
+  194: BCF PORTC, 3
+  195: GOTO .L34
+  196: .L33:
+  197: BCF PORTC, 2
+  198: .L34:
+  199: GOTO .L32
+  200: .L31:
+  201: BTFSS tempCommandeLed, 0
+  202: JUMP .L35
+  203: BCF PORTC, 1
+  204: GOTO .L36
+  205: .L35:
+  206: BCF PORTC, 0
+  207: .L36:
+  208: .L32:
+  209: .L24:
+  210: .L21:
+  211: RETURN
+
+Minimum code size without optimization: 179 instructions.
+
+***********************************************************************************************************************
+*                                                  CODE OPTIMIZATION                                                  *
+***********************************************************************************************************************
+
+Pass 1:
+  line 92: GOTO branching to RETURN replaced by RETURN
+  line 135: GOTO branching to RETURN replaced by RETURN
+  line 143: JUMP branching to RETURN replaced by RETURN
+  line 156: JUMP branching to RETURN replaced by RETURN
+  line 166: JUMP branching to RETURN replaced by RETURN
+  line 174: GOTO branching to GOTO replaced by GOTO
+  line 178: GOTO branching to GOTO replaced by GOTO
+  line 183: GOTO branching to GOTO replaced by GOTO
+  line 188: GOTO branching to RETURN replaced by RETURN
+  line 195: GOTO branching to GOTO replaced by GOTO
+  line 199: GOTO branching to RETURN replaced by RETURN
+  line 204: GOTO branching to RETURN replaced by RETURN
+  line 138: unreferenced label '.L10' is deleted
+  line 160: unreferenced label '.L17' is deleted
+  line 159: unreferenced label '.L19' is deleted
+  line 210: unreferenced label '.L21' is deleted
+  line 177: unreferenced label '.L28' is deleted
+  line 186: unreferenced label '.L30' is deleted
+  line 198: unreferenced label '.L34' is deleted
+  line 207: unreferenced label '.L36' is deleted
+  line 95: unreferenced label '.L8' is deleted
+Pass 2:
+  line 114: JUMP branching to RETURN replaced by RETURN
+  line 174: GOTO branching to RETURN replaced by RETURN
+  line 178: GOTO branching to RETURN replaced by RETURN
+  line 183: GOTO branching to RETURN replaced by RETURN
+  line 195: GOTO branching to RETURN replaced by RETURN
+  line 134: unreferenced label '.L11' is deleted
+  line 209: unreferenced label '.L24' is deleted
+  line 187: unreferenced label '.L26' is deleted
+  line 208: unreferenced label '.L32' is deleted
+Pass 3:
+  No optimization
+
+Minimum code size: 179 instructions
+
+***********************************************************************************************************************
+*                                                COMPUTE JSR and JUMP                                                 *
+***********************************************************************************************************************
+
+Pass 1:
+  No JUMP, no JSR to fix
+
+Program size: 179 instructions
+
+***********************************************************************************************************************
+*                                                   GENERATED CODE                                                    *
+***********************************************************************************************************************
+
+Address Code Mnemonic
+   0000 2819 GOTO main
+   0008      ORG 0x4
+   0008 00F0 MOVWF saveIT1
+   000A 0E03 SWAPF STATUS, W
+   000C 0183 CLRF STATUS
+   000E 00F1 MOVWF saveIT2
+   0010 0821 MOVF pointeur_ecriture, W
+   0012 0084 MOVWF FSR
+   0014 081A MOVF RCREG, W
+   0016 0080 MOVWF INDF
+   0018 0AA1 INCF pointeur_ecriture
+   001A 0821 MOVF pointeur_ecriture, W
+   001C 3CF0 SUBLW 0xF0
+   001E 1D03 BTFSS STATUS, 2
+   0020 2813 GOTO .L0
+   0022 30A0 MOVLW 0xA0
+   0024 00A1 MOVWF pointeur_ecriture
+   0026      .L0:
+   0026 0AA0 INCF nombre_dans_buffer_reception
+   0028 0E71 SWAPF saveIT2, W
+   002A 0083 MOVWF STATUS
+   002C 0EF0 SWAPF saveIT1
+   002E 0E70 SWAPF saveIT1, W
+   0030 0009 RETFIE
+   0032      main:
+   0032 30A0 MOVLW 0xA0
+   0034 00A1 MOVWF pointeur_ecriture
+   0036 00A2 MOVWF pointeur_lecture
+   0038 01A0 CLRF nombre_dans_buffer_reception
+   003A 01A5 CLRF étatCourantEntrées
+   003C 01A7 CLRF émettreEntrées
+   003E 01A3 CLRF incrémentEncodeur
+   0040 30FF MOVLW 0xFF
+   0042 00A4 MOVWF étatEncodeurA
+   0044 0185 CLRF PORTA
+   0046 0186 CLRF PORTB
+   0048 0187 CLRF PORTC
+   004A 1703 BSF STATUS, 6
+   004C 019E CLRF ANSEL
+   004E 019F CLRF ANSELH
+   0050 1683 BSF STATUS, 5
+   0052 1303 BCF STATUS, 6
+   0054 160F BSF OSCCON, 4
+   0056 1381 BCF OPTION_REG, 7
+   0058 30FF MOVLW 0xFF
+   005A 0085 MOVWF TRISA
+   005C 0095 MOVWF WPUA
+   005E 307F MOVLW 0x7F
+   0060 0086 MOVWF TRISB
+   0062 1283 BCF STATUS, 5
+   0064 1703 BSF STATUS, 6
+   0066 0095 MOVWF WPUB
+   0068 1683 BSF STATUS, 5
+   006A 1303 BCF STATUS, 6
+   006C 30F0 MOVLW 0xF0
+   006E 0087 MOVWF TRISC
+   0070 3019 MOVLW 0x19
+   0072 0099 MOVWF SPBRG
+   0074 1518 BSF TXSTA, 2
+   0076 1283 BCF STATUS, 5
+   0078 1798 BSF RCSTA, 7
+   007A 1618 BSF RCSTA, 4
+   007C 1618 BSF RCSTA, 4
+   007E 1683 BSF STATUS, 5
+   0080 1698 BSF TXSTA, 5
+   0082 1283 BCF STATUS, 5
+   0084 1683 BSF STATUS, 5
+   0086 168C BSF PIE1, 5
+   0088 1283 BCF STATUS, 5
+   008A 170B BSF INTCON, 6
+   008C 178B BSF INTCON, 7
+   008E      .L2:
+   008E 204B CALL ENCODEUR
+   0090 207E CALL RÉCEPTION_SÉRIE
+   0092 205A CALL ÉMISSION_SÉRIE
+   0094 2847 GOTO .L2
+   0096      ENCODEUR:
+   0096 1C24 BTFSS étatEncodeurA, 0
+   0098 2854 GOTO .L3
+   009A 1A85 BTFSC PORTA, 5
+   009C 2854 GOTO .L3
+   009E 1A05 BTFSC PORTA, 4
+   00A0 2853 GOTO .L5
+   00A2 0AA3 INCF incrémentEncodeur
+   00A4 2854 GOTO .L6
+   00A6      .L5:
+   00A6 03A3 DECF incrémentEncodeur
+   00A8      .L6:
+   00A8      .L3:
+   00A8 1E85 BTFSS PORTA, 5
+   00AA 2858 GOTO .L7
+   00AC 1424 BSF étatEncodeurA, 0
+   00AE 0008 RETURN
+   00B0      .L7:
+   00B0 1024 BCF étatEncodeurA, 0
+   00B2 0008 RETURN
+   00B4      ÉMISSION_SÉRIE:
+   00B4 1683 BSF STATUS, 5
+   00B6 1C98 BTFSS TXSTA, 1
+   00B8 287C GOTO .L9
+   00BA 1283 BCF STATUS, 5
+   00BC 0905 COMF PORTA, W
+   00BE 3907 ANDLW 0x7
+   00C0 1E06 BTFSS PORTB, 4
+   00C2 3808 IORLW 0x8
+   00C4 00A6 MOVWF nouvelÉtatEntrées
+   00C6 0625 XORWF étatCourantEntrées, W
+   00C8 1D03 BTFSS STATUS, 2
+   00CA 1427 BSF émettreEntrées, 0
+   00CC 0823 MOVF incrémentEncodeur, W
+   00CE 1D03 BTFSS STATUS, 2
+   00D0 1427 BSF émettreEntrées, 0
+   00D2 1C27 BTFSS émettreEntrées, 0
+   00D4 0008 RETURN
+   00D6 1027 BCF émettreEntrées, 0
+   00D8 0826 MOVF nouvelÉtatEntrées, W
+   00DA 00A5 MOVWF étatCourantEntrées
+   00DC 00A8 MOVWF donnéeÀÉmettre
+   00DE 1FA3 BTFSS incrémentEncodeur, 7
+   00E0 2874 GOTO .L13
+   00E2 0AA3 INCF incrémentEncodeur
+   00E4 1628 BSF donnéeÀÉmettre, 4
+   00E6 2879 GOTO .L14
+   00E8      .L13:
+   00E8 0823 MOVF incrémentEncodeur, W
+   00EA 1903 BTFSC STATUS, 2
+   00EC 2879 GOTO .L15
+   00EE 03A3 DECF incrémentEncodeur
+   00F0 16A8 BSF donnéeÀÉmettre, 5
+   00F2      .L15:
+   00F2      .L14:
+   00F2 0828 MOVF donnéeÀÉmettre, W
+   00F4 0099 MOVWF TXREG
+   00F6 0008 RETURN
+   00F8      .L9:
+   00F8 1283 BCF STATUS, 5
+   00FA 0008 RETURN
+   00FC      RÉCEPTION_SÉRIE:
+   00FC 08A0 MOVF nombre_dans_buffer_reception
+   00FE 1903 BTFSC STATUS, 2
+   0100 0008 RETURN
+   0102 138B BCF INTCON, 7
+   0104 0000 NOP
+   0106 0822 MOVF pointeur_lecture, W
+   0108 0084 MOVWF FSR
+   010A 0800 MOVF INDF, W
+   010C 178B BSF INTCON, 7
+   010E 2091 CALL TRAITER_COMMANDE_LEDS
+   0110 03A0 DECF nombre_dans_buffer_reception
+   0112 0AA2 INCF pointeur_lecture
+   0114 0822 MOVF pointeur_lecture, W
+   0116 3CF0 SUBLW 0xF0
+   0118 1D03 BTFSS STATUS, 2
+   011A 0008 RETURN
+   011C 30A0 MOVLW 0xA0
+   011E 00A2 MOVWF pointeur_lecture
+   0120 0008 RETURN
+   0122      TRAITER_COMMANDE_LEDS:
+   0122 00A9 MOVWF tempCommandeLed
+   0124 39F8 ANDLW 0xF8
+   0126 1D03 BTFSS STATUS, 2
+   0128 0008 RETURN
+   012A 1D29 BTFSS tempCommandeLed, 2
+   012C 28A5 GOTO .L23
+   012E 1CA9 BTFSS tempCommandeLed, 1
+   0130 289F GOTO .L25
+   0132 1C29 BTFSS tempCommandeLed, 0
+   0134 289D GOTO .L27
+   0136 1587 BSF PORTC, 3
+   0138 0008 RETURN
+   013A      .L27:
+   013A 1507 BSF PORTC, 2
+   013C 0008 RETURN
+   013E      .L25:
+   013E 1C29 BTFSS tempCommandeLed, 0
+   0140 28A3 GOTO .L29
+   0142 1487 BSF PORTC, 1
+   0144 0008 RETURN
+   0146      .L29:
+   0146 1407 BSF PORTC, 0
+   0148 0008 RETURN
+   014A      .L23:
+   014A 1CA9 BTFSS tempCommandeLed, 1
+   014C 28AD GOTO .L31
+   014E 1C29 BTFSS tempCommandeLed, 0
+   0150 28AB GOTO .L33
+   0152 1187 BCF PORTC, 3
+   0154 0008 RETURN
+   0156      .L33:
+   0156 1107 BCF PORTC, 2
+   0158 0008 RETURN
+   015A      .L31:
+   015A 1C29 BTFSS tempCommandeLed, 0
+   015C 28B1 GOTO .L35
+   015E 1087 BCF PORTC, 1
+   0160 0008 RETURN
+   0162      .L35:
+   0162 1007 BCF PORTC, 0
+   0164 0008 RETURN
