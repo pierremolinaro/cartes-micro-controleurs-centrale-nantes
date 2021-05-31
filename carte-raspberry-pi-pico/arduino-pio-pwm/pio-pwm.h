@@ -11,7 +11,7 @@
 // --- //
 
 #define pwm_wrap_target 0
-#define pwm_wrap 7
+#define pwm_wrap 6
 
 static const uint16_t pwm_program_instructions[] = {
             //     .wrap_target
@@ -22,14 +22,13 @@ static const uint16_t pwm_program_instructions[] = {
     0x1806, //  4: jmp    6               side 1     
     0xa042, //  5: nop                               
     0x0083, //  6: jmp    y--, 3                     
-    0x0000, //  7: jmp    0                          
             //     .wrap
 };
 
 #if !PICO_NO_HARDWARE
 static const struct pio_program pwm_program = {
     .instructions = pwm_program_instructions,
-    .length = 8,
+    .length = 7,
     .origin = -1,
 };
 
