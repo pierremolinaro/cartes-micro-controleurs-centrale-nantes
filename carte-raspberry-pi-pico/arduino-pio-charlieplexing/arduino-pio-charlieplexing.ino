@@ -27,24 +27,24 @@ static void charlieplexing_program_init (PIO pio, uint sm, uint offset, uint pin
 }
 
 static void pio_charlieplexing_set_output (PIO pio, uint sm, const uint32_t inValue) {
-  uint configuration = 0 ;
+  uint configuration = 0x05 | (0x3 << 9) | (0x6 << 18) ;
   if ((inValue & 1) != 0) {
-    configuration |= 1 << 0 ;
+    configuration |= 1 << 3 ;
   }
   if ((inValue & 2) != 0) {
-    configuration |= 4 << 3 ;
+    configuration |= 4 << 6 ;
   }
   if ((inValue & 4) != 0) {
-    configuration |= 1 << 6 ;
+    configuration |= 1 << 12 ;
   }
   if ((inValue & 8) != 0) {
-    configuration |= 2 << 9 ;
+    configuration |= 2 << 15 ;
   }
   if ((inValue & 16) != 0) {
-    configuration |= 2 << 12 ;
+    configuration |= 2 << 21 ;
   }
   if ((inValue & 32) != 0) {
-    configuration |= 4 << 15 ;
+    configuration |= 4 << 24 ;
   }
   pio_sm_put_blocking (pio, sm, configuration) ;
 }

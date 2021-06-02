@@ -2,36 +2,18 @@
 
 
  .wrap_target
-    pull noblock      ; Pull from FIFO to OSR if available, else copy X to OSR.
-    mov x, osr        ; Copy most-recently-pulled value back to scratch X
-    set pins, 0       ; Éteindre toutes les leds
-    set pindirs, 0x5  ; Configurer les directions pour D0 et D1
-    out pins, 3       ; Activer D0 ?
-    set y, 31          ; Charger le compteur Y pour l'attente
+    pull noblock       ; Pull from FIFO to OSR if available, else copy X to OSR.
+    mov x, osr         ; Copy most-recently-pulled value back to scratch X
+mainloop:
+    set pins, 0        ; Éteindre toutes les leds
+    out pindirs, 3     ; Configurer les directions pour D0 et D1
+    out pins, 3   [31] ; Activer ?
+    set y, 31     [31] ; Charger le compteur Y pour l'attente
 wait1:
     jmp y-- wait1 [31] ; Boucle d'attente : 31 * 32 cycles
-    out pins, 3       ; Activer D1 ?
-    set y, 31
+    out pins, 3   [31] ; Activer ?
+    set y, 31     [31] ; Charger le compteur Y pour l'attente
 wait2:
-    jmp y-- wait2 [31]
-    set pins, 0       ; Éteindre toutes les leds
-    set pindirs, 0x3  ; Configurer les directions pour D2 et D3
-    out pins, 3       ; Activer D2 ?
-    set y, 31
-wait3:
-    jmp y-- wait3 [31]
-    out pins, 3       ; Activer D3 ?
-    set y, 31
-wait4:
-    jmp y-- wait4 [31]
-    set pins, 0       ; Éteindre toutes les leds
-    set pindirs, 0x6  ; Configurer les directions pour D4 et D5
-    out pins, 3       ; Activer D4 ?
-    set y, 31
-wait5:
-    jmp y-- wait5 [31]
-    out pins, 3       ; Activer D5 ?
-    set y, 31
-wait6:
-    jmp y-- wait6 [31]
+    jmp y-- wait2 [31] ; Boucle d'attente : 31 * 32 cycles
+    jmp !osre mainloop ;
  .wrap
