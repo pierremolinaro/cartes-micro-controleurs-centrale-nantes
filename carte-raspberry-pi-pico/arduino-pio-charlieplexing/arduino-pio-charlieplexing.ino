@@ -14,9 +14,8 @@ static LiquidCrystal lcd (19, 18, 14, 15, 16, 17) ; // RS, E, D4, D5, D6, D7
 
 //-------------------------------------------------------------------------------------------------
 
-  const uint stateMachine = 0 ;
-  const uint prgmOffset = 0 ;
-  const uint outputPin = 0 ;
+static const uint stateMachine = 0 ;
+static const uint outputPin = 0 ;
 
 //-------------------------------------------------------------------------------------------------
 
@@ -28,6 +27,7 @@ void setup() {
 //--- PIO
 //  charlieplexing6_program_init (pio0, stateMachine, prgmOffset, outputPin) ;
 //  pio_add_program_at_offset (pio0, & charlieplexing6_program, prgmOffset) ;
+  const uint prgmOffset = 0 ;
   charlieplexing5_add_program (pio0, prgmOffset) ;
   charlieplexing5_program_init (pio0, stateMachine, prgmOffset, outputPin) ;
   pio_sm_set_enabled (pio0, stateMachine, true) ;
