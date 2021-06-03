@@ -6,14 +6,14 @@
 #include "hardware/pio.h"
 #endif
 
-// -------------- //
-// charlieplexing //
-// -------------- //
+// --------------- //
+// charlieplexing6 //
+// --------------- //
 
-#define charlieplexing_wrap_target 0
-#define charlieplexing_wrap 10
+#define charlieplexing6_wrap_target 0
+#define charlieplexing6_wrap 10
 
-static const uint16_t charlieplexing_program_instructions[] = {
+static const uint16_t charlieplexing6_program_instructions[] = {
             //     .wrap_target
     0x8080, //  0: pull   noblock                    
     0xa027, //  1: mov    x, osr                     
@@ -30,15 +30,15 @@ static const uint16_t charlieplexing_program_instructions[] = {
 };
 
 #if !PICO_NO_HARDWARE
-static const struct pio_program charlieplexing_program = {
-    .instructions = charlieplexing_program_instructions,
+static const struct pio_program charlieplexing6_program = {
+    .instructions = charlieplexing6_program_instructions,
     .length = 11,
     .origin = -1,
 };
 
-static inline pio_sm_config charlieplexing_program_get_default_config(uint offset) {
+static inline pio_sm_config charlieplexing6_program_get_default_config(uint offset) {
     pio_sm_config c = pio_get_default_sm_config();
-    sm_config_set_wrap(&c, offset + charlieplexing_wrap_target, offset + charlieplexing_wrap);
+    sm_config_set_wrap(&c, offset + charlieplexing6_wrap_target, offset + charlieplexing6_wrap);
     return c;
 }
 #endif

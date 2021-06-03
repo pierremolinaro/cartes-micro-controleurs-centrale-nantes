@@ -1,0 +1,15 @@
+.program charlieplexing5
+
+
+ .wrap_target
+    pull noblock       ; Pull from FIFO to OSR if available, else copy X to OSR.
+    mov x, osr         ; Copy most-recently-pulled value back to scratch X
+mainloop:
+    set pins, 0        ; Éteindre toutes les leds
+    out pindirs, 3     ; Configurer les directions pour D0 et D1
+    out pins, 3   [31] ; Activer ?
+    set y, 31     [31] ; Charger le compteur Y pour l'attente
+wait1:
+    jmp y-- wait1 [31] ; Boucle d'attente : 31 * 32 cycles
+    jmp !osre mainloop ;
+ .wrap
