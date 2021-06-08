@@ -1,0 +1,21 @@
+;
+; Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+;
+; SPDX-License-Identifier: BSD-3-Clause
+;
+
+; Side-set pin 0 is used for LOAD output
+; Side-set pin 1 is used for SCLK output
+
+.program SN74HC595
+.side_set 2
+
+
+ .wrap_target
+    pull block        side 1
+    set     y, 31     side 1
+shiftloop:
+    out     pins, 1   side 1
+    jmp y-- shiftloop side 3 ; Loop until Y hits 0
+    out     pins, 1   side 2
+ .wrap                 ; Implicit jump to the first instruction
