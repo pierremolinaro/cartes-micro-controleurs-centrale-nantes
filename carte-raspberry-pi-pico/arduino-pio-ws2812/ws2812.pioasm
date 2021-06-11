@@ -1,0 +1,20 @@
+;
+; Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+;
+; SPDX-License-Identifier: BSD-3-Clause
+;
+
+; Side-set pin 0 is used for LED output
+
+.program ws2812
+.side_set 1
+
+    pull block      side 0 ;
+    set  y, 23      side 0 ;
+loop:
+    out x, 1        side 1 ;
+    jmp !x, do_zero side 1 [6] ;
+    nop             side 1 [12] ;
+do_zero:
+    nop             side 0 [15] ;
+    jmp y-- loop    side 0  ;
