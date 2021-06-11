@@ -5,8 +5,9 @@
 //-------------------------------------------------------------------------------------------------
 
 #include <hardware/pio.h>
-
 #include <LiquidCrystal.h>
+
+//-------------------------------------------------------------------------------------------------
 
 #include "RP2040_PIO_74HC595.h"
 
@@ -40,7 +41,6 @@ void setup() {
   const uint32_t dataPin = 8 ; // GP8: DATA
   rp2040_PIO_74HC595_add_program (pio, prgmOffset) ;
   rp2040_PIO_74HC595_init (pio, stateMachine, prgmOffset, ctrlBasePin, dataPin, serialClockFrequency) ;
-  pio_sm_set_enabled (pio, stateMachine, true) ;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -51,12 +51,11 @@ static uint32_t gT1 = 0 ;
 
 void loop() {
   if (gT1 < millis ()) {
-    gT1 += 1000 ;
+    gT1 += 1000;
     digitalWrite (LED_BUILTIN, !digitalRead (LED_BUILTIN)) ;
     lcd.setCursor (0, 1) ;
     lcd.print (gT1) ;
     rp2040_PIO_74HC595_set_value (pio, stateMachine, 0x55555555) ;
-    rp2040_PIO_74HC595_set_value (pio, stateMachine, 0xAAAAAAAA) ;
   }
 }
 

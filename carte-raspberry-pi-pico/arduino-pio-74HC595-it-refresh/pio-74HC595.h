@@ -11,22 +11,24 @@
 // --------- //
 
 #define SN74HC595_wrap_target 0
-#define SN74HC595_wrap 4
+#define SN74HC595_wrap 6
 
 static const uint16_t SN74HC595_program_instructions[] = {
             //     .wrap_target
-    0x80a0, //  0: pull   block           side 0     
-    0xe05f, //  1: set    y, 31           side 0     
-    0x6001, //  2: out    pins, 1         side 0     
-    0x1082, //  3: jmp    y--, 2          side 2     
-    0x6801, //  4: out    pins, 1         side 1     
+    0xe020, //  0: set    x, 0            side 0     
+    0x8080, //  1: pull   noblock         side 0     
+    0xe05f, //  2: set    y, 31           side 0     
+    0x6001, //  3: out    pins, 1         side 0     
+    0x1083, //  4: jmp    y--, 3          side 2     
+    0xe823, //  5: set    x, 3            side 1     
+    0x0746, //  6: jmp    x--, 6          side 0 [7] 
             //     .wrap
 };
 
 #if !PICO_NO_HARDWARE
 static const struct pio_program SN74HC595_program = {
     .instructions = SN74HC595_program_instructions,
-    .length = 5,
+    .length = 7,
     .origin = -1,
 };
 
