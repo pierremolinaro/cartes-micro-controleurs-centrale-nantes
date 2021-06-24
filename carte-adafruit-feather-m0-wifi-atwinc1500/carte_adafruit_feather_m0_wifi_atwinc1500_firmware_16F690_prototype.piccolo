@@ -330,7 +330,7 @@ routine ÉMISSION_SÉRIE bank:requires 0 ensures 0 {
 #! Réception série
 
 routine RÉCEPTION_SÉRIE bank:requires 0 ensures 0 {
-  movf nombre_dans_buffer_reception # Pour modifier Z
+  movf *, nombre_dans_buffer_reception # Pour modifier Z
   if (! STATUS.Z)
   #--- Masquer les interruptions (pour pouvoir utilisé FSR, partagé avec le sp d'it
     bcf    INTCON.GIE
