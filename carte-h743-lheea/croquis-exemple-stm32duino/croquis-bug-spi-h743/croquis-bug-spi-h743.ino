@@ -30,7 +30,7 @@
 
 static const uint8_t SPI3_MOSI = PC12 ;
 static const uint8_t SPI3_MISO = PC11 ;
-static const uint8_t SPI3_SSEL  = PA15 ;
+static const uint8_t SPI3_SSEL = PA15 ;
 static const uint8_t SPI3_SCLK = PC10 ;
 
 //--------------------------------------------------------------------------------------------------

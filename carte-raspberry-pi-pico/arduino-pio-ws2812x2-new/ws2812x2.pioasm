@@ -1,0 +1,28 @@
+
+.program ws2812x2
+
+ .wrap_target
+    pull block       ;
+    set  y, 23       ;
+loop:
+    set pins, 1      [5] ; Durée  6 * 40 ns = 240 ns
+    out pins, 1      [8] ; Durée  9 * 40 ns = 360 ns
+    set pins, 0     [14] ; Durée 15 * 40 ns = 600 ns
+    jmp y-- loop         ; Durée  1 * 40 ns =  40 ns
+ .wrap                   ; Implicit jump to 'wrap_target'
+
+; Durées des impulsions, selon la documentation des WS2812 :
+;   Bit à 0 : 1 pendant 250 ± 150 ns, 0 pendant 1000 ± 150 ns ;
+;   Bit à 1 : 1 pendant 600 ± 150 ns, 0 pendant  650 ± 150 ns.
+
+; L'horloge des machines d'états est à 125 MHz, donc les sous multiples exacts
+; sont 25 MHz, 5 MHz, 1 MHz, … On choisit 25 MHz, la période est 40 ns.
+; On ne peut pas avoir exactement la période de 1250 ns, on aura 1240ns (31 périodes)
+
+; 0n procède ainsi :
+;  -1- on sort 1 pendant 240 ns (instruction set pins, 1 [5]) ;
+;  -2- on sort 0 ou 1 pendant 360 ns (instruction out pins, 1 [8]) ;;
+;  -3- on sort 0 pendant 640 ns (instructions set pins, 0 [14], jmp y-- loop).
+
+; Entre chaque led, les deux instructions 'pull block' et 'set y, 23' introduisent un
+; délai supplémentaire de 80 ns (on pourrait améliorer).
