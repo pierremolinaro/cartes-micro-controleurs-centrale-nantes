@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1668,"WindowHeight":1053}
+{"WindowWidth":1796,"WindowHeight":1053}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
@@ -379,7 +379,7 @@ F
 F
 1
 4
-0
+BR
 Erm
 as
 4000000000000000
@@ -407,8 +407,8 @@ NPc
 blJI
 NPc
 Default
-6
-4
+2
+0
 Nucleo32 — asservissements
 3.0
 41d840fe498b45ee
@@ -425,7 +425,7 @@ NPc
 4
 $8
 
-7
+2
 ak
 1:6
 8:1
@@ -437,12 +437,12 @@ H8:A H4 H3 HJ:B Gz HV:A H2 Hg:2 H5 Hj:I H6 I2:9 H7 IC:5 IM:3 II:3 IQ:1 H0 IW IY:
 @1
 Alimentation
 0
-uF uD uC tv u4 e1 tu v8 tx v9 v6 tt v7 v5 vC v4 u3 vB e3 tr u2 ts vA uB v0:1 uA u6 v3 v2 vD:1 uE e0 uG ej wU wX:1 eo el ep ei tp wV:1 tm to tn tq uJ uO uH uL wH:1 19s uI de vF db d8 dA:1 d7 dc as df ay:1
+uF uD uC tv u4 e1 tu v8 tx v9 v6 tt v7 v5 vC v4 u3 vB e3 tr u2 ts vA uB v0:1 uA u6 v3 v2 vD:1 uE e0 uG ej wU wX:1 eo el ep ei tp wV:1 tm to tn tq uJ uO uH uL wH:1 1A0 uI de vF db d8 dA:1 d7 dc as df ay:1
 ct cx e5 tz d1 cz tw e6 u0 u5 cv e2 dz e7 u1 cw cs cy dx d0 e8 cu d5 d4 u8 d3 u9 d2 cr dy dw bX eX bb ba bY en ek eW eB bZ eC eA e9 uK bn uN bo dv cq da d9 d6 dZ cp aw dd ax
 @1
 Nucleo 32 -MCP23S17
 0
-fE 10I 10K 10F 10H zr zt zb zf r7 qf qy iL s1 i1 re ic hv rs w6 iD i2 iK rZ iX hu qt qW s6 sF jJ qk rL sT rQ sK iU rC rn iE jI hX sY jg qR w5 hS jf iV gw ud vw vv uz uc jq nW w4 w3 mk:1 jo:1 o0:1 pI:1 nc:1 pG:1 nb nX nz jn jj uy mz:1 l3 nV nr ne no nf np:1 sz sy w1 vx:1 w0 vz w2 t0 fD qI qA nn ua:1 vu nl:1 hP hL nw ns sn sh q1 pt mj jr gv l4 mg:1 lt:1 fh fc oa:1 kD:1 kC vH vG
+fE 10I 10K 10F 10H zr zt zb zf r7 qf qy iL s1 i1 re ic hv rs w6 iD i2 iK rZ iX hu qt qW s6 sF jJ qk rL sT rQ sK iU rC rn iE jI hX sY jg qR w5 hS jf iV gw ud vw vv uz uc jq nW w4 w3 mk:1 jo:1 o0:1 pI:1 nc:1 pG:1 nb nX nz jn jj uy mz:1 l3 nV nr ne no nf np:1 sz sy w1 vx:1 w0 vz w2 t0 fD qI qA nn ua:1 vu nl:1 hP hL nw ns sn sh q1 pt mj jr gv l4 mg:1 lt:1 fh fc oa:1 kD:1 kC vH vG 19s:7
 10J 10G zs ze ht c0 rP i0 je qV rB qj qx s5 iC iJ ib rd sJ jH hW sX iT rr gx:2 dj h0 gp dE h1:1 gW h3 cA h4:5 bz dD di fF c8 fG:1 c5 c7 c1:1 jv fI jl fJ gn fK gV fL nZ fM gX na jm hA my hB:8 fN:1 fA nh c4 c6 c3 fP:9 f9 qE fZ nj cB dh dk c9 ni nk hO hK nv sm px fa jw go kU m1 lE fg fb oZ kA:1 cn:1
 @1
 LCD — Leds — Push buttons
@@ -59041,6 +59041,78 @@ ENTRÉES BIPOLAIRES
 Y39w
 RKsG
 5 * TME LL-304VD2E-V1-1A
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+qH4m
+hdqu
+PA2
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+kWGC
+fiui
+PA7
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+kWGC
+dnyW
+PA6
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+kWGC
+bt2K
+PA5
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+pJbg
+Zy68
+PA4
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+pJbg
+Y39w
+PA3
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+pnLE
+W8Dk
+PA1
+@Q
+2
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+pnLE
+UDHY
+PA0
 @Q
 1
 0.0 0.0 0.0 1.0
