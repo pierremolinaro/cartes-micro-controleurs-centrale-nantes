@@ -37,15 +37,14 @@ void loop () {
   const int32_t encodeur = valeurEncodeur () ;
   if (gValeurEncodeur != encodeur) {
     gValeurEncodeur = encodeur ;
-    const uint8_t commande = uint8_t (encodeur) ;
-    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE_UNIPOLAIRE::SU0, commande) ;
-    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE_UNIPOLAIRE::SU1, commande) ;
+    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE_UNIPOLAIRE::SU0, uint32_t (gValeurEncodeur)) ;
+    actionSortieAnalogiqueUnipolaire (SORTIE_ANALOGIQUE_UNIPOLAIRE::SU1, uint32_t (gValeurEncodeur)) ;
     lcd.setCursor (7, 1) ;
     lcd.print ("             ") ;
     lcd.setCursor (7, 1) ;
-    lcd.print (commande) ;
+    lcd.print (gValeurEncodeur) ;
     lcd.print (" -> ") ;
-    lcd.print (float (commande) * 0.041412) ;
+    lcd.print (float (gValeurEncodeur) * 0.041412) ;
     lcd.print ("V") ;
   }
 //--- Troisième action : lire les entrées analogiques

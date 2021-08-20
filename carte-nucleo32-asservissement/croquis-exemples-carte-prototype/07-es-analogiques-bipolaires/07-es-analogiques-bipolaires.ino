@@ -37,15 +37,14 @@ void loop () {
   const int32_t encodeur = valeurEncodeur () ;
   if (gValeurEncodeur != encodeur) {
     gValeurEncodeur = encodeur ;
-    const int8_t commande = int8_t (gValeurEncodeur) ;
-    actionSortieAnalogiqueBipolaire (SORTIE_ANALOGIQUE_BIPOLAIRE::SB0, commande) ;
-    actionSortieAnalogiqueBipolaire (SORTIE_ANALOGIQUE_BIPOLAIRE::SB1, commande) ;
+    actionSortieAnalogiqueBipolaire (SORTIE_ANALOGIQUE_BIPOLAIRE::SB0, gValeurEncodeur) ;
+    actionSortieAnalogiqueBipolaire (SORTIE_ANALOGIQUE_BIPOLAIRE::SB1, gValeurEncodeur) ;
     lcd.setCursor (6, 1) ;
     lcd.print ("              ") ;
     lcd.setCursor (6, 1) ;
-    lcd.print (commande) ;
+    lcd.print (gValeurEncodeur) ;
     lcd.print ("->") ;
-    lcd.print (float (commande) * 0.082824) ;
+    lcd.print (float (gValeurEncodeur) * 0.082824) ;
     lcd.print ("V") ;
   }
 //--- Troisième action : lire les entrées analogiques

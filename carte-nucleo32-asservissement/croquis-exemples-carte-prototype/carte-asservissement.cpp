@@ -98,8 +98,12 @@ static const uint8_t GPIOB_MCP23S17  = 0x13 ;
 static const uint8_t LECTURE_MCP23S17  = 0x41 ;
 static const uint8_t ECRITURE_MCP23S17 = 0x40 ;
 
-//--- Débit SPI (en bit/s, maximum 10 Mbit/s)
-static const uint32_t DEBIT_SPI = 1 * 1000 * 1000 ;
+//--- Débits SPI
+static const uint32_t DEBIT_SPI_MCP23S17 = 10 * 1000 * 1000 ; // En bit/s, maximum 10 Mbit/s
+const SPISettings SPI_SETTINGS_MCP23S17 (DEBIT_SPI_MCP23S17, MSBFIRST, SPI_MODE0) ;
+
+static const uint32_t DEBIT_SPI_MCP49x2 = 20 * 1000 * 1000 ; // En bit/s, maximum 20 Mbit/s
+const SPISettings SPI_SETTINGS_MCP49x2 (DEBIT_SPI_MCP49x2, MSBFIRST, SPI_MODE0) ;
 
 //-------------------------------------------------------------------------------------------------
 // ENCODEUR NUMÉRIQUE
@@ -141,22 +145,19 @@ void configurerCarteAsservissement () {
   SPI.begin () ;
 //--- Configurer le MCP23S17 : GPA
   digitalWrite (CS_SPI_23S17, LOW);
-  SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-  SPI.beginTransaction (settings) ;
+  SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (IODIRA_MCP23S17) ;
   SPI.transfer (0x1F) ; // GPA0 à GPA4 en entrée, GPA5 à GPA7 en sortie
   digitalWrite (CS_SPI_23S17, HIGH);
 //--- Configurer le MCP23S17 : activer les pullup sur GPA0 à GPA4
   digitalWrite (CS_SPI_23S17, LOW);
-  SPI.beginTransaction (settings) ;
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (GPPUA_MCP23S17) ;
   SPI.transfer (0x1F) ; // pullup sur GPA0 à GPA4
   digitalWrite (CS_SPI_23S17, HIGH);
 //--- Configurer le MCP23S17 : GPB
   digitalWrite (CS_SPI_23S17, LOW);
-  SPI.beginTransaction (settings) ;
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (IODIRB_MCP23S17) ;
   SPI.transfer (0x00) ; // GPB0 à GPB7 en sortie
@@ -181,8 +182,7 @@ static void activationGPA (const uint8_t inValue) {
 //--- Si changement, écrire le registre GPIOA du MCP23S17
   if (cachePortA != gCachePortA) {
     digitalWrite (CS_SPI_23S17, LOW);
-    SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOA_MCP23S17) ;
     SPI.transfer (gCachePortA) ;
@@ -201,8 +201,7 @@ static void desactivationGPA (const uint8_t inValue) {
 //--- Si changement, écrire le registre GPIOA du MCP23S17
   if (cachePortA != gCachePortA) {
     digitalWrite (CS_SPI_23S17, LOW);
-    SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOA_MCP23S17) ;
     SPI.transfer (gCachePortA) ;
@@ -221,8 +220,7 @@ static void activationGPB (const uint8_t inValue) {
 //--- Si changement, écrire le registre GPIOB du MCP23S17
   if (cachePortB != gCachePortB) {
     digitalWrite (CS_SPI_23S17, LOW);
-    SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOB_MCP23S17) ;
     SPI.transfer (gCachePortB) ;
@@ -241,8 +239,7 @@ static void desactivationGPB (const uint8_t inValue) {
 //--- Si changement, écrire le registre GPIOB du MCP23S17
   if (cachePortB != gCachePortB) {
     digitalWrite (CS_SPI_23S17, LOW);
-    SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOB_MCP23S17) ;
     SPI.transfer (gCachePortB) ;
@@ -269,8 +266,7 @@ void actionLed (const LED inLed, const bool inValue) {
 bool etatPoussoir (const POUSSOIR inPoussoir) {
 //--- Lire le port A
   digitalWrite (CS_SPI_23S17, LOW);
-  SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-  SPI.beginTransaction (settings) ;
+  SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
   SPI.transfer (LECTURE_MCP23S17) ;
   SPI.transfer (GPIOA_MCP23S17) ;
   const uint8_t portA = SPI.transfer (0) ;
@@ -365,9 +361,11 @@ void actionSortieLogique (const SORTIE_LOGIQUE inSortieLogique, const bool inVal
 //-------------------------------------------------------------------------------------------------
 
 void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSortieAnalogique,
-                                       const uint8_t inValue) {
-  const SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-  uint16_t v = inValue ;
+                                       const uint32_t inValue) {
+  uint16_t v = uint16_t (inValue) ;
+  if (inValue > 255) {
+    v = 255 ;
+  }
   v <<= 4 ; // MCP4902 : 8 bit DAC, LSB is bit 4
   v |= (1 << 12) ; // Active mode operation. Vout is available
   v |= (1 << 13) ; // Gain 1
@@ -375,7 +373,7 @@ void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSort
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE_UNIPOLAIRE::SU0 :
     digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_UNIPOLAIRE, HIGH);
@@ -383,7 +381,7 @@ void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSort
   case SORTIE_ANALOGIQUE_UNIPOLAIRE::SU1 :
     v |= (1 << 15) ; // Write to DAC1
     digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_UNIPOLAIRE, HIGH);
@@ -396,9 +394,13 @@ void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSort
 //-------------------------------------------------------------------------------------------------
 
 void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortieAnalogique,
-                                      const int8_t inValue) {
-  const SPISettings settings (DEBIT_SPI, MSBFIRST, SPI_MODE0) ;
-  int16_t value = inValue ;
+                                      const int32_t inValue) {
+  int16_t value = int16_t (inValue) ;
+  if (inValue > 127) {
+    value = 127 ;
+  }else if (inValue < -128) {
+    value = -128 ;
+  }
   value += 128 ;
   uint16_t v = uint16_t (value) ;
   v <<= 4 ; // MCP4902 : 8 bit DAC, LSB is bit 4
@@ -408,7 +410,7 @@ void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortie
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE_BIPOLAIRE::SB0 :
     digitalWrite (CS_DAC_BIPOLAIRE, LOW);
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_BIPOLAIRE, HIGH);
@@ -416,7 +418,7 @@ void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortie
   case SORTIE_ANALOGIQUE_BIPOLAIRE::SB1 :
     v |= (1 << 15) ; // Write to DAC1
     digitalWrite (CS_DAC_BIPOLAIRE, LOW);
-    SPI.beginTransaction (settings) ;
+    SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_BIPOLAIRE, HIGH);
@@ -428,8 +430,8 @@ void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortie
 // ENTRÉES ANALOGIQUES UNIPOLAIRES
 //-------------------------------------------------------------------------------------------------
 
-uint16_t lireEntreeAnalogiqueUnipolaire (const ENTREE_ANALOGIQUE_UNIPOLAIRE inEntreeAnalogique) {
-  uint16_t result = 0 ;
+uint32_t lireEntreeAnalogiqueUnipolaire (const ENTREE_ANALOGIQUE_UNIPOLAIRE inEntreeAnalogique) {
+  uint32_t result = 0 ;
   switch (inEntreeAnalogique) {
   case ENTREE_ANALOGIQUE_UNIPOLAIRE::EU0 :
     result = analogRead (PA0) ;
@@ -445,8 +447,8 @@ uint16_t lireEntreeAnalogiqueUnipolaire (const ENTREE_ANALOGIQUE_UNIPOLAIRE inEn
 // ENTRÉES ANALOGIQUES UNIPOLAIRES
 //-------------------------------------------------------------------------------------------------
 
-int16_t lireEntreeAnalogiqueBipolaire (const ENTREE_ANALOGIQUE_BIPOLAIRE inEntreeAnalogique) {
-  uint16_t rawValue = 0 ;
+int32_t lireEntreeAnalogiqueBipolaire (const ENTREE_ANALOGIQUE_BIPOLAIRE inEntreeAnalogique) {
+  uint32_t rawValue = 0 ;
   switch (inEntreeAnalogique) {
   case ENTREE_ANALOGIQUE_BIPOLAIRE::EB0 :
     rawValue = analogRead (PA3) ;
@@ -455,7 +457,7 @@ int16_t lireEntreeAnalogiqueBipolaire (const ENTREE_ANALOGIQUE_BIPOLAIRE inEntre
     rawValue = analogRead (PA4) ;
     break ;
   }
-  int16_t result = int16_t (rawValue) ;
+  int32_t result = int32_t (rawValue) ;
   result -= 512 ;
   return result ;
 }
