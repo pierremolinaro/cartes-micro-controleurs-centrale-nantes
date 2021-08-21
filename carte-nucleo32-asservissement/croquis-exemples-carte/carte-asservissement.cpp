@@ -53,35 +53,36 @@ LiquidCrystal lcd (LCD_RS, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7) ;
 //
 //-------------------------------------------------------------------------------------------------
 
-static const uint8_t myMOSI = PA7 ; // Attention, noté A6 sur la STM32
-static const uint8_t myMISO = PA6 ; // Attention, noté A5 sur la STM32
-static const uint8_t mySCLK = PA5 ; // Attention, noté A4 sur la STM32
+static const uint8_t myMOSI = A6 ; // Attention, noté A6 sur la STM32
+static const uint8_t myMISO = A5 ; // Attention, noté A5 sur la STM32
+static const uint8_t mySCLK = A4 ; // Attention, noté A4 sur la STM32
+
 static const uint8_t CS_SPI_23S17 = D3 ;
 static const uint8_t CS_DAC_UNIPOLAIRE = D6 ;
-static const uint8_t CS_DAC_BIPOLAIRE = PA2 ; // A7 sur la carte STM32
+static const uint8_t CS_DAC_BIPOLAIRE = A7 ; // A7 sur la carte STM32
 
 //-------------------------------------------------------------------------------------------------
 // MCP23S17 sur bus SPI
 //-------------------------------------------------------------------------------------------------
 // Le MCP23S17 présente deux ports de 8 bits dont l'affectation des masques est :
 
-static const uint8_t MASQUE_PUSH_0 = 1 << 0 ; // GPA0, en entrée
-static const uint8_t MASQUE_PUSH_1 = 1 << 1 ; // GPA1, en entrée
-static const uint8_t MASQUE_PUSH_2 = 1 << 2 ; // GPA2, en entrée
-static const uint8_t MASQUE_PUSH_3 = 1 << 3 ; // GPA3, en entrée
-static const uint8_t MASQUE_PUSH_4 = 1 << 4 ; // GPA4, en entrée
-static const uint8_t MASQUE_SORTIE_LOGIQUE_0 = 1 << 5 ; // GPA5, en sortie
-static const uint8_t MASQUE_SORTIE_LOGIQUE_1 = 1 << 6 ; // GPA6, en sortie
-static const uint8_t MASQUE_LDAC_DAC_UNIPOLAIRE = 1 << 7 ; // GPA7, en sortie
+static const uint8_t MASQUE_GPA_PUSH_0 = 1 << 0 ; // GPA0, en entrée
+static const uint8_t MASQUE_GPA_PUSH_1 = 1 << 1 ; // GPA1, en entrée
+static const uint8_t MASQUE_GPA_PUSH_2 = 1 << 2 ; // GPA2, en entrée
+static const uint8_t MASQUE_GPA_PUSH_3 = 1 << 3 ; // GPA3, en entrée
+static const uint8_t MASQUE_GPA_PUSH_4 = 1 << 4 ; // GPA4, en entrée
+static const uint8_t MASQUE_GPA_SORTIE_LOGIQUE_0 = 1 << 5 ; // GPA5, en sortie
+static const uint8_t MASQUE_GPA_SORTIE_LOGIQUE_1 = 1 << 6 ; // GPA6, en sortie
+static const uint8_t MASQUE_GPA_LDAC_DAC_UNIPOLAIRE = 1 << 7 ; // GPA7, en sortie
 
-static const uint8_t MASQUE_LED_0 = 1 << 0 ; // GPB0, en sortie
-static const uint8_t MASQUE_LED_1 = 1 << 1 ; // GPB1, en sortie
-static const uint8_t MASQUE_LED_2 = 1 << 2 ; // GPB2, en sortie
-static const uint8_t MASQUE_LED_3 = 1 << 3 ; // GPB3, en sortie
-static const uint8_t MASQUE_LED_4 = 1 << 4 ; // GPB4, en sortie
-static const uint8_t MASQUE_SORTIE_LOGIQUE_2 = 1 << 5 ; // GPB5, en sortie
-static const uint8_t MASQUE_SORTIE_LOGIQUE_3 = 1 << 6 ; // GPB6, en sortie
-static const uint8_t MASQUE_LDAC_DAC_BIPOLAIRE = 1 << 7 ; // GPB7, en sortie
+static const uint8_t MASQUE_GPB_LED_0 = 1 << 0 ; // GPB0, en sortie
+static const uint8_t MASQUE_GPB_LED_1 = 1 << 1 ; // GPB1, en sortie
+static const uint8_t MASQUE_GPB_LED_2 = 1 << 2 ; // GPB2, en sortie
+static const uint8_t MASQUE_GPB_LED_3 = 1 << 3 ; // GPB3, en sortie
+static const uint8_t MASQUE_GPB_LED_4 = 1 << 4 ; // GPB4, en sortie
+static const uint8_t MASQUE_GPB_SORTIE_LOGIQUE_2 = 1 << 5 ; // GPB5, en sortie
+static const uint8_t MASQUE_GPB_SORTIE_LOGIQUE_3 = 1 << 6 ; // GPB6, en sortie
+static const uint8_t MASQUE_GPB_LDAC_DAC_BIPOLAIRE = 1 << 7 ; // GPB7, en sortie
 
 //--- Initialement, IOCON.BANK est à zéro, et n'est pas modifié par la configuration.
 // Les adresses des registres du MCP23S17 sont donc :
@@ -144,24 +145,29 @@ void configurerCarteAsservissement () {
   SPI.setMISO (myMISO) ;
   SPI.begin () ;
 //--- Configurer le MCP23S17 : GPA
-  digitalWrite (CS_SPI_23S17, LOW);
   SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+  digitalWrite (CS_SPI_23S17, LOW);
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (IODIRA_MCP23S17) ;
   SPI.transfer (0x1F) ; // GPA0 à GPA4 en entrée, GPA5 à GPA7 en sortie
   digitalWrite (CS_SPI_23S17, HIGH);
+  SPI.endTransaction () ;
 //--- Configurer le MCP23S17 : activer les pullup sur GPA0 à GPA4
+  SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
   digitalWrite (CS_SPI_23S17, LOW);
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (GPPUA_MCP23S17) ;
   SPI.transfer (0x1F) ; // pullup sur GPA0 à GPA4
   digitalWrite (CS_SPI_23S17, HIGH);
+  SPI.endTransaction () ;
 //--- Configurer le MCP23S17 : GPB
+  SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
   digitalWrite (CS_SPI_23S17, LOW);
   SPI.transfer (ECRITURE_MCP23S17) ;
   SPI.transfer (IODIRB_MCP23S17) ;
   SPI.transfer (0x00) ; // GPB0 à GPB7 en sortie
   digitalWrite (CS_SPI_23S17, HIGH);
+  SPI.endTransaction () ;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -181,12 +187,13 @@ static void activationGPA (const uint8_t inValue) {
   gCachePortA |= inValue ;
 //--- Si changement, écrire le registre GPIOA du MCP23S17
   if (cachePortA != gCachePortA) {
-    digitalWrite (CS_SPI_23S17, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+    digitalWrite (CS_SPI_23S17, LOW);
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOA_MCP23S17) ;
     SPI.transfer (gCachePortA) ;
     digitalWrite (CS_SPI_23S17, HIGH);
+    SPI.endTransaction () ;
   }
 }
 
@@ -200,12 +207,13 @@ static void desactivationGPA (const uint8_t inValue) {
   gCachePortA &= ~ inValue ;
 //--- Si changement, écrire le registre GPIOA du MCP23S17
   if (cachePortA != gCachePortA) {
-    digitalWrite (CS_SPI_23S17, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+    digitalWrite (CS_SPI_23S17, LOW);
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOA_MCP23S17) ;
     SPI.transfer (gCachePortA) ;
     digitalWrite (CS_SPI_23S17, HIGH);
+    SPI.endTransaction () ;
   }
 }
 
@@ -219,12 +227,13 @@ static void activationGPB (const uint8_t inValue) {
   gCachePortB |= inValue ;
 //--- Si changement, écrire le registre GPIOB du MCP23S17
   if (cachePortB != gCachePortB) {
-    digitalWrite (CS_SPI_23S17, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+    digitalWrite (CS_SPI_23S17, LOW);
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOB_MCP23S17) ;
     SPI.transfer (gCachePortB) ;
     digitalWrite (CS_SPI_23S17, HIGH);
+    SPI.endTransaction () ;
   }
 }
 
@@ -238,12 +247,13 @@ static void desactivationGPB (const uint8_t inValue) {
   gCachePortB &= ~ inValue ;
 //--- Si changement, écrire le registre GPIOB du MCP23S17
   if (cachePortB != gCachePortB) {
-    digitalWrite (CS_SPI_23S17, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+    digitalWrite (CS_SPI_23S17, LOW);
     SPI.transfer (ECRITURE_MCP23S17) ;
     SPI.transfer (GPIOB_MCP23S17) ;
     SPI.transfer (gCachePortB) ;
     digitalWrite (CS_SPI_23S17, HIGH);
+    SPI.endTransaction () ;
   }
 }
 
@@ -265,12 +275,13 @@ void actionLed (const LED inLed, const bool inValue) {
 
 bool etatPoussoir (const POUSSOIR inPoussoir) {
 //--- Lire le port A
-  digitalWrite (CS_SPI_23S17, LOW);
   SPI.beginTransaction (SPI_SETTINGS_MCP23S17) ;
+  digitalWrite (CS_SPI_23S17, LOW);
   SPI.transfer (LECTURE_MCP23S17) ;
   SPI.transfer (GPIOA_MCP23S17) ;
   const uint8_t portA = SPI.transfer (0) ;
   digitalWrite (CS_SPI_23S17, HIGH);
+  SPI.endTransaction () ;
   return (portA & uint8_t (inPoussoir)) == 0 ;
 }
 
@@ -327,30 +338,30 @@ void actionSortieLogique (const SORTIE_LOGIQUE inSortieLogique, const bool inVal
   switch (inSortieLogique) {
   case SORTIE_LOGIQUE::S0 :
     if (inValue) {
-      activationGPA (MASQUE_SORTIE_LOGIQUE_0) ;
+      activationGPA (MASQUE_GPA_SORTIE_LOGIQUE_0) ;
     }else{
-      desactivationGPA (MASQUE_SORTIE_LOGIQUE_0) ;
+      desactivationGPA (MASQUE_GPA_SORTIE_LOGIQUE_0) ;
     }
     break ;
   case SORTIE_LOGIQUE::S1 :
     if (inValue) {
-      activationGPA (MASQUE_SORTIE_LOGIQUE_1) ;
+      activationGPA (MASQUE_GPA_SORTIE_LOGIQUE_1) ;
     }else{
-      desactivationGPA (MASQUE_SORTIE_LOGIQUE_1) ;
+      desactivationGPA (MASQUE_GPA_SORTIE_LOGIQUE_1) ;
     }
     break ;
   case SORTIE_LOGIQUE::S2 :
     if (inValue) {
-      activationGPB (MASQUE_SORTIE_LOGIQUE_2) ;
+      activationGPB (MASQUE_GPB_SORTIE_LOGIQUE_2) ;
     }else{
-      desactivationGPB (MASQUE_SORTIE_LOGIQUE_2) ;
+      desactivationGPB (MASQUE_GPB_SORTIE_LOGIQUE_2) ;
     }
     break ;
   case SORTIE_LOGIQUE::S3 :
     if (inValue) {
-      activationGPB (MASQUE_SORTIE_LOGIQUE_3) ;
+      activationGPB (MASQUE_GPB_SORTIE_LOGIQUE_3) ;
     }else{
-      desactivationGPB (MASQUE_SORTIE_LOGIQUE_3) ;
+      desactivationGPB (MASQUE_GPB_SORTIE_LOGIQUE_3) ;
     }
     break ;
   }
@@ -372,19 +383,21 @@ void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSort
   v |= (1 << 14) ;
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE_UNIPOLAIRE::SU0 :
-    digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
+    digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_UNIPOLAIRE, HIGH);
+    SPI.endTransaction () ;
     break ;
   case SORTIE_ANALOGIQUE_UNIPOLAIRE::SU1 :
     v |= (1 << 15) ; // Write to DAC1
-    digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
+    digitalWrite (CS_DAC_UNIPOLAIRE, LOW);
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_UNIPOLAIRE, HIGH);
+    SPI.endTransaction () ;
     break ;
   }
 }
@@ -409,19 +422,21 @@ void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortie
   v |= (1 << 14) ;
   switch (inSortieAnalogique) {
   case SORTIE_ANALOGIQUE_BIPOLAIRE::SB0 :
-    digitalWrite (CS_DAC_BIPOLAIRE, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
+    digitalWrite (CS_DAC_BIPOLAIRE, LOW);
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_BIPOLAIRE, HIGH);
+    SPI.endTransaction () ;
     break ;
   case SORTIE_ANALOGIQUE_BIPOLAIRE::SB1 :
     v |= (1 << 15) ; // Write to DAC1
-    digitalWrite (CS_DAC_BIPOLAIRE, LOW);
     SPI.beginTransaction (SPI_SETTINGS_MCP49x2) ;
+    digitalWrite (CS_DAC_BIPOLAIRE, LOW);
     SPI.transfer (uint8_t (v >> 8)) ;
     SPI.transfer (uint8_t (v)) ;
     digitalWrite (CS_DAC_BIPOLAIRE, HIGH);
+    SPI.endTransaction () ;
     break ;
   }
 }

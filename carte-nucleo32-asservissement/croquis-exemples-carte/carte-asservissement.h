@@ -78,7 +78,8 @@ enum class SORTIE_ANALOGIQUE_UNIPOLAIRE {
   SU1  // Sortie analogique unipolaire 1
 } ;
 
-void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSortieAnalogique, const uint32_t inValue) ;
+void actionSortieAnalogiqueUnipolaire (const SORTIE_ANALOGIQUE_UNIPOLAIRE inSortieAnalogique,
+                                       const uint32_t inValue) ;
 
 //-------------------------------------------------------------------------------------------------
 // SORTIES ANALOGIQUES BIPOLAIRES
@@ -89,7 +90,8 @@ enum class SORTIE_ANALOGIQUE_BIPOLAIRE {
   SB1  // Sortie analogique unipolaire 1
 } ;
 
-void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortieAnalogique, const int32_t inValue) ;
+void actionSortieAnalogiqueBipolaire (const SORTIE_ANALOGIQUE_BIPOLAIRE inSortieAnalogique,
+                                      const int32_t inValue) ;
 
 //-------------------------------------------------------------------------------------------------
 // ENTRÉES ANALOGIQUES UNIPOLAIRES
