@@ -20,8 +20,8 @@ void setup () {
 static uint32_t gInstantClignotement = 0 ;
 static uint32_t gInstantLectureAnalogique = 0 ;
 static int32_t  gValeurEncodeur = -1 ;
-static uint16_t gEntreeAnalogique0 = UINT16_MAX ;
-static uint16_t gEntreeAnalogique1 = UINT16_MAX ;
+static uint32_t gEntreeAnalogique0 = UINT32_MAX ;
+static uint32_t gEntreeAnalogique1 = UINT32_MAX ;
 
 //--------------------------------------------------------
 
@@ -50,7 +50,7 @@ void loop () {
 //--- Troisième action : lire les entrées analogiques
   if (gInstantLectureAnalogique <= millis ()) {
     gInstantLectureAnalogique += 500 ;
-    const uint16_t entree0 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE_UNIPOLAIRE::EU0) ;
+    const uint32_t entree0 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE_UNIPOLAIRE::EU0) ;
     if (gEntreeAnalogique0 != entree0) {
       gEntreeAnalogique0 = entree0 ;
       lcd.setCursor (4, 2) ;
@@ -61,7 +61,7 @@ void loop () {
       lcd.print (float (entree0) * 0.0103226) ;
       lcd.print ("V") ;
     }
-    const uint16_t entree1 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE_UNIPOLAIRE::EU1) ;
+    const uint32_t entree1 = lireEntreeAnalogiqueUnipolaire (ENTREE_ANALOGIQUE_UNIPOLAIRE::EU1) ;
     if (gEntreeAnalogique1 != entree1) {
       gEntreeAnalogique1 = entree1 ;
       lcd.setCursor (4, 3) ;
