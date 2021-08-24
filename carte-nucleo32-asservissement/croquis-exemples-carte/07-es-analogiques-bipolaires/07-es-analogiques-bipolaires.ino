@@ -8,11 +8,11 @@ void setup () {
   fixerGammeEncodeur (-128, 127) ;
   lcd.print ("E/S analog. -10V:10V") ;
   lcd.setCursor (0, 1) ;
-  lcd.print ("S0,S1:") ;
+  lcd.print ("SB0,1:") ;
   lcd.setCursor (0, 2) ;
-  lcd.print ("E0:") ;
+  lcd.print ("EB0:") ;
   lcd.setCursor (0, 3) ;
-  lcd.print ("E1:") ;
+  lcd.print ("EB1:") ;
 }
 
 //--------------------------------------------------------
@@ -53,9 +53,9 @@ void loop () {
     const int32_t entree0 = lireEntreeAnalogiqueBipolaire (ENTREE_ANALOGIQUE_BIPOLAIRE::EB0) ;
     if (gEntreeAnalogique0 != entree0) {
       gEntreeAnalogique0 = entree0 ;
-      lcd.setCursor (4, 2) ;
-      lcd.print ("               ") ;
-      lcd.setCursor (4, 2) ;
+      lcd.setCursor (5, 2) ;
+      lcd.print ("              ") ;
+      lcd.setCursor (5, 2) ;
       lcd.print (entree0) ;
       lcd.print (" -> ") ;
       lcd.print (float (entree0) * 0.0206452) ;
@@ -64,9 +64,9 @@ void loop () {
     const int32_t entree1 = lireEntreeAnalogiqueBipolaire (ENTREE_ANALOGIQUE_BIPOLAIRE::EB1) ;
     if (gEntreeAnalogique1 != entree1) {
       gEntreeAnalogique1 = entree1 ;
-      lcd.setCursor (4, 3) ;
-      lcd.print ("               ") ;
-      lcd.setCursor (4, 3) ;
+      lcd.setCursor (5, 3) ;
+      lcd.print ("              ") ;
+      lcd.setCursor (5, 3) ;
       lcd.print (entree1) ;
       lcd.print (" -> ") ;
       lcd.print (float (entree1) * 0.0206452) ;
