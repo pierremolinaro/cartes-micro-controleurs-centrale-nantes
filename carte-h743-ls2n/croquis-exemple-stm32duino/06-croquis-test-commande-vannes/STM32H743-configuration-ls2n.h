@@ -1,0 +1,1 @@
+../STM32H743-configuration-ls2n.h

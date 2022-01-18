@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1668,"WindowHeight":970}
+{"WindowWidth":1668,"WindowHeight":998}
 $ProjectRoot
 mSchematicSheetOrientation
 mArtworkName
@@ -15,12 +15,14 @@ mDirectionForNewTrack
 mBoardLayerForNewText
 mBoardLayerForNewLine
 mBoardSideForNewRestrictRectangle
+mNewRestrictRectangleLayers
 mAutoRouterPreferredDirections
 mAutorouterSnapAngle
 mRouteDirection
 mRouteOrigin
 mAutorouterInterfaceMode
 mExportExistingTracksAndVias
+mExportExistingTracksAndVias2
 mTrackLengthUnit
 mLayoutClearance
 mLayoutClearanceUnit
@@ -212,6 +214,10 @@ mWidth
 mHeight
 mIsInFrontLayer
 mIsInBackLayer
+mIsInInner1Layer
+mIsInInner2Layer
+mIsInInner3Layer
+mIsInInner4Layer
 mX
 $BoardConnector
 mRoot
@@ -322,6 +328,7 @@ mP1
 mP2
 $NetInProject
 mNetName
+mWarnsExactlyOneLabel
 mNetClass
 mPoints
 mTracks
@@ -390,10 +397,12 @@ T
 0
 1
 1
+1
 0
 0
 0
 T
+F
 65d6u
 5wi
 as
@@ -412,7 +421,7 @@ NPc
 NPc
 Bho
 NPc
-2
+1
 F
 F
 1
@@ -430,11 +439,11 @@ NPc
 1BdYW
 NPc
 Default
-6
-0
+2
+4
 STM32H743 — LS2N
 1.0
-41d870d34f57c604
+41d8795d70c9f987
 F
 F
 0
@@ -448,7 +457,7 @@ NPc
 +18V
 IC4
 1cJ
-G
+I
 1:J
 L
 M:W
@@ -459,7 +468,7 @@ k7 k6 k8:M k5 kV:4 ou k2 ka:A km kl oo kn:2 k4 kq ks kr kt:7 l2 l1 mE m7 mU l3 o
 @1
 Alimentation
 0
-2VU 1vu 2TY 1w8 1wC 1vw 2Vh 2Zp 2Zr 2Zt 2Vf 2TU 1vt 2TW 2VR 2TX 2Zq 2Vg 2Zs 1vv 2TV 2VS:1 2Zu 2VQ 2Zv 2D2 23y 1w6 1w5 2Vd 2D0:1 2Cz 2Vb 2Ve 2VZ 2Vc 241 1va 23w 23v 20x 2D4 210 20z 2D3 1vx 1wX 1vc 1vZ 1x5 213 20w 211:1 218 2WP:1 215 1wV 1x8 2WA 2W9 2WB:2 2Cy 1wW 1wU 1wZ 1x6:1 1w1 2c7 2dx 2VX 243 23t 2Va 2VW 2VY 23u 242 2W7:1 2W6 2dz 1w4 1w3 1vz 2cA 2c6 2c8:1 2dw 2e0 2dy 2e2 2e1 2e3 1w2 1w0 1vy 2D5 1wA 1w9 1w7 1wB 2Vj 2Vi 2Vk
+2VU 1vu 2TY 1w8 1wC 1vw 2Vh 2Zp 2Zr 2Zt 2Vf 2TU 1vt 2TW 2VR 2TX 2Zq 2Vg 2Zs 1vv 2TV 2VS:1 2Zu 2VQ 2Zv 2D2 23y 1w6 1w5 2Vd 2D0:1 2Cz 2Vb 2Ve 2VZ 2Vc 241 1va 23w 23v 20x 2D4 210 20z 2D3 1vx 1wX 1vc 1vZ 1x5 213 20w 211:1 218 2WP:1 215 1wV 1x8 2WA 2W9 2WB:2 2Cy 1wW 1wU 1wZ 1x6:1 1w1 2c7 2dx 2VX 243 23t 2Va 2VW 2VY 23u 242 2W7:1 2W6 2dz 1w4 1w3 1vz 2cA 2c6 2c8:1 2dw 2e0 2dy 2e2 2e1 2e3 1w2 1w0 1vy 2D5 1wA 1w9 1w7 1wB 2Vj 2Vi 2Vk 31q:1
 1p2 1om 1lK 1vs 1rQ 1lL 1oo 1ol 1p3 1lM 1rR 1vr 1lN 1oj 1rS 1vq 1ok 1p4 1rT 1lO 1p5 1lP:1 1vN 1vk 1oh 1os 1vP:1 1on 1op 1vO 240 1vb 1oq 23r 23x 20v 20y 1vM 20u 1vL 1vm 1wY 1oI 1vj 1vh 1vU 1vS 1wu 214 20t 20s 1o3:1 217 1oJ 1oH 1oG 1oF 1vR 1vT 1wt 1ws 1fA 1dD 1f9 1ot 23s 23q 1ou 1or 23p 1dB 1oK:1 1dE 1d9 1vl 1vo 1dA 1dF 1f8 1f7 1dC 1d8 1vn 1vp 1oi 1vi 1vg 1og
 @1
 STM32 : Alim
@@ -469,22 +478,22 @@ STM32 : Alim
 @1
 STM32 : ports A et B
 0
-1ub 1kn 2Ig:1 2Ik 2Id 2Ii 2Ie:1 2Ij 2Il 2aE 2aD 2aC 2aB 2a0 2I7:1 2IJ:1 2IU 2IP 2IL 2DP 1sX:1 2Yf:1 2YG:1 2aF 1km 2Y0:1 1l9 1l4 2DE 2Im 2Zz 2D9 1ua 2DN 31b:1 2Zy 31d:1 1l3 31f:1 2DO 2Zx 2D8 1ur
+1ub 1kn 2Ig:1 2Ik 2Id 2Ii 2Ie:1 2Ij 2Il 2aE 2aD 2aC 2aB 2a0 2I7:1 2IJ:1 2IU 2IP 2IL 2DP 1sX:1 2Yf:1 2YG:1 2aF 1km 2Y0:1 1l9 1l4 2DE 2Im 2Zz 2D9 1ua 2DN 31k:1 2Zy 31m:1 1l3 31o:1 2DO 2Zx 2D8 1ur
 1uc:8 1ko:2 2a2 1kr:1 2Hu 1kt 2IB 1ku:1 2IT 1ul 2DT 1um:1 1sM 1kw:1 2Ye 1ky 2YF 1kz 1ki:1 1uo 2Xz 1l0 1l8 1l1 2DD 1uR 1up 1uS 1l2 1ut 1uq
 @1
 STM32 : ports C et D
 0
-2Kp 1tV 2Jk:1 2Kd 2Kc 2Kg 2Kf 2Kb 2Ke 2La:1 2K8:1 2Ka 2KF 2LV 2LR 2LL 2LH 2J4 2Iz 2Kh 1tU 2Iy 1uB 1uA 1tx 1tw 1tl 2Lc 2Ko 2LB 2L7 2LP 2KE 2KD 2LZ 2LY 2LQ 2LO 2LG 2LF 2LE 2L6 2L5
+2Kp 1tV 2Jk:1 2Kd 2Kc 2Kg 2Kf 2Kb 2Ke 2La:1 2K8:1 2Ka 2KF 2LV 2LR 2LL 2LH 2J4 2Iz 2Kh 1tU 2Iy 1uB 1uA 1tx 1tw 1tl 2Lc 2Ko 2LB 2L7 2LP 2KE 2KD 2LZ 2LY 2LQ 2LO 2LG 2LF 2LE 2L6 2L5 31j
 2Kq:1 1tW:5 2Jj 1tc 2Ks:1 2K7 1td 2KH 1te:1 2LU 2Ku:3 1tg 2LK 2Ky 2J3 1th 1tS:1 2Kz 1uD 1ti 1tz 1tj 1tn 1tk 2L0 2Km:1 2L1 2LA 2L2:2
 @1
 STM 32 : ports E et F
 0
-29h 1qs 2OK:1 2T2:1 2Ro:1 2RE:1 2Qf:1 2CI 2CD 2By 2Bt 2Be 2BZ 2Mf:1 2UH 2U6 2U5 2Ts 2UI 1qr 2Nk:1 2BH 2BC 29g 2CZ 2B9 2Aj 2Ai 2AL 2AK 29y 2N9:1 2Q5:1 2SQ:1 2BB 31a 2Ou 2PV:1 2Ov 1rF 1r8 2CY 2CX 2BY 2BX 2BW 2BA 29x
+29h 1qs 2OK:1 2T2:1 2Ro:1 2RE:1 2Qf:1 2CI 2CD 2By 2Bt 2Be 2BZ 2Mf:1 2UH 2U6 2U5 2Ts 2UI 1qr 2Nk:1 2BH 2BC 29g 2CZ 2B9 2Aj 2Ai 2AL 2AK 29y 2N9:1 2Q5:1 2SQ:1 2BB 31i 2Ou 2PV:1 2Ov 1rF 1r8 2CY 2CX 2BY 2BX 2BW 2BA 29x
 29i 2OJ 1qt 2T1 1qu 2Rn 1qv 2RD 1qw 2Qe 1qx 29j 2CH 29k 2Bx 29l 2Bd 29m 2MU 1qy 2U8 1qz 2Tu 1r0 1qi:1 29n:2 2Nj 1r1 2BG 29q:2 29N:1 2Al 29t 2AN 29u 2A0 29v:1 2N8 1r2 2Q4 1r3 2SP 1r4 2Ot 2PU 1r5:1 1rE 1r7
 @1
 STM32: ports G et H
 0
-2iL 1sq 2kh 2kg 2MH:1 1sp 2MF:1 2Lw 2Lr 1tB 1t6 2ME 2MD 2MC 2MB 2MA 2M9 2M8 2M7 2M6 2M5
+2iL 1sq 2kh 2kg 2MH:1 1sp 2MF:1 2Lw 2Lr 1tB 1t6 2ME 2MD 2MC 2MB 2MA 2M9 2M8 2M7 2M6 2M5 31d:4
 2ke:1 1sr:2 1si:1 1su:9 2Lv 1t4 1tA 1t5
 @1
 SPI1 à SPI5, Afficheur LCD
@@ -504,7 +513,7 @@ Entrées analogiques (1)
 @1
 Entrées analogiques (2)
 0
-1hR 2at 2aq 2as 2ca 2cX 2cZ 1hT 2cY 2bt 1hJ 1hS 1hQ 1hL 1hY 1hI 1hU:1 1hX 1hW 1hZ 1hu 2ao 2ar 2cU 2cW 1hw 2cV 1hm 1hv 1ht 1ho 1i1 1hl 1hx:1 1i0 1hz 1i2 1iN 2cR 2cT 2am 2ap 1iP 2cS 1iF 1iU 1iO 1iM 1iH 1iE 1iQ:1 1iT 1iS 1iV 1iq 2al 2an 2cO 2cQ 1is 2cP 1ii 1ix 1ir 1ip 1ik 1ih 1it:1 1iw 1iv 1iy 2br 1jJ 2ak 2ah 2aj 2cN 2cK 2cM 1jL 2cL 1jB 1jK 1jI 1jD 1jM 1jA 1jN:4 1jm 2cH 2cJ 2af 2ai 1jo 2cI 1je 1jn 1jl 1jg 1jp 1jd 1jq:4 1kF 2cE 2cG 2ad 2ag 2ae 1kH 2cF 2cD 1k7 1kI 1kG 1kE 1k9 1k6 1kJ:4 1gg 2aa 2aW:3 1gj 2ab 2dq 2dp 2do 2bu 2bs 2bq 2bn 2bl 2dn 2dm 2bp 2bo 2bm 2bk 2ac 1ga 1gd 1gb
+1hR 2at 2aq 2as 2ca 2cX 2cZ 1hT 2cY 2bt 1hJ 1hS 1hQ 1hL 1hY 1hI 1hU:1 1hX 1hW 1hZ 1hu 2ao 2ar 2cU 2cW 1hw 2cV 1hm 1hv 1ht 1ho 1i1 1hl 1hx:1 1i0 1hz 1i2 1iN 2cR 2cT 2am 2ap 1iP 2cS 1iF 1iU 1iO 1iM 1iH 1iE 1iQ:1 1iT 1iS 1iV 1iq 2al 2an 2cO 2cQ 1is 2cP 1ii 1ix 1ir 1ip 1ik 1ih 1it:1 1iw 1iv 1iy 2br 1jJ 2ak 2ah 2aj 2cN 2cK 2cM 1jL 2cL 1jB 1jK 1jI 1jD 1jM 1jA 1jN:4 1jm 2cH 2cJ 2af 2ai 1jo 2cI 1je 1jn 1jl 1jg 1jp 1jd 1jq:4 1kF 2cE 2cG 2ad 2ag 2ae 1kH 2cF 2cD 1k7 1kI 1kG 1kE 1k9 1k6 1kJ:4 1gg 2aa 2aW:3 1gj 2ab 2dq 2dp 2do 2bu 2bs 2bq 2bn 2bl 2dn 2dm 2bp 2bo 2bm 2bk 2ac 1ga 1gd 1gb 31c
 1ee 1gF 1hP 1gC:1 1eb:1 1hO 1ed 1hF 1hC 1hK 1hN 1hA 1hE 1hD 1hB 1h9 1eh 1gH 1hs 1gE 1ef 1hr 1eg 1hf 1hi 1hn 1hq 1hd 1hh 1hg 1he 1hc 1ek 1gJ 1iL 1ei 1gG 1iK 1ej 1i8 1i6 1iG 1iJ 1iA:1 1i9 1i7 1i5 1en 1gK 1io 1gI 1el 1in 1em 1ib 1iZ 1ij 1im 1id:1 1ic 1ia 1iY 1er 1gO 1jH 1gL 1gR 1gM 1eo:1 1jG 1eq 1j7 1jC 1jF 1j6 1j5 1j4 1j3 1j2 1j1 1eu 1gQ 1jk 1es 1gN 1jj 1et 1ja 1jf 1ji 1jZ 1jY 1jX 1jW 1jV 1jU 1ex 1gS 1kD 1ev 1gP 1kC 1ew 1k3 1k2 1k8 1kB 1k1 1k0 1jz 1jy 1jx 1gh:1 1gm 1gp 1go 1gn 1gl 1dL:2 1fI:2 1dO:1 1fL:3 1gT 1gf 1gU 1ey 1gc
 @1
 Entrées analogiques (3)
@@ -539,7 +548,7 @@ Commande des vannes
 @1
 Retour analogique vannes
 0
-1yF 253 22U 1zu 2Cd 254 22V 1zm 1yE 2UO 2UQ 2UP 2Vr 2Vq 2Vs 2Uc:1 2Ub 2WU 2WT 2AC 2Ax 2AE 2B3:1 2Az 29I 29B 29G:1 1qE 2Af 2AZ 2Ab 2AY 2Ad 2Ag 2Ae 2WR:1 2B5 2Aw 2B6 2B8 2B7 2Ah 2AG 2AB 2AH 2AJ 2AI 29c 29L 29d:2 2d9 2bC 2bG 2bD:2 2bH 2d8 2dA 1qG 1qJ 1qD 1qI 1qH 1qK 2Cc 2Cb 2Ca 1yZ 1yR
+1yF 253 22U 1zu 2Cd 254 22V 1zm 1yE 2UO 2UQ 2UP 2Vr 2Vq 2Vs 2Uc:1 2Ub 2WU 2WT 2AC 2Ax 2AE 2B3:1 2Az 29I 29B 29G:1 1qE 2Af 2AZ 2Ab 2AY 2Ad 2Ag 2Ae 2WR:1 2B5 2Aw 2B6 2B8 2B7 2Ah 2AG 2AB 2AH 2AJ 2AI 29c 29L 29d:2 2d9 2bC 2bG 2bD:2 2bH 2d8 2dA 1qG 1qJ 1qD 1qI 1qH 1qK 2Cc 2Cb 2Ca 1yZ 1yR 31b
 1yG:3 1oa 1pz 1ft 1yK 1e3 1yL:1 252 22T 1zt 1yC 1yN:2 1yD 1q0 1py 1oZ 1oY 1pn:1 1nz:1 2A5 2A3 2Aq 2Ao 2AD 2B2 2B1 2Ay 29J:1 29F 29E 29D 1qF 1qA 1q9 1o1 2Aa 2AR:1 2AO:2 1o2 2Ap 2An 2Am 2A4 2A2 2A1 29R 29Q 29P 1e2 1fs 1fr 1fq 1fp 1e1 1q7:1 1q6 1yY 1yQ
 @1
 Test commande vannes
@@ -549,7 +558,7 @@ Test commande vannes
 @1
 6 entrées logiques +5V (EL0 - EL5)
 0
-2Ox 2P5 2PC 2P4 2Oz 2PB 2PY 2Pg 2XR 2Pn 2Pm 2Pf 2Pa 2XT 2XS 2XC 2QG 2QN 2Q8 2QM 2QF 2QA 2XV 2XU 2NC 2NK 2NR 2NQ 2X6 2NJ 2NE 2Nn 2Nv 2O2 2Nu 2Np 2O1 2XB 2X7 2ON 2OV 2Oc 2Ob 2OU 2OP 2X8:2 2Oh 2XW:1 2Om 2PG 2PF 2Ow 2PI 2PN 2PX 2Pq 2PE 2Pp 2Ps 2Px 2Q7 2QP:1 2PD 2Po 2QO 2Mw 2NS 2N1 2NB 2NT 2NV 2NU 2O3 2Od 2NX 2O7 2Nm 2O4 2OM 2Oe 2Nc 2OC 2O5 2Of 2PA 2P7 2VB 2VD 2VC 2Pl 2QL 2Pi 2QI 2VA 2VF 2VE 2VG 2NP 2O0 2Oa 2NM 2Nx 2OX 2V4 2V6 2V5 2V3 2V8 2V7 2V9 2Ms 2Mq 2X3 2X2 2Mp 2Oo 2Oj 2Og 2PP 2PK 2PH 2Pz 2Pu 2Pr 2N3 2My 2Mv 2Ne 2NZ 2NW 2OE 2O9 2O6 2Mu 2X4:1 2Mr 2Mt
+2Ox 2P5 2PC 2P4 2Oz 2PB 2PY 2Pg 2XR 2Pn 2Pm 2Pf 2Pa 2XT 2XS 2XC 2QG 2QN 2Q8 2QM 2QF 2QA 2XV 2XU 2NC 2NK 2NR 2NQ 2X6 2NJ 2NE 2Nn 2Nv 2O2 2Nu 2Np 2O1 2XB 2X7 2ON 2OV 2Oc 2Ob 2OU 2OP 2X8:2 2Oh 2XW:1 2Om 2PG 2PF 2Ow 2PI 2PN 2PX 2Pq 2PE 2Pp 2Ps 2Px 2Q7 2QP:1 2PD 2Po 2QO 2Mw 2NS 2N1 2NB 2NT 2NV 2NU 2O3 2Od 2NX 2O7 2Nm 2O4 2OM 2Oe 2Nc 2OC 2O5 2Of 2PA 2P7 2VB 2VD 2VC 2Pl 2QL 2Pi 2QI 2VA 2VF 2VE 2VG 2NP 2O0 2Oa 2NM 2Nx 2OX 2V4 2V6 2V5 2V3 2V8 2V7 2V9 2Ms 2Mq 2X3 2X2 2Mp 2Oo 2Oj 2Og 2PP 2PK 2PH 2Pz 2Pu 2Pr 2N3 2My 2Mv 2Ne 2NZ 2NW 2OE 2O9 2O6 2Mu 2X4:1 2Mr 2Mt 31a
 2Os 2P3 2Oy 1n3 2P2 2P1 2PT 2Pe 2PZ 1n2 2Pd 1n1 2Pc 1nJ 1n0 2QE 2QD 2Q3 2Q9 2QC 1my:1 2N7 2NI 1nK 2ND 2NH 1nO 2NG 2Ni 2Nt 1nI 2No 2Ns 2Nr 1nM 2OI 2OT 2OS 1nL 2OO 2OR 1nN 1rr 1mx 2Ol 2On 1rp 2PM 2PO 1rq 2Or 2PS 2Q2 1rn 2Pw 2Py 1ry 2N6 2N0 2N2 1rx 2Nh 2OH 1rw 1ru 2Nb 2OB 2Nd 2P6 1pH:1 2P9 1pJ 2Pk 1pG 2QK 1pK 2Ph 2QH 1pF 1pE 2NO 1pQ 2Nz 1pN 2OZ 1pR 2NL 2Nw 2OW 1pO:1 1pM 1pL 1nR 1s1:1 1nS 2Oq 2Oi 1ro 2PR 2PJ 1rm 2Q1 2Pt 1rl 2N5 2Mx 1rv 2Ng 2NY 1rt 2OD 2OG 2O8 1rs 1nQ 1nP 1s0 1rz
 @1
 6 entrées logiques +5V (EL6 - EL11)
@@ -56657,7 +56666,7 @@ F
 -2sPI
 4010000000000000
 0
-27 kΩ
+2,7 kΩ
 R
 U
 as
@@ -56918,7 +56927,7 @@ F
 -2sPI
 4010000000000000
 0
-27 kΩ
+2,7 kΩ
 R
 T
 as
@@ -57034,7 +57043,7 @@ F
 -2sPI
 4010000000000000
 0
-27 kΩ
+2,7 kΩ
 R
 J
 as
@@ -57063,7 +57072,7 @@ F
 -2sPI
 4010000000000000
 0
-27 kΩ
+2,7 kΩ
 R
 R
 as
@@ -57092,7 +57101,7 @@ F
 -2sPI
 4010000000000000
 0
-27 kΩ
+2,7 kΩ
 R
 N
 as
@@ -57208,7 +57217,7 @@ F
 -2sPI
 4010000000000000
 0
-BC547C
+BC547B
 T
 9
 as
@@ -57904,7 +57913,7 @@ F
 -2sPI
 4010000000000000
 0
-BC547C
+BC547B
 T
 8
 as
@@ -57933,7 +57942,7 @@ F
 -2sPI
 4010000000000000
 0
-BC547C
+BC547B
 T
 7
 as
@@ -57962,7 +57971,7 @@ F
 -2sPI
 4010000000000000
 0
-BC547C
+BC547B
 T
 6
 as
@@ -59064,7 +59073,7 @@ F
 -2sPI
 4010000000000000
 0
-22kΩ
+2,7kΩ
 R
 1
 as
@@ -59180,7 +59189,7 @@ F
 -2sPI
 4010000000000000
 0
-9,1 kΩ 1%
+10kΩ 1%
 R
 5
 as
@@ -59209,7 +59218,7 @@ F
 -2sPI
 4010000000000000
 0
-10 kΩ 1%
+9,1kΩ 1%
 R
 P
 as
@@ -59238,7 +59247,7 @@ F
 -2sPI
 4010000000000000
 0
-9,1kΩ 1%
+10kΩ 1%
 R
 4
 as
@@ -59267,7 +59276,7 @@ F
 -2sPI
 4010000000000000
 0
-10kΩ 1%
+9,1kΩ 1%
 R
 V
 as
@@ -59702,7 +59711,7 @@ F
 -2sPI
 4010000000000000
 0
-
+RK09D1130C2P
 P
 Q
 as
@@ -59749,6 +59758,10 @@ Erm0
 Erm
 T
 T
+F
+F
+F
+F
 TjY
 @B
 0
@@ -112000,6 +112013,7 @@ I
 1ca
 @J
 $121
+T
 t
 1cW 1ca:4
 Jc:3 g0:1
@@ -112105,6 +112119,7 @@ I
 1cm
 @J
 $124
+T
 t
 1cl:2 1ci 1co:1 1ch
 Du:1 bh
@@ -112215,6 +112230,7 @@ I
 1d1
 @J
 $125
+T
 t
 1cz:2 1cw
 K4:1 ge:1
@@ -112291,6 +112307,7 @@ I
 1e4
 @J
 GND-ref-analogique
+T
 t
 1d8:w 1d5 1e5:w
 S5:9 4S:F SF:4 4i:2 SK:2 4l:7 SN:7 4t:1 SV:5 4v:8 Sb:5 54:8 Sh:4 5D:9 Sm:5 5N:5 Ss:8 5T:3 T1 5X:2 T2:L 5a:4 TO:2 5f:4 TR:4
@@ -113628,6 +113645,7 @@ G
 1f4
 @J
 +5V-ref-analogique
+T
 t
 1f7:1P 1f4
 KF:D go:A KT:3 gz:C KX hC:7 KY:S hK:B L1:3 hW:2 L5:K hZ:8
@@ -114638,7 +114656,7 @@ trimmer
 1RCe
 T
 0
--3M8q
+-2Ofk
 oy
 1gU 1ey 1gc
 @H
@@ -114658,6 +114676,7 @@ A
 1gf
 @J
 $174
+T
 t
 1gc 1gf
 W3:2
@@ -114715,6 +114734,7 @@ A
 1gl
 @J
 ENTRÉE-ANALOGIQUE-15
+T
 t
 1gl:2 1gi 1go:1 1gh 1gq:1
 at:2 Bo:1 aw
@@ -114963,6 +114983,7 @@ B
 1h6
 @J
 ENTRÉE-ANALOGIQUE-8
+T
 t
 1h9:7 1h6
 5q:3 Tk
@@ -115094,6 +115115,7 @@ A
 1hK
 @J
 $29
+T
 t
 1hN 1hK 1hO:1
 FW:1 dH:4
@@ -115198,6 +115220,7 @@ B
 1h5
 @J
 ENTRÉE-ANALOGIQUE-9
+T
 t
 1hc:7 1h5
 em Hl:2
@@ -115329,6 +115352,7 @@ A
 1hn
 @J
 $30
+T
 t
 1hq 1hn 1hr:1
 QE:2 28
@@ -115433,6 +115457,7 @@ B
 1h4
 @J
 ENTRÉE-ANALOGIQUE-10
+T
 t
 1i5:7 1h4
 E3:2 cB
@@ -115564,6 +115589,7 @@ A
 1iG
 @J
 $32
+T
 t
 1iJ 1iG 1iK:1
 WW:4 6s
@@ -115668,6 +115694,7 @@ B
 1h3
 @J
 ENTRÉE-ANALOGIQUE-11
+T
 t
 1iY:7 1h3
 NX:4 k0
@@ -115799,6 +115826,7 @@ A
 1ij
 @J
 $33
+T
 t
 1im 1ij 1in:1
 UT:3 60
@@ -115903,6 +115931,7 @@ B
 1h2
 @J
 ENTRÉE-ANALOGIQUE-12
+T
 t
 1j1:7 1h2
 3b:6 R2:3
@@ -116034,6 +116063,7 @@ A
 1jC
 @J
 $93
+T
 t
 1jF 1jC 1jG:1
 FU:1 d8:8
@@ -116138,6 +116168,7 @@ B
 1h1
 @J
 ENTRÉE-ANALOGIQUE-13
+T
 t
 1jU:7 1h1
 LQ:9
@@ -116269,6 +116300,7 @@ A
 1jf
 @J
 $94
+T
 t
 1ji 1jf 1jj:1
 Qd:4
@@ -116373,6 +116405,7 @@ B
 1h0
 @J
 ENTRÉE-ANALOGIQUE-14
+T
 t
 1jx:7 1h0
 76:3 Wf
@@ -116504,6 +116537,7 @@ A
 1k8
 @J
 $95
+T
 t
 1kB 1k8 1kC:1
 HO:1 eK:5
@@ -116608,6 +116642,7 @@ B
 1kS
 @J
 $108
+T
 t
 1kQ:2 1gz
 ix:3 MI:5
@@ -116761,6 +116796,7 @@ B
 1kk
 @J
 SPI2-MOSI
+T
 t
 1kg:3 1kd 1kk
 7e:9 XE:6 7o:2
@@ -117017,6 +117053,7 @@ NyjQ
 1l1
 @J
 INTER-DIL-3
+T
 t
 1l6:2 1l1
 Bv:N
@@ -117093,6 +117130,7 @@ JBNw
 1lC
 @J
 $10
+T
 t
 1lC 1lF
 8P
@@ -117139,6 +117177,7 @@ JBNw
 1lH
 @J
 GND
+T
 u
 1lK:1L 1lH 1mg:11 1kc 1ni:f 1gv 1oO:Y
 9S:F YL 9i:S YM:6 AB:2 YT:l AE:P ZF:L Ae:8 Zb An:5 Zc:1 At:2 Ze Aw:5 Zf:7 B2:1 Zn:1 B4:1 Zp:6 B6:1 Zw B8:1 Zx:A BA a8:3 BB:5 aC BH:1 aD BJ:4
@@ -119653,6 +119692,7 @@ G
 1oz
 @J
 +5V-logique
+T
 u
 1p2:o 1gw 1pr:K 1oz
 bC:8 Cf:K bL:1 D0:7 bN:1 D8 bP:2 D9:6 bS:2 DG:X bV
@@ -120582,6 +120622,7 @@ G
 1qR
 @J
 $117
+T
 t
 1qR 1qU:2
 Mb:3
@@ -120720,6 +120761,7 @@ G
 1qf
 @J
 SPI5-MOSI
+T
 t
 1qi:4 1qf
 8b:b
@@ -120995,6 +121037,7 @@ QNPA
 1r7
 @J
 ENTRÉE-LOGIQUE-7
+T
 t
 1rA:4 1r7
 NI:4 jd:6
@@ -121093,6 +121136,7 @@ K
 1rL
 @J
 $85
+T
 t
 1rL 1rI
 RI:1
@@ -121139,6 +121183,7 @@ K
 1rZ
 @J
 +3,3V
+T
 u
 1rQ:B 1rN 1rc:e
 Im:U fh:4 JH:4 fm:2 JM:A fp:5
@@ -121761,6 +121806,7 @@ BVdA
 1sN
 @J
 SPI2-NSS
+T
 t
 1sM 1kw 1sN 1sJ 1sO:1 1kX 1sQ
 Jg:8 g8:8 Jp:3 gH:6 Jt
@@ -121906,6 +121952,7 @@ B
 1sk
 @J
 SPI1-NSS
+T
 t
 1sg:4 1sd 1ka 1sl
 Dy:4 c1:4
@@ -122177,6 +122224,7 @@ cqVQ
 1t5
 @J
 AFFICHEUR-LCD-D4
+T
 t
 1t8:2 1t5
 bi:I
@@ -122363,6 +122411,7 @@ elRc
 1tO
 @J
 AFFICHEUR-LCD-D5
+T
 t
 1tR 1tO 1tS:1
 3r:5 RT:E
@@ -122589,6 +122638,7 @@ QNPA
 1tk
 @J
 SPI3-MOSI
+T
 t
 1tk 1tn:3 1qc
 7H:C Wh:6
@@ -122677,6 +122727,7 @@ lG
 1tj
 @J
 SPI3-MISO
+T
 t
 1tj 1tz:4
 7r:1 XL:A 7t:5 XW
@@ -122791,6 +122842,7 @@ lE
 1ti
 @J
 SPI3-SCK
+T
 t
 1ti 1uD:4
 Eb:A
@@ -122907,6 +122959,7 @@ G
 1uM
 @J
 SPI3-NSS
+T
 t
 1uP:4 1uM 1uU:1
 S1:3 4L:6
@@ -123204,6 +123257,7 @@ fFBA
 1uq
 @J
 SORTIE-ANALOGIQUE-STM32
+T
 t
 1uq 1ut:2
 Lu:C il:1
@@ -123287,6 +123341,7 @@ I
 1v3
 @J
 $127
+T
 t
 1v2:1 1uz
 Gc:4
@@ -123348,6 +123403,7 @@ I
 1v6
 @J
 $128
+T
 t
 1v9:2 1uy 1v6
 gO:3
@@ -123450,6 +123506,7 @@ I
 1vV
 @J
 +24V
+T
 v
 1vL:9 1vI 1vV:1
 aU:D Bd:1
@@ -123629,6 +123686,7 @@ eHi4
 1vj
 @J
 +12V
+T
 u
 1ve:6 1vb 1vl:7
 W6:6 6X:7 WD:1 6f
@@ -124137,6 +124195,7 @@ Vout
 1wt
 @J
 +18V
+T
 t
 1wb:J 1wY 1wv:3
 3x Ru:2 3y:8 Rx:3 47:D
@@ -124513,6 +124572,7 @@ F
 1xE
 @J
 $52
+T
 t
 1xE 1xB
 in:3
@@ -124570,6 +124630,7 @@ F
 1xK
 @J
 $53
+T
 t
 1xK 1xH
 Q0:2
@@ -124649,6 +124710,7 @@ F
 1xP
 @J
 $165
+T
 t
 1xS:1 1xP 1xU:2
 jK:2 Mf
@@ -124751,6 +124813,7 @@ F
 1xb
 @J
 RETOUR-LOGIQUE-VANNE-3
+T
 t
 1xe:1 1xb 1xg
 Nc
@@ -124850,6 +124913,7 @@ F
 1xt
 @J
 $162
+T
 t
 1xq:5 1xn
 MP:1 j6:5 MR:2
@@ -125027,6 +125091,7 @@ F
 1y6
 @J
 RETOUR-ANALOGIQUE-VANNE-3
+T
 t
 1y9 1y6 1yA:1 1y5 1yC:1
 fa:6 IW:7
@@ -125231,6 +125296,7 @@ H
 1yQ
 @J
 RETOUR-TEST-4-20mA
+T
 t
 1yT:5 1yQ
 cv:4
@@ -125340,6 +125406,7 @@ I
 1yc
 @J
 $126
+T
 t
 1yf:2 1yc 1yi
 WF:6
@@ -125423,6 +125490,7 @@ I
 1yl
 @J
 $123
+T
 t
 1yl 1yo:5
 QA 22:1
@@ -125528,6 +125596,7 @@ I
 1yw
 @J
 $122
+T
 t
 1cV 1yz:4 1yw
 eQ:4 HR
@@ -125648,6 +125717,7 @@ I
 1zC
 @J
 $120
+T
 t
 1z9 1zC:2
 61:3
@@ -125696,11 +125766,11 @@ nsP2
 F
 
 led
-2sPI
-3M8q
+0
+-3M8q
 T
 0
-3M8q
+2sPI
 od
 1zE 1zH
 @H
@@ -125720,6 +125790,7 @@ I
 1zH
 @J
 $119
+T
 t
 1zH 1zK
 Ie:1
@@ -125766,6 +125837,7 @@ I
 1zM
 @J
 $118
+T
 t
 1z7 1zM
 3K:4
@@ -125779,6 +125851,7 @@ I
 1zS
 @J
 $129
+T
 t
 1z8 1zS 1vG 1zT 1vH
 ef:4 HY
@@ -125904,6 +125977,7 @@ H
 1yP
 @J
 RETOUR-ANALOGIQUE-VANNE-2
+T
 t
 1zo:5 1yP
 M7:5 ir
@@ -126013,6 +126087,7 @@ E
 1zx
 @J
 $166
+T
 t
 200:1 1zx 202:3
 Ha:4 ek:1
@@ -126137,6 +126212,7 @@ E
 20A
 @J
 $164
+T
 t
 20D:4 20A
 j1:4 MO
@@ -126231,6 +126307,7 @@ E
 20K
 @J
 RETOUR-LOGIQUE-VANNE-2
+T
 t
 20N:1 20K 20P
 N6
@@ -126367,6 +126444,7 @@ E
 20a
 @J
 $109
+T
 v
 20d:1 20a
 eV:3
@@ -126439,6 +126517,7 @@ E
 20i
 @J
 24V-vannes
+T
 v
 20l:4 20i 20q:5
 E7:A cF:4
@@ -126641,6 +126720,7 @@ C
 217
 @J
 $134
+T
 t
 217 214
 Dw:1
@@ -126667,7 +126747,7 @@ resistor
 0
 T
 0
--1uwC
+xT6
 nH
 1o3 217
 @I
@@ -126725,6 +126805,7 @@ F
 21H
 @J
 $111
+T
 v
 21H 21B 21I 1xO
 VN:2
@@ -126786,6 +126867,7 @@ F
 21O
 @J
 $173
+T
 t
 21O 21L
 3P:1
@@ -126874,6 +126956,7 @@ D
 21Z
 @J
 $110
+T
 v
 21Z 21V 21a:1
 XX:3
@@ -126979,6 +127062,7 @@ D
 21h
 @J
 $163
+T
 t
 21k:2 21h 21n:1
 fI:A
@@ -127073,6 +127157,7 @@ D
 21r
 @J
 RETOUR-LOGIQUE-VANNE-1
+T
 t
 21u:1 21r 21w
 HQ
@@ -127180,6 +127265,7 @@ D
 225
 @J
 $167
+T
 t
 228:4 225 22D
 8Q:7
@@ -127338,6 +127424,7 @@ D
 22R
 @J
 RETOUR-ANALOGIQUE-VANNE-1
+T
 t
 22P:3 22M 22L 22T 1yO
 Do:5 be
@@ -127449,6 +127536,7 @@ D
 21g
 @J
 $41
+T
 t
 22f:4 21g
 Lr:2 ig:2
@@ -127547,6 +127635,7 @@ D
 22q
 @J
 $42
+T
 t
 22q:2 22n 22t:1
 UM:6
@@ -127652,6 +127741,7 @@ D
 22y
 @J
 COMMANDE-VANNE-1
+T
 t
 22y 231:1 1qO
 cZ:5
@@ -127695,6 +127785,7 @@ D
 238
 @J
 $23
+T
 t
 238:2 22x
 Ju:6
@@ -127797,6 +127888,7 @@ D
 23G
 @J
 $34
+T
 t
 23J 23G 23K:1
 iK:3
@@ -127899,6 +127991,7 @@ D
 23R
 @J
 $37
+T
 t
 23R 23U
 U5:4
@@ -127934,6 +128027,7 @@ D
 21e
 @J
 $40
+T
 t
 21e 23Q
 R8:2
@@ -127943,6 +128037,7 @@ D
 23a
 @J
 $24
+T
 t
 23a 23F
 EX:1
@@ -128013,6 +128108,7 @@ D
 21f
 @J
 POWER-GND
+T
 v
 23k:2 21f 23n 20Y 23o 1xM 23p:3
 16:4 PX:1 1B:8 PZ:1
@@ -128159,6 +128255,7 @@ eHi4
 240
 @J
 $39
+T
 v
 23x 240
 1R:2
@@ -128300,6 +128397,7 @@ C
 24F
 @J
 $161
+T
 t
 24I:2 24F 24L:2
 gV:8 K1:2
@@ -128409,6 +128507,7 @@ C
 24V
 @J
 RETOUR-LOGIQUE-VANNE-0
+T
 t
 24U:2 24R
 CL
@@ -128516,6 +128615,7 @@ C
 24f
 @J
 $168
+T
 t
 24i:4 24f 24n
 MD:4
@@ -128674,6 +128774,7 @@ C
 24w
 @J
 RETOUR-ANALOGIQUE-VANNE-0
+T
 t
 24z 24w 250:1 24v 252 1yN
 G0:1 dZ
@@ -128770,6 +128871,7 @@ C
 24E
 @J
 $20
+T
 t
 24E 25D:2
 Wc:2
@@ -128857,6 +128959,7 @@ C
 25K
 @J
 $19
+T
 t
 25K 25N
 CJ:1
@@ -128892,6 +128995,7 @@ C
 25R
 @J
 $16
+T
 t
 25R:1 25J 25T
 La:1 hw:2
@@ -128994,6 +129098,7 @@ C
 25Z
 @J
 $13
+T
 t
 25c 25Z 25d:1
 JX:2
@@ -129077,6 +129182,7 @@ C
 25i
 @J
 COMMANDE-VANNE-0
+T
 t
 25i 25l 1qN 25m
 dz:2
@@ -129120,6 +129226,7 @@ C
 25h
 @J
 $22
+T
 t
 25s:4 25h
 YI:2 9Q:1
@@ -129218,6 +129325,7 @@ C
 263
 @J
 $21
+T
 t
 263:1 260 265 24D
 jr:8 NU:2
@@ -129314,6 +129422,7 @@ C
 26G
 @J
 $15
+T
 t
 26G 25Y
 b5:6
@@ -129349,6 +129458,7 @@ C
 24C
 @J
 $105
+T
 v
 26K:1 24C 26M
 e3 Gv:2
@@ -129455,6 +129565,7 @@ C
 26W
 @J
 $135
+T
 t
 26W 26T
 di
@@ -129516,6 +129627,7 @@ D
 26c
 @J
 $136
+T
 t
 26c 26Z
 1w:1
@@ -129597,6 +129709,7 @@ E
 26n
 @J
 $137
+T
 t
 26n 26k
 dv:1
@@ -129632,6 +129745,7 @@ E
 20Z
 @J
 $48
+T
 t
 26r:4 20Z
 WT:2 6p:2
@@ -129730,6 +129844,7 @@ E
 272
 @J
 $49
+T
 t
 272:2 26z 275:1
 1K:6
@@ -129835,6 +129950,7 @@ E
 27A
 @J
 COMMANDE-VANNE-2
+T
 t
 27A 27D:2
 e8:6
@@ -129944,6 +130060,7 @@ G
 27M
 @J
 $116
+T
 t
 27M 1qa
 g2:5
@@ -129953,6 +130070,7 @@ G
 27L
 @J
 $115
+T
 t
 27L 1qb
 VW:8
@@ -129962,6 +130080,7 @@ G
 27K
 @J
 $114
+T
 t
 27K 1qZ
 6g:3
@@ -129971,6 +130090,7 @@ G
 27X
 @J
 COMMANDE-VANNE-3
+T
 t
 27V:1 27J 27X
 eq:5
@@ -130062,6 +130182,7 @@ F
 27d
 @J
 $56
+T
 t
 27g:4 27d
 jR:4
@@ -130160,6 +130281,7 @@ F
 27r
 @J
 $55
+T
 t
 27r:2 27o 27u 1xN
 Ig:5
@@ -130274,6 +130396,7 @@ F
 285
 @J
 $50
+T
 t
 285:1 282 27c
 is:4
@@ -130346,6 +130469,7 @@ F
 28A
 @J
 $51
+T
 t
 28D 28A 1xG 28E
 YC:5
@@ -130400,6 +130524,7 @@ F
 28K
 @J
 $54
+T
 t
 28K 289
 QH:1
@@ -130447,6 +130572,7 @@ E
 28R
 @J
 $43
+T
 t
 28R:2 279
 Hh:3
@@ -130549,6 +130675,7 @@ E
 28Z
 @J
 $44
+T
 t
 28c 28Z 28d:1
 P7:5
@@ -130651,6 +130778,7 @@ E
 28k
 @J
 $45
+T
 t
 28k 28n
 P2:4
@@ -130686,6 +130814,7 @@ E
 20X
 @J
 $47
+T
 t
 20X 28j
 cC:2
@@ -130695,6 +130824,7 @@ E
 28t
 @J
 $46
+T
 t
 28t 28Y
 Hf:1
@@ -130827,6 +130957,7 @@ H
 29F
 @J
 $171
+T
 t
 29D:2 1yM
 3S:2
@@ -130914,6 +131045,7 @@ H
 29Q
 @J
 SPI4-NSS
+T
 t
 29N:3 29J 29R 29K 29S:3
 hz:7 Lc:B i7:8 Lo iG:3
@@ -131272,6 +131404,7 @@ IheO
 29v
 @J
 SPI4-MOSI
+T
 t
 2A0 29v 2A1:6
 Wo:P 7U:9
@@ -131422,6 +131555,7 @@ H
 2AD
 @J
 $169
+T
 t
 2AD 1yK
 Wb
@@ -131451,6 +131585,7 @@ H
 29u
 @J
 SPI4-MISO
+T
 t
 2AN 29u 2AO:6
 aE:7 BO:6 aM:1 BV:1 aO:5 BX:5
@@ -131601,6 +131736,7 @@ H
 2Aa
 @J
 $172
+T
 t
 2Aa 1yJ
 PP:2
@@ -131645,6 +131781,7 @@ H
 29t
 @J
 SPI4-SCK
+T
 t
 2Al 29t 2Am:6
 Xb:A 8I:4 Xm:8 8N:1 Xv
@@ -131795,6 +131932,7 @@ H
 2Ay
 @J
 $170
+T
 t
 2Ay 2B1:1 1yL
 am:4
@@ -131862,6 +132000,7 @@ H
 29q
 @J
 POUSSOIR-0
+T
 t
 2BE:2 29q
 IL:3
@@ -131938,6 +132077,7 @@ Robo
 2BK
 @J
 $3
+T
 t
 2BN:2 2BK 2BQ
 jE:2
@@ -132034,6 +132174,7 @@ kd
 29m
 @J
 POUSSOIR-3
+T
 t
 2Bb:2 29m
 Ho:A
@@ -132110,6 +132251,7 @@ NUzs
 2Bh
 @J
 $7
+T
 t
 2Bk:2 2Bh 2Bn
 e4:3
@@ -132194,6 +132336,7 @@ ky
 29l
 @J
 POUSSOIR-2
+T
 t
 2Bv:2 29l
 Bf:8
@@ -132270,6 +132413,7 @@ DQZM
 2C1
 @J
 $6
+T
 t
 2C4:2 2C1 2C7
 VQ:3
@@ -132354,6 +132498,7 @@ k5
 29k
 @J
 POUSSOIR-1
+T
 t
 2CF:2 29k
 9D:C
@@ -132430,6 +132575,7 @@ Jf7U
 2CL
 @J
 $4
+T
 t
 2CO:2 2CL 2CR
 PS:4
@@ -132688,6 +132834,7 @@ I
 1up
 @J
 LED-1
+T
 t
 2DB:1 1up 2DD
 H0:I
@@ -132768,6 +132915,7 @@ DQZM
 2DI
 @J
 $38
+T
 t
 2DL 2DI
 fT:1
@@ -132811,6 +132959,7 @@ kE
 1um
 @J
 SPI1-SCK
+T
 t
 2DR:2 1um 2DU:1
 FY:K dP:9 Ft:6
@@ -132931,6 +133080,7 @@ B
 2Db
 @J
 $99
+T
 t
 2Db 2De
 1W:8 Pw:3
@@ -133087,6 +133237,7 @@ B
 2Dq
 @J
 ENTRÉE-ANALOGIQUE-7
+T
 t
 2Dt:7 2Dq
 12:3 PD:2
@@ -133218,6 +133369,7 @@ HGRk
 2E4
 @J
 $27
+T
 t
 2E7 2E4 2E8:1
 Ri:B
@@ -133322,6 +133474,7 @@ B
 2Dp
 @J
 ENTRÉE-ANALOGIQUE-6
+T
 t
 2EM:7 2Dp
 HU:3 eb:3
@@ -133453,6 +133606,7 @@ Sm4u
 2EX
 @J
 $26
+T
 t
 2Ea 2EX 2Eb:1
 iT:6
@@ -133557,6 +133711,7 @@ B
 2Do
 @J
 ENTRÉE-ANALOGIQUE-5
+T
 t
 2Ep:7 2Do
 ES:4 cY
@@ -133688,6 +133843,7 @@ dKEy
 2F0
 @J
 $25
+T
 t
 2F3:1 2F0 2F5
 10:1 Ox:4
@@ -133792,6 +133948,7 @@ B
 2Dn
 @J
 ENTRÉE-ANALOGIQUE-4
+T
 t
 2FI:7 2Dn
 G2:D da
@@ -133923,6 +134080,7 @@ nsP2
 2FT
 @J
 $14
+T
 t
 2FW 2FT 2FX:1
 UA:B
@@ -134027,6 +134185,7 @@ B
 2Dm
 @J
 ENTRÉE-ANALOGIQUE-3
+T
 t
 2Fl:7 2Dm
 3V:5 Qy:3
@@ -134158,6 +134317,7 @@ FpF6
 2Fw
 @J
 $103
+T
 t
 2Fz:1 2Fw 2G1
 Qo:9 3R
@@ -134262,6 +134422,7 @@ B
 2Dl
 @J
 ENTRÉE-ANALOGIQUE-2
+T
 t
 2GE:7 2Dl
 Gj:B e2
@@ -134393,6 +134554,7 @@ Qr8i
 2GP
 @J
 $102
+T
 t
 2GS:1 2GP 2GU
 1y:2 Q5:4 21
@@ -134497,6 +134659,7 @@ B
 2Dk
 @J
 ENTRÉE-ANALOGIQUE-1
+T
 t
 2Gh:7 2Dk
 MU:5 jC:1 Ma
@@ -134628,6 +134791,7 @@ cqVQ
 2Gs
 @J
 $101
+T
 t
 2Gv:2 2Gs
 f2:6 IP:1
@@ -134732,6 +134896,7 @@ B
 2Dj
 @J
 ENTRÉE-ANALOGIQUE-0
+T
 t
 2HA:7 2Dj
 Mg:4 jQ
@@ -134863,6 +135028,7 @@ nsP2
 2HL
 @J
 $97
+T
 t
 2HO:2 2HL
 PG:8
@@ -134967,6 +135133,7 @@ B
 2He
 @J
 $104
+T
 t
 1kW 2Hd:1 2Di
 Vr:6 6N:3
@@ -135006,6 +135173,7 @@ B
 2Hk
 @J
 $100
+T
 t
 2DZ 2Hj:1 2Dh
 GG:6 db:6
@@ -135045,6 +135213,7 @@ B
 2Hp
 @J
 $98
+T
 t
 2Hp 2Dg
 ak:1
@@ -135091,6 +135260,7 @@ B
 2Hy
 @J
 SPI1-MISO
+T
 t
 2Hu 1kt 2Hv:4 2Hr
 IR:4 f9:8
@@ -135224,6 +135394,7 @@ B
 2IE
 @J
 SPI1-MOSI
+T
 t
 2IB 1ku 2IC:1 2Da 2IE
 2c:3 QW:2 2g:A QZ:3
@@ -135339,6 +135510,7 @@ kh
 1ul
 @J
 LED-0
+T
 t
 2IR:2 1ul
 2O:D
@@ -135415,6 +135587,7 @@ rEXs
 2IX
 @J
 $31
+T
 t
 2IX 2Ia
 eZ:1
@@ -135517,6 +135690,7 @@ G
 1qP
 @J
 $112
+T
 t
 1qP 1uL
 EZ
@@ -135526,6 +135700,7 @@ G
 1qQ
 @J
 $113
+T
 t
 1qQ 1uK
 VU:1
@@ -135566,6 +135741,7 @@ lH
 1th
 @J
 ENCODEUR-B
+T
 t
 2J1:2 1th
 CM:I
@@ -135646,6 +135822,7 @@ A
 2J8
 @J
 $1
+T
 t
 2JB:1 2J8 2JD
 en:2
@@ -135722,6 +135899,7 @@ A
 2JH
 @J
 $2
+T
 t
 2JK 2JH 2JL
 fx:2
@@ -135794,6 +135972,7 @@ A
 2JT
 @J
 $5
+T
 t
 2JS 2JP 2JT
 Qi:5
@@ -135855,6 +136034,7 @@ B
 2Jb
 @J
 $11
+T
 t
 2JW 2JZ:2
 Gy:1
@@ -135931,6 +136111,7 @@ B
 2Jf
 @J
 ENCODEUR-A
+T
 t
 2Jf 2Ji:1 1tc
 29:A
@@ -135989,6 +136170,7 @@ kA
 2Jq
 @J
 $28
+T
 t
 2Jq:1 2JO
 jN:2
@@ -136050,6 +136232,7 @@ B
 2Jz
 @J
 $35
+T
 t
 2Jx 2Ju 2Jy:1
 Ja:1
@@ -136126,6 +136309,7 @@ B
 2K6
 @J
 ENCODEUR-CLIC
+T
 t
 2K3 2K6:1 1td
 6t:C
@@ -136207,6 +136391,7 @@ k9
 1te
 @J
 SPI2-MISO
+T
 t
 2KH 1te 2KI:4
 5u:5 Tl:G
@@ -136312,6 +136497,7 @@ B
 2KP
 @J
 $96
+T
 t
 1gu 2KS 2KP
 IK
@@ -136418,6 +136604,7 @@ kl
 1tN
 @J
 AFFICHEUR-LCD-D6
+T
 t
 2Kl 1tN 2Km:1
 N7:A jZ:3
@@ -136652,6 +136839,7 @@ OSSy
 2L2
 @J
 AFFICHEUR-LCD-RS
+T
 t
 2L9 1tH 2LA 2L2
 Ez:N
@@ -136707,6 +136895,7 @@ bt2K
 2Ky
 @J
 AFFICHEUR-LCD-E
+T
 t
 2LJ 1tI 2LK 2Ky
 Bq:4 ax:7
@@ -136762,6 +136951,7 @@ Zy68
 2Ku
 @J
 AFFICHEUR-LCD-D7
+T
 t
 2LT 1tM 2LU 2Ku
 5k:5 TW:8
@@ -136829,6 +137019,7 @@ hdqu
 2Lg
 @J
 $17
+T
 t
 2Lg 1tL
 HS:1
@@ -136880,6 +137071,7 @@ l2
 2Lo
 @J
 $18
+T
 t
 2Lo 1tE
 R6:1
@@ -136919,6 +137111,7 @@ l1
 1t4
 @J
 INTER-DIL-1
+T
 t
 2Lt:2 1t4
 Eo:A
@@ -136995,6 +137188,7 @@ RKsG
 2Lz
 @J
 $8
+T
 t
 2Lz 2M2
 HZ
@@ -137155,6 +137349,7 @@ AYA4
 2MV
 @J
 SPI5-NSS
+T
 t
 2MU 1qy 2MV 2MR 2MW:2 1qd
 Mo:H
@@ -137392,6 +137587,7 @@ J
 2Mx
 @J
 $70
+T
 t
 2Mx 2N0
 bf:1
@@ -137438,6 +137634,7 @@ J
 2N5
 @J
 ENTRÉE-LOGIQUE-3
+T
 t
 2N5:2 2N2 2N8 1r2
 HJ:4 eF:4
@@ -137529,6 +137726,7 @@ J
 2ND
 @J
 $60
+T
 t
 2NG:1 2ND 2NI
 hs:3
@@ -137601,6 +137799,7 @@ J
 2NL
 @J
 $78
+T
 t
 2NL 2NO
 Q3:1
@@ -137701,6 +137900,7 @@ J
 2NY
 @J
 $71
+T
 t
 2NY 2Nb
 jH:2
@@ -137747,6 +137947,7 @@ J
 2Ng
 @J
 ENTRÉE-LOGIQUE-4
+T
 t
 2Ng:2 2Nd 2Nj 1r1
 cj:B
@@ -137838,6 +138039,7 @@ J
 2No
 @J
 $61
+T
 t
 2Nr:1 2No 2Nt
 Pb:7
@@ -137910,6 +138112,7 @@ J
 2Nw
 @J
 $79
+T
 t
 2Nw 2Nz
 iO:4
@@ -138006,6 +138209,7 @@ J
 2O8
 @J
 $72
+T
 t
 2O8 2OB
 UX:1
@@ -138052,6 +138256,7 @@ J
 2OG
 @J
 ENTRÉE-LOGIQUE-5
+T
 t
 2OG:2 2OD 2OJ 1qt
 Ul:A
@@ -138143,6 +138348,7 @@ J
 2OO
 @J
 $62
+T
 t
 2OR 2OO 2OS:1
 bW:7
@@ -138215,6 +138421,7 @@ J
 2OW
 @J
 $80
+T
 t
 2OW 2OZ
 ij:1
@@ -138311,6 +138518,7 @@ J
 2Oi
 @J
 $69
+T
 t
 2Oi 2Ol
 U2:2
@@ -138357,6 +138565,7 @@ J
 2Oq
 @J
 ENTRÉE-LOGIQUE-0
+T
 t
 2Oq:2 2On 2Ot 1r6
 ew:5 Hz:K
@@ -138448,6 +138657,7 @@ J
 2Oy
 @J
 $57
+T
 t
 2P1:1 2Oy 2P3
 24:3 QB:2
@@ -138520,6 +138730,7 @@ J
 2P6
 @J
 $75
+T
 t
 2P9 2P6
 c6:4
@@ -138620,6 +138831,7 @@ J
 2PJ
 @J
 $73
+T
 t
 2PJ 2PM
 fv:1
@@ -138666,6 +138878,7 @@ J
 2PR
 @J
 ENTRÉE-LOGIQUE-1
+T
 t
 2PR:2 2PO 2PU 1r5
 GN:E dj:8
@@ -138757,6 +138970,7 @@ J
 2PZ
 @J
 $58
+T
 t
 2Pc 2PZ 2Pd:1
 7A:6 Wg
@@ -138829,6 +139043,7 @@ J
 2Ph
 @J
 $76
+T
 t
 2Ph 2Pk
 ar:1
@@ -138925,6 +139140,7 @@ J
 2Pt
 @J
 $74
+T
 t
 2Pt 2Pw
 dM:2
@@ -138971,6 +139187,7 @@ J
 2Q1
 @J
 ENTRÉE-LOGIQUE-2
+T
 t
 2Q1:2 2Py 2Q4 1r3
 Vf:B 69:D
@@ -139062,6 +139279,7 @@ J
 2Q9
 @J
 $59
+T
 t
 2QC 2Q9 2QD:1
 jW:2 Ml:2
@@ -139134,6 +139352,7 @@ J
 2QH
 @J
 $77
+T
 t
 2QH 2QK
 fV:4
@@ -139230,6 +139449,7 @@ K
 2QT
 @J
 $90
+T
 t
 2QT 2QW
 Gh:1
@@ -139276,6 +139496,7 @@ K
 2Qb
 @J
 ENTRÉE-LOGIQUE-11
+T
 t
 2Qb:2 2QY 2Qe 1qx
 6k:4 WM:6
@@ -139367,6 +139588,7 @@ K
 2Qj
 @J
 $68
+T
 t
 2Qm 2Qj 2Qn:1
 UZ:B
@@ -139439,6 +139661,7 @@ K
 2Qr
 @J
 $89
+T
 t
 2Qr 2Qu
 dx:1
@@ -139531,6 +139754,7 @@ K
 2R2
 @J
 $91
+T
 t
 2R2 2R5
 ds:2
@@ -139577,6 +139801,7 @@ K
 2RA
 @J
 ENTRÉE-LOGIQUE-10
+T
 t
 2RA:2 2R7 2RD 1qw
 QJ:A 2K:3 QU:1
@@ -139668,6 +139893,7 @@ K
 2RI
 @J
 $67
+T
 t
 2RL 2RI 2RM:1
 hi:9
@@ -139740,6 +139966,7 @@ K
 2RQ
 @J
 $88
+T
 t
 2RQ 2RT
 Y7:4
@@ -139836,6 +140063,7 @@ K
 2Rc
 @J
 $92
+T
 t
 2Rc 2Rf
 Tf:1
@@ -139882,6 +140110,7 @@ K
 2Rk
 @J
 ENTRÉE-LOGIQUE-9
+T
 t
 2Rk:2 2Rh 2Rn 1qv
 RK:8 3i:8
@@ -139973,6 +140202,7 @@ K
 2Rs
 @J
 $66
+T
 t
 2Rv:1 2Rs 2Rx
 RB:6
@@ -140045,6 +140275,7 @@ K
 2S0
 @J
 $87
+T
 t
 2S0 2S3
 ai:1
@@ -140149,6 +140380,7 @@ K
 2SE
 @J
 $84
+T
 t
 2SE 2SH
 gS:2
@@ -140195,6 +140427,7 @@ K
 2SM
 @J
 ENTRÉE-LOGIQUE-6
+T
 t
 2SM:2 2SJ 2SP 1r4
 gg:7 K6:8
@@ -140286,6 +140519,7 @@ K
 2SU
 @J
 $63
+T
 t
 2SX:1 2SU 2SZ
 6R:5 Vy:4
@@ -140358,6 +140592,7 @@ K
 2Sc
 @J
 $81
+T
 t
 2Sc 2Sf
 Xw:4
@@ -140462,6 +140697,7 @@ K
 2Sq
 @J
 $86
+T
 t
 2Sq 2St
 Th:2
@@ -140508,6 +140744,7 @@ K
 2Sy
 @J
 ENTRÉE-LOGIQUE-8
+T
 t
 2Sy:2 2Sv 2T1 1qu
 jk:6 NN:6
@@ -140599,6 +140836,7 @@ K
 2T6
 @J
 $65
+T
 t
 2T9:1 2T6 2TB
 ia:5
@@ -140671,6 +140909,7 @@ K
 2TE
 @J
 $83
+T
 t
 2TE 2TH
 d0:4
@@ -140844,6 +141083,7 @@ K
 2Tb
 @J
 $64
+T
 t
 2Te 2Tb 2Tf:1
 cf:2 Em:1 ci
@@ -140916,6 +141156,7 @@ K
 2Tj
 @J
 $82
+T
 t
 2Tj 2Tm
 Y5:1
@@ -140978,6 +141219,7 @@ K
 1r0
 @J
 SPI5-MISO
+T
 t
 2Tu 1r0 2Tv:3
 FN:6 d5:2
@@ -141092,6 +141334,7 @@ lK
 1qz
 @J
 SPI5-SCK
+T
 t
 2U8 1qz 2U9:2 1qe
 EI:9 cK:D
@@ -142181,6 +142424,7 @@ B
 2Xt
 @J
 $12
+T
 t
 2Xt 2Xq
 E6
@@ -142227,6 +142471,7 @@ B
 2Xy
 @J
 INTER-DIL-4
+T
 t
 2Xy 2Xv 2Xz 1l0
 2r:S
@@ -142304,6 +142549,7 @@ B
 2Y9
 @J
 $9
+T
 t
 2Y9 2Y6
 Ea
@@ -142350,6 +142596,7 @@ B
 2YE
 @J
 INTER-DIL-2
+T
 t
 2YE 2YB 2YF 1kz
 7z:I
@@ -142463,6 +142710,7 @@ DQZM
 2YY
 @J
 $36
+T
 t
 2YY 2YV
 Lp:1
@@ -142509,6 +142757,7 @@ DQZM
 2Yd
 @J
 LED-2
+T
 t
 2Ya 2Yd:1 1ky
 1f:G
@@ -142927,6 +143176,7 @@ k4
 1kr
 @J
 SPI2-SCK
+T
 t
 2a2 1kr 2a3:1 1kY 2a5
 Uw:Q 65:3
@@ -143054,6 +143304,7 @@ B
 1kb
 @J
 $107
+T
 t
 1kb 2aL:1 1gx
 1U:1 Pj:C
@@ -143093,6 +143344,7 @@ B
 1kZ
 @J
 $106
+T
 t
 1kZ 2aR:1 1gy
 8Y:2 Y1:3
@@ -156475,6 +156727,78 @@ J1s
 0
 1
 @R
+J
+0.0 0.0 0.0 1.0
+4026000000000000
+1
+2
+vY9o
+GIye
+LEDs rouges LL-304VDE-v1-1A
+@R
+H
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+GIye
+oM8a
+Erreur 4 : oubli protection CH4
+@R
+A
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+sfkW
+HGRk
+Erreur 3 : le potentiomètre est monté à l'envers.
+@R
+6
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+0
+2
+7fkm
+t9U4
+Erreur 2 : oubli des retours logique des vannes
+@R
+6
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+2
+2
+Robo
+kWGC
+RETOUR-LOGIQUE-VANNE-0
+@R
+6
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+2
+2
+Robo
+oM8a
+RETOUR-LOGIQUE-VANNE-2
+@R
+6
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+2
+2
+Robo
+ibK0
+RETOUR-LOGIQUE-VANNE-1
+@R
+6
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+2
+2
+Robo
+X5gq
+RETOUR-LOGIQUE-VANNE-3
+@R
 5
 0.0 0.0 0.0 1.0
 4022000000000000
@@ -156483,6 +156807,15 @@ J1s
 TjY0
 jYn6
 Nucleo : led jaune
+@R
+4
+0.0 0.0 0.0 1.0
+4026000000000000
+2
+2
+PPw4
+OSSy
+Poussoir NUCLEO-BLEU
 @R
 3
 0.0 0.0 0.0 1.0
@@ -156537,3 +156870,21 @@ Nucleo : RMII_TXD1
 zrlk
 M3nE
 Nucleo : led rouge
+@R
+1
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+VAke
+VeUC
+ERREUR 1 : le LM7812 est alimenté par le +24V
+@R
+1
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+QNPA
+TjY0
+ à travers 3 résistances de 8,2Ω5W

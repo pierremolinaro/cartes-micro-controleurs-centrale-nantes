@@ -114,6 +114,12 @@ static void configurerPortsEntreesLogiques (void) {
   pinMode (PORT_EL9,  INPUT_PULLUP) ;
   pinMode (PORT_EL10, INPUT_PULLUP) ;
   pinMode (PORT_EL11, INPUT_PULLUP) ;
+  pinMode (PA15, OUTPUT) ;
+  digitalWrite (PA15, HIGH) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_0, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_1, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_2, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_3, INPUT_PULLUP) ;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -186,11 +192,12 @@ static const uint8_t SPI5_SCK  = PF7 ;
 //-------------------------------------------------------------------------------------------------
 
 static SPIClass mySPI2 (SPI2_MOSI, SPI2_MISO, SPI2_SCK, SPI2_CS) ;
-static SPIClass mySPI3 (SPI3_MOSI, SPI3_MISO, SPI3_SCK, SPI3_CS) ;
+static SPIClass mySPI3 (SPI3_MOSI, SPI3_MISO, SPI3_SCK) ;
 static SPIClass mySPI4 (SPI4_MOSI, SPI4_MISO, SPI4_SCK, SPI4_CS) ;
 static SPIClass mySPI5 (SPI5_MOSI, SPI5_MISO, SPI5_SCK, SPI5_CS) ;
 
 static const SPISettings spiSettings_MCP3008 (1'000'000, MSBFIRST, SPI_MODE0) ;
+static const SPISettings spiSettings_MCP4902 (1'000'000, MSBFIRST, SPI_MODE0) ;
 
 //-------------------------------------------------------------------------------------------------
 
@@ -299,6 +306,91 @@ uint16_t lireEntreeAnalogique_10bits (const uint8_t inIndiceEntree) {
   }
  //---
   return resultat ;
+}
+
+//-------------------------------------------------------------------------------------------------
+// CONTRÔLE DES VANNES 0 à 3
+// Vanne
+//    0 : SPI3, canal 0
+//    1 : SPI3, canal 1
+//    2 : SPI5, canal 0
+//    3 : SPI5, canal 1
+//-------------------------------------------------------------------------------------------------
+
+void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
+                    const uint8_t inCommande) {
+  uint16_t w = uint16_t (inCommande) << 4 ;
+  w |= 1 << 12 ; // bit SHDN: 1 -> la sortie est active
+  w |= 1 << 13 ; // bit GA: 1 -> le gain est 1
+  w |= 1 << 14 ; // bit BUF: 1 -> bufferisé
+  w |= (inNumeroVanne & 1) << 15 ; // Sélection du canal
+  if (inNumeroVanne < 2) {
+    digitalWrite (SPI3_CS, LOW) ;
+    mySPI3.beginTransaction (spiSettings_MCP4902) ;
+    mySPI3.transfer16 (w) ;
+    mySPI3.endTransaction () ;
+    digitalWrite (SPI3_CS, HIGH) ;
+  }else{
+    mySPI5.beginTransaction (spiSettings_MCP4902) ;
+    mySPI5.transfer16 (w) ;
+    mySPI5.endTransaction () ;
+  }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+uint16_t retourCommandeVanne (void) {
+  uint16_t w = 4 << 11 ;
+  w |= 1 << 15 ; // Bit START
+  w |= 1 << 14 ; // Bit SINGLE
+  mySPI4.beginTransaction (spiSettings_MCP3008) ;
+  uint16_t r = mySPI4.transfer16 (w) ;
+  mySPI4.endTransaction () ;
+  r &= 0x1FF ;
+  return r ;
+}
+
+bool retourLogiqueVanne (const uint32_t inNumeroVanne) { // 0 à 3
+  bool r = false ;
+  switch (inNumeroVanne) {
+  case 0 :
+    r = digitalRead (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_0) ;
+    break ;
+  case 1 :
+    r = digitalRead (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_1) ;
+    break ;
+  case 2 :
+    r = digitalRead (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_2) ;
+    break ;
+  case 3 :
+    r = digitalRead (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_3) ;
+    break ;
+  default :
+    break ;
+  }
+  return r ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+uint16_t retourAnalogiqueVanne (const uint32_t inNumeroVanne) { // 0 à 3
+  uint16_t r = 0 ;
+  if (inNumeroVanne < 4) {
+    uint16_t w = uint16_t (inNumeroVanne) << 11 ;
+    w |= 1 << 15 ; // Bit START
+    w |= 1 << 14 ; // Bit SINGLE
+    mySPI4.beginTransaction (spiSettings_MCP3008) ;
+    r = mySPI4.transfer16 (w) ;
+    mySPI4.endTransaction () ;
+    r &= 0x1FF ;
+  }
+  return r ;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void fixerValeurCapteurAnalogique (const uint16_t inValeur) {
+  analogWrite (PA4, inValeur) ;
 }
 
 //--------------------------------------------------------------------------------------------------

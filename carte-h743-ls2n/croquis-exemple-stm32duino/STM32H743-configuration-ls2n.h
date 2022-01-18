@@ -78,6 +78,9 @@ static const uint8_t PORT_EL10 = PF14 ;
 static const uint8_t PORT_EL11 = PF15 ;
 
 //-------------------------------------------------------------------------------------------------
+// Cette fonction renvoie un entier non signé de 16 bits :
+//   - le bit i (0 ≤ i ≤ 11) est à 1 si l'entrée est non connectée, 0 si elle est activée ;
+//   - les bits 12 à 15 sont à 0.
 
 uint16_t lireToutesEntreesLogiques (void) ;
 
@@ -87,6 +90,38 @@ uint16_t lireToutesEntreesLogiques (void) ;
 
 uint16_t lireEntreeAnalogique_9bits (const uint8_t inIndiceEntree) ; // Résultat : 0 -> 511
 
+//-------------------------------------------------------------------------------------------------
+
 uint16_t lireEntreeAnalogique_10bits (const uint8_t inIndiceEntree) ; // Résultat : 0 -> 1023
+
+//-------------------------------------------------------------------------------------------------
+// CONTRÔLE DES VANNES 0 à 3
+//-------------------------------------------------------------------------------------------------
+
+void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
+                    const uint8_t inCommande) ;
+
+//-------------------------------------------------------------------------------------------------
+
+bool retourLogiqueVanne (const uint32_t inNumeroVanne) ; // 0 à 3
+
+static const uint8_t PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_0 = PG2 ;
+static const uint8_t PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_1 = PG3 ;
+static const uint8_t PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_2 = PG0 ;
+static const uint8_t PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_3 = PG9 ;
+
+//-------------------------------------------------------------------------------------------------
+
+uint16_t retourAnalogiqueVanne (const uint32_t inNumeroVanne) ; // 0 à 3
+
+//-------------------------------------------------------------------------------------------------
+// TEST CONNEXION VANNE
+//-------------------------------------------------------------------------------------------------
+
+uint16_t retourCommandeVanne (void) ;
+
+//-------------------------------------------------------------------------------------------------
+
+void fixerValeurCapteurAnalogique (const uint16_t inValeur) ;
 
 //--------------------------------------------------------------------------------------------------
