@@ -20,7 +20,7 @@ static uint16_t gEntreeAnalogiqueCapteurVanne = 512 ;
 
 //--------------------------------------------------------------------------------------------------
 
-void loop() {
+void loop () {
   if (gClignotement < millis ()) {
     gClignotement += 1000 ;
     digitalWrite (NUCLEO_LD2_JAUNE, !digitalRead (NUCLEO_LD2_JAUNE)) ;

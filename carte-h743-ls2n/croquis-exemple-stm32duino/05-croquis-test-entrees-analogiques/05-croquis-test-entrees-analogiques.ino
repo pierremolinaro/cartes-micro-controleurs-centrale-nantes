@@ -42,7 +42,7 @@ void loop() {
       lcd.print (" 9bits ") ;
       lcd.print (ea_9bits) ;
       lcd.print (" -> ") ;
-      const float tension = float (ea_9bits) * (5.0 / 512.0) ;
+      const float tension = float (ea_9bits) * (5.0 / 511.0) ;
       lcd.print (tension) ;
       lcd.print ("V") ;
     }

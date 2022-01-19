@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1668,"WindowHeight":998}
+{"WindowHeight":998,"WindowWidth":1668}
 $ProjectRoot
 mSchematicSheetOrientation
 mArtworkName
@@ -440,7 +440,7 @@ NPc
 NPc
 Default
 2
-0
+4
 STM32H743 — LS2N
 1.0
 41d8795d70c9f987

@@ -56,6 +56,22 @@ static void configurerEntreesSortiesLogiques () {
   pinMode (ENCODEUR_A, INPUT_PULLUP) ;
   pinMode (ENCODEUR_B, INPUT_PULLUP) ;
   pinMode (ENCODEUR_CLIC, INPUT_PULLUP) ;
+  pinMode (PORT_EL0,  INPUT_PULLUP) ;
+  pinMode (PORT_EL1,  INPUT_PULLUP) ;
+  pinMode (PORT_EL2,  INPUT_PULLUP) ;
+  pinMode (PORT_EL3,  INPUT_PULLUP) ;
+  pinMode (PORT_EL4,  INPUT_PULLUP) ;
+  pinMode (PORT_EL5,  INPUT_PULLUP) ;
+  pinMode (PORT_EL6,  INPUT_PULLUP) ;
+  pinMode (PORT_EL7,  INPUT_PULLUP) ;
+  pinMode (PORT_EL8,  INPUT_PULLUP) ;
+  pinMode (PORT_EL9,  INPUT_PULLUP) ;
+  pinMode (PORT_EL10, INPUT_PULLUP) ;
+  pinMode (PORT_EL11, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_0, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_1, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_2, INPUT_PULLUP) ;
+  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_3, INPUT_PULLUP) ;
   attachInterrupt (digitalPinToInterrupt (ENCODEUR_A), appuiEncodeur, FALLING) ;
 }
 
@@ -99,29 +115,6 @@ int32_t valeurEncodeur (void) {
 
 //-------------------------------------------------------------------------------------------------
 // ENTREES LOGIQUES EL0 à EL11
-//-------------------------------------------------------------------------------------------------
-
-static void configurerPortsEntreesLogiques (void) {
-  pinMode (PORT_EL0,  INPUT_PULLUP) ;
-  pinMode (PORT_EL1,  INPUT_PULLUP) ;
-  pinMode (PORT_EL2,  INPUT_PULLUP) ;
-  pinMode (PORT_EL3,  INPUT_PULLUP) ;
-  pinMode (PORT_EL4,  INPUT_PULLUP) ;
-  pinMode (PORT_EL5,  INPUT_PULLUP) ;
-  pinMode (PORT_EL6,  INPUT_PULLUP) ;
-  pinMode (PORT_EL7,  INPUT_PULLUP) ;
-  pinMode (PORT_EL8,  INPUT_PULLUP) ;
-  pinMode (PORT_EL9,  INPUT_PULLUP) ;
-  pinMode (PORT_EL10, INPUT_PULLUP) ;
-  pinMode (PORT_EL11, INPUT_PULLUP) ;
-  pinMode (PA15, OUTPUT) ;
-  digitalWrite (PA15, HIGH) ;
-  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_0, INPUT_PULLUP) ;
-  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_1, INPUT_PULLUP) ;
-  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_2, INPUT_PULLUP) ;
-  pinMode (PORT_ENTREE_LOGIQUE_CAPTEUR_VANNE_3, INPUT_PULLUP) ;
-}
-
 //-------------------------------------------------------------------------------------------------
 
 uint16_t lireToutesEntreesLogiques (void) {
@@ -178,10 +171,10 @@ static const uint8_t SPI3_MISO = PC11 ;
 static const uint8_t SPI3_CS   = PA15 ;
 static const uint8_t SPI3_SCK  = PC10 ;
 
-static const uint8_t SPI4_MOSI = PE14 ;
-static const uint8_t SPI4_MISO = PE13 ;
-static const uint8_t SPI4_CS   = PE11 ;
-static const uint8_t SPI4_SCK  = PE12 ;
+static const uint32_t SPI4_MOSI = PE14 ;
+static const uint32_t SPI4_MISO = PE13 ;
+static const uint32_t SPI4_CS   = PE11 ;
+static const uint32_t SPI4_SCK  = PE12 ;
 
 
 static const uint8_t SPI5_MOSI = PF9 ;
@@ -211,7 +204,7 @@ static void configurerSPI (void) {
 //--- Configurer SPI2
   mySPI2.begin () ;
 //--- Configurer SPI3
-  mySPI3.begin () ;
+  mySPI3.begin (SPI3_CS) ;
 //--- Configurer SPI4
   mySPI4.begin () ;
 //--- Configurer SPI5
@@ -325,11 +318,9 @@ void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
   w |= 1 << 14 ; // bit BUF: 1 -> bufferisé
   w |= (inNumeroVanne & 1) << 15 ; // Sélection du canal
   if (inNumeroVanne < 2) {
-    digitalWrite (SPI3_CS, LOW) ;
     mySPI3.beginTransaction (spiSettings_MCP4902) ;
     mySPI3.transfer16 (w) ;
     mySPI3.endTransaction () ;
-    digitalWrite (SPI3_CS, HIGH) ;
   }else{
     mySPI5.beginTransaction (spiSettings_MCP4902) ;
     mySPI5.transfer16 (w) ;
@@ -404,7 +395,6 @@ void fixerValeurTestRetourAnalogique (const uint16_t inValeur) {
 void configurerCarteH743LS2N (void) {
   lcd.begin (20, 4) ;
   configurerEntreesSortiesLogiques () ;
-  configurerPortsEntreesLogiques () ;
   configurerSPI () ;
 }
 
