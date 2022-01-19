@@ -118,10 +118,10 @@ uint16_t retourAnalogiqueVanne (const uint32_t inNumeroVanne) ; // 0 à 3
 // TEST CONNEXION VANNE
 //-------------------------------------------------------------------------------------------------
 
-uint16_t retourCommandeVanne (void) ;
+uint16_t testCommandeVanne (void) ;
 
 //-------------------------------------------------------------------------------------------------
 
-void fixerValeurCapteurAnalogique (const uint16_t inValeur) ;
+void fixerValeurTestRetourAnalogique (const uint16_t inValeur) ;
 
 //--------------------------------------------------------------------------------------------------

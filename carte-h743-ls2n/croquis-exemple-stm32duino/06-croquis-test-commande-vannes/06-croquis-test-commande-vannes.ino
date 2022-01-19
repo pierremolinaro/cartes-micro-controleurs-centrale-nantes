@@ -66,7 +66,7 @@ void loop() {
     }
     if (page) {
       if (rafraichir) {
-        fixerValeurCapteurAnalogique (potentiometre) ;
+        fixerValeurTestRetourAnalogique (potentiometre) ;
       }
       const uint16_t entreeAnalogique = retourAnalogiqueVanne (uint8_t (gValeurEncodeur)) ;
       if (rafraichir || (gEntreeAnalogiqueCapteurVanne != entreeAnalogique)) {
@@ -87,7 +87,7 @@ void loop() {
       if (rafraichir) {
         commandeVanne (uint8_t (gValeurEncodeur), potentiometre) ;
       }
-      const uint16_t retourCommande = retourCommandeVanne () ;
+      const uint16_t retourCommande = testCommandeVanne () ;
       if (rafraichir || (gRetourCommande != retourCommande)) {
         gRetourCommande = retourCommande ;
         lcd.setCursor (0, 3) ;
@@ -96,10 +96,10 @@ void loop() {
         lcd.print ("Ret. ") ;
         lcd.print (retourCommande) ;
         lcd.print (" -> ") ;
-        const float R2 = 9'100.0 ; // 9,1 kΩ
+        const float R2 =  9'100.0 ; // 9,1 kΩ
         const float R1 = 10'000.0 ; // 10 kΩ
-        const float R0 = 250.74 ; // 250,74 kΩ = (15 kΩ // 255Ω)
-        const float courant = float (retourCommande) * (5.0 / 511.0) * R1 / (R0 * R2) * 1000.0 ;
+        const float R0 = 250.74 ; // 250,74 Ω = (15 kΩ // 255Ω)
+        const float courant = float (retourCommande) * (5.0 / 511.0) * R1 * 1000.0 / (R0 * R2) ;
         lcd.print (courant) ;
         lcd.print ("mA") ;
       }

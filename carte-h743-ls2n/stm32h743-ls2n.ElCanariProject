@@ -440,7 +440,7 @@ NPc
 NPc
 Default
 2
-4
+0
 STM32H743 — LS2N
 1.0
 41d8795d70c9f987
@@ -468,7 +468,7 @@ k7 k6 k8:M k5 kV:4 ou k2 ka:A km kl oo kn:2 k4 kq ks kr kt:7 l2 l1 mE m7 mU l3 o
 @1
 Alimentation
 0
-2VU 1vu 2TY 1w8 1wC 1vw 2Vh 2Zp 2Zr 2Zt 2Vf 2TU 1vt 2TW 2VR 2TX 2Zq 2Vg 2Zs 1vv 2TV 2VS:1 2Zu 2VQ 2Zv 2D2 23y 1w6 1w5 2Vd 2D0:1 2Cz 2Vb 2Ve 2VZ 2Vc 241 1va 23w 23v 20x 2D4 210 20z 2D3 1vx 1wX 1vc 1vZ 1x5 213 20w 211:1 218 2WP:1 215 1wV 1x8 2WA 2W9 2WB:2 2Cy 1wW 1wU 1wZ 1x6:1 1w1 2c7 2dx 2VX 243 23t 2Va 2VW 2VY 23u 242 2W7:1 2W6 2dz 1w4 1w3 1vz 2cA 2c6 2c8:1 2dw 2e0 2dy 2e2 2e1 2e3 1w2 1w0 1vy 2D5 1wA 1w9 1w7 1wB 2Vj 2Vi 2Vk 31q:1
+2VU 1vu 2TY 1w8 1wC 1vw 2Vh 2Zp 2Zr 2Zt 2Vf 2TU 1vt 2TW 2VR 2TX 2Zq 2Vg 2Zs 1vv 2TV 2VS:1 2Zu 2VQ 2Zv 2D2 23y 1w6 1w5 2Vd 2D0:1 2Cz 2Vb 2Ve 2VZ 2Vc 241 1va 23w 23v 20x 2D4 210 20z 2D3 1vx 1wX 1vc 1vZ 1x5 213 20w 211:1 218 2WP:1 215 1wV 1x8 2WA 2W9 2WB:2 2Cy 1wW 1wU 1wZ 1x6:1 1w1 2c7 2dx 2VX 243 23t 2Va 2VW 2VY 23u 242 2W7:1 2W6 2dz 1w4 1w3 1vz 2cA 2c6 2c8:1 2dw 2e0 2dy 2e2 2e1 2e3 1w2 1w0 1vy 2D5 1wA 1w9 1w7 1wB 2Vj 2Vi 2Vk 31u:1
 1p2 1om 1lK 1vs 1rQ 1lL 1oo 1ol 1p3 1lM 1rR 1vr 1lN 1oj 1rS 1vq 1ok 1p4 1rT 1lO 1p5 1lP:1 1vN 1vk 1oh 1os 1vP:1 1on 1op 1vO 240 1vb 1oq 23r 23x 20v 20y 1vM 20u 1vL 1vm 1wY 1oI 1vj 1vh 1vU 1vS 1wu 214 20t 20s 1o3:1 217 1oJ 1oH 1oG 1oF 1vR 1vT 1wt 1ws 1fA 1dD 1f9 1ot 23s 23q 1ou 1or 23p 1dB 1oK:1 1dE 1d9 1vl 1vo 1dA 1dF 1f8 1f7 1dC 1d8 1vn 1vp 1oi 1vi 1vg 1og
 @1
 STM32 : Alim
@@ -478,22 +478,22 @@ STM32 : Alim
 @1
 STM32 : ports A et B
 0
-1ub 1kn 2Ig:1 2Ik 2Id 2Ii 2Ie:1 2Ij 2Il 2aE 2aD 2aC 2aB 2a0 2I7:1 2IJ:1 2IU 2IP 2IL 2DP 1sX:1 2Yf:1 2YG:1 2aF 1km 2Y0:1 1l9 1l4 2DE 2Im 2Zz 2D9 1ua 2DN 31k:1 2Zy 31m:1 1l3 31o:1 2DO 2Zx 2D8 1ur
+1ub 1kn 2Ig:1 2Ik 2Id 2Ii 2Ie:1 2Ij 2Il 2aE 2aD 2aC 2aB 2a0 2I7:1 2IJ:1 2IU 2IP 2IL 2DP 1sX:1 2Yf:1 2YG:1 2aF 1km 2Y0:1 1l9 1l4 2DE 2Im 2Zz 2D9 1ua 2DN 31o:1 2Zy 31q:1 1l3 31s:1 2DO 2Zx 2D8 1ur
 1uc:8 1ko:2 2a2 1kr:1 2Hu 1kt 2IB 1ku:1 2IT 1ul 2DT 1um:1 1sM 1kw:1 2Ye 1ky 2YF 1kz 1ki:1 1uo 2Xz 1l0 1l8 1l1 2DD 1uR 1up 1uS 1l2 1ut 1uq
 @1
 STM32 : ports C et D
 0
-2Kp 1tV 2Jk:1 2Kd 2Kc 2Kg 2Kf 2Kb 2Ke 2La:1 2K8:1 2Ka 2KF 2LV 2LR 2LL 2LH 2J4 2Iz 2Kh 1tU 2Iy 1uB 1uA 1tx 1tw 1tl 2Lc 2Ko 2LB 2L7 2LP 2KE 2KD 2LZ 2LY 2LQ 2LO 2LG 2LF 2LE 2L6 2L5 31j
+2Kp 1tV 2Jk:1 2Kd 2Kc 2Kg 2Kf 2Kb 2Ke 2La:1 2K8:1 2Ka 2KF 2LV 2LR 2LL 2LH 2J4 2Iz 2Kh 1tU 2Iy 1uB 1uA 1tx 1tw 1tl 2Lc 2Ko 2LB 2L7 2LP 2KE 2KD 2LZ 2LY 2LQ 2LO 2LG 2LF 2LE 2L6 2L5 31n
 2Kq:1 1tW:5 2Jj 1tc 2Ks:1 2K7 1td 2KH 1te:1 2LU 2Ku:3 1tg 2LK 2Ky 2J3 1th 1tS:1 2Kz 1uD 1ti 1tz 1tj 1tn 1tk 2L0 2Km:1 2L1 2LA 2L2:2
 @1
 STM 32 : ports E et F
 0
-29h 1qs 2OK:1 2T2:1 2Ro:1 2RE:1 2Qf:1 2CI 2CD 2By 2Bt 2Be 2BZ 2Mf:1 2UH 2U6 2U5 2Ts 2UI 1qr 2Nk:1 2BH 2BC 29g 2CZ 2B9 2Aj 2Ai 2AL 2AK 29y 2N9:1 2Q5:1 2SQ:1 2BB 31i 2Ou 2PV:1 2Ov 1rF 1r8 2CY 2CX 2BY 2BX 2BW 2BA 29x
+29h 1qs 2OK:1 2T2:1 2Ro:1 2RE:1 2Qf:1 2CI 2CD 2By 2Bt 2Be 2BZ 2Mf:1 2UH 2U6 2U5 2Ts 2UI 1qr 2Nk:1 2BH 2BC 29g 2CZ 2B9 2Aj 2Ai 2AL 2AK 29y 2N9:1 2Q5:1 2SQ:1 2BB 31m 2Ou 2PV:1 2Ov 1rF 1r8 2CY 2CX 2BY 2BX 2BW 2BA 29x
 29i 2OJ 1qt 2T1 1qu 2Rn 1qv 2RD 1qw 2Qe 1qx 29j 2CH 29k 2Bx 29l 2Bd 29m 2MU 1qy 2U8 1qz 2Tu 1r0 1qi:1 29n:2 2Nj 1r1 2BG 29q:2 29N:1 2Al 29t 2AN 29u 2A0 29v:1 2N8 1r2 2Q4 1r3 2SP 1r4 2Ot 2PU 1r5:1 1rE 1r7
 @1
 STM32: ports G et H
 0
-2iL 1sq 2kh 2kg 2MH:1 1sp 2MF:1 2Lw 2Lr 1tB 1t6 2ME 2MD 2MC 2MB 2MA 2M9 2M8 2M7 2M6 2M5 31d:4
+2iL 1sq 2kh 2kg 2MH:1 1sp 2MF:1 2Lw 2Lr 1tB 1t6 2ME 2MD 2MC 2MB 2MA 2M9 2M8 2M7 2M6 2M5 31h:4
 2ke:1 1sr:2 1si:1 1su:9 2Lv 1t4 1tA 1t5
 @1
 SPI1 à SPI5, Afficheur LCD
@@ -513,7 +513,7 @@ Entrées analogiques (1)
 @1
 Entrées analogiques (2)
 0
-1hR 2at 2aq 2as 2ca 2cX 2cZ 1hT 2cY 2bt 1hJ 1hS 1hQ 1hL 1hY 1hI 1hU:1 1hX 1hW 1hZ 1hu 2ao 2ar 2cU 2cW 1hw 2cV 1hm 1hv 1ht 1ho 1i1 1hl 1hx:1 1i0 1hz 1i2 1iN 2cR 2cT 2am 2ap 1iP 2cS 1iF 1iU 1iO 1iM 1iH 1iE 1iQ:1 1iT 1iS 1iV 1iq 2al 2an 2cO 2cQ 1is 2cP 1ii 1ix 1ir 1ip 1ik 1ih 1it:1 1iw 1iv 1iy 2br 1jJ 2ak 2ah 2aj 2cN 2cK 2cM 1jL 2cL 1jB 1jK 1jI 1jD 1jM 1jA 1jN:4 1jm 2cH 2cJ 2af 2ai 1jo 2cI 1je 1jn 1jl 1jg 1jp 1jd 1jq:4 1kF 2cE 2cG 2ad 2ag 2ae 1kH 2cF 2cD 1k7 1kI 1kG 1kE 1k9 1k6 1kJ:4 1gg 2aa 2aW:3 1gj 2ab 2dq 2dp 2do 2bu 2bs 2bq 2bn 2bl 2dn 2dm 2bp 2bo 2bm 2bk 2ac 1ga 1gd 1gb 31c
+1hR 2at 2aq 2as 2ca 2cX 2cZ 1hT 2cY 2bt 1hJ 1hS 1hQ 1hL 1hY 1hI 1hU:1 1hX 1hW 1hZ 1hu 2ao 2ar 2cU 2cW 1hw 2cV 1hm 1hv 1ht 1ho 1i1 1hl 1hx:1 1i0 1hz 1i2 1iN 2cR 2cT 2am 2ap 1iP 2cS 1iF 1iU 1iO 1iM 1iH 1iE 1iQ:1 1iT 1iS 1iV 1iq 2al 2an 2cO 2cQ 1is 2cP 1ii 1ix 1ir 1ip 1ik 1ih 1it:1 1iw 1iv 1iy 2br 1jJ 2ak 2ah 2aj 2cN 2cK 2cM 1jL 2cL 1jB 1jK 1jI 1jD 1jM 1jA 1jN:4 1jm 2cH 2cJ 2af 2ai 1jo 2cI 1je 1jn 1jl 1jg 1jp 1jd 1jq:4 1kF 2cE 2cG 2ad 2ag 2ae 1kH 2cF 2cD 1k7 1kI 1kG 1kE 1k9 1k6 1kJ:4 1gg 2aa 2aW:3 1gj 2ab 2dq 2dp 2do 2bu 2bs 2bq 2bn 2bl 2dn 2dm 2bp 2bo 2bm 2bk 2ac 1ga 1gd 1gb 31g
 1ee 1gF 1hP 1gC:1 1eb:1 1hO 1ed 1hF 1hC 1hK 1hN 1hA 1hE 1hD 1hB 1h9 1eh 1gH 1hs 1gE 1ef 1hr 1eg 1hf 1hi 1hn 1hq 1hd 1hh 1hg 1he 1hc 1ek 1gJ 1iL 1ei 1gG 1iK 1ej 1i8 1i6 1iG 1iJ 1iA:1 1i9 1i7 1i5 1en 1gK 1io 1gI 1el 1in 1em 1ib 1iZ 1ij 1im 1id:1 1ic 1ia 1iY 1er 1gO 1jH 1gL 1gR 1gM 1eo:1 1jG 1eq 1j7 1jC 1jF 1j6 1j5 1j4 1j3 1j2 1j1 1eu 1gQ 1jk 1es 1gN 1jj 1et 1ja 1jf 1ji 1jZ 1jY 1jX 1jW 1jV 1jU 1ex 1gS 1kD 1ev 1gP 1kC 1ew 1k3 1k2 1k8 1kB 1k1 1k0 1jz 1jy 1jx 1gh:1 1gm 1gp 1go 1gn 1gl 1dL:2 1fI:2 1dO:1 1fL:3 1gT 1gf 1gU 1ey 1gc
 @1
 Entrées analogiques (3)
@@ -548,12 +548,12 @@ Commande des vannes
 @1
 Retour analogique vannes
 0
-1yF 253 22U 1zu 2Cd 254 22V 1zm 1yE 2UO 2UQ 2UP 2Vr 2Vq 2Vs 2Uc:1 2Ub 2WU 2WT 2AC 2Ax 2AE 2B3:1 2Az 29I 29B 29G:1 1qE 2Af 2AZ 2Ab 2AY 2Ad 2Ag 2Ae 2WR:1 2B5 2Aw 2B6 2B8 2B7 2Ah 2AG 2AB 2AH 2AJ 2AI 29c 29L 29d:2 2d9 2bC 2bG 2bD:2 2bH 2d8 2dA 1qG 1qJ 1qD 1qI 1qH 1qK 2Cc 2Cb 2Ca 1yZ 1yR 31b
+1yF 253 22U 1zu 2Cd 254 22V 1zm 1yE 2UO 2UQ 2UP 2Vr 2Vq 2Vs 2Uc:1 2Ub 2WU 2WT 2AC 2Ax 2AE 2B3:1 2Az 29I 29B 29G:1 1qE 2Af 2AZ 2Ab 2AY 2Ad 2Ag 2Ae 2WR:1 2B5 2Aw 2B6 2B8 2B7 2Ah 2AG 2AB 2AH 2AJ 2AI 29c 29L 29d:2 2d9 2bC 2bG 2bD:2 2bH 2d8 2dA 1qG 1qJ 1qD 1qI 1qH 1qK 2Cc 2Cb 2Ca 1yZ 1yR 31f
 1yG:3 1oa 1pz 1ft 1yK 1e3 1yL:1 252 22T 1zt 1yC 1yN:2 1yD 1q0 1py 1oZ 1oY 1pn:1 1nz:1 2A5 2A3 2Aq 2Ao 2AD 2B2 2B1 2Ay 29J:1 29F 29E 29D 1qF 1qA 1q9 1o1 2Aa 2AR:1 2AO:2 1o2 2Ap 2An 2Am 2A4 2A2 2A1 29R 29Q 29P 1e2 1fs 1fr 1fq 1fp 1e1 1q7:1 1q6 1yY 1yQ
 @1
 Test commande vannes
 0
-1zL 1zG 1zN 1zI 1zA 1zP 1zF 1za 1z5 1zX 1x2 2d1:1 1wz:1 1yv 1yu 1zb:1 1ze 1zd 1z4 1yx 1cg 1cq:3 1cj 2e5 2e4 1cf 1cv 1cu 1d4 1cx 1d2 1d6 2d7 1yk 1ym 1yb 1zh 1d3 1yj 1yd 1zf:1 1ya 1zj 1zi 1zk:1 1ux 2D7 1uw 1v5 2D6 1v0 1v4 2d5:1 1vD 1v7 1vC 1x4 2d3:1 1x1 1x3 1zQ 1vJ 1vY 1vX 1vF 1zW 1zU:1 1vE 1z6 1cR 1zY:1 1cX:1
+1zL 1zG 1zN 1zI 1zA 1zP 1zF 1za 1z5 1zX 1x2 2d1:1 1wz:1 1yv 1yu 1zb:1 1ze 1zd 1z4 1yx 1cg 1cq:3 1cj 2e5 2e4 1cf 1cv 1cu 1d4 1cx 1d2 1d6 2d7 1yk 1ym 1yb 1zh 1d3 1yj 1yd 1zf:1 1ya 1zj 1zi 1zk:1 1ux 2D7 1uw 1v5 2D6 1v0 1v4 2d5:1 1vD 1v7 1vC 1x4 2d3:1 1x1 1x3 1zQ 1vJ 1vY 1vX 1vF 1zW 1zU:1 1vE 1z6 1cR 1zY:1 1cX:1 31b:3
 1zK 1zE 1zM 1zH 1zC:1 1ca 1z1 1z0 1yz 1eA 1e9 1wy 1wx 1yt 1yq 1ys 1yr 1yp 1yo 1z3 1yw 1ch:1 1cp 1co 1cn 1cm 1cc:2 1cw 1cl 1d5 1d1 1d0 1e4 1yi 1yl 1yX 1yW 1cz 1yc 1yh 1yg 1yf 1yT 1yV 1yU 1uy:1 1uv 1uu 1e6 1v3 1v2 1e5 1vA:1 1v6 1e8 1e7 1ww 1wv 1zS 1vV:1 1vG 1zT 1vH:1 1v9 1z7 1cb 1z8:1 1z2 1cV:1
 @1
 6 entrées logiques +5V (EL0 - EL5)
@@ -156735,6 +156735,42 @@ J
 vY9o
 GIye
 LEDs rouges LL-304VDE-v1-1A
+@R
+I
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+Erm0
+tdDc
+Erreur 5 : échange 2 et 5 de K5
+@R
+I
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+DQZM
+i7aS
+X
+@R
+I
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+1
+2
+CT6G
+cMls
+X
+@R
+I
+0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0
+4026000000000000
+0
+2
+7C1E
+K8r2
+Erreur 6 : ajouter une résistance de 1MΩ entre les pattes 11 et 3 de IC1
 @R
 H
 0.9862460494041443 0.007120788097381592 0.02743418887257576 1.0

@@ -339,17 +339,6 @@ void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
 
 //-------------------------------------------------------------------------------------------------
 
-uint16_t retourCommandeVanne (void) {
-  uint16_t w = 4 << 11 ;
-  w |= 1 << 15 ; // Bit START
-  w |= 1 << 14 ; // Bit SINGLE
-  mySPI4.beginTransaction (spiSettings_MCP3008) ;
-  uint16_t r = mySPI4.transfer16 (w) ;
-  mySPI4.endTransaction () ;
-  r &= 0x1FF ;
-  return r ;
-}
-
 bool retourLogiqueVanne (const uint32_t inNumeroVanne) { // 0 à 3
   bool r = false ;
   switch (inNumeroVanne) {
@@ -388,9 +377,24 @@ uint16_t retourAnalogiqueVanne (const uint32_t inNumeroVanne) { // 0 à 3
 }
 
 //-------------------------------------------------------------------------------------------------
+//  TEST CONNEXION VANNE
+//-------------------------------------------------------------------------------------------------
 
-void fixerValeurCapteurAnalogique (const uint16_t inValeur) {
-  analogWrite (PA4, inValeur) ;
+uint16_t testCommandeVanne (void) {
+  uint16_t w = 4 << 11 ;
+  w |= 1 << 15 ; // Bit START
+  w |= 1 << 14 ; // Bit SINGLE
+  mySPI4.beginTransaction (spiSettings_MCP3008) ;
+  uint16_t r = mySPI4.transfer16 (w) ;
+  mySPI4.endTransaction () ;
+  r &= 0x1FF ;
+  return r ;
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void fixerValeurTestRetourAnalogique (const uint16_t inValeur) {
+  analogWrite (PA4, (inValeur > 255) ? 255 : uint8_t (inValeur)) ;
 }
 
 //--------------------------------------------------------------------------------------------------
