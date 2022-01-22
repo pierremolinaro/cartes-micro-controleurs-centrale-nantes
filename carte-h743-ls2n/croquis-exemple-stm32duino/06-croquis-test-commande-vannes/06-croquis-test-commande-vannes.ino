@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------------------------------------------
 
-void setup() {
+void setup () {
   configurerCarteH743LS2N () ;
   fixerGammeEncodeur (0, 3) ;
   lcd.print ("Test vannes (DIL4  )") ;
