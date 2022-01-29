@@ -1,8 +1,7 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1440,"WindowHeight":903}
+{"WindowWidth":1440,"WindowHeight":987}
 $ProjectRoot
-mSchematicSheetOrientation
 mArtworkName
 mArtworkVersion
 mPDFBoardBackgroundColor
@@ -73,6 +72,7 @@ mSchematicCustomWidth
 mSchematicCustomWidthUnit
 mSchematicCustomHeight
 mSchematicCustomHeightUnit
+mSchematicSheetOrientation
 mRastnetDisplay
 mRastnetDisplayedNetName
 mRastnetDisplayedComponentName
@@ -370,7 +370,6 @@ mX
 mY
 mComment
 @0
-1
 jlc_pcb
 1
 0.6027153730392456 0.6027153730392456 0.6027153730392456 1.0
@@ -427,7 +426,7 @@ NPc
 blJI
 NPc
 Default
-6
+2
 4
 Nucleo32 — asservissements
 3.1
@@ -441,6 +440,7 @@ F
 NPc
 1pHvs
 NPc
+1
 4
 $8
 
