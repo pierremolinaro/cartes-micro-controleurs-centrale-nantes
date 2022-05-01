@@ -3,7 +3,7 @@
 
  .wrap_target
     pull block       ;
-    set  y, 23       ;
+    set  y, 23       ; La boucle est exécutée 24 fois
 loop:
     set pins, 1      [5] ; Durée  6 * 40 ns = 240 ns
     out pins, 1      [8] ; Durée  9 * 40 ns = 360 ns
@@ -21,7 +21,7 @@ loop:
 
 ; 0n procède ainsi :
 ;  -1- on sort 1 pendant 240 ns (instruction set pins, 1 [5]) ;
-;  -2- on sort 0 ou 1 pendant 360 ns (instruction out pins, 1 [8]) ;;
+;  -2- on sort 0 ou 1 pendant 360 ns (instruction out pins, 1 [8]) ;
 ;  -3- on sort 0 pendant 640 ns (instructions set pins, 0 [14], jmp y-- loop).
 
 ; Entre chaque led, les deux instructions 'pull block' et 'set y, 23' introduisent un
