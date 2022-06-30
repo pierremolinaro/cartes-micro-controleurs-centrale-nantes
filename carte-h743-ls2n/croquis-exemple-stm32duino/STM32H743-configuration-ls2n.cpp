@@ -190,7 +190,7 @@ static SPIClass mySPI4 (SPI4_MOSI, SPI4_MISO, SPI4_SCK, SPI4_CS) ;
 static SPIClass mySPI5 (SPI5_MOSI, SPI5_MISO, SPI5_SCK, SPI5_CS) ;
 
 static const SPISettings spiSettings_MCP3008 (1'000'000, MSBFIRST, SPI_MODE0) ;
-static const SPISettings spiSettings_MCP4902 (1'000'000, MSBFIRST, SPI_MODE0) ;
+static const SPISettings spiSettings_MCP49x2 (1'000'000, MSBFIRST, SPI_MODE0) ;
 
 //-------------------------------------------------------------------------------------------------
 
@@ -204,7 +204,9 @@ static void configurerSPI (void) {
 //--- Configurer SPI2
   mySPI2.begin () ;
 //--- Configurer SPI3
-  mySPI3.begin (SPI3_CS) ;
+  mySPI3.begin () ;
+  pinMode (SPI3_CS, OUTPUT) ;
+  digitalWrite (SPI3_CS, HIGH) ;
 //--- Configurer SPI4
   mySPI4.begin () ;
 //--- Configurer SPI5
@@ -311,18 +313,21 @@ uint16_t lireEntreeAnalogique_10bits (const uint8_t inIndiceEntree) {
 //-------------------------------------------------------------------------------------------------
 
 void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
-                    const uint8_t inCommande) {
-  uint16_t w = uint16_t (inCommande) << 4 ;
+                    const uint16_t inCommande) {  // Changement 30 juin 2022 : uint8_t --> uint16_t
+//  uint16_t w = uint16_t (inCommande) << 4 ; // Changement 30 juin 2022 : supprimé
+  uint16_t w = (inCommande <= 4095) ? inCommande : 4095 ; // Changement 30 juin 2022 : ajouté
   w |= 1 << 12 ; // bit SHDN: 1 -> la sortie est active
   w |= 1 << 13 ; // bit GA: 1 -> le gain est 1
   w |= 1 << 14 ; // bit BUF: 1 -> bufferisé
-  w |= (inNumeroVanne & 1) << 15 ; // Sélection du canal
+  w |= uint16_t (inNumeroVanne & 1) << 15 ; // Sélection du canal
   if (inNumeroVanne < 2) {
-    mySPI3.beginTransaction (spiSettings_MCP4902) ;
+    mySPI3.beginTransaction (spiSettings_MCP49x2) ;
+      digitalWrite (SPI3_CS, LOW) ;
     mySPI3.transfer16 (w) ;
+      digitalWrite (SPI3_CS, HIGH) ;
     mySPI3.endTransaction () ;
   }else{
-    mySPI5.beginTransaction (spiSettings_MCP4902) ;
+    mySPI5.beginTransaction (spiSettings_MCP49x2) ;
     mySPI5.transfer16 (w) ;
     mySPI5.endTransaction () ;
   }

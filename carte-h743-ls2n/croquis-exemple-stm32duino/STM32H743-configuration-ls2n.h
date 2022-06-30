@@ -99,7 +99,7 @@ uint16_t lireEntreeAnalogique_10bits (const uint8_t inIndiceEntree) ; // Résult
 //-------------------------------------------------------------------------------------------------
 
 void commandeVanne (const uint32_t inNumeroVanne, // 0 à 3
-                    const uint8_t inCommande) ;
+                    const uint16_t inCommande) ; // Changement 30 juin 2022 : uint8_t --> uint16_t
 
 //-------------------------------------------------------------------------------------------------
 

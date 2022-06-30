@@ -44,7 +44,8 @@ void loop () {
       lcd.setCursor (18, 0) ;
       lcd.print (page) ;
     }
-    const uint16_t potentiometre = lireEntreeAnalogique_9bits (15) / 2 ; // Lire le potentiomètre EA15 (sur 8 bits)
+    // const uint16_t potentiometre = lireEntreeAnalogique_9bits (15) / 2 ; // Lire le potentiomètre EA15 (sur 8 bits), supprimé 30 juin 2022
+    const uint16_t potentiometre = lireEntreeAnalogique_9bits (15) ; // Lire le potentiomètre EA15 (sur 9 bits), ajouté 30 juin 2022
     if (rafraichir || (gPotentiometre != potentiometre)) {
       gPotentiometre = potentiometre ;
       rafraichir = true ;
@@ -52,21 +53,22 @@ void loop () {
       lcd.print ("                    ") ;
       lcd.setCursor (0, 2) ;
       lcd.print ("Pot. ") ;
-      lcd.print (potentiometre) ;
+      lcd.print (potentiometre * 8) ; // Étendre de 9 à 12 bits, ajouté 30 juin 2022
       lcd.print (" -> ") ;
       if (page) {
-        const float tension = float (potentiometre) * 0.04406 ;
+        const float tension = (float (potentiometre) * 0.04406) / 2.0 ; // Ramener à 8 bits, ajouté 30 juin 2022
         lcd.print (tension) ;
         lcd.print ("V") ;
       }else{
-        const float courant = float (potentiometre) * (1000.0 * 5.0) / (255.0 * 150.0) ;
+        // const float courant = float (potentiometre) * (1000.0 * 5.0) / (255.0 * 150.0) ; // Supprimé 30 juin 2022
+        const float courant = float (potentiometre) * 8.0 * (1000.0 * 5.0) / (4095.0 * 240.0) ; // Étendre à 12 bits, ajouté 30 juin 2022
         lcd.print (courant) ;
         lcd.print ("mA") ;
       }
     }
     if (page) {
       if (rafraichir) {
-        fixerValeurTestRetourAnalogique (potentiometre) ;
+        fixerValeurTestRetourAnalogique (potentiometre / 2) ; // Ramaner de 9 à 8 bits, modifié 30 juin 2022
       }
       const uint16_t entreeAnalogique = retourAnalogiqueVanne (uint8_t (gValeurEncodeur)) ;
       if (rafraichir || (gEntreeAnalogiqueCapteurVanne != entreeAnalogique)) {
@@ -85,7 +87,7 @@ void loop () {
      
     }else{
       if (rafraichir) {
-        commandeVanne (uint8_t (gValeurEncodeur), potentiometre) ;
+        commandeVanne (uint8_t (gValeurEncodeur), potentiometre * 8) ; // Étendre de 9 à 12 bits, modifié 30 juin 2022
       }
       const uint16_t retourCommande = testCommandeVanne () ;
       if (rafraichir || (gRetourCommande != retourCommande)) {

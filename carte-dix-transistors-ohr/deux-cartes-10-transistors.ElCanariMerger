@@ -1,9 +1,11 @@
 PM-TEXT-FORMAT
 0
-{"WindowHeight":671,"WindowWidth":800}
+{"WindowWidth":800,"WindowHeight":699}
 $MergerRoot
 selectedPageIndex
 zoom
+showDisplaySettingView
+modelInsertionRotation
 automaticBoardSize
 boardManualWidth
 boardManualHeight
@@ -31,6 +33,7 @@ modelWidthUnit
 modelHeight
 modelHeightUnit
 zoom
+layerConfiguration
 modelLimitWidth
 modelLimitWidthUnit
 artworkName
@@ -45,12 +48,17 @@ drills
 vias
 frontPads
 backPads
+traversingPads
 backComponentNames
 frontComponentNames
 frontComponentValues
 backComponentValues
 backTracks
 frontTracks
+inner1Tracks
+inner2Tracks
+inner3Tracks
+inner4Tracks
 frontPackages
 backPackages
 myInstances
@@ -61,6 +69,7 @@ instanceRotation
 myModel
 myRoot
 $ArtworkRoot
+layerConfiguration
 selectedTab
 comments
 minPPTPTTTWdisplayUnit
@@ -71,6 +80,7 @@ minValueForPHDdisplayUnit
 minValueForPHDinEBUnit
 minValueForBoardLimitWidthDisplayUnit
 minValueForBoardLimitWidth
+title
 drillDataFileExtension
 fileGenerationParameterArray
 $ArtworkFileGenerationParameters
@@ -90,13 +100,19 @@ drawTextsLayoutBottomSide
 drawTextsLegendTopSide
 drawTextsLegendBottomSide
 drawTracksTopSide
+drawTracksInner1Layer
+drawTracksInner2Layer
+drawTracksInner3Layer
+drawTracksInner4Layer
 drawTracksBottomSide
+drawTraversingPads
 drawVias
 fileExtension
 horizontalMirror
 name
 measurementUnitForPadHoleInPDF
 padHoleDiameterInPDF
+mArtwork
 $SegmentEntity
 y1
 x2
@@ -112,6 +128,8 @@ rotation
 x
 @0
 1
+0
+F
 0
 T
 blJI
@@ -140,6 +158,7 @@ NPc
 blJI
 NPc
 0
+0
 NPc
 NPc
 jlc_pcb
@@ -155,11 +174,16 @@ Gv:2O
 JK:2O
 Lj:2O
 
+
 O8:Cu
 
 
 b3:2S
 dW:u
+
+
+
+
 eR:8s
 
 2:1
@@ -177,6 +201,7 @@ Isee
 0
 @3
 0
+0
 This artwork file corresponds to specification from JLC PCB. See :\n\nhttps://jlcpcb.com\n\nFusion PCB Specification:\nhttps://jlcpcb.com/capabilities/Capabilities
 as
 2yM
@@ -186,10 +211,16 @@ NPc
 4gK
 NPc
 NPc
+
 TXT
 5:6
 @4
 T
+F
+F
+F
+F
+F
 F
 F
 F
@@ -212,6 +243,7 @@ F
 Board Outline
 NPc
 Bho
+4
 @4
 T
 F
@@ -228,6 +260,11 @@ F
 F
 F
 T
+F
+F
+F
+F
+F
 F
 F
 F
@@ -236,6 +273,7 @@ F
 Legend Bottom Side
 NPc
 Bho
+4
 @4
 F
 F
@@ -248,6 +286,11 @@ F
 F
 F
 T
+F
+F
+F
+F
+F
 F
 F
 F
@@ -260,6 +303,7 @@ F
 Solder Mask Bottom Side
 NPc
 Bho
+4
 @4
 F
 F
@@ -277,6 +321,11 @@ F
 F
 F
 T
+F
+F
+F
+F
+F
 F
 T
 GTL
@@ -284,6 +333,7 @@ F
 Layout Top Side
 NPc
 Bho
+4
 @4
 F
 F
@@ -301,13 +351,19 @@ T
 F
 F
 F
+F
+F
+F
+F
 T
+F
 T
 GBL
 F
 Layout Bottom Side
 NPc
 Bho
+4
 @4
 F
 F
@@ -319,6 +375,11 @@ F
 F
 F
 T
+F
+F
+F
+F
+F
 F
 F
 F
@@ -332,6 +393,7 @@ F
 Solder Mask Top Side
 NPc
 Bho
+4
 @4
 T
 T
@@ -351,11 +413,17 @@ F
 F
 F
 F
+F
+F
+F
+F
+F
 GTO
 F
 Legend Top Side
 NPc
 Bho
+4
 @5
 XoIA
 nJw
