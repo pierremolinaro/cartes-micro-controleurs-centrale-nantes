@@ -34,3 +34,6 @@
 *.out
 *.app
 *.bin
+*.xcworkspacedata
+*.plist
+*.xcuserstate
