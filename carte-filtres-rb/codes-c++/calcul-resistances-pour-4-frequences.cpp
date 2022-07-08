@@ -180,7 +180,7 @@ int main (void) {
   }
 //--- Affichage des résultats
   printf ("----------------------------------------------------------------------------------\n") ;
-  printf ("|   Écart  |   F0  |   F1  |   F2  |    F3   |   R1H  |   R1L  |   R2H  |   R2L  |\n") ;
+  printf ("|   Écart  |   F0  |   F1  |   F2   |   F3   |   R1H  |   R1L  |   R2H  |   R2L  |\n") ;
   printf ("----------------------------------------------------------------------------------\n") ;
   for (int i = 0 ; i < tableauResultats.size () ; i++) {
     printf (
