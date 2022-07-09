@@ -28,9 +28,9 @@ static const bool CALCULER_POUR_R1X_ET_R2X = true ;
 //----------------------------------------------------------------------------------------
 
 static const double R1H = 91000.0 ;
-static const double R1L = 24000.0 ;
+static const double R1L = 30000.0 ;
 static const double R2H = 82000.0 ;
-static const double R2L = 3900.0 ;
+static const double R2L = 3300.0 ;
 static const double C1 = 4.7e-9 ;
 static const double C2 = 4.7e-9 ;
 
@@ -69,7 +69,9 @@ static std::vector <double> gammeResistances (void) {
   for (int i=0 ; i<22 ; i++) {
     result.push_back (1000.0 * double (SERIE_E24 [i])) ;
   }
-  result.push_back (1000.0 * 1000.0) ;
+  result.push_back (1000.0 * 1000.0) ; // 1 MΩ
+  result.push_back (1200.0 * 1000.0) ; // 1,2 MΩ
+  result.push_back (1500.0 * 1000.0) ; // 1,5 MΩ
   return result ;
 }
 

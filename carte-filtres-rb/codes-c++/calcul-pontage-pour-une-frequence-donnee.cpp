@@ -34,9 +34,9 @@ static const bool CALCULER_POUR_R1X_ET_R2X = false ;
 //----------------------------------------------------------------------------------------
 
 static const double R1H = 91000.0 ;
-static const double R1L = 24000.0 ;
+static const double R1L = 30000.0 ;
 static const double R2H = 82000.0 ;
-static const double R2L = 3900.0 ;
+static const double R2L = 3300.0 ;
 static const double C1 = 4.7e-9 ;
 static const double C2 = 4.7e-9 ;
 

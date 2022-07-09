@@ -37,3 +37,7 @@
 *.xcworkspacedata
 *.plist
 *.xcuserstate
+carte-filtres-rb/codes-c++/calcul-meilleurs-pontages-pour-gamme-frequences
+carte-filtres-rb/codes-c++/calcul-pontage-pour-plusieurs-frequences
+carte-filtres-rb/codes-c++/calcul-pontage-pour-une-frequence-donnee
+carte-filtres-rb/codes-c++/calcul-resistances-pour-2-frequences
