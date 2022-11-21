@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowHeight":835,"WindowWidth":1440}
+{"WindowHeight":863,"WindowWidth":1440}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
@@ -436,8 +436,8 @@ NPc
 blJI
 NPc
 Default
-6
-0
+2
+1
 Extension ZIO CANFD 
 1.0
 41d8cefdc20c5282
