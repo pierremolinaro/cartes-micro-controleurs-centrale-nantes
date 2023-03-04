@@ -18,7 +18,7 @@
 //-------------------------------------------------------------------------------------------------
 
 const uint32_t fréquenceHorlogePWM = 5 * 1000 ; // En Hz
-const uint32_t nombreNiveauxPWM = 256 ; // La rapport cyclique va de 0 à nombreNiveauxPWM-1
+const uint32_t nombreNiveauxPWM = 256 ; // La rapport cyclique va de 0 à nombreNiveauxPWM
 
 //-------------------------------------------------------------------------------------------------
 
@@ -59,9 +59,9 @@ void loop () {
     gPhase += 1 ;
   }
   if ((digitalRead (16) == LOW) && (digitalRead (17) == HIGH)) {
-    marcheAvant (255) ;
+    marcheAvant (200) ;
   }else if ((digitalRead (16) == HIGH) && (digitalRead (17) == LOW)) {
-    marcheArriere (255) ;
+    marcheArriere (200) ;
   }else{
     arret () ;
   }
