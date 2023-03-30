@@ -59,9 +59,9 @@ void loop () {
     gPhase += 1 ;
   }
   if ((digitalRead (16) == LOW) && (digitalRead (17) == HIGH)) {
-    marcheAvant (200) ;
+    marcheAvant (100) ;
   }else if ((digitalRead (16) == HIGH) && (digitalRead (17) == LOW)) {
-    marcheArriere (200) ;
+    marcheArriere (100) ;
   }else{
     arret () ;
   }

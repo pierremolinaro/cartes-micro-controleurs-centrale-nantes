@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowHeight":919,"WindowWidth":1440}
+{"WindowHeight":947,"WindowWidth":1440}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
@@ -53,6 +53,7 @@ mBoardPointsBoundingBoxUnit
 mBoardSelectedCurveDisplayUnit
 mBoardLimitControlPointsDisplayUnit
 mBoardShape
+mContentOpacityInBoardOutline
 mRectangularBoardWidth
 mRectangularBoardWidthUnit
 mRectangularBoardHeight
@@ -220,6 +221,10 @@ mNamePrefix
 mNameIndex
 mXUnit
 mYUnit
+mXNameUnit
+mYNameUnit
+mXValueUnit
+mYValueUnit
 mDevice
 mSelectedPackage
 mNameFont
@@ -396,10 +401,10 @@ F
 65d6u
 5tU
 as
-0
-F
-F
 2
+F
+F
+0
 4
 0
 Erm
@@ -424,21 +429,22 @@ NPc
 NPc
 NPc
 0
+3fe0000000000000
 Isee
 NPc
 Isee
 NPc
 1
 Default
-6
 2
+0
 
 
-41d8d4f95f0b1306
+41d8fb38630b1306
 F
 F
 0
-2
+0
 4
 1pHvs
 NPc
@@ -2508,6 +2514,10 @@ K
 2
 as
 as
+as
+as
+as
+as
 6
 8Q
 2
@@ -2534,6 +2544,10 @@ F
 
 H
 2
+as
+as
+as
+as
 as
 as
 3
@@ -2564,6 +2578,10 @@ H
 1
 as
 as
+as
+as
+as
+as
 3
 8D
 2
@@ -2590,6 +2608,10 @@ F
 
 H
 3
+as
+as
+as
+as
 as
 as
 3
@@ -2620,6 +2642,10 @@ H
 4
 as
 as
+as
+as
+as
+as
 3
 8D
 2
@@ -2646,6 +2672,10 @@ F
 100µF 100V
 C
 1
+as
+as
+as
+as
 as
 as
 4
@@ -2676,6 +2706,10 @@ C
 2
 as
 as
+as
+as
+as
+as
 5
 86
 2
@@ -2702,6 +2736,10 @@ F
 
 K
 1
+as
+as
+as
+as
 as
 as
 7
@@ -2732,6 +2770,10 @@ IC
 1
 as
 as
+as
+as
+as
+as
 8
 7s
 2
@@ -2758,6 +2800,10 @@ F
 
 K
 3
+as
+as
+as
+as
 as
 as
 9
@@ -2788,6 +2834,10 @@ R
 5
 as
 as
+as
+as
+as
+as
 A
 7b
 2
@@ -2814,6 +2864,10 @@ F
 180Ω
 R
 6
+as
+as
+as
+as
 as
 as
 A
@@ -2844,6 +2898,10 @@ IC
 2
 as
 as
+as
+as
+as
+as
 B
 7e
 2
@@ -2870,6 +2928,10 @@ F
 4,7kΩ
 R
 2
+as
+as
+as
+as
 as
 as
 A
@@ -2900,6 +2962,10 @@ R
 3
 as
 as
+as
+as
+as
+as
 A
 7b
 2
@@ -2926,6 +2992,10 @@ F
 4,7kΩ
 R
 1
+as
+as
+as
+as
 as
 as
 A
@@ -2956,6 +3026,10 @@ R
 4
 as
 as
+as
+as
+as
+as
 A
 7b
 2
@@ -2982,6 +3056,10 @@ F
 4,7V
 Z
 1
+as
+as
+as
+as
 as
 as
 C
@@ -3012,6 +3090,10 @@ S
 1
 as
 as
+as
+as
+as
+as
 D
 7V
 2
@@ -3040,6 +3122,10 @@ K
 4
 as
 as
+as
+as
+as
+as
 E
 7S
 2
@@ -3063,9 +3149,13 @@ F
 -2Ofk
 4008000000000000
 0
-10µF 50V
+10µF 25V
 C
 3
+as
+as
+as
+as
 as
 as
 4

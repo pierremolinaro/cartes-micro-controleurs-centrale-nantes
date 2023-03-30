@@ -1,7 +1,9 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1224,"WindowHeight":963}
+{"WindowHeight":991,"WindowWidth":1545}
 $MergerRoot
+boardModels
+boardInstances
 selectedPageIndex
 zoom
 showDisplaySettingView
@@ -24,8 +26,6 @@ mPDFBoardBackgroundColor
 mArtworkName
 mArtworkVersion
 mArtwork
-boardModels
-boardInstances
 $BoardModel
 name
 modelWidth
@@ -33,10 +33,9 @@ modelWidthUnit
 modelHeight
 modelHeightUnit
 zoom
+modelVersion
+ignoreModelVersionError
 layerConfiguration
-modelLimitWidth
-modelLimitWidthUnit
-artworkName
 frontLegendLines
 backLegendLines
 frontLegendTexts
@@ -49,6 +48,8 @@ vias
 frontPads
 backPads
 traversingPads
+modelLimitWidth
+modelLimitWidthUnit
 backComponentNames
 frontComponentNames
 frontComponentValues
@@ -61,6 +62,7 @@ inner3Tracks
 inner4Tracks
 frontPackages
 backPackages
+artworkName
 myInstances
 $MergerBoardInstance
 x
@@ -127,9 +129,11 @@ shape
 rotation
 x
 @0
+1:1
+3:9
 1
 0
-T
+F
 0
 T
 blJI
@@ -149,8 +153,6 @@ NPc
 jlc_pcb
 2
 D
-1:1
-3:9
 @1
 Carte_CAD
 Isee
@@ -159,9 +161,8 @@ NPc
 NPc
 0
 0
-NPc
-NPc
-seeed_studio
+T
+0
 Bm:6
 
 Bt:5n
@@ -174,6 +175,8 @@ Hl:g
 IS:g
 J9:g
 
+NPc
+NPc
 
 Jq:R
 KI:o
@@ -186,6 +189,7 @@ Ly:M
 
 ML:Y
 
+seeed_studio
 3:4
 @1
 Carte_DAC
@@ -195,9 +199,8 @@ NPc
 NPc
 0
 0
-NPc
-NPc
-seeed_studio
+T
+0
 L:6
 
 S:6O
@@ -210,6 +213,8 @@ S:6O
 7i:m
 8V:m
 
+NPc
+NPc
 
 9I:R
 
@@ -222,6 +227,7 @@ AY:e
 
 BD:Y
 
+seeed_studio
 8:4
 @2
 0

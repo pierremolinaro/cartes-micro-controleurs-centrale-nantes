@@ -1,7 +1,9 @@
 PM-TEXT-FORMAT
 0
-{"WindowWidth":1084,"WindowHeight":771}
+{"WindowHeight":799,"WindowWidth":1084}
 $MergerRoot
+boardModels
+boardInstances
 selectedPageIndex
 zoom
 showDisplaySettingView
@@ -24,8 +26,6 @@ mPDFBoardBackgroundColor
 mArtworkName
 mArtworkVersion
 mArtwork
-boardModels
-boardInstances
 $BoardModel
 name
 modelWidth
@@ -33,10 +33,9 @@ modelWidthUnit
 modelHeight
 modelHeightUnit
 zoom
+modelVersion
+ignoreModelVersionError
 layerConfiguration
-modelLimitWidth
-modelLimitWidthUnit
-artworkName
 frontLegendLines
 backLegendLines
 frontLegendTexts
@@ -49,6 +48,8 @@ vias
 frontPads
 backPads
 traversingPads
+modelLimitWidth
+modelLimitWidthUnit
 backComponentNames
 frontComponentNames
 frontComponentValues
@@ -61,6 +62,7 @@ inner3Tracks
 inner4Tracks
 frontPackages
 backPackages
+artworkName
 myInstances
 $MergerBoardInstance
 x
@@ -131,6 +133,8 @@ y
 padDiameter
 x
 @0
+1:2
+4:A
 1
 3L
 F
@@ -153,8 +157,6 @@ NPc
 jlc_pcb
 1
 F
-1:2
-4:A
 @1
 Carte_encoder
 blJI
@@ -163,9 +165,8 @@ NPc
 NPc
 0
 0
-NPc
-NPc
-seeed_studio
+T
+0
 No:6
 
 Nv:3u
@@ -178,6 +179,8 @@ Ru:1U
 TP:1U
 Uu:1U
 
+NPc
+NPc
 
 WP:5U
 bu:1o
@@ -190,6 +193,7 @@ fO:1B
 
 ga:4D
 
+seeed_studio
 4
 @1
 Carte-test
@@ -199,9 +203,8 @@ NPc
 NPc
 0
 0
-NPc
-NPc
-jlc_pcb
+T
+0
 1n:6
 
 1u:4e
@@ -214,6 +217,8 @@ jlc_pcb
 81:1J
 9L:1J
 
+NPc
+NPc
 
 Af:2E
 
@@ -226,6 +231,7 @@ Eg:v
 
 Fc:8B
 
+jlc_pcb
 5:1 A:1
 @1
 dil8-msop8-adapter
@@ -235,9 +241,8 @@ NPc
 NPc
 0
 0
-NPc
-NPc
-jlc_pcb
+T
+0
 N:1
 
 
@@ -250,6 +255,8 @@ T:7
 b:F
 r:7
 
+NPc
+NPc
 
 
 
@@ -262,6 +269,7 @@ z:b
 
 1b:B
 
+jlc_pcb
 7:2 C:2
 @2
 0
