@@ -17,7 +17,7 @@
 "resistor";"mf25-rect";"24kΩ 1%";"4";"Ra2, Rb2, Rc2, Rd2"
 "resistor";"mf25-rect";"82kΩ 1%";"4";"Ra5, Rb5, Rc5, Rd5"
 "resistor";"mf25-rect";"91kΩ 1%";"4";"Ra1, Rb3, Rc1, Rd3"
-"resistor";"mf25-rect";"3300Ω";"1";"R1"
+"resistor";"mf25-rect";"5600Ω";"1";"R1"
 "terminal-block-2-way-3-5mm";"terminal-block-2-3-5mm";"Ra1x";"1";"K13"
 "terminal-block-2-way-3-5mm";"terminal-block-2-3-5mm";"Ra1y";"1";"K17"
 "terminal-block-2-way-3-5mm";"terminal-block-2-3-5mm";"Rb1x";"1";"K12"
