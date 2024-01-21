@@ -1,6 +1,6 @@
 PM-TEXT-FORMAT
 0
-{"WindowHeight":892,"WindowWidth":1496}
+{"WindowHeight":920,"WindowWidth":1496}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
@@ -172,6 +172,7 @@ mP2XUnit
 mP2YUnit
 mManualLockP1
 mManualLockP2
+mAddedToSolderMask
 mDirectionLockOnKnobDragging
 mConnectorP1
 mConnectorP2
@@ -400,6 +401,8 @@ mColor
 mSize
 mHorizontalAlignment
 mVerticalAlignment
+mRotation
+mBold
 mX
 mY
 mComment
@@ -429,12 +432,12 @@ T
 65d6u
 5wi
 as
-0
+2
 F
 F
 0
 4
-0
+Jc
 Erm
 as
 400a749a4d26934a
@@ -809,6 +812,7 @@ as
 as
 F
 F
+F
 0
 6Z
 7S
@@ -824,6 +828,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -843,6 +848,7 @@ as
 as
 F
 F
+F
 0
 5a
 7U
@@ -860,6 +866,7 @@ as
 as
 F
 F
+F
 0
 7U
 7V
@@ -875,6 +882,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -894,6 +902,7 @@ as
 as
 F
 F
+F
 0
 57
 7Y
@@ -911,6 +920,7 @@ as
 as
 F
 F
+F
 0
 7Y
 7Z
@@ -928,6 +938,7 @@ as
 as
 F
 F
+F
 0
 7Z
 7a
@@ -943,6 +954,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -962,6 +974,7 @@ as
 as
 F
 F
+F
 0
 5M
 7b
@@ -979,6 +992,7 @@ as
 as
 F
 F
+F
 0
 7b
 7c
@@ -996,6 +1010,7 @@ as
 as
 F
 F
+F
 0
 7c
 7d
@@ -1011,6 +1026,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1030,6 +1046,7 @@ as
 as
 F
 F
+F
 0
 7J
 7h
@@ -1045,6 +1062,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1064,6 +1082,7 @@ as
 as
 F
 F
+F
 0
 7p
 7q
@@ -1081,6 +1100,7 @@ as
 as
 F
 F
+F
 0
 7q
 4w
@@ -1096,6 +1116,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1115,6 +1136,7 @@ as
 as
 F
 F
+F
 0
 7r
 7s
@@ -1132,6 +1154,7 @@ as
 as
 F
 F
+F
 0
 7s
 7p
@@ -1147,6 +1170,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1166,6 +1190,7 @@ as
 as
 F
 F
+F
 0
 7t
 7u
@@ -1181,6 +1206,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1200,6 +1226,7 @@ as
 as
 F
 F
+F
 0
 6y
 7E
@@ -1215,6 +1242,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1234,6 +1262,7 @@ as
 as
 F
 F
+F
 0
 7v
 7w
@@ -1251,6 +1280,7 @@ as
 as
 F
 F
+F
 0
 7w
 7x
@@ -1268,6 +1298,7 @@ as
 as
 F
 F
+F
 0
 7x
 6y
@@ -1283,6 +1314,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1302,6 +1334,7 @@ as
 as
 F
 F
+F
 0
 5e
 8C
@@ -1319,6 +1352,7 @@ as
 as
 F
 F
+F
 0
 8C
 8D
@@ -1336,6 +1370,7 @@ as
 as
 F
 F
+F
 0
 8D
 8E
@@ -1351,6 +1386,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1370,6 +1406,7 @@ as
 as
 F
 F
+F
 0
 6P
 8I
@@ -1387,6 +1424,7 @@ as
 as
 F
 F
+F
 0
 8I
 8J
@@ -1402,6 +1440,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1421,6 +1460,7 @@ as
 as
 F
 F
+F
 0
 8P
 8Q
@@ -1438,6 +1478,7 @@ as
 as
 F
 F
+F
 0
 8Q
 8R
@@ -1453,6 +1494,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1472,6 +1514,7 @@ as
 as
 F
 F
+F
 0
 4y
 8S
@@ -1489,6 +1532,7 @@ as
 as
 F
 F
+F
 0
 8S
 8P
@@ -1506,6 +1550,7 @@ as
 as
 F
 F
+F
 0
 59
 8P
@@ -1521,6 +1566,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1540,6 +1586,7 @@ as
 as
 F
 F
+F
 0
 8T
 8U
@@ -1555,6 +1602,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1574,6 +1622,7 @@ as
 as
 F
 F
+F
 0
 5G
 8Z
@@ -1591,6 +1640,7 @@ as
 as
 F
 F
+F
 0
 8Z
 8a
@@ -1608,6 +1658,7 @@ as
 as
 F
 F
+F
 0
 8a
 8b
@@ -1625,6 +1676,7 @@ as
 as
 F
 F
+F
 0
 8b
 8c
@@ -1642,6 +1694,7 @@ as
 as
 F
 F
+F
 0
 8c
 5P
@@ -1657,6 +1710,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1676,6 +1730,7 @@ as
 as
 F
 F
+F
 0
 8o
 8p
@@ -1691,6 +1746,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1710,6 +1766,7 @@ as
 as
 F
 F
+F
 0
 7K
 8v
@@ -1725,6 +1782,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1744,6 +1802,7 @@ as
 as
 F
 F
+F
 0
 6A
 8w
@@ -1761,6 +1820,7 @@ as
 as
 F
 F
+F
 0
 8w
 7K
@@ -1776,6 +1836,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1795,6 +1856,7 @@ as
 as
 F
 F
+F
 0
 95
 6O
@@ -1810,6 +1872,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1829,6 +1892,7 @@ as
 as
 F
 F
+F
 0
 6v
 98
@@ -1846,6 +1910,7 @@ as
 as
 F
 F
+F
 0
 98
 97
@@ -1863,6 +1928,7 @@ as
 as
 F
 F
+F
 0
 97
 99
@@ -1880,6 +1946,7 @@ as
 as
 F
 F
+F
 0
 99
 9A
@@ -1895,6 +1962,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1914,6 +1982,7 @@ as
 as
 F
 F
+F
 0
 6K
 9B
@@ -1929,6 +1998,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1948,6 +2018,7 @@ as
 as
 F
 F
+F
 0
 5U
 6K
@@ -1963,6 +2034,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -1982,6 +2054,7 @@ as
 as
 F
 F
+F
 0
 9C
 5n
@@ -1999,6 +2072,7 @@ as
 as
 F
 F
+F
 0
 5n
 9D
@@ -2014,6 +2088,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2033,6 +2108,7 @@ as
 as
 F
 F
+F
 0
 5S
 9E
@@ -2050,6 +2126,7 @@ as
 as
 F
 F
+F
 0
 9E
 9F
@@ -2065,6 +2142,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2084,6 +2162,7 @@ as
 as
 F
 F
+F
 0
 5J
 9K
@@ -2099,6 +2178,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2118,6 +2198,7 @@ as
 as
 F
 F
+F
 0
 9L
 9M
@@ -2133,6 +2214,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2152,6 +2234,7 @@ as
 as
 F
 F
+F
 0
 9N
 9L
@@ -2167,6 +2250,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2186,6 +2270,7 @@ as
 as
 F
 F
+F
 0
 9O
 9L
@@ -2201,6 +2286,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2220,6 +2306,7 @@ as
 as
 F
 F
+F
 0
 9M
 9P
@@ -2237,6 +2324,7 @@ as
 as
 F
 F
+F
 0
 9P
 6x
@@ -2252,6 +2340,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2271,6 +2360,7 @@ as
 as
 F
 F
+F
 0
 6T
 6N
@@ -2286,6 +2376,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2305,6 +2396,7 @@ as
 as
 F
 F
+F
 0
 9Q
 6Q
@@ -2320,6 +2412,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2339,6 +2432,7 @@ as
 as
 F
 F
+F
 0
 7G
 9S
@@ -2354,6 +2448,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2373,6 +2468,7 @@ as
 as
 F
 F
+F
 0
 5f
 7R
@@ -2388,6 +2484,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2407,6 +2504,7 @@ as
 as
 F
 F
+F
 0
 6p
 5w
@@ -2422,6 +2520,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2441,6 +2540,7 @@ as
 as
 F
 F
+F
 0
 7T
 6j
@@ -2456,6 +2556,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2475,6 +2576,7 @@ as
 as
 F
 F
+F
 0
 7W
 74
@@ -2490,6 +2592,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2509,6 +2612,7 @@ as
 as
 F
 F
+F
 0
 7X
 7C
@@ -2524,6 +2628,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2543,6 +2648,7 @@ as
 as
 F
 F
+F
 0
 7e
 7f
@@ -2558,6 +2664,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2577,6 +2684,7 @@ as
 as
 F
 F
+F
 0
 7N
 7g
@@ -2592,6 +2700,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2611,6 +2720,7 @@ as
 as
 F
 F
+F
 0
 5y
 7i
@@ -2626,6 +2736,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2645,6 +2756,7 @@ as
 as
 F
 F
+F
 0
 5D
 7j
@@ -2660,6 +2772,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2679,6 +2792,7 @@ as
 as
 F
 F
+F
 0
 5q
 7k
@@ -2694,6 +2808,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2713,6 +2828,7 @@ as
 as
 F
 F
+F
 0
 6X
 7l
@@ -2730,6 +2846,7 @@ as
 as
 F
 F
+F
 0
 7l
 7m
@@ -2745,6 +2862,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2764,6 +2882,7 @@ as
 as
 F
 F
+F
 0
 4z
 7n
@@ -2779,6 +2898,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2798,6 +2918,7 @@ as
 as
 F
 F
+F
 0
 4w
 7o
@@ -2813,6 +2934,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2832,6 +2954,7 @@ as
 as
 F
 F
+F
 0
 7I
 7y
@@ -2849,6 +2972,7 @@ as
 as
 F
 F
+F
 0
 7y
 7z
@@ -2866,6 +2990,7 @@ as
 as
 F
 F
+F
 0
 7z
 80
@@ -2881,6 +3006,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2900,6 +3026,7 @@ as
 as
 F
 F
+F
 0
 6q
 81
@@ -2917,6 +3044,7 @@ as
 as
 F
 F
+F
 0
 81
 82
@@ -2932,6 +3060,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -2951,6 +3080,7 @@ as
 as
 F
 F
+F
 0
 5m
 83
@@ -2968,6 +3098,7 @@ as
 as
 F
 F
+F
 0
 83
 84
@@ -2983,6 +3114,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3002,6 +3134,7 @@ as
 as
 F
 F
+F
 0
 5t
 85
@@ -3019,6 +3152,7 @@ as
 as
 F
 F
+F
 0
 85
 86
@@ -3034,6 +3168,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3053,6 +3188,7 @@ as
 as
 F
 F
+F
 0
 72
 87
@@ -3070,6 +3206,7 @@ as
 as
 F
 F
+F
 0
 87
 88
@@ -3087,6 +3224,7 @@ as
 as
 F
 F
+F
 0
 88
 89
@@ -3104,6 +3242,7 @@ as
 as
 F
 F
+F
 0
 89
 8A
@@ -3121,6 +3260,7 @@ as
 as
 F
 F
+F
 0
 8A
 5V
@@ -3136,6 +3276,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3155,6 +3296,7 @@ as
 as
 F
 F
+F
 0
 8B
 5V
@@ -3172,6 +3314,7 @@ as
 as
 F
 F
+F
 0
 5o
 8F
@@ -3187,6 +3330,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3206,6 +3350,7 @@ as
 as
 F
 F
+F
 0
 5A
 8G
@@ -3221,6 +3366,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3240,6 +3386,7 @@ as
 as
 F
 F
+F
 0
 5W
 8H
@@ -3255,6 +3402,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3274,6 +3422,7 @@ as
 as
 F
 F
+F
 0
 5B
 8K
@@ -3291,6 +3440,7 @@ as
 as
 F
 F
+F
 0
 8K
 8L
@@ -3306,6 +3456,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3325,6 +3476,7 @@ as
 as
 F
 F
+F
 0
 8M
 7M
@@ -3340,6 +3492,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3359,6 +3512,7 @@ as
 as
 F
 F
+F
 0
 8N
 8O
@@ -3376,6 +3530,7 @@ as
 as
 F
 F
+F
 0
 8O
 8M
@@ -3391,6 +3546,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3410,6 +3566,7 @@ as
 as
 F
 F
+F
 0
 7O
 8V
@@ -3425,6 +3582,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3444,6 +3602,7 @@ as
 as
 F
 F
+F
 0
 54
 8W
@@ -3459,6 +3618,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3478,6 +3638,7 @@ as
 as
 F
 F
+F
 0
 52
 8X
@@ -3495,6 +3656,7 @@ as
 as
 F
 F
+F
 0
 8X
 8Y
@@ -3510,6 +3672,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3529,6 +3692,7 @@ as
 as
 F
 F
+F
 0
 5Z
 8d
@@ -3544,6 +3708,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3563,6 +3728,7 @@ as
 as
 F
 F
+F
 0
 63
 8e
@@ -3578,6 +3744,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3597,6 +3764,7 @@ as
 as
 F
 F
+F
 0
 51
 8f
@@ -3612,6 +3780,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3631,6 +3800,7 @@ as
 as
 F
 F
+F
 0
 5j
 8g
@@ -3646,6 +3816,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3665,6 +3836,7 @@ as
 as
 F
 F
+F
 0
 5H
 8h
@@ -3682,6 +3854,7 @@ as
 as
 F
 F
+F
 0
 8h
 8i
@@ -3699,6 +3872,7 @@ as
 as
 F
 F
+F
 0
 8i
 8j
@@ -3716,6 +3890,7 @@ as
 as
 F
 F
+F
 0
 8j
 6B
@@ -3731,6 +3906,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3750,6 +3926,7 @@ as
 as
 F
 F
+F
 0
 8k
 6B
@@ -3765,6 +3942,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3784,6 +3962,7 @@ as
 as
 F
 F
+F
 0
 8l
 8k
@@ -3799,6 +3978,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3818,6 +3998,7 @@ as
 as
 F
 F
+F
 0
 60
 8m
@@ -3833,6 +4014,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3852,6 +4034,7 @@ as
 as
 F
 F
+F
 0
 5v
 8n
@@ -3867,6 +4050,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3886,6 +4070,7 @@ as
 as
 F
 F
+F
 0
 5r
 8q
@@ -3901,6 +4086,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3920,6 +4106,7 @@ as
 as
 F
 F
+F
 0
 53
 8r
@@ -3935,6 +4122,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3954,6 +4142,7 @@ as
 as
 F
 F
+F
 0
 5u
 8s
@@ -3969,6 +4158,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -3988,6 +4178,7 @@ as
 as
 F
 F
+F
 0
 6m
 8t
@@ -4005,6 +4196,7 @@ as
 as
 F
 F
+F
 0
 8t
 8u
@@ -4020,6 +4212,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4039,6 +4232,7 @@ as
 as
 F
 F
+F
 0
 7K
 8x
@@ -4056,6 +4250,7 @@ as
 as
 F
 F
+F
 0
 8x
 8y
@@ -4071,6 +4266,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4090,6 +4286,7 @@ as
 as
 F
 F
+F
 0
 6A
 8z
@@ -4107,6 +4304,7 @@ as
 as
 F
 F
+F
 0
 8z
 90
@@ -4124,6 +4322,7 @@ as
 as
 F
 F
+F
 0
 90
 6D
@@ -4141,6 +4340,7 @@ as
 as
 F
 F
+F
 0
 6D
 91
@@ -4158,6 +4358,7 @@ as
 as
 F
 F
+F
 0
 91
 5O
@@ -4173,6 +4374,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4192,6 +4394,7 @@ as
 as
 F
 F
+F
 0
 92
 93
@@ -4207,6 +4410,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4226,6 +4430,7 @@ as
 as
 F
 F
+F
 0
 5k
 94
@@ -4241,6 +4446,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4260,6 +4466,7 @@ as
 as
 F
 F
+F
 0
 64
 96
@@ -4275,6 +4482,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4294,6 +4502,7 @@ as
 as
 F
 F
+F
 0
 9G
 5b
@@ -4309,6 +4518,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4328,6 +4538,7 @@ as
 as
 F
 F
+F
 0
 6w
 6x
@@ -4343,6 +4554,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4362,6 +4574,7 @@ as
 as
 F
 F
+F
 0
 5l
 9H
@@ -4379,6 +4592,7 @@ as
 as
 F
 F
+F
 0
 9H
 9I
@@ -4394,6 +4608,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4413,6 +4628,7 @@ as
 as
 F
 F
+F
 0
 5I
 5J
@@ -4428,6 +4644,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4447,6 +4664,7 @@ as
 as
 F
 F
+F
 0
 9J
 65
@@ -4462,6 +4680,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4481,6 +4700,7 @@ as
 as
 F
 F
+F
 0
 6o
 6r
@@ -4496,6 +4716,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4515,6 +4736,7 @@ as
 as
 F
 F
+F
 0
 6v
 9G
@@ -4530,6 +4752,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4549,6 +4772,7 @@ as
 as
 F
 F
+F
 0
 6u
 9R
@@ -4564,6 +4788,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4583,6 +4808,7 @@ as
 as
 F
 F
+F
 0
 5p
 9T
@@ -4600,6 +4826,7 @@ as
 as
 F
 F
+F
 0
 9T
 9U
@@ -4615,6 +4842,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4634,6 +4862,7 @@ as
 as
 F
 F
+F
 0
 61
 9V
@@ -4649,6 +4878,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -4668,6 +4898,7 @@ as
 as
 F
 F
+F
 0
 62
 9W
@@ -4683,6 +4914,7 @@ as
 as
 as
 as
+F
 F
 F
 0
@@ -21768,6 +22000,8 @@ kpE
 4026000000000000
 0
 2
+0
+F
 qkoK
 Erm0
 TME : TBG-3.5-KW-2P
@@ -21776,6 +22010,8 @@ TME : TBG-3.5-KW-2P
 4026000000000000
 0
 2
+0
+F
 rEXs
 Cwpo
 Fiche femelle : TME 15EDGK-3.5/2P
@@ -21784,6 +22020,8 @@ Fiche femelle : TME 15EDGK-3.5/2P
 4026000000000000
 0
 2
+0
+F
 JBNw
 u6xA
 TME : 2EDGRC-5.0-02P14
@@ -21792,6 +22030,8 @@ TME : 2EDGRC-5.0-02P14
 4026000000000000
 0
 2
+0
+F
 Jf7U
 sC0y
 Fiche femelle : TME 2EDGK5.00-02P-14
