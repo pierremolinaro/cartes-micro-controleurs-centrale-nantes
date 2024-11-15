@@ -1,10 +1,22 @@
 PM-TEXT-FORMAT
 0
-{"WindowHeight":948,"WindowWidth":1496}
+{"WindowHeight":896,"WindowWidth":1496}
 $ProjectRoot
 mArtworkName
 mArtworkVersion
 mPDFBoardBackgroundColor
+mGenerateMergerArchive
+mGenerateBOM
+mGenerateGerberAndPDF
+mPDFProductGrid
+mGerberProductUnit
+mExpandInner1BoardSettings
+mExpandInner2BoardSettings
+mExpandInner3BoardSettings
+mExpandInner4BoardSettings
+mExpandOtherBoardSettings
+mExpandFrontSideBoardSettings
+mExpandBackSideBoardSettings
 mCheckClearanceBetweenPadsOfSameNet
 mLastERCCheckingIsSuccess
 mLastERCCheckingSignature
@@ -23,7 +35,7 @@ mRouteDirection
 mRouteOrigin
 mAutorouterInterfaceMode
 mExportExistingTracksAndVias
-mExportExistingTracksAndVias2
+mAllowViaAtSMD
 mTrackLengthUnit
 mLayoutClearance
 mLayoutClearanceUnit
@@ -79,6 +91,7 @@ mSchematicCustomWidth
 mSchematicCustomWidthUnit
 mSchematicCustomHeight
 mSchematicCustomHeightUnit
+mWorkingAreaRectString
 drawErrorBackgroundForBoard
 displayFrontRestrictRectangles
 displayBackRestrictRectangles
@@ -172,6 +185,8 @@ mP2XUnit
 mP2YUnit
 mManualLockP1
 mManualLockP2
+mAddedToSolderMask
+mEndStyle
 mDirectionLockOnKnobDragging
 mConnectorP1
 mConnectorP2
@@ -287,7 +302,6 @@ drawComponentValuesTopSide
 drawComponentValuesBottomSide
 drawPackageLegendTopSide
 drawPackageLegendBottomSide
-drawPadHolesInPDF
 drawPadsTopSide
 drawPadsBottomSide
 drawTextsLayoutTopSide
@@ -301,12 +315,14 @@ drawTracksInner3Layer
 drawTracksInner4Layer
 drawTracksBottomSide
 drawTraversingPads
+drawImagesTopSide
+drawImagesBottomSide
+drawQRCodesTopSide
+drawQRCodesBottomSide
 drawVias
 fileExtension
 horizontalMirror
 name
-measurementUnitForPadHoleInPDF
-padHoleDiameterInPDF
 mArtwork
 $ComponentSymbolInProject
 mCenterX
@@ -397,11 +413,23 @@ mStrokeBezierPath
 mFilledBezierPath
 @0
 jlc_pcb
-2
+5
 0.9999950528144836 1.0 1.0 1.0
 T
 T
-WzAHx
+T
+0
+0
+F
+F
+F
+F
+T
+T
+T
+T
+T
+0
 0
 0
 0
@@ -473,6 +501,7 @@ F
 NPc
 1pHvs
 NPc
+
 T
 T
 T
@@ -532,100 +561,100 @@ tl074
 IC
 7
 
-Qf X2:1
-X4:4
+Qf X8:1
+XA:4
 6R:1
-X9:D
+XF:D
 @3
 resistor
 R
 9
 
-WJ:2 QR WM:9
-WW
+WP:2 QR WS:9
+Wc
 6V:1 6K 6I 6Z:1 6e 6i 6f 6j 6o 6s 6p 6t 6w:2 71 74:3
-WX:1
+Wd:1
 @3
 unpolarized-capacitor
 C
 8
 
-Va:1 QU Vc:A
-Vn
+Vg:1 QU Vi:A
+Vt
 6T:1 6k:1 6u:1 73 72
-Vo:1
+Vu:1
 @3
 b6252h5-npp3g-50
 K
 1
 
 Qa
-VS
+VY
 6M:4 6b:2
-VT:3
+VZ:3
 @3
 dc-supply-5-5mm-2-1mm
 K
 7
 
 RS
-VK
+VQ
 68
-VL:2
+VR:2
 @3
 1n400x
 D
 9
 
-RB VB
-VC
+RB VH
+VI
 6D
-VD:1
+VJ:1
 @3
 ceramic-multi-layer-capacitor
 C
 6
 
-Uw QO Ux:1
-Uz
+V2 QO V3:1
+V5
 6F:1 6m:1 78
-V0:1
+V6:1
 @3
 lm78xx
 IC
 8
 
-R5 UX:2
-Ua
+R5 Ud:2
+Ug
 6E
-Ub:2
+Uh:2
 @3
 am1ss-nz-dc-dc-converter
 IC
 2
 
 Qx
-UN
+UT
 6J
-UO:3
+UU:3
 @3
 aluminium-capacitor
 C
-A
+B
 
-Sg:H Qu Sy:E
-TD
+Sj:H Qu T1:F
+TH
 6L
-TE:1
+TI:1
 @3
 led
 D
-5
+7
 
-R2
-Sa
+R2 Sa
+Sb
 6H
-Sb:1
+Sc:1
 @3
 hole
 H
@@ -657,7 +686,7 @@ Rj:1
 grid-1-2
 K
 1
-UE0tVEVYVC1GT1JNQVQKMQp7IkRldmljZUNvbW1lbnQiOiIiLCJEZXZpY2VQYWNrYWdlcyI6eyJncmlkLTJtbS0xLTIiOjgsImdyaWQtMTAwbWlscy0xLTIiOjcsImdyaWQtMTAwbWlscy0xLTItcm91bmQiOjh9LCJEZXZpY2VTeW1ib2xzIjp7IjF4Mi1waW5zIjoxfSwiRGV2aWNlVmVyc2lvbiI6MSwiV2luZG93SGVpZ2h0Ijo4NzUsIldpbmRvd1dpZHRoIjoxMTE2fQokRGV2aWNlUm9vdAptU2VsZWN0ZWRQYWdlSW5kZXgKbVNlbGVjdGVkU3ltYm9sSW5zcGVjdG9ySW5kZXgKbVNlbGVjdGVkUGFja2FnZUluc3BlY3RvckluZGV4Cm1UaXRsZQptSW1hZ2VEYXRhCm1QcmVmaXgKbUNvbW1lbnRzCm1QYWNrYWdlRGlzcGxheVpvb20KbVBhY2thZ2VEaXNwbGF5SG9yaXpvbnRhbEZsaXAKbVBhY2thZ2VEaXNwbGF5VmVydGljYWxGbGlwCm1TaG93UGFja2FnZXMKbVNob3dQYWNrYWdlUGFkTnVtYmVycwptU2hvd1BhY2thZ2VGcm9udFBhZHMKbVNob3dQYWNrYWdlQmFja1BhZHMKbVN5bWJvbERpc3BsYXlab29tCm1Eb2NzCm1TeW1ib2xJbnN0YW5jZXMKbVBhY2thZ2VzCm1TeW1ib2xUeXBlcwptUGFkUHJveGllcwokU3ltYm9sSW5zdGFuY2VJbkRldmljZQptUGluSW5zdGFuY2VzCm1JbnN0YW5jZU5hbWUKbVgKbVkKbURldmljZVJvb3QKbVR5cGUKJFBhY2thZ2VJbkRldmljZQptRmlsZURhdGEKbU5hbWUKbVZlcnNpb24KbVN0cm9rZUJlemllclBhdGgKbVgKbVkKbU1hc3RlclBhZHMKbVJvb3QKJFN5bWJvbFR5cGVJbkRldmljZQptSW5zdGFuY2VzCm1UeXBlTmFtZQptVmVyc2lvbgptRmlsZURhdGEKbVN0cm9rZUJlemllclBhdGgKbUZpbGxlZEJlemllclBhdGgKbVBpblR5cGVzCiRQYWRQcm94eUluRGV2aWNlCm1QaW5JbnN0YW5jZU5hbWUKbVBhZE5hbWUKbUlzTkMKbVBpbkluc3RhbmNlCiRTeW1ib2xQaW5JbnN0YW5jZUluRGV2aWNlCm1TeW1ib2xJbnN0YW5jZQptVHlwZQptUGFkUHJveHkKJFN5bWJvbFBpblR5cGVJbkRldmljZQptUGluWAptUGluWQptWE5hbWUKbVlOYW1lCm1OYW1lCm1OYW1lSG9yaXpvbnRhbEFsaWdubWVudAptUGluTmFtZUlzRGlzcGxheWVkSW5TY2hlbWF0aWNzCm1YTnVtYmVyCm1ZTnVtYmVyCm1OdW1iZXJIb3Jpem9udGFsQWxpZ25tZW50Cm1JbnN0YW5jZXMKJE1hc3RlclBhZEluRGV2aWNlCm1DZW50ZXJYCm1DZW50ZXJZCm1XaWR0aAptSGVpZ2h0Cm1Ib2xlV2lkdGgKbUhvbGVIZWlnaHQKbVNoYXBlCm1TdHlsZQptTmFtZQptU2xhdmVQYWRzCkAwCjAKMAowCkdyaWQgMSByb3cgMiBjb2x1bW5zLCAxMDAgbWlscyBvciAybW0KCksKCjRxCkYKRgpUClQKVApUCjRxCgoxCjI6Mgo1CjY6MQpAMQpBIDgKCjAKMAowCjUKQDIKVUUwdFFrbE9RVkpaTFVaUFVrMUJWQUVCZG1Kd2JHbHpkREF3MHdFQ0F3UUZCbHRYYVc1a2IzZFhhV1IwYUZ4WGFXNWtiM2RJWldsbmFIUmZFQkJRVFZCaFkydGhaMlZXWlhKemFXOXVJMENOV0FBQUFBQUFJMENEaUFBQUFBQUFFQWNJRHhzb08wUk5BQUFBQUFBQUFRRUFBQUFBQUFBQUJ3QUFBQUFBQUFBQUFBQUFBQUFBQUU4R25RaGljR3hwYzNRd01LY0JGelpFVmw5bzJRSURCQVVHQndnSkNnc05FaE1VRlEwV0ZsNXdZV05yWVdkbFQySnFaV04wYzFsbmNtbGtVM1I1YkdWY2NHRmtUblZ0WW1WeWFXNW5WSHB2YjIxWUxTMWxiblJwZEhsWVozSnBaRk4wWlhCYlozSnBaRVJwYzNCc1lYbGVhRzl5YVhwdmJuUmhiRVpzYVhCY2RtVnlkR2xqWVd4R2JHbHdwZ3dORGc4UUVSQUJFQUlRQXhBRUVBVVFCaEFJRVFIMFcxQmhZMnRoWjJWU2IyOTBFZ0FCdm53UUFOOFFFUmdaR2dZYkhCMGVIeUFoSWlNa0pTWW5GaWdwS2lzc0xTNFdMekF4RERJek5EVlljR0ZrVTNSNWJHVmRhRzlzWlZkcFpIUm9WVzVwZEZkNVEyVnVkR1Z5V1dodmJHVlhhV1IwYUZWM2FXUjBhRnBvWldsbmFIUlZibWwwV21odmJHVklaV2xuYUhSWWNHRmtVMmhoY0dWZkVBOWhibTUxYkdGeVVtbHVaMVZ1YVhSZWFHOXNaVWhsYVdkb2RGVnVhWFJXYUdWcFoyaDBXWEJoWkU1MWJXSmxjbHQ0UTJWdWRHVnlWVzVwZEZ0NVEyVnVkR1Z5Vlc1cGRGZDRRMlZ1ZEdWeVdYZHBaSFJvVlc1cGRCRUk3aElBRVhEWVdsQmhZMnRoWjJWUVlXUVNBQUVkd0JJQUFkQllFUWp1RWdBQkhjQVJDTzRSQ080U0FBTEtZQkVJN2hFSTdoSUFFWERZRVFqdTN4QVJHQmthQmhzY0hSNGZJQ0VpSXlRbEppY1dOemdxT1RvN1BBdzlQajhOUUVGQ1F4RUk3aElBRVhEWUVnQUJIY0FTQUFIUVdCRUk3aElBQVIzQUVRanVFUWp1RWdBQ3ltQVJDTzRSQ080U0FCVHQwQkVJN3RsRlJrZElTVXBMQmt4TlRrOVFVVkpUVkZWV2VERlZibWwwVm5reFZXNXBkRko1TVZaNE1sVnVhWFJTZURGV2VUSlZibWwwVW5reVVuZ3lFUWp1RVFqdUVnQVRMMVFSQ080U0FBK3lYQkVJN2hJQUV5OVVYbEJoWTJ0aFoyVlRaV2R0Wlc1MEVnQVdyRXpaUlVaSFNFbEtTd1pNVjFoWldsdGNYVlJlRVFqdUVRanVFZ0FQc2x3UkNPNFNBQSt5WEJFSTdoSUFEN0pjRWdBV3JFelpSVVpIU0VsS1N3Wk1ZR0ZpWTJSbFpsUm5FUWp1RVFqdUVnQVBzbHdSQ080U0FBK3lYQkVJN2hJQUV5OVVFZ0FQc2x6WlJVWkhTRWxLU3daTWFXcHJiRzF1YjFSd0VRanVFUWp1RWdBUHNsd1JDTzRTQUJhc1RCRUk3aElBRXk5VUVnQVdyRXdBQ0FBUUFDTUFNZ0E4QUVrQVRnQlhBR0FBYkFCN0FJZ0Fqd0NSQUpNQWxRQ1hBSmtBbXdDZEFLQUFyQUN4QUxNQTJBRGhBTzhBOXdFQkFRY0JFZ0VkQVNZQk9BRkhBVTRCV0FGa0FYQUJlQUdDQVlVQmlnR1ZBWm9CbndHaUFhY0JxZ0d0QWJJQnRRRzRBYjBCd0FIbEFlZ0I3UUh5QWZjQitnSC9BZ0lDQlFJS0FnMENFQUlWQWhnQ0t3SXlBamtDUEFKREFrWUNUUUpRQWxNQ1ZnSlpBbDRDWVFKbUFta0NiZ0o5QW9JQ2xRS1lBcHNDb0FLakFxZ0Nxd0t3QXJVQ3lBTExBczRDMHdMV0F0c0MzZ0xqQXVnQyt3TCtBd0VEQmdNSkF3NERFUU1XQUFBQUFBQUFBZ0VBQUFBQUFBQUFjUUFBQUFBQUFBQUFBQUFBQUFBQUF4c0EKZ3JpZC0xMDBtaWxzLTEtMgo3CjozMi40IDM5LjY7NDYuOCAzOS42OjMyLjQgMzIuNDs0Ni44IDMyLjQ6MzIuNCAzMi40OzMyLjQgMzkuNjo0Ni44IDMyLjQ7NDYuOCAzOS42KjAgMCAwIDEuMCAwLjYgMTAuMAowCjAKRzoxCjAKQDIKVUUwdFFrbE9RVkpaTFVaUFVrMUJWQUVCZ2dGaWNHeHBjM1F3TU5RQkFnTUVCUVlIQ0Y4UUVGQk5VR0ZqYTJGblpVTnZiVzFsYm5SYlYybHVaRzkzVjJsa2RHaGZFQkJRVFZCaFkydGhaMlZXWlhKemFXOXVYRmRwYm1SdmQwaGxhV2RvZEZBUkE2c1FDQkVDY1FnUkpEQkRVRkZVVmdBQUFBQUFBQUVCQUFBQUFBQUFBQWtBQUFBQUFBQUFBQUFBQUFBQUFBQlpCcVVRWW5Cc2FYTjBNRENuQVVsZmFYZDZmZDhRS3dJREJBVUdCd2dKQ2dzTURRNFBFQkVTRXhRVkZoY1lHUm9iSEIwZUh5QWhJaU1rSlNZbktDa3FLeXd0TGk4dk1ERXdNRFF3TmpjNE9TOHZPanN2Tnk4dlBEMCtQejR2TDBBM1FTODNNQzlEU0RjM0x6Y3ZYeEFQYlUxdlpHVnNTVzFoWjJWRVlYUmhYeEFUYlUxdlpHVnNTVzFoWjJWUVlXZGxXbTl2YlY4UUlHMUVhVzFsYm5OcGIyNVZibWwwVTJWamIyNWtUVzlrWld4UWIybHVkRVI1WHhBYmJVMXZaR1ZzU1cxaFoyVlFZV2RsUjNKcFpGTjBaWEJWYm1sMFh4QWJiVTF2WkdWc1NXMWhaMlZRWVdkbFZtVnlkR2xqWVd4R2JHbHdYeEFmWTI5MWJuUmxja05zYjJOclRuVnRZbVZ5YVc1blUzUmhjblJCYm1kc1pWNW9iM0pwZW05dWRHRnNSbXhwY0Y4UUhXMU5iMlJsYkVsdFlXZGxVR0ZuWlVodmNtbDZiMjUwWVd4R2JHbHdXR2R5YVdSVGRHVndYSFpsY25ScFkyRnNSbXhwY0Z4d1lXUk9kVzFpWlhKcGJtZGZFQmx0VFc5a1pXeEpiV0ZuWlZCdmFXNTBjMFI0VDI1TWIyTnJYeEFTYlUxdlpHVnNTVzFoWjJWUGNHRmphWFI1V0MwdFpXNTBhWFI1WHhBZWJVUnBiV1Z1YzJsdmJsVnVhWFJHYVhKemRFMXZaR1ZzVUc5cGJuUllYeEFYYlUxdlpHVnNTVzFoWjJWUVlXZGxSM0pwWkZOMFpYQmZFQkZuY21sa1JHbHpjR3hoZVVaaFkzUnZjbDhRSUcxTmIyUmxiRWx0WVdkbFVHRm5aVWR5YVdSRWFYTndiR0Y1Um1GamRHOXlYeEFnYlVScGJXVnVjMmx2YmxWdWFYUlRaV052Ym1STmIyUmxiRkJ2YVc1MFJIaGZFQkZ6Wld4bFkzUmxaRkJoWjJWSmJtUmxlRjhRRzIxTmIyUmxiRWx0WVdkbFVHRm5aVmxRYkdGallYSmtWVzVwZEY4UUcyMU5iMlJsYkVsdFlXZGxVR0ZuWlZoUWJHRmpZWEprVlc1cGRGOFFGbXR1YjJKVGFYcGxUWFZzZEhCc2FXVmtRbmxVWlc1VWVtOXZiVmR3Y205bmNtRnRYeEFjYlUxdlpHVnNTVzFoWjJWU2IzUmhkR2x2YmtsdVVtRmthV0Z1YzFoamIyMXRaVzUwYzE4UUcyMU5iMlJsYkVsdFlXZGxVMlZqYjI1a1VHOXBiblJZVlc1cGRGeDRVR3hoWTJGeVpGVnVhWFJmRUJCdFRXOWtaV3hKYldGblpWTmpZV3hsWHhBUmMyVnNaV04wWldSSmJuTndaV04wYjNKWlozSnBaRk4wZVd4bFhHZHlhV1JUZEdWd1ZXNXBkRjhRR1cxTmIyUmxiRWx0WVdkbFVHOXBiblJ6UkhsUGJreHZZMnRmRUJCdFVHOXBiblJ6UVhKbFRHOWphMlZrWEhsUWJHRmpZWEprVlc1cGRGNXdZV05yWVdkbFQySnFaV04wYzE4UUdHMU5iMlJsYkZCdmFXNTBjME5wY21Oc1pWSmhaR2wxYzE4UUhHMU5iMlJsYkVsdFlXZGxSbWx5YzNSUWIybHVkRmxQYmt4dlkydGZFQmh0VFc5a1pXeEpiV0ZuWlZCaFoyVkhjbWxrVTNSNWJHVmZFQnR0VFc5a1pXeEpiV0ZuWlZObFkyOXVaRkJ2YVc1MFdWVnVhWFJmRUJ4dFRXOWtaV3hKYldGblpVWnBjbk4wVUc5cGJuUllUMjVNYjJOclh4QWViVVJwYldWdWMybHZibFZ1YVhSR2FYSnpkRTF2WkdWc1VHOXBiblJaUUJESUVRanVDQkMwQ0FnU0FBRytmQWdRQ0JBQUl6L2dBQUFBQUFBQVcxQmhZMnRoWjJWU2IyOTBFQVFRWkJBVUVRSDBVQ01BQUFBQUFBQUFBQ00vOEFBQUFBQUFBQkFDQ0taRVFVVTZSa2NRQVJBREVBVVFCaEFLM3hBUlNrdE1UVTVQVUZGU1V3OVVWVlpYV0ZsYVJDOWJXamN2THk5Y1hVUXZMeTliWGxsb2IyeGxWMmxrZEdoWWNHRmtVMmhoY0dWYmVFTmxiblJsY2xWdWFYUlhlRU5sYm5SbGNscG9iMnhsU0dWcFoyaDBXSEJoWkZOMGVXeGxXWGRwWkhSb1ZXNXBkRjhRRDJGdWJuVnNZWEpTYVc1blZXNXBkRnBvWldsbmFIUlZibWwwVlhkcFpIUm9XWEJoWkU1MWJXSmxjbDVvYjJ4bFNHVnBaMmgwVlc1cGRGMW9iMnhsVjJsa2RHaFZibWwwVzNsRFpXNTBaWEpWYm1sMFYzbERaVzUwWlhKV2FHVnBaMmgwRWdBQkhjQVNBQkZ3MkJJQUFkQllXbEJoWTJ0aFoyVlFZV1FTQUFMS1lOOFFFV0JoRDB0aVkwcFFaRmhaVFZObFQxUm1MeTluUkM5YVdpOHZXMTVvWEM4M1FTOWVhRzlzWlVobGFXZG9kRlZ1YVhSZkVBOWhibTUxYkdGeVVtbHVaMVZ1YVhSZGFHOXNaVmRwWkhSb1ZXNXBkRnBvYjJ4bFNHVnBaMmgwVzNsRFpXNTBaWEpWYm1sMFdtaGxhV2RvZEZWdWFYUmJlRU5sYm5SbGNsVnVhWFJhVUdGamEyRm5aVkJoWkJJQUZPM1EybXByYkE5dGJtOXdjWEp6ZEhSMUwzWXZMeTh2VW5neVVua3hVbmt5Vm5neVZXNXBkRko0TVZaNU1sVnVhWFJXZVRGVmJtbDBWbmd4Vlc1cGRGcHNaVzVuZEdoVmJtbDBFZ0FXckV3U0FCTXZWRjVRWVdOcllXZGxVMlZuYldWdWRCSUFEN0pjMm01d2EyMXFjV3h2ZUE5MkwzWXZjeTkyTHk5NVdteGxibWQwYUZWdWFYUmVVR0ZqYTJGblpWTmxaMjFsYm5UYWIyeDdjWEJyYWc5dGJpOTBMeTh2ZG5aOEwzWmFiR1Z1WjNSb1ZXNXBkRjVRWVdOcllXZGxVMlZuYldWdWROcCtibXB2Y1d4dGNHc1BMM056THk5MEx5OTJmMXBzWlc1bmRHaFZibWwwWGxCaFkydGhaMlZUWldkdFpXNTBBQWdBRUFCcEFIc0FrUUMwQU5JQThBRVNBU0VCUVFGS0FWY0JaQUdBQVpVQm5nRy9BZGtCN1FJUUFqTUNSd0psQW9NQ25BS2hBcWtDeUFMUkF1OEMvQU1QQXlNRExRTTZBMVlEYVFOMkE0VURvQU8vQTlvRCtBUVhCRGdFT1FRN0JENEVQd1JCQkVJRVF3UklCRWtFU3dSTkJGWUVZZ1JrQkdZRWFBUnJCR3dFZFFSK0JJQUVnUVNJQklvRWpBU09CSkFFa2dTM0JNRUV5Z1RXQk40RTZRVHlCUHdGRGdVWkJSOEZLUVU0QlVZRlVnVmFCV0VGWmdWckJYQUZld1dBQmFVRnRBWEdCZFFGM3dYckJmWUdBZ1lOQmhJR0p3WXFCaTBHTUFZM0Jqb0dRUVpJQms4R1dnWmZCbVFHY3daNEJvMEdtQWFuQnJ3R3h3YldCdXNHOWdBQUFBQUFBQUlCQUFBQUFBQUFBSUFBQUFBQUFBQUFBQUFBQUFBQUFBY0ZBQT09CmdyaWQtMTAwbWlscy0xLTItcm91bmQKOAo6MzIuNCAzOS42OzQ2LjggMzkuNjozMi40IDMyLjQ7NDYuOCAzMi40OjMyLjQgMzIuNDszMi40IDM5LjY6NDYuOCAzMi40OzQ2LjggMzkuNiowIDAgMCAwLjEgMC42IDEwLjAKLUVaTwozZ3cxCkU6MQowCkAyClVFMHRRa2xPUVZKWkxVWlBVazFCVkFFQmpnRmljR3hwYzNRd01OUUJBZ01FQlFZSENGdFhhVzVrYjNkWGFXUjBhRjhRRUZCTlVHRmphMkZuWlZabGNuTnBiMjVjVjJsdVpHOTNTR1ZwWjJoMFh4QVFVRTFRWVdOcllXZGxRMjl0YldWdWRDTkFqVmdBQUFBQUFCQUlJMENIQ0FBQUFBQUFVQWdSSFRBOVVGbGJaQUFBQUFBQUFBRUJBQUFBQUFBQUFBa0FBQUFBQUFBQUFBQUFBQUFBQUFCbEJyRVFZbkJzYVhOME1EQ25BVXBnYW5oOGY5OFFLd0lEQkFVR0J3Z0pDZ3NNRFE0UEVCRVNFeFFWRmhjWUdSb2JIQjBlSHlBaElpTWtKU1luS0NrcUt5d3RMaTh1TUM0eExpNHlMakV1TXpRMU96SXlQaTQ0UHpGQUxqRTJRVUpEUkM1RlFrWXhMakl1TWpGSlh4QVNiVTF2WkdWc1NXMWhaMlZQY0dGamFYUjVYeEFnYlVScGJXVnVjMmx2YmxWdWFYUlRaV052Ym1STmIyUmxiRkJ2YVc1MFJIaGZFQkZ6Wld4bFkzUmxaRkJoWjJWSmJtUmxlRjhRRzIxTmIyUmxiRWx0WVdkbFVHRm5aVWR5YVdSVGRHVndWVzVwZEY4UUlHMU5iMlJsYkVsdFlXZGxVR0ZuWlVkeWFXUkVhWE53YkdGNVJtRmpkRzl5WHhBYmJVMXZaR1ZzU1cxaFoyVlFZV2RsV0ZCc1lXTmhjbVJWYm1sMFh4QWNiVTF2WkdWc1NXMWhaMlZHYVhKemRGQnZhVzUwV1U5dVRHOWphMThRRjIxTmIyUmxiRWx0WVdkbFVHRm5aVWR5YVdSVGRHVndYeEFlYlVScGJXVnVjMmx2YmxWdWFYUkdhWEp6ZEUxdlpHVnNVRzlwYm5SWlh4QVFiVkJ2YVc1MGMwRnlaVXh2WTJ0bFpGeDRVR3hoWTJGeVpGVnVhWFJmRUJodFRXOWtaV3hKYldGblpWQmhaMlZIY21sa1UzUjViR1ZmRUJ0dFRXOWtaV3hKYldGblpWTmxZMjl1WkZCdmFXNTBXRlZ1YVhSVWVtOXZiVmhuY21sa1UzUmxjRjV3WVdOcllXZGxUMkpxWldOMGMxOFFIRzFOYjJSbGJFbHRZV2RsVW05MFlYUnBiMjVKYmxKaFpHbGhibk5mRUJ0dFRXOWtaV3hKYldGblpWQmhaMlZXWlhKMGFXTmhiRVpzYVhCZkVCMXRUVzlrWld4SmJXRm5aVkJoWjJWSWIzSnBlbTl1ZEdGc1JteHBjRnh3WVdST2RXMWlaWEpwYm1kZkVCNXRSR2x0Wlc1emFXOXVWVzVwZEVacGNuTjBUVzlrWld4UWIybHVkRmhmRUJGbmNtbGtSR2x6Y0d4aGVVWmhZM1J2Y2w4UUgyTnZkVzUwWlhKRGJHOWphMDUxYldKbGNtbHVaMU4wWVhKMFFXNW5iR1ZmRUJsdFRXOWtaV3hKYldGblpWQnZhVzUwYzBSNVQyNU1iMk5yWHhBWWJVMXZaR1ZzVUc5cGJuUnpRMmx5WTJ4bFVtRmthWFZ6WHhBZ2JVUnBiV1Z1YzJsdmJsVnVhWFJUWldOdmJtUk5iMlJsYkZCdmFXNTBSSGxmRUJsdFRXOWtaV3hKYldGblpWQnZhVzUwYzBSNFQyNU1iMk5yV1dkeWFXUlRkSGxzWlY4UUUyMU5iMlJsYkVsdFlXZGxVR0ZuWlZwdmIyMVlZMjl0YldWdWRITmNaM0pwWkZOMFpYQlZibWwwWHhBV2EyNXZZbE5wZW1WTmRXeDBjR3hwWldSQ2VWUmxibHg1VUd4aFkyRnlaRlZ1YVhSZkVBOXRUVzlrWld4SmJXRm5aVVJoZEdGWGNISnZaM0poYlZndExXVnVkR2wwZVY4UUVYTmxiR1ZqZEdWa1NXNXpjR1ZqZEc5eVh4QWJiVTF2WkdWc1NXMWhaMlZUWldOdmJtUlFiMmx1ZEZsVmJtbDBYSFpsY25ScFkyRnNSbXhwY0Y4UUcyMU5iMlJsYkVsdFlXZGxVR0ZuWlZsUWJHRmpZWEprVlc1cGRGNW9iM0pwZW05dWRHRnNSbXhwY0Y4UUhHMU5iMlJsYkVsdFlXZGxSbWx5YzNSUWIybHVkRmhQYmt4dlkydGZFQkJ0VFc5a1pXeEpiV0ZuWlZOallXeGxJei9nQUFBQUFBQUFFUWp1RUFFUVpCQUFDQkVENkJHdnlLWXZOamM0T1RvUUFoQURFQVFRQlJBR0l3QUFBQUFBQUFBQUNBZ1FDQkMwRUFvUXlGQVNBQUZma0JBVVFGdFFZV05yWVdkbFVtOXZkQWdJSXovd0FBQUFBQUFBM3hBUlMweE5UazlRVVZKVFZGVldKVmRZV1ZwRFF6RkRXekZiTDF4RFhVTmVYRjlEUTExb2IyeGxWMmxrZEdoVmJtbDBYbWh2YkdWSVpXbG5hSFJWYm1sMFdIQmhaRk4wZVd4bFh4QVBZVzV1ZFd4aGNsSnBibWRWYm1sMFdXaHZiR1ZYYVdSMGFGaHdZV1JUYUdGd1pWcG9iMnhsU0dWcFoyaDBXWEJoWkU1MWJXSmxjbGQ0UTJWdWRHVnlXM2hEWlc1MFpYSlZibWwwVlhkcFpIUm9XM2xEWlc1MFpYSlZibWwwVjNsRFpXNTBaWEpXYUdWcFoyaDBXbWhsYVdkb2RGVnVhWFJaZDJsa2RHaFZibWwwRWdBQkhjQVNBQkI2d0JJQUFkQllXbEJoWTJ0aFoyVlFZV1FTQUFMS1lOOFFFU1ZoWW1OWFVGcE5VbE5rV0U5VlpXWm5hRU5EUTF3dlF6RTJhVU5mVzExYlEwTmJlVU5sYm5SbGNsVnVhWFJkYUc5c1pWZHBaSFJvVlc1cGRGOFFEMkZ1Ym5Wc1lYSlNhVzVuVlc1cGRGcG9aV2xuYUhSVmJtbDBXbWh2YkdWSVpXbG5hSFJlYUc5c1pVaGxhV2RvZEZWdWFYUmJlRU5sYm5SbGNsVnVhWFJhVUdGamEyRm5aVkJoWkJJQUV6bmcyaVZyYkcxdWIzQnhjbk4wUTNWMlEwTjJRME4zVm5neFZXNXBkRko0TWxKNU1WcHNaVzVuZEdoVmJtbDBWbmt5Vlc1cGRGSjVNbFo1TVZWdWFYUldlREpWYm1sMFVuZ3hYbEJoWTJ0aFoyVlRaV2R0Wlc1MEVnQVVtWEFTQUJLS0dCSUFEeHN3Mm05eWJTVnJjWEJzZVhORFEzcDdRME42ZFVOM1dteGxibWQwYUZWdWFYUVNBQTVyYUY1UVlXTnJZV2RsVTJWbmJXVnVkTnB0Ykc5d0pYSnpjV3Q5ZW5kRGRuNURkME5EUTFwc1pXNW5kR2hWYm1sMFhsQmhZMnRoWjJWVFpXZHRaVzUwMm9BbGJXeHpjR3R4Y205RGdYcDFkWFpEUTBORFdteGxibWQwYUZWdWFYUmVVR0ZqYTJGblpWTmxaMjFsYm5RQUNBQVFBR2tBZmdDaEFMVUEwd0QyQVJRQk13Rk5BVzRCZ1FHT0Fha0J4d0hNQWRVQjVBSURBaUVDUVFKT0FtOENnd0tsQXNFQzNBTC9BeHNESlFNN0EwUURVUU5xQTNjRGlRT1JBNW9EcmdQTUE5a0Q5d1FHQkNVRU9BUkJCRVFFUmdSSUJFb0VTd1JPQkZFRVdBUmFCRndFWGdSZ0JHSUVhd1JzQkcwRWJ3UnhCSE1FZFFSMkJIc0VmUVIrQklvRWl3U01CSlVFdWdUSUJOY0U0QVR5QlB3RkJRVVFCUm9GSWdVdUJUUUZRQVZJQlU4RldnVmtCV2tGYmdWekJYNEZnd1dvQmJRRndnWFVCZDhGNmdYNUJnVUdFQVlWQmlvR01RWTBCamNHUWdaSkJrd0dVd1phQmwwR2JBWnhCbllHZXdhUUJwc0dvQWF2QnNRR3p3YmVCdk1HL2dBQUFBQUFBQUlCQUFBQUFBQUFBSUlBQUFBQUFBQUFBQUFBQUFBQUFBY05BQT09CmdyaWQtMm1tLTEtMgo4CjozMS4xODExMDIzNjIyMDQ3MjYgMzguMjY3NzE2NTM1NDMzMDc0OzQyLjUxOTY4NTAzOTM3MDA4IDM4LjI2NzcxNjUzNTQzMzA3NDozMS4xODExMDIzNjIyMDQ3MjYgMjkuNzYzNzc5NTI3NTU5MDU2OzQyLjUxOTY4NTAzOTM3MDA4IDI5Ljc2Mzc3OTUyNzU1OTA1NjozMS4xODExMDIzNjIyMDQ3MjYgMjkuNzYzNzc5NTI3NTU5MDU2OzMxLjE4MTEwMjM2MjIwNDcyNiAzOC4yNjc3MTY1MzU0MzMwNzQ6NDIuNTE5Njg1MDM5MzcwMDggMjkuNzYzNzc5NTI3NTU5MDU2OzQyLjUxOTY4NTAzOTM3MDA4IDM4LjI2NzcxNjUzNTQzMzA3NCowIDAgMCAwLjEgMC42IDEwLjAKRVk2CjdrS3UKQzoxCjAKQDMKMQoxeDItcGlucwoxClVFMHRRa2xPUVZKWkxVWlBVazFCVkFFQmRXSndiR2x6ZERBdzB3RUNBd1FGQmx4WGFXNWtiM2RJWldsbmFIUmZFQTlRVFZONWJXSnZiRlpsY25OcGIyNWJWMmx1Wkc5M1YybGtkR2dqUUg3UUFBQUFBQUFRQVNOQWhLQUFBQUFBQUFnUEhDNDZRMFVBQUFBQUFBQUJBUUFBQUFBQUFBQUhBQUFBQUFBQUFBQUFBQUFBQUFBQVRnYTRCbUp3YkdsemREQXdxUUVXSURVNlEwaE5VdGNDQXdRRkJnY0lDUXNTRXcwVUZGMXplVzFpYjJ4UFltcGxZM1J6V1dkeWFXUlRkSGxzWlZSNmIyOXRXQzB0Wlc1MGFYUjVXMmR5YVdSRWFYTndiR0Y1WG1odmNtbDZiMjUwWVd4R2JHbHdYSFpsY25ScFkyRnNSbXhwY0tnS0N3d05EZzhRRVJBQkVBSVFBeEFFRUFVUUJoQUhFQWdSQWZSYVUzbHRZbTlzVW05dmRBZ0kxUVVYR0JrYUd4d2RIaDlTZURKU2VERlNlVEpTZVRGZFUzbHRZbTlzVTJWbmJXVnVkQklBRVhEWUVnQU44K0FTQUJUdDBCSUFGTzNRMnlFaUl5UWxKZ1VuS0NrcUN4UXNMUzR2TURFeU16UmZFQmx1ZFcxaVpYSkliM0pwZW05dWRHRnNRV3hwWjI1dFpXNTBYeEFlY0dsdVRtRnRaVWx6UkdsemNHeGhlV1ZrU1c1VFkyaGxiV0YwYVdOelZIaFFhVzVmRUJkdVlXMWxTRzl5YVhwdmJuUmhiRUZzYVdkdWJXVnVkRlY1VG1GdFpWZDVUblZ0WW1WeVZYaE9ZVzFsVjNoT2RXMWlaWEpVZVZCcGJsUnVZVzFsQ0JJQURmUGdFQUFTQUJUdDBCSUFHR3JJV1ZONWJXSnZiRkJwYmhJQUV5OVVFZ0FQc2x3U0FCVHQwRkV4MVFVWEdCa2FHelkzT0RrU0FCRncyQklBRGZQZ0VnQU44K0FTQUEzejROc2hJaU1rSlNZRkp5Z3BLZ3NVUEMwOVBqQS9RRUZDQ0JJQURmUGdFZ0FOOCtBU0FCQ1JtaElBRXk5VUVnQVBzbHdTQUEzejRGRXkxUVVYR0JrYUcwUkZSa2NTQUJGdzJCSUFFWERZRWdBS2R1Z1NBQmhxeU5VRkZ4Z1pHaHRKU2t0TUVnQWZaTGdTQUJGdzJCSUFHR3JJRWdBWWFzalZCUmNZR1JvYlRrOVFVUklBSDJTNEVnQWZaTGdTQUFwMjZCSUFHR3JJMVFVWEdCa2FHMU5VVlZZU0FCOWt1QklBRVhEWUVnQUtkdWdTQUFwMjZBQUlBQklBSVFBdkFEa0FQZ0JIQUZNQVlnQnZBSGdBZWdCOEFINEFnQUNDQUlRQWhnQ0lBSXNBbGdDWEFKZ0Fvd0NtQUtrQXJBQ3ZBTDBBd2dESEFNd0EwUURvQVFRQkpRRXFBVVFCU2dGU0FWZ0JZQUZsQVdvQmF3RndBWElCZHdGOEFZWUJpd0dRQVpVQmx3R2lBYWNCckFHeEFiWUJ6UUhPQWRNQjJBSGRBZUlCNXdIc0FlNEIrUUgrQWdNQ0NBSU5BaGdDSFFJaUFpY0NMQUkzQWp3Q1FRSkdBa3NDVmdKYkFtQUNaUUFBQUFBQUFBSUJBQUFBQUFBQUFGY0FBQUFBQUFBQUFBQUFBQUFBQUFKcUFBPT0KOjI4LjggNDMuMjszNi4wIDQzLjI6MjguOCAyOC44OzM2LjAgMjguODozNi4wIDUwLjQ7MzYuMCAyMS42OjM2LjAgNTAuNDs2NC44IDUwLjQ6NjQuOCA1MC40OzY0LjggMjEuNjozNi4wIDIxLjY7NjQuOCAyMS42KjAgMSAwIDAuNSAwLjYgMTAuMAo6MzAuMDcyNzkyMjA2MTM1Nzg3IDQxLjkyNzIwNzc5Mzg2NDIyQDMwLjc3NTczNTkzMTI4ODA3IDQyLjYzMDE1MTUxOTAxNjUgMzAuNzc1NzM1OTMxMjg4MDcgNDMuNzY5ODQ4NDgwOTgzNTA1IDMwLjA3Mjc5MjIwNjEzNTc4NyA0NC40NzI3OTIyMDYxMzU3ODZAMjkuMzY5ODQ4NDgwOTgzNSA0NS4xNzU3MzU5MzEyODgwNzQgMjguMjMwMTUxNTE5MDE2NTAyIDQ1LjE3NTczNTkzMTI4ODA3NCAyNy41MjcyMDc3OTM4NjQyMTQgNDQuNDcyNzkyMjA2MTM1Nzg2QDI2LjgyNDI2NDA2ODcxMTkzIDQzLjc2OTg0ODQ4MDk4MzUwNSAyNi44MjQyNjQwNjg3MTE5MyA0Mi42MzAxNTE1MTkwMTY1IDI3LjUyNzIwNzc5Mzg2NDIxNCA0MS45MjcyMDc3OTM4NjQyMkAyOC4yMzAxNTE1MTkwMTY1MDIgNDEuMjI0MjY0MDY4NzExOTMgMjkuMzY5ODQ4NDgwOTgzNSA0MS4yMjQyNjQwNjg3MTE5MyAzMC4wNzI3OTIyMDYxMzU3ODcgNDEuOTI3MjA3NzkzODY0MjI6MzAuMDcyNzkyMjA2MTM1Nzg3IDI3LjUyNzIwNzc5Mzg2NDIxNEAzMC43NzU3MzU5MzEyODgwNyAyOC4yMzAxNTE1MTkwMTY1MDIgMzAuNzc1NzM1OTMxMjg4MDcgMjkuMzY5ODQ4NDgwOTgzNSAzMC4wNzI3OTIyMDYxMzU3ODcgMzAuMDcyNzkyMjA2MTM1Nzg3QDI5LjM2OTg0ODQ4MDk4MzUgMzAuNzc1NzM1OTMxMjg4MDcgMjguMjMwMTUxNTE5MDE2NTAyIDMwLjc3NTczNTkzMTI4ODA3IDI3LjUyNzIwNzc5Mzg2NDIxNCAzMC4wNzI3OTIyMDYxMzU3ODdAMjYuODI0MjY0MDY4NzExOTMgMjkuMzY5ODQ4NDgwOTgzNSAyNi44MjQyNjQwNjg3MTE5MyAyOC4yMzAxNTE1MTkwMTY1MDIgMjcuNTI3MjA3NzkzODY0MjE0IDI3LjUyNzIwNzc5Mzg2NDIxNEAyOC4yMzAxNTE1MTkwMTY1MDIgMjYuODI0MjY0MDY4NzExOTMgMjkuMzY5ODQ4NDgwOTgzNSAyNi44MjQyNjQwNjg3MTE5MyAzMC4wNzI3OTIyMDYxMzU3ODcgMjcuNTI3MjA3NzkzODY0MjE0KjAgMCAwIDEuMCAwLjYgMTAuMAo5IEIKQDQKMQoxCkYKQQpANAoyCjIKRgo4CkA1CjEKOQo3CkA2CjNwc08KM3BzTwo1SDUyCjNwc08KMgowCkYKNEpidwo0WVRpCjIKOApANQoxCkIKNgpANgozcHNPCjVrb2EKNUg1Mgo1a29hCjEKMApGCjRKYncKNmlIZwoyCkEKQDcKNFd4TQo0V3hNClV2SQpsWmcKSjFzCkoxcwowCjAKMQoKQDcKNUhtYQo0V3hNClV2SQpsWmcKSjFzCkoxcwoxCjAKMgoKQDcKNG5MVQo0bkxVClV2SQpsWmcKSjFzCkoxcwoxCjAKMQoKQDcKNWtvYQo0bkxVClV2SQpsWmcKSjFzCkoxcwoxCjAKMgoKQDcKNG5MVQo0bkxVClV2SQpsWmcKSjFzCkoxcwowCjAKMQoKQDcKNWtvYQo0bkxVClV2SQpsWmcKSjFzCkoxcwoxCjAKMgoK
+
 Ew RW:1
 RY
 7H:7
@@ -751,6 +780,8 @@ as
 as
 F
 F
+F
+0
 0
 Ad
 96
@@ -768,6 +799,8 @@ as
 as
 F
 F
+F
+0
 0
 8X
 Ae
@@ -785,6 +818,8 @@ as
 as
 F
 F
+F
+0
 0
 Ae
 Af
@@ -802,6 +837,8 @@ as
 as
 F
 F
+F
+0
 0
 Af
 Ad
@@ -819,6 +856,8 @@ as
 as
 F
 F
+F
+0
 0
 Ac
 Ad
@@ -836,6 +875,8 @@ as
 as
 F
 F
+F
+0
 0
 8c
 8X
@@ -853,6 +894,8 @@ as
 as
 F
 F
+F
+0
 0
 9B
 Ai
@@ -870,6 +913,8 @@ as
 as
 F
 F
+F
+0
 0
 Ai
 Aj
@@ -887,6 +932,8 @@ as
 as
 F
 F
+F
+0
 0
 Aj
 9G
@@ -904,6 +951,8 @@ as
 as
 F
 F
+F
+0
 0
 9O
 Ar
@@ -921,6 +970,8 @@ as
 as
 F
 F
+F
+0
 0
 Ar
 8J
@@ -938,6 +989,8 @@ as
 as
 F
 F
+F
+0
 0
 A5
 As
@@ -955,6 +1008,8 @@ as
 as
 F
 F
+F
+0
 0
 As
 At
@@ -972,6 +1027,8 @@ as
 as
 F
 F
+F
+0
 0
 At
 7o
@@ -989,6 +1046,8 @@ as
 as
 F
 F
+F
+0
 0
 9P
 Az
@@ -1006,6 +1065,8 @@ as
 as
 F
 F
+F
+0
 0
 Az
 8T
@@ -1023,6 +1084,8 @@ as
 as
 F
 F
+F
+0
 0
 8D
 B2
@@ -1040,6 +1103,8 @@ as
 as
 F
 F
+F
+0
 0
 B2
 8u
@@ -1057,6 +1122,8 @@ as
 as
 F
 F
+F
+0
 0
 8u
 8l
@@ -1074,6 +1141,8 @@ as
 as
 F
 F
+F
+0
 0
 9n
 B7
@@ -1091,6 +1160,8 @@ as
 as
 F
 F
+F
+0
 0
 B7
 B8
@@ -1108,6 +1179,8 @@ as
 as
 F
 F
+F
+0
 0
 B8
 AJ
@@ -1125,6 +1198,8 @@ as
 as
 F
 F
+F
+0
 0
 9q
 9n
@@ -1142,6 +1217,8 @@ as
 as
 F
 F
+F
+0
 0
 9q
 B9
@@ -1159,6 +1236,8 @@ as
 as
 F
 F
+F
+0
 0
 B9
 BA
@@ -1176,6 +1255,8 @@ as
 as
 F
 F
+F
+0
 0
 BA
 AI
@@ -1193,6 +1274,8 @@ as
 as
 F
 F
+F
+0
 0
 9c
 BF
@@ -1210,6 +1293,8 @@ as
 as
 F
 F
+F
+0
 0
 BF
 8e
@@ -1227,6 +1312,8 @@ as
 as
 F
 F
+F
+0
 0
 AG
 BG
@@ -1244,6 +1331,8 @@ as
 as
 F
 F
+F
+0
 0
 BG
 9U
@@ -1261,6 +1350,8 @@ as
 as
 F
 F
+F
+0
 0
 8q
 BH
@@ -1278,6 +1369,8 @@ as
 as
 F
 F
+F
+0
 0
 BH
 BI
@@ -1295,6 +1388,8 @@ as
 as
 F
 F
+F
+0
 0
 BI
 AA
@@ -1312,6 +1407,8 @@ as
 as
 F
 F
+F
+0
 0
 8n
 8q
@@ -1329,6 +1426,8 @@ as
 as
 F
 F
+F
+0
 0
 8n
 BJ
@@ -1346,6 +1445,8 @@ as
 as
 F
 F
+F
+0
 0
 BJ
 BK
@@ -1363,6 +1464,8 @@ as
 as
 F
 F
+F
+0
 0
 BK
 A7
@@ -1380,6 +1483,8 @@ as
 as
 F
 F
+F
+0
 0
 7W
 BO
@@ -1397,6 +1502,8 @@ as
 as
 F
 F
+F
+0
 0
 BO
 7R
@@ -1414,6 +1521,8 @@ as
 as
 F
 F
+F
+0
 0
 7d
 BP
@@ -1431,6 +1540,8 @@ as
 as
 F
 F
+F
+0
 0
 BP
 7X
@@ -1448,6 +1559,8 @@ as
 as
 F
 F
+F
+0
 0
 9D
 BT
@@ -1465,6 +1578,8 @@ as
 as
 F
 F
+F
+0
 0
 BT
 BU
@@ -1482,6 +1597,8 @@ as
 as
 F
 F
+F
+0
 0
 BU
 AE
@@ -1499,6 +1616,8 @@ as
 as
 F
 F
+F
+0
 0
 9C
 9D
@@ -1516,6 +1635,8 @@ as
 as
 F
 F
+F
+0
 0
 9C
 BW
@@ -1533,6 +1654,8 @@ as
 as
 F
 F
+F
+0
 0
 BW
 BX
@@ -1550,6 +1673,8 @@ as
 as
 F
 F
+F
+0
 0
 BX
 AC
@@ -1567,6 +1692,8 @@ as
 as
 F
 F
+F
+0
 0
 9F
 Ba
@@ -1584,6 +1711,8 @@ as
 as
 F
 F
+F
+0
 0
 Ba
 98
@@ -1601,6 +1730,8 @@ as
 as
 F
 F
+F
+0
 0
 8G
 9F
@@ -1618,6 +1749,8 @@ as
 as
 F
 F
+F
+0
 0
 8M
 8G
@@ -1635,6 +1768,8 @@ as
 as
 F
 F
+F
+0
 0
 Bc
 9k
@@ -1652,6 +1787,8 @@ as
 as
 F
 F
+F
+0
 0
 8a
 Bd
@@ -1669,6 +1806,8 @@ as
 as
 F
 F
+F
+0
 0
 Bd
 Bc
@@ -1686,6 +1825,8 @@ as
 as
 F
 F
+F
+0
 0
 Bc
 Be
@@ -1703,6 +1844,8 @@ as
 as
 F
 F
+F
+0
 0
 Be
 9i
@@ -1720,6 +1863,8 @@ as
 as
 F
 F
+F
+0
 0
 8U
 8a
@@ -1737,6 +1882,8 @@ as
 as
 F
 F
+F
+0
 0
 Bf
 8r
@@ -1754,6 +1901,8 @@ as
 as
 F
 F
+F
+0
 0
 8N
 Bg
@@ -1771,6 +1920,8 @@ as
 as
 F
 F
+F
+0
 0
 Bg
 Bf
@@ -1788,6 +1939,8 @@ as
 as
 F
 F
+F
+0
 0
 8j
 Bh
@@ -1805,6 +1958,8 @@ as
 as
 F
 F
+F
+0
 0
 Bh
 Bf
@@ -1822,6 +1977,8 @@ as
 as
 F
 F
+F
+0
 0
 8P
 8N
@@ -1839,6 +1996,8 @@ as
 as
 F
 F
+F
+0
 0
 8R
 Bs
@@ -1856,6 +2015,8 @@ as
 as
 F
 F
+F
+0
 0
 Bs
 AY
@@ -1873,6 +2034,8 @@ as
 as
 F
 F
+F
+0
 0
 8d
 8R
@@ -1890,6 +2053,8 @@ as
 as
 F
 F
+F
+0
 0
 9r
 9m
@@ -1907,6 +2072,8 @@ as
 as
 F
 F
+F
+0
 0
 8Y
 C2
@@ -1924,6 +2091,8 @@ as
 as
 F
 F
+F
+0
 0
 C2
 9r
@@ -1941,6 +2110,8 @@ as
 as
 F
 F
+F
+0
 0
 8W
 C5
@@ -1958,6 +2129,8 @@ as
 as
 F
 F
+F
+0
 0
 C5
 C6
@@ -1975,6 +2148,8 @@ as
 as
 F
 F
+F
+0
 0
 C6
 A4
@@ -1992,6 +2167,8 @@ as
 as
 F
 F
+F
+0
 0
 C7
 C8
@@ -2009,6 +2186,8 @@ as
 as
 F
 F
+F
+0
 0
 C8
 C9
@@ -2026,6 +2205,8 @@ as
 as
 F
 F
+F
+0
 0
 C9
 CA
@@ -2043,6 +2224,8 @@ as
 as
 F
 F
+F
+0
 0
 CA
 9N
@@ -2060,6 +2243,8 @@ as
 as
 F
 F
+F
+0
 0
 7j
 C7
@@ -2077,6 +2262,8 @@ as
 as
 F
 F
+F
+0
 0
 C7
 7q
@@ -2094,6 +2281,8 @@ as
 as
 F
 F
+F
+0
 0
 8E
 CB
@@ -2111,6 +2300,8 @@ as
 as
 F
 F
+F
+0
 0
 CB
 9N
@@ -2128,6 +2319,8 @@ as
 as
 F
 F
+F
+0
 0
 9Q
 CD
@@ -2145,6 +2338,8 @@ as
 as
 F
 F
+F
+0
 0
 CD
 CE
@@ -2162,6 +2357,8 @@ as
 as
 F
 F
+F
+0
 0
 CE
 CF
@@ -2179,6 +2376,8 @@ as
 as
 F
 F
+F
+0
 0
 CF
 CG
@@ -2196,6 +2395,8 @@ as
 as
 F
 F
+F
+0
 0
 CG
 CH
@@ -2213,6 +2414,8 @@ as
 as
 F
 F
+F
+0
 0
 CH
 CI
@@ -2230,6 +2433,8 @@ as
 as
 F
 F
+F
+0
 0
 CI
 CJ
@@ -2247,6 +2452,8 @@ as
 as
 F
 F
+F
+0
 0
 CJ
 CK
@@ -2264,6 +2471,8 @@ as
 as
 F
 F
+F
+0
 0
 CK
 8E
@@ -2281,6 +2490,8 @@ as
 as
 F
 F
+F
+0
 0
 7c
 CL
@@ -2298,6 +2509,8 @@ as
 as
 F
 F
+F
+0
 0
 CL
 7g
@@ -2315,6 +2528,8 @@ as
 as
 F
 F
+F
+0
 0
 7k
 CO
@@ -2332,6 +2547,8 @@ as
 as
 F
 F
+F
+0
 0
 CO
 CP
@@ -2349,6 +2566,8 @@ as
 as
 F
 F
+F
+0
 0
 CP
 CQ
@@ -2366,6 +2585,8 @@ as
 as
 F
 F
+F
+0
 0
 CQ
 7h
@@ -2383,6 +2604,8 @@ as
 as
 F
 F
+F
+0
 0
 AV
 CR
@@ -2400,6 +2623,8 @@ as
 as
 F
 F
+F
+0
 0
 CR
 88
@@ -2417,6 +2642,8 @@ as
 as
 F
 F
+F
+0
 0
 A2
 CS
@@ -2434,6 +2661,8 @@ as
 as
 F
 F
+F
+0
 0
 CS
 AV
@@ -2451,6 +2680,8 @@ as
 as
 F
 F
+F
+0
 0
 8b
 CT
@@ -2468,6 +2699,8 @@ as
 as
 F
 F
+F
+0
 0
 CT
 A2
@@ -2485,6 +2718,8 @@ as
 as
 F
 F
+F
+0
 0
 AU
 CU
@@ -2502,6 +2737,8 @@ as
 as
 F
 F
+F
+0
 0
 CU
 8x
@@ -2519,6 +2756,8 @@ as
 as
 F
 F
+F
+0
 0
 8O
 CV
@@ -2536,6 +2775,8 @@ as
 as
 F
 F
+F
+0
 0
 CV
 CW
@@ -2553,6 +2794,8 @@ as
 as
 F
 F
+F
+0
 0
 CW
 AU
@@ -2570,6 +2813,8 @@ as
 as
 F
 F
+F
+0
 0
 8H
 8O
@@ -2587,6 +2832,8 @@ as
 as
 F
 F
+F
+0
 0
 AQ
 Cm
@@ -2604,6 +2851,8 @@ as
 as
 F
 F
+F
+0
 0
 Cm
 80
@@ -2621,6 +2870,8 @@ as
 as
 F
 F
+F
+0
 0
 8F
 8Q
@@ -2638,6 +2889,8 @@ as
 as
 F
 F
+F
+0
 0
 Cn
 9Z
@@ -2655,6 +2908,8 @@ as
 as
 F
 F
+F
+0
 0
 8Z
 Co
@@ -2672,6 +2927,8 @@ as
 as
 F
 F
+F
+0
 0
 Co
 Cn
@@ -2689,6 +2946,8 @@ as
 as
 F
 F
+F
+0
 0
 Cn
 Cp
@@ -2706,6 +2965,8 @@ as
 as
 F
 F
+F
+0
 0
 Cp
 9S
@@ -2723,6 +2984,8 @@ as
 as
 F
 F
+F
+0
 0
 8Z
 8V
@@ -2740,6 +3003,8 @@ as
 as
 F
 F
+F
+0
 0
 9W
 Cv
@@ -2757,6 +3022,8 @@ as
 as
 F
 F
+F
+0
 0
 Cv
 Cw
@@ -2774,6 +3041,8 @@ as
 as
 F
 F
+F
+0
 0
 Cw
 AM
@@ -2791,6 +3060,8 @@ as
 as
 F
 F
+F
+0
 0
 9Y
 9W
@@ -2808,6 +3079,8 @@ as
 as
 F
 F
+F
+0
 0
 AF
 Cx
@@ -2825,6 +3098,8 @@ as
 as
 F
 F
+F
+0
 0
 Cx
 Cy
@@ -2842,6 +3117,8 @@ as
 as
 F
 F
+F
+0
 0
 Cy
 9Y
@@ -2859,6 +3136,8 @@ as
 as
 F
 F
+F
+0
 0
 AN
 D1
@@ -2876,6 +3155,8 @@ as
 as
 F
 F
+F
+0
 0
 D1
 7v
@@ -2893,6 +3174,8 @@ as
 as
 F
 F
+F
+0
 0
 9x
 D2
@@ -2910,6 +3193,8 @@ as
 as
 F
 F
+F
+0
 0
 D2
 AN
@@ -2927,6 +3212,8 @@ as
 as
 F
 F
+F
+0
 0
 8I
 D3
@@ -2944,6 +3231,8 @@ as
 as
 F
 F
+F
+0
 0
 D3
 9x
@@ -2961,6 +3250,8 @@ as
 as
 F
 F
+F
+0
 0
 AR
 D5
@@ -2978,6 +3269,8 @@ as
 as
 F
 F
+F
+0
 0
 D5
 83
@@ -2995,6 +3288,8 @@ as
 as
 F
 F
+F
+0
 0
 9z
 D6
@@ -3012,6 +3307,8 @@ as
 as
 F
 F
+F
+0
 0
 D6
 D7
@@ -3029,6 +3326,8 @@ as
 as
 F
 F
+F
+0
 0
 D7
 AR
@@ -3046,6 +3345,8 @@ as
 as
 F
 F
+F
+0
 0
 8K
 D8
@@ -3063,6 +3364,8 @@ as
 as
 F
 F
+F
+0
 0
 D8
 9z
@@ -3080,6 +3383,8 @@ as
 as
 F
 F
+F
+0
 0
 8L
 DB
@@ -3097,6 +3402,8 @@ as
 as
 F
 F
+F
+0
 0
 DB
 9I
@@ -3114,6 +3421,8 @@ as
 as
 F
 F
+F
+0
 0
 9I
 99
@@ -3131,6 +3440,8 @@ as
 as
 F
 F
+F
+0
 0
 DQ
 A6
@@ -3148,6 +3459,8 @@ as
 as
 F
 F
+F
+0
 0
 7m
 DQ
@@ -3165,6 +3478,8 @@ as
 as
 F
 F
+F
+0
 0
 7z
 DR
@@ -3182,6 +3497,8 @@ as
 as
 F
 F
+F
+0
 0
 DR
 DQ
@@ -3199,6 +3516,8 @@ as
 as
 F
 F
+F
+0
 0
 AT
 DV
@@ -3216,6 +3535,8 @@ as
 as
 F
 F
+F
+0
 0
 DV
 8y
@@ -3233,6 +3554,8 @@ as
 as
 F
 F
+F
+0
 0
 Db
 Dc
@@ -3250,6 +3573,8 @@ as
 as
 F
 F
+F
+0
 0
 Dc
 7f
@@ -3267,6 +3592,8 @@ as
 as
 F
 F
+F
+0
 0
 7Z
 Dd
@@ -3284,6 +3611,8 @@ as
 as
 F
 F
+F
+0
 0
 Dd
 Db
@@ -3301,6 +3630,8 @@ as
 as
 F
 F
+F
+0
 0
 7e
 Db
@@ -3318,6 +3649,8 @@ as
 as
 F
 F
+F
+0
 0
 De
 Df
@@ -3335,6 +3668,8 @@ as
 as
 F
 F
+F
+0
 0
 8A
 Dg
@@ -3352,6 +3687,8 @@ as
 as
 F
 F
+F
+0
 0
 Dg
 De
@@ -3369,6 +3706,8 @@ as
 as
 F
 F
+F
+0
 0
 A3
 Dh
@@ -3386,6 +3725,8 @@ as
 as
 F
 F
+F
+0
 0
 Dh
 De
@@ -3403,6 +3744,8 @@ as
 as
 F
 F
+F
+0
 0
 Df
 Di
@@ -3420,6 +3763,8 @@ as
 as
 F
 F
+F
+0
 0
 Di
 Dj
@@ -3437,6 +3782,8 @@ as
 as
 F
 F
+F
+0
 0
 Df
 Dk
@@ -3454,6 +3801,8 @@ as
 as
 F
 F
+F
+0
 0
 Dk
 Dl
@@ -3471,6 +3820,8 @@ as
 as
 F
 F
+F
+0
 0
 Dl
 Aa
@@ -3488,6 +3839,8 @@ as
 as
 F
 F
+F
+0
 0
 8z
 95
@@ -3505,6 +3858,8 @@ as
 as
 F
 F
+F
+0
 0
 Ab
 Dr
@@ -3522,6 +3877,8 @@ as
 as
 F
 F
+F
+0
 0
 Dr
 8z
@@ -3539,6 +3896,8 @@ as
 as
 F
 F
+F
+0
 0
 7l
 Ds
@@ -3556,6 +3915,8 @@ as
 as
 F
 F
+F
+0
 0
 Ds
 7r
@@ -3573,6 +3934,8 @@ as
 as
 F
 F
+F
+0
 0
 7b
 Dt
@@ -3590,6 +3953,8 @@ as
 as
 F
 F
+F
+0
 0
 Dt
 Du
@@ -3607,6 +3972,8 @@ as
 as
 F
 F
+F
+0
 0
 Du
 7r
@@ -3624,6 +3991,8 @@ as
 as
 F
 F
+F
+0
 0
 Dj
 AW
@@ -3641,6 +4010,8 @@ as
 as
 F
 F
+F
+0
 0
 A1
 Dj
@@ -3658,6 +4029,8 @@ as
 as
 F
 F
+F
+0
 0
 8c
 Ag
@@ -3675,6 +4048,8 @@ as
 as
 F
 F
+F
+0
 0
 Ag
 Ah
@@ -3692,6 +4067,8 @@ as
 as
 F
 F
+F
+0
 0
 Ah
 9w
@@ -3709,6 +4086,8 @@ as
 as
 F
 F
+F
+0
 0
 9O
 Ak
@@ -3726,6 +4105,8 @@ as
 as
 F
 F
+F
+0
 0
 Ak
 Al
@@ -3743,6 +4124,8 @@ as
 as
 F
 F
+F
+0
 0
 Al
 Am
@@ -3760,6 +4143,8 @@ as
 as
 F
 F
+F
+0
 0
 Am
 An
@@ -3777,6 +4162,8 @@ as
 as
 F
 F
+F
+0
 0
 An
 Ao
@@ -3794,6 +4181,8 @@ as
 as
 F
 F
+F
+0
 0
 Ao
 Ap
@@ -3811,6 +4200,8 @@ as
 as
 F
 F
+F
+0
 0
 Ap
 Aq
@@ -3828,6 +4219,8 @@ as
 as
 F
 F
+F
+0
 0
 Aq
 8T
@@ -3845,6 +4238,8 @@ as
 as
 F
 F
+F
+0
 0
 A5
 Au
@@ -3862,6 +4257,8 @@ as
 as
 F
 F
+F
+0
 0
 Au
 Av
@@ -3879,6 +4276,8 @@ as
 as
 F
 F
+F
+0
 0
 Av
 Aw
@@ -3896,6 +4295,8 @@ as
 as
 F
 F
+F
+0
 0
 Aw
 Ax
@@ -3913,6 +4314,8 @@ as
 as
 F
 F
+F
+0
 0
 Ax
 Ay
@@ -3930,6 +4333,8 @@ as
 as
 F
 F
+F
+0
 0
 Ay
 8J
@@ -3947,6 +4352,8 @@ as
 as
 F
 F
+F
+0
 0
 8l
 B0
@@ -3964,6 +4371,8 @@ as
 as
 F
 F
+F
+0
 0
 B0
 A9
@@ -3981,6 +4390,8 @@ as
 as
 F
 F
+F
+0
 0
 8l
 B1
@@ -3998,6 +4409,8 @@ as
 as
 F
 F
+F
+0
 0
 B1
 8i
@@ -4015,6 +4428,8 @@ as
 as
 F
 F
+F
+0
 0
 AI
 B3
@@ -4032,6 +4447,8 @@ as
 as
 F
 F
+F
+0
 0
 B3
 9l
@@ -4049,6 +4466,8 @@ as
 as
 F
 F
+F
+0
 0
 9v
 B4
@@ -4066,6 +4485,8 @@ as
 as
 F
 F
+F
+0
 0
 B4
 9n
@@ -4083,6 +4504,8 @@ as
 as
 F
 F
+F
+0
 0
 9h
 B5
@@ -4100,6 +4523,8 @@ as
 as
 F
 F
+F
+0
 0
 B5
 B6
@@ -4117,6 +4542,8 @@ as
 as
 F
 F
+F
+0
 0
 B6
 9v
@@ -4134,6 +4561,8 @@ as
 as
 F
 F
+F
+0
 0
 9s
 BB
@@ -4151,6 +4580,8 @@ as
 as
 F
 F
+F
+0
 0
 BB
 9p
@@ -4168,6 +4599,8 @@ as
 as
 F
 F
+F
+0
 0
 BC
 BD
@@ -4185,6 +4618,8 @@ as
 as
 F
 F
+F
+0
 0
 BD
 9f
@@ -4202,6 +4637,8 @@ as
 as
 F
 F
+F
+0
 0
 9U
 BC
@@ -4219,6 +4656,8 @@ as
 as
 F
 F
+F
+0
 0
 BC
 BE
@@ -4236,6 +4675,8 @@ as
 as
 F
 F
+F
+0
 0
 BE
 8e
@@ -4253,6 +4694,8 @@ as
 as
 F
 F
+F
+0
 0
 8m
 BL
@@ -4270,6 +4713,8 @@ as
 as
 F
 F
+F
+0
 0
 BL
 AA
@@ -4287,6 +4732,8 @@ as
 as
 F
 F
+F
+0
 0
 8k
 BM
@@ -4304,6 +4751,8 @@ as
 as
 F
 F
+F
+0
 0
 BM
 8g
@@ -4321,6 +4770,8 @@ as
 as
 F
 F
+F
+0
 0
 8g
 BN
@@ -4338,6 +4789,8 @@ as
 as
 F
 F
+F
+0
 0
 BN
 8n
@@ -4355,6 +4808,8 @@ as
 as
 F
 F
+F
+0
 0
 7Y
 BQ
@@ -4372,6 +4827,8 @@ as
 as
 F
 F
+F
+0
 0
 BQ
 BR
@@ -4389,6 +4846,8 @@ as
 as
 F
 F
+F
+0
 0
 BR
 7d
@@ -4406,6 +4865,8 @@ as
 as
 F
 F
+F
+0
 0
 AC
 BS
@@ -4423,6 +4884,8 @@ as
 as
 F
 F
+F
+0
 0
 BS
 97
@@ -4440,6 +4903,8 @@ as
 as
 F
 F
+F
+0
 0
 9C
 BV
@@ -4457,6 +4922,8 @@ as
 as
 F
 F
+F
+0
 0
 BV
 9J
@@ -4474,6 +4941,8 @@ as
 as
 F
 F
+F
+0
 0
 AE
 BY
@@ -4491,6 +4960,8 @@ as
 as
 F
 F
+F
+0
 0
 BY
 9A
@@ -4508,6 +4979,8 @@ as
 as
 F
 F
+F
+0
 0
 9F
 BZ
@@ -4525,6 +4998,8 @@ as
 as
 F
 F
+F
+0
 0
 BZ
 AB
@@ -4542,6 +5017,8 @@ as
 as
 F
 F
+F
+0
 0
 9k
 Bb
@@ -4559,6 +5036,8 @@ as
 as
 F
 F
+F
+0
 0
 Bb
 AK
@@ -4576,6 +5055,8 @@ as
 as
 F
 F
+F
+0
 0
 8r
 Bi
@@ -4593,6 +5074,8 @@ as
 as
 F
 F
+F
+0
 0
 Bi
 A8
@@ -4610,6 +5093,8 @@ as
 as
 F
 F
+F
+0
 0
 8s
 Bj
@@ -4627,6 +5112,8 @@ as
 as
 F
 F
+F
+0
 0
 Bj
 Bk
@@ -4644,6 +5131,8 @@ as
 as
 F
 F
+F
+0
 0
 Bk
 8o
@@ -4661,6 +5150,8 @@ as
 as
 F
 F
+F
+0
 0
 9e
 Bl
@@ -4678,6 +5169,8 @@ as
 as
 F
 F
+F
+0
 0
 Bl
 Bm
@@ -4695,6 +5188,8 @@ as
 as
 F
 F
+F
+0
 0
 Bm
 Bn
@@ -4712,6 +5207,8 @@ as
 as
 F
 F
+F
+0
 0
 Bn
 Bo
@@ -4729,6 +5226,8 @@ as
 as
 F
 F
+F
+0
 0
 Bo
 Bp
@@ -4746,6 +5245,8 @@ as
 as
 F
 F
+F
+0
 0
 Bp
 8d
@@ -4763,6 +5264,8 @@ as
 as
 F
 F
+F
+0
 0
 AY
 Bq
@@ -4780,6 +5283,8 @@ as
 as
 F
 F
+F
+0
 0
 Bq
 Br
@@ -4797,6 +5302,8 @@ as
 as
 F
 F
+F
+0
 0
 Br
 92
@@ -4814,6 +5321,8 @@ as
 as
 F
 F
+F
+0
 0
 9V
 Bt
@@ -4831,6 +5340,8 @@ as
 as
 F
 F
+F
+0
 0
 Bt
 Bu
@@ -4848,6 +5359,8 @@ as
 as
 F
 F
+F
+0
 0
 Bu
 9a
@@ -4865,6 +5378,8 @@ as
 as
 F
 F
+F
+0
 0
 7p
 Bv
@@ -4882,6 +5397,8 @@ as
 as
 F
 F
+F
+0
 0
 Bv
 Bw
@@ -4899,6 +5416,8 @@ as
 as
 F
 F
+F
+0
 0
 Bw
 Bx
@@ -4916,6 +5435,8 @@ as
 as
 F
 F
+F
+0
 0
 Bx
 By
@@ -4933,6 +5454,8 @@ as
 as
 F
 F
+F
+0
 0
 By
 7n
@@ -4950,6 +5473,8 @@ as
 as
 F
 F
+F
+0
 0
 9E
 Bz
@@ -4967,6 +5492,8 @@ as
 as
 F
 F
+F
+0
 0
 Bz
 9H
@@ -4984,6 +5511,8 @@ as
 as
 F
 F
+F
+0
 0
 9m
 C0
@@ -5001,6 +5530,8 @@ as
 as
 F
 F
+F
+0
 0
 C0
 9t
@@ -5018,6 +5549,8 @@ as
 as
 F
 F
+F
+0
 0
 9m
 C1
@@ -5035,6 +5568,8 @@ as
 as
 F
 F
+F
+0
 0
 C1
 AH
@@ -5052,6 +5587,8 @@ as
 as
 F
 F
+F
+0
 0
 C3
 8B
@@ -5069,6 +5606,8 @@ as
 as
 F
 F
+F
+0
 0
 AZ
 C4
@@ -5086,6 +5625,8 @@ as
 as
 F
 F
+F
+0
 0
 C4
 C3
@@ -5103,6 +5644,8 @@ as
 as
 F
 F
+F
+0
 0
 A4
 C3
@@ -5120,6 +5663,8 @@ as
 as
 F
 F
+F
+0
 0
 7c
 CC
@@ -5137,6 +5682,8 @@ as
 as
 F
 F
+F
+0
 0
 CC
 7j
@@ -5154,6 +5701,8 @@ as
 as
 F
 F
+F
+0
 0
 7q
 CM
@@ -5171,6 +5720,8 @@ as
 as
 F
 F
+F
+0
 0
 CM
 7s
@@ -5188,6 +5739,8 @@ as
 as
 F
 F
+F
+0
 0
 8S
 CN
@@ -5205,6 +5758,8 @@ as
 as
 F
 F
+F
+0
 0
 CN
 9Q
@@ -5222,6 +5777,8 @@ as
 as
 F
 F
+F
+0
 0
 9K
 CX
@@ -5239,6 +5796,8 @@ as
 as
 F
 F
+F
+0
 0
 CX
 CY
@@ -5256,6 +5815,8 @@ as
 as
 F
 F
+F
+0
 0
 CY
 CZ
@@ -5273,6 +5834,8 @@ as
 as
 F
 F
+F
+0
 0
 CZ
 Ca
@@ -5290,6 +5853,8 @@ as
 as
 F
 F
+F
+0
 0
 Ca
 8H
@@ -5307,6 +5872,8 @@ as
 as
 F
 F
+F
+0
 0
 8Q
 Cb
@@ -5324,6 +5891,8 @@ as
 as
 F
 F
+F
+0
 0
 Cb
 Cc
@@ -5341,6 +5910,8 @@ as
 as
 F
 F
+F
+0
 0
 Cc
 Cd
@@ -5358,6 +5929,8 @@ as
 as
 F
 F
+F
+0
 0
 Cd
 Ce
@@ -5375,6 +5948,8 @@ as
 as
 F
 F
+F
+0
 0
 Ce
 Cf
@@ -5392,6 +5967,8 @@ as
 as
 F
 F
+F
+0
 0
 Cf
 Cg
@@ -5409,6 +5986,8 @@ as
 as
 F
 F
+F
+0
 0
 Cg
 AQ
@@ -5426,6 +6005,8 @@ as
 as
 F
 F
+F
+0
 0
 8f
 Ch
@@ -5443,6 +6024,8 @@ as
 as
 F
 F
+F
+0
 0
 Ch
 Ci
@@ -5460,6 +6043,8 @@ as
 as
 F
 F
+F
+0
 0
 Ci
 Cj
@@ -5477,6 +6062,8 @@ as
 as
 F
 F
+F
+0
 0
 Cj
 Ck
@@ -5494,6 +6081,8 @@ as
 as
 F
 F
+F
+0
 0
 Ck
 Cl
@@ -5511,6 +6100,8 @@ as
 as
 F
 F
+F
+0
 0
 Cl
 8F
@@ -5528,6 +6119,8 @@ as
 as
 F
 F
+F
+0
 0
 AL
 Cq
@@ -5545,6 +6138,8 @@ as
 as
 F
 F
+F
+0
 0
 Cq
 9Z
@@ -5562,6 +6157,8 @@ as
 as
 F
 F
+F
+0
 0
 9j
 Cr
@@ -5579,6 +6176,8 @@ as
 as
 F
 F
+F
+0
 0
 Cr
 Cs
@@ -5596,6 +6195,8 @@ as
 as
 F
 F
+F
+0
 0
 Cs
 9o
@@ -5613,6 +6214,8 @@ as
 as
 F
 F
+F
+0
 0
 9X
 Ct
@@ -5630,6 +6233,8 @@ as
 as
 F
 F
+F
+0
 0
 Ct
 9b
@@ -5647,6 +6252,8 @@ as
 as
 F
 F
+F
+0
 0
 9W
 Cu
@@ -5664,6 +6271,8 @@ as
 as
 F
 F
+F
+0
 0
 Cu
 9d
@@ -5681,6 +6290,8 @@ as
 as
 F
 F
+F
+0
 0
 9d
 Cz
@@ -5698,6 +6309,8 @@ as
 as
 F
 F
+F
+0
 0
 Cz
 9R
@@ -5715,6 +6328,8 @@ as
 as
 F
 F
+F
+0
 0
 AF
 D0
@@ -5732,6 +6347,8 @@ as
 as
 F
 F
+F
+0
 0
 D0
 9T
@@ -5749,6 +6366,8 @@ as
 as
 F
 F
+F
+0
 0
 8t
 D4
@@ -5766,6 +6385,8 @@ as
 as
 F
 F
+F
+0
 0
 D4
 8p
@@ -5783,6 +6404,8 @@ as
 as
 F
 F
+F
+0
 0
 9M
 D9
@@ -5800,6 +6423,8 @@ as
 as
 F
 F
+F
+0
 0
 D9
 99
@@ -5817,6 +6442,8 @@ as
 as
 F
 F
+F
+0
 0
 AD
 DA
@@ -5834,6 +6461,8 @@ as
 as
 F
 F
+F
+0
 0
 DA
 99
@@ -5851,6 +6480,8 @@ as
 as
 F
 F
+F
+0
 0
 DC
 A0
@@ -5868,6 +6499,8 @@ as
 as
 F
 F
+F
+0
 0
 DD
 DE
@@ -5885,6 +6518,8 @@ as
 as
 F
 F
+F
+0
 0
 DE
 DC
@@ -5902,6 +6537,8 @@ as
 as
 F
 F
+F
+0
 0
 DC
 DF
@@ -5919,6 +6556,8 @@ as
 as
 F
 F
+F
+0
 0
 DF
 AS
@@ -5936,6 +6575,8 @@ as
 as
 F
 F
+F
+0
 0
 DD
 9y
@@ -5953,6 +6594,8 @@ as
 as
 F
 F
+F
+0
 0
 AO
 DG
@@ -5970,6 +6613,8 @@ as
 as
 F
 F
+F
+0
 0
 DG
 DD
@@ -5987,6 +6632,8 @@ as
 as
 F
 F
+F
+0
 0
 AP
 DH
@@ -6004,6 +6651,8 @@ as
 as
 F
 F
+F
+0
 0
 DH
 DI
@@ -6021,6 +6670,8 @@ as
 as
 F
 F
+F
+0
 0
 DI
 DJ
@@ -6038,6 +6689,8 @@ as
 as
 F
 F
+F
+0
 0
 DJ
 DK
@@ -6055,6 +6708,8 @@ as
 as
 F
 F
+F
+0
 0
 AP
 DL
@@ -6072,6 +6727,8 @@ as
 as
 F
 F
+F
+0
 0
 DL
 A6
@@ -6089,6 +6746,8 @@ as
 as
 F
 F
+F
+0
 0
 DK
 DM
@@ -6106,6 +6765,8 @@ as
 as
 F
 F
+F
+0
 0
 DM
 DN
@@ -6123,6 +6784,8 @@ as
 as
 F
 F
+F
+0
 0
 9L
 DK
@@ -6140,6 +6803,8 @@ as
 as
 F
 F
+F
+0
 0
 DN
 AT
@@ -6157,6 +6822,8 @@ as
 as
 F
 F
+F
+0
 0
 DO
 DP
@@ -6174,6 +6841,8 @@ as
 as
 F
 F
+F
+0
 0
 DP
 DN
@@ -6191,6 +6860,8 @@ as
 as
 F
 F
+F
+0
 0
 9L
 8h
@@ -6208,6 +6879,8 @@ as
 as
 F
 F
+F
+0
 0
 DO
 AX
@@ -6225,6 +6898,8 @@ as
 as
 F
 F
+F
+0
 0
 DS
 DT
@@ -6242,6 +6917,8 @@ as
 as
 F
 F
+F
+0
 0
 DT
 DO
@@ -6259,6 +6936,8 @@ as
 as
 F
 F
+F
+0
 0
 DS
 Ab
@@ -6276,6 +6955,8 @@ as
 as
 F
 F
+F
+0
 0
 DU
 DS
@@ -6293,6 +6974,8 @@ as
 as
 F
 F
+F
+0
 0
 DW
 DX
@@ -6310,6 +6993,8 @@ as
 as
 F
 F
+F
+0
 0
 DX
 7l
@@ -6327,6 +7012,8 @@ as
 as
 F
 F
+F
+0
 0
 DY
 DZ
@@ -6344,6 +7031,8 @@ as
 as
 F
 F
+F
+0
 0
 DZ
 DW
@@ -6361,6 +7050,8 @@ as
 as
 F
 F
+F
+0
 0
 A6
 Da
@@ -6378,6 +7069,8 @@ as
 as
 F
 F
+F
+0
 0
 Da
 DY
@@ -6395,6 +7088,8 @@ as
 as
 F
 F
+F
+0
 0
 Aa
 Dm
@@ -6412,6 +7107,8 @@ as
 as
 F
 F
+F
+0
 0
 Dm
 87
@@ -6429,6 +7126,8 @@ as
 as
 F
 F
+F
+0
 0
 DU
 9g
@@ -6446,6 +7145,8 @@ as
 as
 F
 F
+F
+0
 0
 9u
 DU
@@ -6463,6 +7164,8 @@ as
 as
 F
 F
+F
+0
 0
 Dn
 84
@@ -6480,6 +7183,8 @@ as
 as
 F
 F
+F
+0
 0
 AS
 Do
@@ -6497,6 +7202,8 @@ as
 as
 F
 F
+F
+0
 0
 Do
 Dn
@@ -6514,6 +7221,8 @@ as
 as
 F
 F
+F
+0
 0
 AW
 Dp
@@ -6531,6 +7240,8 @@ as
 as
 F
 F
+F
+0
 0
 Dp
 Dq
@@ -6548,6 +7259,8 @@ as
 as
 F
 F
+F
+0
 0
 Dq
 Dn
@@ -6565,6 +7278,8 @@ as
 as
 F
 F
+F
+0
 0
 7Z
 7a
@@ -6582,6 +7297,8 @@ as
 as
 F
 F
+F
+0
 0
 Dv
 7P
@@ -6599,6 +7316,8 @@ as
 as
 F
 F
+F
+0
 0
 7i
 Dw
@@ -6616,6 +7335,8 @@ as
 as
 F
 F
+F
+0
 0
 Dw
 Dv
@@ -6633,6 +7354,8 @@ as
 as
 F
 F
+F
+0
 0
 Dv
 7Q
@@ -6650,6 +7373,8 @@ as
 as
 F
 F
+F
+0
 0
 7P
 Dx
@@ -6667,6 +7392,8 @@ as
 as
 F
 F
+F
+0
 0
 Dx
 7t
@@ -6684,6 +7411,8 @@ as
 as
 F
 F
+F
+0
 0
 AO
 Dy
@@ -6701,6 +7430,8 @@ as
 as
 F
 F
+F
+0
 0
 Dy
 7t
@@ -6718,6 +7449,8 @@ as
 as
 F
 F
+F
+0
 0
 7Q
 Dz
@@ -6735,6 +7468,8 @@ as
 as
 F
 F
+F
+0
 0
 Dz
 7e
@@ -6752,6 +7487,8 @@ as
 as
 F
 F
+F
+0
 0
 7a
 7b
@@ -16483,7 +17220,7 @@ https://github.com/pierremolinaro/cartes-micro-controleurs-centrale-nantes/tree/
 5H52
 @C
 0
-0
+2
 This artwork file corresponds to specification from JLC PCB. See :\n\nhttps://jlcpcb.com\n\nFusion PCB Specification:\nhttps://jlcpcb.com/capabilities/Capabilities
 as
 2yM
@@ -16498,6 +17235,195 @@ TXT
 Eo:6
 @D
 T
+F
+F
+T
+F
+T
+F
+T
+F
+F
+F
+F
+F
+T
+F
+F
+F
+F
+F
+F
+F
+F
+T
+F
+T
+F
+GBO
+F
+Legend Bottom Side
+En
+@D
+T
+F
+F
+F
+F
+F
+F
+F
+F
+T
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+T
+GBS
+F
+Solder Mask Bottom Side
+En
+@D
+T
+F
+F
+F
+F
+F
+F
+F
+T
+F
+T
+F
+F
+F
+T
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+T
+GTL
+F
+Layout Top Side
+En
+@D
+T
+F
+F
+F
+F
+F
+F
+F
+F
+T
+F
+T
+F
+F
+F
+F
+F
+F
+F
+T
+F
+F
+F
+F
+F
+T
+GBL
+F
+Layout Bottom Side
+En
+@D
+T
+F
+F
+F
+F
+F
+F
+F
+T
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+F
+T
+GTS
+F
+Solder Mask Top Side
+En
+@D
+T
+T
+T
+F
+T
+F
+T
+F
+F
+F
+F
+F
+T
+F
+F
+F
+F
+F
+F
+F
+F
+T
+F
+T
+F
+F
+GTO
+F
+Legend Top Side
+En
+@D
+T
+F
+F
+F
 F
 F
 F
@@ -16523,188 +17449,6 @@ F
 GML
 F
 Board Outline
-NPc
-Bho
-En
-@D
-T
-F
-F
-T
-F
-T
-F
-T
-F
-F
-F
-F
-F
-F
-T
-F
-F
-F
-F
-F
-F
-F
-F
-GBO
-F
-Legend Bottom Side
-NPc
-Bho
-En
-@D
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-GBS
-F
-Solder Mask Bottom Side
-NPc
-Bho
-En
-@D
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-F
-T
-F
-F
-F
-T
-F
-F
-F
-F
-F
-F
-T
-GTL
-F
-Layout Top Side
-NPc
-Bho
-En
-@D
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-F
-T
-F
-F
-F
-F
-F
-F
-F
-T
-F
-T
-GBL
-F
-Layout Bottom Side
-NPc
-Bho
-En
-@D
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-F
-T
-GTS
-F
-Solder Mask Top Side
-NPc
-Bho
-En
-@D
-T
-T
-T
-F
-T
-F
-T
-F
-F
-F
-F
-F
-F
-T
-F
-F
-F
-F
-F
-F
-F
-F
-F
-GTO
-F
-Legend Top Side
-NPc
-Bho
 En
 @E
 181G4
@@ -23479,15 +24223,19 @@ kpE
 0
 1
 
+@F
+Sh:1
+pllc-2
+:28.346456692913385 28.346456692913385;28.346456692913385 36.28346456692913:28.346456692913385 36.28346456692913;38.55118110236221 36.28346456692913:38.55118110236221 28.346456692913385;38.55118110236221 36.28346456692913:28.346456692913385 28.346456692913385;38.267716535433074 28.346456692913385*0 0 0 1.0 0.6 10.0
 @N
 
-Sf
+Sg
 @O
 2
-Se
+Sf
 @O
 1
-Sd
+Se
 @P
 A
 
@@ -23518,147 +24266,173 @@ F
 led
 :55.8 34.2;61.2 36.0:34.2 41.4;30.6 45.0:30.6 34.2;25.2 36.0:21.6 28.8;36.0 28.8:36.0 39.6;36.0 18.0:30.6 23.4;25.2 21.6:36.0 39.6;50.4 28.8:36.0 18.0;50.4 28.8:50.4 39.6;50.4 18.0:52.2 41.4;55.8 45.0:52.2 16.2;55.8 12.6:50.4 28.8;64.8 28.8:55.8 23.4;61.2 21.6:43.2 16.2;43.2 10.8:34.2 16.2;30.6 12.6:43.2 41.4;43.2 46.8*0 1 0 0.5 0.6 10.0
 :22.872792206135788 27.527207793864214@23.575735931288072 28.230151519016502 23.575735931288072 29.3698484809835 22.872792206135788 30.072792206135787@22.1698484809835 30.77573593128807 21.030151519016503 30.77573593128807 20.327207793864215 30.072792206135787@19.62426406871193 29.3698484809835 19.62426406871193 28.230151519016502 20.327207793864215 27.527207793864214@21.030151519016503 26.82426406871193 22.1698484809835 26.82426406871193 22.872792206135788 27.527207793864214:66.07279220613579 27.527207793864214@66.77573593128807 28.230151519016502 66.77573593128807 29.3698484809835 66.07279220613579 30.072792206135787@65.36984848098349 30.77573593128807 64.2301515190165 30.77573593128807 63.527207793864214 30.072792206135787@62.824264068711926 29.3698484809835 62.824264068711926 28.230151519016502 63.527207793864214 27.527207793864214@64.2301515190165 26.82426406871193 65.36984848098349 26.82426406871193 66.07279220613579 27.527207793864214*0 0 0 1.0 0.6 10.0
+@G
+40B6
+4IuO
+NPc
+nAO
+Erm
+Erm
+0
+1
+1
+
+@G
+4nLU
+4IuO
+nAO
+nAO
+nAO
+nAO
+0
+1
+2
+
 @F
-UL:1
+UR:1
 axial-capacitor-100-300
 :15.12 14.4;92.88 14.4:15.12 43.2;93.6 43.2:15.12 43.2;15.12 14.4:100.08 43.2;100.08 14.4:97.2 14.4;100.08 14.4:97.2 14.4;97.2 18.0:92.88 18.0;97.2 18.0:92.88 14.4;92.88 18.0:93.6 39.6;93.6 43.2:93.6 39.6;97.2 39.6:97.2 39.6;97.2 43.2:97.2 43.2;100.08 43.2:7.2 28.8;15.12 28.8:100.08 28.8;108.0 28.8*0 0 0 1.0 0.6 10.0
 @F
-UJ:1
+UP:1
 axial-capacitor-80-180
 :14.4 10.08;57.6 10.08:14.4 33.12;58.32 33.12:14.4 33.12;14.4 10.08:64.8 33.12;64.8 10.08:61.92 10.08;64.8 10.08:61.92 10.08;61.92 13.68:57.6 13.68;61.92 13.68:57.6 10.08;57.6 13.68:58.32 29.52;58.32 33.12:58.32 29.52;61.92 29.52:61.92 29.52;61.92 33.12:61.92 33.12;64.8 33.12:7.2 21.6;14.4 21.6:64.8 21.6;72.0 21.6*0 0 0 1.0 0.6 10.0
 @F
-UH:1
+UN:1
 axial-capacitor-60-100
 :14.4 12.96;36.0 12.96:14.4 30.24;36.72 30.24:14.4 30.24;14.4 12.96:43.2 30.24;43.2 12.96:40.32 12.96;43.2 12.96:40.32 12.96;40.32 16.56:36.0 16.56;39.6 16.56:36.0 12.96;36.0 16.56:36.72 26.64;36.72 30.24:36.72 26.64;40.32 26.64:40.32 26.64;40.32 30.24:40.32 30.24;43.2 30.24:7.2 21.6;14.4 21.6:43.2 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-UF:1
+UL:1
 radial-capacitor-55-130
 :41.37503833052379 18.152520724594325@48.57052528090152 25.348007674972052 48.57052528090152 37.0141970494374 41.37503833052379 44.20968399981513@34.17955138014606 51.405170950192854 22.51336200568071 51.405170950192854 15.317875055302984 44.20968399981513@8.122388104925253 37.0141970494374 8.12238810492525 25.348007674972056 15.317875055302979 18.152520724594325@22.513362005680708 10.957033774216594 34.17955138014606 10.95703377421659 41.375038330523786 18.152520724594318:19.133858267716537 38.267716535433074;21.968503937007874 38.267716535433074:34.724409448818896 38.267716535433074;37.55905511811024 38.267716535433074:36.14173228346457 36.8503937007874;36.14173228346457 39.68503937007874*0 0 0 1.0 0.6 10.0
 @F
-UD:1
+UJ:1
 axial-capacitor-65
 :18.0 21.6;20.88 21.6:19.44 20.16;19.44 23.04:23.76 21.6;28.8 21.6:21.01851947190608 14.981480528093918@24.67382684269797 18.636787898885803 24.67382684269797 24.5632121011142 21.01851947190608 28.218519471906085@17.363212101114197 31.873826842697973 11.4367878988858 31.873826842697973 7.7814805280939146 28.218519471906085@4.126173157302029 24.5632121011142 4.126173157302027 18.636787898885807 7.781480528093913 14.981480528093918@11.436787898885798 11.326173157302032 17.363212101114193 11.32617315730203 21.01851947190608 14.981480528093915:27.36 26.64;30.24 26.64*0 0 0 1.0 0.6 10.0
 @F
-UB:1
+UH:1
 axial-capacitor-180-300
 :15.12 10.8;92.88 10.8:15.12 61.2;93.6 61.2:15.12 61.2;15.12 10.8:100.08 61.2;100.08 10.8:97.2 10.8;100.08 10.8:97.2 10.8;97.2 14.4:92.88 14.4;97.2 14.4:92.88 10.8;92.88 14.4:93.6 57.6;93.6 61.2:93.6 57.6;97.2 57.6:97.2 57.6;97.2 61.2:97.2 61.2;100.08 61.2:7.2 36.0;15.12 36.0:100.08 36.0;108.0 36.0*0 0 0 1.0 0.6 10.0
 @F
-U9:1
+UF:1
 axial-capacitor-125
 :30.96 21.6;33.84 21.6:32.4 20.16;32.4 23.04:39.6 21.6;50.4 21.6:34.12748234385616 9.072517656143845@41.04621979614244 15.991255108430124 41.04621979614244 27.20874489156988 34.12748234385616 34.12748234385616@27.208744891569882 41.04621979614244 15.991255108430124 41.04621979614244 9.072517656143845 34.12748234385616@2.1537802038575684 27.208744891569882 2.153780203857565 15.991255108430124 9.072517656143841 9.072517656143845@15.991255108430119 2.1537802038575684 27.20874489156988 2.153780203857565 34.12748234385616 9.072517656143841:48.96 27.36;51.84 27.36*0 0 0 1.0 0.6 10.0
 @F
-U7:1
+UD:1
 axial-capacitor-100
 :27.36 21.6;30.24 21.6:28.8 20.16;28.8 23.04:36.0 21.6;43.2 21.6:31.395214221541618 11.351242471371767@36.930204183370634 16.88623243320079 36.930204183370634 25.860224259712595 31.395214221541618 31.395214221541615@25.860224259712595 36.930204183370634 16.88623243320079 36.930204183370634 11.351242471371767 31.395214221541618@5.816252509542746 25.860224259712595 5.816252509542743 16.886232433200792 11.351242471371764 11.351242471371767@16.886232433200785 5.816252509542746 25.86022425971259 5.816252509542743 31.395214221541615 11.351242471371764:41.76 26.64;44.64 26.64*0 0 0 1.0 0.6 10.0
 @F
-U5:1
+UB:1
 axial-capacitor-60-110
 :12.96 12.96;37.44 12.96:12.96 30.24;38.16 30.24:12.96 30.24;12.96 12.96:44.64 30.24;44.64 12.96:41.76 12.96;44.64 12.96:41.76 12.96;41.76 16.56:37.44 16.56;41.76 16.56:37.44 12.96;37.44 16.56:38.16 26.64;38.16 30.24:38.16 26.64;41.76 26.64:41.76 26.64;41.76 30.24:41.76 30.24;44.64 30.24:7.2 21.6;12.96 21.6:44.64 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-U3:1
+U9:1
 radial-capacitor-75-185
 :49.72177623111184 18.30971983188029@59.96150766049553 28.549451261263982 59.96150766049553 45.15133614031082 49.72177623111184 55.39106756969451@39.48204480172815 65.6307989990782 22.880159922681308 65.6307989990782 12.640428493297616 55.39106756969451@2.400697063913924 45.151336140310825 2.4006970639139205 28.549451261263982 12.640428493297609 18.30971983188029@22.8801599226813 8.069988402496598 39.482044801728144 8.069988402496595 49.72177623111183 18.309719831880283:19.133858267716537 43.93700787401575;21.968503937007874 43.93700787401575:40.39370078740158 43.93700787401575;43.22834645669291 43.93700787401575:41.811023622047244 42.51968503937008;41.811023622047244 45.354330708661415*0 0 0 1.0 0.6 10.0
 @F
-U1:1
+U7:1
 radial-capacitor-55-105
 :32.49158910584705 17.823371524074215@38.303328565767515 23.63511098399469 38.303328565767515 33.057802401832085 32.49158910584705 38.86954186175255@26.679849645926573 44.681281321673026 17.257158228089178 44.681281321673026 11.445418768168704 38.86954186175256@5.6336793082482295 33.057802401832085 5.633679308248226 23.63511098399469 11.4454187681687 17.823371524074215@17.257158228089175 12.01163206415374 26.67984964592657 12.011632064153737 32.49158910584704 17.82337152407421:12.755905511811024 35.43307086614173;15.590551181102363 35.43307086614173:28.346456692913385 35.43307086614173;31.181102362204726 35.43307086614173:29.763779527559056 34.01574803149607;29.763779527559056 36.8503937007874*0 0 0 1.0 0.6 10.0
 @F
-Tz:1
+U5:1
 axial-capacitor-45-100
 :21.6 28.08;43.2 28.08:21.6 28.08;21.6 15.12:21.6 15.12;43.2 15.12:50.4 28.08;50.4 15.12:46.8 15.12;50.4 15.12:46.8 15.12;46.8 18.72:43.2 18.72;46.8 18.72:43.2 15.12;43.2 18.72:43.2 24.48;43.2 28.08:43.2 24.48;43.2 28.08:43.2 24.48;46.8 24.48:46.8 24.48;46.8 28.08:46.8 28.08;50.4 28.08:14.4 21.6;21.6 21.6:50.4 21.6;57.6 21.6*0 0 0 1.0 0.6 10.0
 @F
-Tx:1
+U3:1
 axial-capacitor-180-400
 :15.12 10.8;121.68 10.8:15.12 61.2;122.4 61.2:15.12 61.2;15.12 10.8:128.88 61.2;128.88 10.8:126.0 10.8;128.88 10.8:126.0 10.8;126.0 14.4:121.68 14.4;126.0 14.4:121.68 10.8;121.68 14.4:122.4 57.6;122.4 61.2:122.4 57.6;126.0 57.6:126.0 57.6;126.0 61.2:126.0 61.2;128.88 61.2:7.2 36.0;15.12 36.0:128.88 36.0;136.8 36.0*0 0 0 1.0 0.6 10.0
 @F
-Tv:1
+U1:1
 axial-capacitor-125-300
 :15.12 11.52;92.88 11.52:15.12 46.8;93.6 46.8:15.12 46.8;15.12 11.52:100.08 46.8;100.08 11.52:97.2 11.52;100.08 11.52:97.2 11.52;97.2 15.12:92.88 15.12;97.2 15.12:92.88 11.52;92.88 15.12:93.6 43.2;93.6 46.8:93.6 43.2;97.2 43.2:97.2 43.2;97.2 46.8:97.2 46.8;100.08 46.8:7.2 28.8;15.12 28.8:100.08 28.8;108.0 28.8*0 0 0 1.0 0.6 10.0
 @F
-Tt:1
+Tz:1
 axial-capacitor-150-300
 :15.12 14.4;92.88 14.4:15.12 57.6;93.6 57.6:15.12 57.6;15.12 14.4:100.08 57.6;100.08 14.4:97.2 14.4;100.08 14.4:97.2 14.4;97.2 18.0:92.88 18.0;97.2 18.0:92.88 14.4;92.88 18.0:93.6 54.0;93.6 57.6:93.6 54.0;97.2 54.0:97.2 54.0;97.2 57.6:97.2 57.6;100.08 57.6:7.2 36.0;15.12 36.0:100.08 36.0;108.0 36.0*0 0 0 1.0 0.6 10.0
 @F
-Tr:1
+Tx:1
 axial-capacitor-150
 :38.16 28.8;41.04 28.8:39.6 27.36;39.6 30.24:50.4 28.8;57.6 28.8:43.83297881262739 13.767021187372613@52.13546375537092 22.069506130116146 52.13546375537092 35.530493869883855 43.83297881262739 43.83297881262739@35.530493869883855 52.13546375537092 22.069506130116146 52.13546375537092 13.767021187372613 43.83297881262739@5.46453624462908 35.530493869883855 5.464536244629073 22.06950613011615 13.767021187372608 13.767021187372613@22.069506130116142 5.46453624462908 35.530493869883855 5.464536244629073 43.83297881262739 13.767021187372608:56.16 34.56;59.04 34.56*0 0 0 1.0 0.6 10.0
 @F
-Tp:1
+Tv:1
 axial-capacitor-80
 :27.36 21.6;30.24 21.6:28.8 20.16;28.8 23.04:33.12 21.6;43.2 21.6:29.61758870006794 13.582411299932062@34.04558066953116 18.01040326939528 34.04558066953116 25.189596730604723 29.61758870006794 29.61758870006794@25.189596730604723 34.04558066953116 18.01040326939528 34.04558066953116 13.582411299932062 29.61758870006794@9.154419330468844 25.189596730604723 9.154419330468842 18.01040326939528 13.58241129993206 13.582411299932062@18.010403269395276 9.154419330468844 25.189596730604723 9.154419330468842 29.61758870006794 13.58241129993206:41.76 26.64;44.64 26.64*0 0 0 1.0 0.6 10.0
 @F
-Tn:1
+Tt:1
 axial-capacitor-100-250
 :14.4 14.4;79.2 14.4:14.4 43.2;79.92 43.2:14.4 43.2;14.4 14.4:86.4 43.2;86.4 14.4:83.52 14.4;86.4 14.4:83.52 14.4;83.52 18.0:79.2 18.0;83.52 18.0:79.2 14.4;79.2 18.0:79.92 39.6;79.92 43.2:79.92 39.6;83.52 39.6:83.52 39.6;83.52 43.2:83.52 43.2;86.4 43.2:7.2 28.8;14.4 28.8:86.4 28.8;93.6 28.8*0 0 0 1.0 0.6 10.0
 @F
-Tl:1
+Tr:1
 axial-capacitor-65-180
 :14.4 12.24;57.6 12.24:14.4 30.96;58.32 30.96:14.4 30.96;14.4 12.24:64.8 30.96;64.8 12.24:61.92 12.24;64.8 12.24:61.92 12.24;61.92 15.84:57.6 15.84;61.92 15.84:57.6 12.24;57.6 15.84:58.32 27.36;58.32 30.96:58.32 27.36;61.92 27.36:61.92 27.36;61.92 30.96:61.92 30.96;64.8 30.96:7.2 21.6;14.4 21.6:64.8 21.6;72.0 21.6*0 0 0 1.0 0.6 10.0
 @F
-Tj:1
+Tp:1
 axial-capacitor-100-180
 :14.4 14.4;57.6 14.4:14.4 43.2;58.32 43.2:14.4 43.2;14.4 14.4:64.8 43.2;64.8 14.4:61.92 14.4;64.8 14.4:61.92 14.4;61.92 18.0:57.6 18.0;61.92 18.0:57.6 14.4;57.6 18.0:58.32 39.6;58.32 43.2:58.32 39.6;61.92 39.6:61.92 39.6;61.92 43.2:61.92 43.2;64.8 43.2:7.2 28.8;14.4 28.8:64.8 28.8;72.0 28.8*0 0 0 1.0 0.6 10.0
 @F
-Th:1
+Tn:1
 radial-capacitor-35-85
 :27.65254626153872 14.158477360508526@32.357287729093386 18.863218828063196 32.357287729093386 26.491111880598226 27.65254626153872 31.195853348152895@22.94780479398405 35.900594815707564 15.319911741449017 35.900594815707564 10.615170273894348 31.195853348152898@5.910428806339679 26.49111188059823 5.9104288063396755 18.863218828063196 10.615170273894345 14.158477360508526@15.319911741449014 9.453735892953857 22.947804793984048 9.453735892953853 27.652546261538717 14.158477360508522:12.755905511811024 29.763779527559056;15.590551181102363 29.763779527559056:22.677165354330707 29.763779527559056;25.511811023622048 29.763779527559056:24.094488188976378 28.346456692913385;24.094488188976378 31.181102362204726*0 0 0 1.0 0.6 10.0
 @F
-Tf:1
+Tl:1
 radial-capacitor-25-70
 :24.731925545630315 15.661775241771263@28.60641851891063 19.536268215051578 28.60641851891063 25.818062493609844 24.731925545630315 29.69255546689016@20.85743257235 33.567048440170474 14.575638293791735 33.567048440170474 10.701145320511419 29.69255546689016@6.826652347231104 25.818062493609844 6.826652347231102 19.53626821505158 10.701145320511417 15.661775241771263@14.575638293791734 11.787282268490948 20.857432572349996 11.787282268490946 24.731925545630315 15.661775241771261:12.755905511811024 28.346456692913385;15.590551181102363 28.346456692913385:19.84251968503937 28.346456692913385;22.677165354330707 28.346456692913385:21.25984251968504 26.929133858267715;21.25984251968504 29.763779527559056*0 0 0 1.0 0.6 10.0
 @F
-Td:1
+Tj:1
 radial-capacitor-75-165
 :47.717379056094856 20.314117006897273@56.85011249311274 29.44685044391516 56.85011249311274 44.25393695765964 47.717379056094856 53.38667039467752@38.584645619076966 62.51940383169541 23.777559105332486 62.51940383169541 14.6448256683146 53.38667039467753@5.512092231296712 44.25393695765964 5.512092231296705 29.446850443915164 14.644825668314596 20.314117006897273@23.777559105332482 11.181383569879387 38.584645619076966 11.18138356987938 47.717379056094856 20.31411700689727:19.133858267716537 43.93700787401575;21.968503937007874 43.93700787401575:40.39370078740158 43.93700787401575;43.22834645669291 43.93700787401575:41.811023622047244 42.51968503937008;41.811023622047244 45.354330708661415*0 0 0 1.0 0.6 10.0
 @F
-Tb:1
+Th:1
 radial-capacitor-25-50
 :22.01886695329049 17.66617241678825@24.786361934205004 20.43366739770276 24.786361934205004 24.920663310958663 22.01886695329049 27.688158291873172@19.25137197237598 30.455653272787686 14.764376059120078 30.455653272787686 11.996881078205568 27.688158291873172@9.229386097291057 24.920663310958663 9.229386097291055 20.43366739770276 11.996881078205565 17.66617241678825@14.764376059120076 14.898677435873738 19.25137197237598 14.898677435873736 22.01886695329049 17.666172416788246:14.173228346456693 18.4251968503937;17.007874015748033 18.4251968503937:17.007874015748033 26.929133858267715;19.84251968503937 26.929133858267715:18.4251968503937 25.511811023622048;18.4251968503937 28.346456692913385*0 0 0 1.0 0.6 10.0
 @F
-TZ:1
+Tf:1
 axial-capacitor-210-400
 :15.12 12.96;121.68 12.96:15.12 72.72;122.4 72.72:15.12 72.72;15.12 12.96:128.88 72.72;128.88 12.96:126.0 12.96;128.88 12.96:126.0 12.96;126.0 16.56:121.68 16.56;126.0 16.56:121.68 12.96;121.68 16.56:122.4 69.12;122.4 72.72:122.4 69.12;126.0 69.12:126.0 69.12;126.0 72.72:126.0 72.72;128.88 72.72:7.2 43.2;15.12 43.2:128.88 43.2;136.8 43.2*0 0 0 1.0 0.6 10.0
 @F
-TX:1
+Td:1
 axial-capacitor-180
 :41.76 28.8;44.64 28.8:43.2 27.36;43.2 30.24:54.72 28.8;64.8 28.8:46.83957457515287 10.760425424847135@56.80255650644511 20.723407356139376 56.80255650644511 36.876592643860626 46.83957457515287 46.83957457515287@36.876592643860626 56.80255650644511 20.723407356139376 56.80255650644511 10.760425424847135 46.83957457515287@0.7974434935548942 36.876592643860626 0.7974434935548906 20.72340735613938 10.760425424847131 10.760425424847135@20.72340735613937 0.7974434935548942 36.87659264386062 0.7974434935548906 46.83957457515287 10.760425424847131:63.36 34.56;66.24 34.56*0 0 0 1.0 0.6 10.0
 @F
-TV:1
+Tb:1
 axial-capacitor-60
 :18.0 21.6;20.88 21.6:19.44 20.16;19.44 23.04:23.04 21.6;28.8 21.6:20.50940258945177 15.490597410548231@23.883532470182743 18.864727291279202 23.883532470182743 24.3352727087208 20.50940258945177 27.70940258945177@17.135272708720798 31.083532470182746 11.664727291279203 31.083532470182746 8.29059741054823 27.709402589451773@4.9164675298172575 24.3352727087208 4.916467529817256 18.864727291279205 8.290597410548228 15.490597410548231@11.664727291279199 12.116467529817259 17.135272708720798 12.116467529817257 20.50940258945177 15.49059741054823:27.36 26.64;30.24 26.64*0 0 0 1.0 0.6 10.0
 @F
-TT:1
+TZ:1
 axial-capacitor-210
 :48.96 36.0;51.84 36.0:50.4 34.56;50.4 37.44:66.24 36.0;79.2 36.0:57.04617033767835 14.95382966232166@68.6696492575193 26.57730858216261 68.6696492575193 45.42269141783739 57.04617033767835 57.04617033767834@45.4226914178374 68.6696492575193 26.57730858216261 68.6696492575193 14.95382966232166 57.04617033767835@3.330350742480711 45.4226914178374 3.3303507424807037 26.57730858216261 14.953829662321652 14.95382966232166@26.577308582162598 3.330350742480711 45.42269141783739 3.3303507424807037 57.04617033767834 14.953829662321652:77.76 41.76;80.64 41.76*0 0 0 1.0 0.6 10.0
 @F
-TR:1
+TX:1
 radial-capacitor-100-50
 :10.021985875084926 -2.935371701856578@15.556975836913946 2.599618259972445 15.556975836913946 11.573610086484248 10.021985875084926 17.10860004831327@4.486995913255904 22.64359001014229 -4.486995913255901 22.64359001014229 -10.021985875084924 17.10860004831327@-15.556975836913946 11.573610086484251 -15.55697583691395 2.5996182599724458 -10.021985875084928 -2.935371701856578@-4.486995913255906 -8.4703616636856 4.4869959132559005 -8.470361663685603 10.021985875084924 -2.9353717018565817:7.2 -1.8;7.2 1.8:9.0 0.0;5.4 0.0:7.2 12.6;7.2 16.2*0 0 0 1.0 0.6 10.0
 @F
-TP:1
+TV:1
 axial-capacitor-80-110
 :12.96 10.08;37.44 10.08:12.96 33.12;38.16 33.12:12.96 33.12;12.96 10.08:44.64 33.12;44.64 10.08:41.76 10.08;44.64 10.08:41.76 10.08;41.76 13.68:37.44 13.68;41.76 13.68:37.44 10.08;37.44 13.68:38.16 29.52;38.16 33.12:38.16 29.52;41.76 29.52:41.76 29.52;41.76 33.12:41.76 33.12;44.64 33.12:7.2 21.6;12.96 21.6:44.64 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-TN:1
+TT:1
 radial-capacitor-20-55
 :22.51996624704474 17.165073123034002@25.564210726050703 20.209317602039967 25.564210726050703 25.145013106621455 22.51996624704474 28.18925758562742@19.475721768038778 31.233502064633385 14.540026263457284 31.233502064633385 11.49578178445132 28.18925758562742@8.451537305445358 25.14501310662146 8.451537305445356 20.209317602039967 11.495781784451319 17.165073123034002@14.540026263457282 14.12082864402804 19.475721768038774 14.120828644028038 22.51996624704474 17.165073123034:12.755905511811024 27.637795275590552;15.590551181102363 27.637795275590552:18.4251968503937 27.637795275590552;21.25984251968504 27.637795275590552:19.84251968503937 26.22047244094488;19.84251968503937 29.055118110236222*0 0 0 1.0 0.6 10.0
 @F
-TL:1
+TR:1
 radial-capacitor-35-80
 :30.69475405439865 14.659576654262768@35.122746023861865 19.087568623725986 35.122746023861865 26.26676208493543 30.69475405439865 30.694754054398647@26.26676208493543 35.122746023861865 19.087568623725986 35.122746023861865 14.659576654262768 30.69475405439865@10.23158468479955 26.26676208493543 10.231584684799548 19.087568623725986 14.659576654262766 14.659576654262768@19.087568623725982 10.23158468479955 26.26676208493543 10.231584684799548 30.694754054398647 14.659576654262766:16.299212598425196 29.763779527559056;19.133858267716537 29.763779527559056:26.22047244094488 29.763779527559056;29.055118110236222 29.763779527559056:27.637795275590552 28.346456692913385;27.637795275590552 31.181102362204726*0 0 0 1.0 0.6 10.0
 @F
-TJ:1
+TP:1
 radial-flat-capacitor-50-120
 :21.6 28.8;43.2 28.8:21.6 28.8;21.6 14.4:21.6 14.4;43.2 14.4:50.4 28.08;50.4 15.12:46.8 15.12;50.4 15.12:46.8 15.12;46.8 18.72:43.2 18.72;46.8 18.72:43.2 15.12;43.2 18.72:43.2 24.48;43.2 28.08:43.2 24.48;43.2 28.08:43.2 24.48;46.8 24.48:46.8 24.48;46.8 28.08:46.8 28.08;50.4 28.08:50.4 18.0;55.44 18.0:50.4 24.48;55.44 24.48*0 0 0 1.0 0.6 10.0
+@F
+TN:1
+radial-capacitor-50-65
+:27.774133338490238 21.832165874108185@31.3718768136791 25.42990934929705 31.3718768136791 31.263004036529722 27.774133338490238 34.860747511718586@24.176389863301374 38.45849098690745 18.3432951760687 38.45849098690745 14.745551700879837 34.860747511718586@11.147808225690971 31.263004036529722 11.14780822569097 25.42990934929705 14.745551700879833 21.832165874108185@18.3432951760687 18.234422398919317 24.17638986330137 18.234422398919317 27.774133338490238 21.83216587410818:17.007874015748033 32.59842519685039;19.84251968503937 32.59842519685039:23.385826771653544 32.59842519685039;26.22047244094488 32.59842519685039:24.80314960629921 31.181102362204726;24.80314960629921 34.01574803149607*0 0 0 1.0 0.6 10.0
 @N
 
-TI
+TM
 @O
 1
-TH
+TL
 @O
 2
-TG
+TK
 @P
 -
 
@@ -23689,6 +24463,28 @@ T
 polarized-capacitor
 :12.6 23.4;30.6 23.4:12.6 27.0;30.6 27.0:21.6 27.0;21.6 36.0:21.6 23.4;21.6 14.4*0 1 0 0.5 0.6 10.0
 :22.872792206135788 34.72720779386422@23.575735931288072 35.4301515190165 23.575735931288072 36.5698484809835 22.872792206135788 37.27279220613578@22.1698484809835 37.97573593128807 21.030151519016503 37.97573593128807 20.327207793864215 37.27279220613578@19.62426406871193 36.5698484809835 19.62426406871193 35.4301515190165 20.327207793864215 34.72720779386422@21.030151519016503 34.02426406871193 22.1698484809835 34.02426406871193 22.872792206135788 34.72720779386422:22.872792206135788 13.127207793864216@23.575735931288072 13.830151519016502 23.575735931288072 14.969848480983499 22.872792206135788 15.672792206135785@22.1698484809835 16.375735931288073 21.030151519016503 16.375735931288073 20.327207793864215 15.672792206135785@19.62426406871193 14.9698484809835 19.62426406871193 13.830151519016502 20.327207793864215 13.127207793864216@21.030151519016503 12.42426406871193 22.1698484809835 12.424264068711928 22.872792206135788 13.127207793864214*0 0 0 1.0 0.6 10.0
+@G
+1t44
+3m88
+UvI
+xT6
+J1s
+J1s
+1
+0
+2
+
+@G
+3m88
+3m88
+UvI
+xT6
+J1s
+J1s
+0
+0
+1
+
 @G
 7Nue
 2Ofk
@@ -24417,19 +25213,19 @@ NPc
 
 @N
 
-UW
+Uc
 @O
 4
-UV
+Ub
 @O
 3
-UU
+Ua
 @O
 2
-UT
+UZ
 @O
 1
-US
+UY
 @P
 IN-
 
@@ -24487,29 +25283,29 @@ dc-dc-converter
 :14.4 43.2;21.6 43.2:14.4 14.4;21.6 14.4:21.6 7.2;21.6 50.4:72.0 7.2;72.0 50.4:72.0 50.4;21.6 50.4:72.0 7.2;21.6 7.2:72.0 43.2;79.2 43.2:72.0 14.4;79.2 14.4*0 1 0 0.5 0.6 10.0
 :15.672792206135785 41.92720779386422@16.375735931288073 42.6301515190165 16.375735931288073 43.769848480983505 15.672792206135785 44.472792206135786@14.9698484809835 45.175735931288074 13.830151519016502 45.175735931288074 13.127207793864216 44.472792206135786@12.42426406871193 43.769848480983505 12.424264068711928 42.6301515190165 13.127207793864214 41.92720779386422@13.8301515190165 41.22426406871193 14.969848480983499 41.22426406871193 15.672792206135785 41.92720779386422:15.672792206135785 13.127207793864216@16.375735931288073 13.830151519016502 16.375735931288073 14.969848480983499 15.672792206135785 15.672792206135785@14.9698484809835 16.375735931288073 13.830151519016502 16.375735931288073 13.127207793864216 15.672792206135785@12.42426406871193 14.9698484809835 12.424264068711928 13.830151519016502 13.127207793864214 13.127207793864216@13.8301515190165 12.42426406871193 14.969848480983499 12.424264068711928 15.672792206135785 13.127207793864214:80.4727922061358 41.92720779386422@81.17573593128807 42.6301515190165 81.17573593128807 43.769848480983505 80.4727922061358 44.472792206135786@79.7698484809835 45.175735931288074 78.63015151901651 45.175735931288074 77.92720779386421 44.472792206135786@77.22426406871193 43.769848480983505 77.22426406871193 42.6301515190165 77.92720779386421 41.92720779386422@78.63015151901651 41.22426406871193 79.7698484809835 41.22426406871193 80.4727922061358 41.92720779386422:80.4727922061358 13.127207793864216@81.17573593128807 13.830151519016502 81.17573593128807 14.969848480983499 80.4727922061358 15.672792206135785@79.7698484809835 16.375735931288073 78.63015151901651 16.375735931288073 77.92720779386421 15.672792206135785@77.22426406871193 14.9698484809835 77.22426406871193 13.830151519016502 77.92720779386421 13.127207793864216@78.63015151901651 12.42426406871193 79.7698484809835 12.424264068711928 80.4727922061358 13.127207793864214*0 0 0 1.0 0.6 10.0
 @F
-Up:2
+Uv:2
 to220-on-ml26
 :28.8 34.2;28.8 21.6:36.0 34.2;36.0 21.6:43.2 34.2;43.2 21.6:14.4 86.4;57.6 86.4:14.4 86.4;14.4 14.4:57.6 86.4;57.6 14.4:25.2 34.2;46.8 34.2:14.4 14.4;25.2 14.4:25.2 14.4;25.2 34.2:46.8 34.2;46.8 14.4:46.8 14.4;57.6 14.4*0 0 0 1.0 0.6 10.0
 @F
-Um:2
+Us:2
 to220up
 :6.3 16.2;36.9 16.2:6.3 6.3;36.9 6.3:6.3 16.2;6.3 6.3:36.9 16.2;36.9 6.3:6.3 18.9;36.9 18.9*0 0 0 1.0 0.6 10.0
 @F
-Ui:2
+Uo:2
 dpak
 :-2.9763779527559056 5.669291338582677;15.73228346456693 5.669291338582677:-2.9763779527559056 5.669291338582677;-2.9763779527559056 22.677165354330707:-1.4173228346456692 25.2;14.173228346456693 25.2:15.73228346456693 5.669291338582677;15.73228346456693 22.677165354330707:-1.4173228346456692 25.2;-2.9763779527559056 22.677165354330707:14.173228346456693 25.2;15.73228346456693 22.677165354330707:4.960629921259843 5.669291338582677;4.960629921259843 3.4015748031496065:7.7952755905511815 5.669291338582677;7.7952755905511815 3.4015748031496065:4.960629921259843 3.4015748031496065;7.7952755905511815 3.4015748031496065*0 0 0 1.0 0.6 10.0
 @N
 
-Uh
+Un
 @O
 1
-Ug
+Um
 @O
 3
-Uf
+Ul
 @O
 2
-Ue
+Uk
 @P
 GND
 
@@ -24585,7 +25381,7 @@ J1s
 0
 1
 3
-Ul
+Ur
 @L
 qg8
 2LrY
@@ -24660,7 +25456,7 @@ Whu
 1
 0
 2
-Us:3
+Uy:3
 @L
 4nLU
 6EY8
@@ -24698,26 +25494,26 @@ J1s
 0
 1
 @F
-V9:1
+VF:1
 0805
 :-2.7 -2.7;-2.7 2.7:-2.7 -2.7;9.9 -2.7:-2.7 2.7;9.9 2.7:9.9 -2.7;9.9 2.7*0 0 0 1.0 0.6 10.0
 @F
-V7:1
+VD:1
 1206
 :-2.5511811023622046 2.5511811023622046;12.472440944881889 2.5511811023622046:-2.5511811023622046 -2.5511811023622046;12.472440944881889 -2.5511811023622046:12.472440944881889 2.5511811023622046;12.472440944881889 -2.5511811023622046:-2.5511811023622046 2.5511811023622046;-2.5511811023622046 -2.5511811023622046*0 0 0 1.0 0.6 10.0
 @F
-V5:1
+VB:1
 ceramic-multi-layer-capacitor-100mil
 :18.0 18.0;32.4 18.0:18.0 18.0;18.0 10.8:32.4 18.0;32.4 10.8:18.0 10.8;32.4 10.8*0 0 0 1.0 0.6 10.0
 @N
 
-V4
+VA
 @O
 2
-V3
+V9
 @O
 1
-V2
+V8
 @P
 A
 
@@ -24815,18 +25611,18 @@ J1s
 2
 
 @F
-VI:1
+VO:1
 do41
 :21.6 14.4;25.2 14.4:25.2 18.18;25.2 10.62:43.2 14.4;39.6 14.4:39.6 18.18;39.6 10.8:25.2 18.18;39.6 18.18:25.2 10.62;39.6 10.62:37.8 18.18;37.8 10.62*0 0 0 1.0 0.6 10.0
 @N
 
-VH
+VN
 @O
 2
-VG
+VM
 @O
 1
-VF
+VL
 @P
 A
 
@@ -24881,16 +25677,16 @@ Pkm
 
 @N
 
-VR
+VX
 @O
 1
-VQ
+VW
 @O
 2
-VP
+VV
 @O
 3
-VO
+VU
 @P
 3
 
@@ -24936,7 +25732,7 @@ dc-supply
 :80.4727922061358 13.127207793864216@81.17573593128807 13.830151519016502 81.17573593128807 14.969848480983499 80.4727922061358 15.672792206135785@79.7698484809835 16.375735931288073 78.63015151901651 16.375735931288073 77.92720779386421 15.672792206135785@77.22426406871193 14.9698484809835 77.22426406871193 13.830151519016502 77.92720779386421 13.127207793864216@78.63015151901651 12.42426406871193 79.7698484809835 12.424264068711928 80.4727922061358 13.127207793864214:80.4727922061358 27.527207793864214@81.17573593128807 28.230151519016502 81.17573593128807 29.3698484809835 80.4727922061358 30.072792206135787@79.7698484809835 30.77573593128807 78.63015151901651 30.77573593128807 77.92720779386421 30.072792206135787@77.22426406871193 29.3698484809835 77.22426406871193 28.230151519016502 77.92720779386421 27.527207793864214@78.63015151901651 26.82426406871193 79.7698484809835 26.82426406871193 80.4727922061358 27.527207793864214:80.4727922061358 41.92720779386422@81.17573593128807 42.6301515190165 81.17573593128807 43.769848480983505 80.4727922061358 44.472792206135786@79.7698484809835 45.175735931288074 78.63015151901651 45.175735931288074 77.92720779386421 44.472792206135786@77.22426406871193 43.769848480983505 77.22426406871193 42.6301515190165 77.92720779386421 41.92720779386422@78.63015151901651 41.22426406871193 79.7698484809835 41.22426406871193 80.4727922061358 41.92720779386422*0 0 0 1.0 0.6 10.0
 @N
 
-VZ
+Vf
 @O
 4
 
@@ -24945,10 +25741,10 @@ VZ
 
 @O
 1
-VY
+Ve
 @O
 2
-VX
+Vd
 @P
 SIGNAL
 
@@ -24980,66 +25776,66 @@ bnc
 :28.8 43.2;36.0 43.2:28.8 28.8;36.0 28.8:36.0 50.4;36.0 21.6:36.0 50.4;64.8 50.4:64.8 50.4;64.8 21.6:36.0 21.6;64.8 21.6*0 1 0 0.5 0.6 10.0
 :30.072792206135787 41.92720779386422@30.77573593128807 42.6301515190165 30.77573593128807 43.769848480983505 30.072792206135787 44.472792206135786@29.3698484809835 45.175735931288074 28.230151519016502 45.175735931288074 27.527207793864214 44.472792206135786@26.82426406871193 43.769848480983505 26.82426406871193 42.6301515190165 27.527207793864214 41.92720779386422@28.230151519016502 41.22426406871193 29.3698484809835 41.22426406871193 30.072792206135787 41.92720779386422:30.072792206135787 27.527207793864214@30.77573593128807 28.230151519016502 30.77573593128807 29.3698484809835 30.072792206135787 30.072792206135787@29.3698484809835 30.77573593128807 28.230151519016502 30.77573593128807 27.527207793864214 30.072792206135787@26.82426406871193 29.3698484809835 26.82426406871193 28.230151519016502 27.527207793864214 27.527207793864214@28.230151519016502 26.82426406871193 29.3698484809835 26.82426406871193 30.072792206135787 27.527207793864214*0 0 0 1.0 0.6 10.0
 @F
-WH:1
+WN:1
 ceramic-multi-layer-capacitor-100mil
 :18.0 18.0;32.4 18.0:18.0 18.0;18.0 10.8:32.4 18.0;32.4 10.8:18.0 10.8;32.4 10.8*0 0 0 1.0 0.6 10.0
 @F
-WF:1
+WL:1
 ceramic-multi-layer-capacitor-200mil
 :18.0 18.0;39.6 18.0:18.0 18.0;18.0 10.8:39.6 18.0;39.6 10.8:18.0 10.8;39.6 10.8*0 0 0 1.0 0.6 10.0
 @F
-WD:1
+WJ:1
 1206
 :-2.5511811023622046 2.5511811023622046;12.472440944881889 2.5511811023622046:-2.5511811023622046 -2.5511811023622046;12.472440944881889 -2.5511811023622046:12.472440944881889 2.5511811023622046;12.472440944881889 -2.5511811023622046:-2.5511811023622046 2.5511811023622046;-2.5511811023622046 -2.5511811023622046*0 0 0 1.0 0.6 10.0
 @F
-WB:1
+WH:1
 polyester-capacitor-50-110x72
 :-3.1181102362204722 -15.590551181102363;-3.1181102362204722 15.590551181102363:17.291338582677167 -15.590551181102363;17.291338582677167 15.590551181102363:-3.1181102362204722 15.590551181102363;17.291338582677167 15.590551181102363:-3.1181102362204722 -15.590551181102363;17.291338582677167 -15.590551181102363*0 0 0 0.043308791684711995 0.6 10.0
 @F
-W9:1
+WF:1
 polyester-capacitor-50-25x72
 :-3.1181102362204722 -3.543307086614173;-3.1181102362204722 3.543307086614173:17.291338582677167 -3.543307086614173;17.291338582677167 3.543307086614173:-3.1181102362204722 3.543307086614173;17.291338582677167 3.543307086614173:-3.1181102362204722 -3.543307086614173;17.291338582677167 -3.543307086614173*0 0 0 0.043308791684711995 0.6 10.0
 @F
-W7:1
+WD:1
 polyester-capacitor-50-30x72
 :-3.1181102362204722 -4.251968503937008;-3.1181102362204722 4.251968503937008:17.291338582677167 -4.251968503937008;17.291338582677167 4.251968503937008:-3.1181102362204722 4.251968503937008;17.291338582677167 4.251968503937008:-3.1181102362204722 -4.251968503937008;17.291338582677167 -4.251968503937008*0 0 0 0.043308791684711995 0.6 10.0
 @F
-W5:1
+WB:1
 polyester-capacitor-50-35x72
 :-3.1181102362204722 -4.960629921259843;-3.1181102362204722 4.960629921259843:17.291338582677167 -4.960629921259843;17.291338582677167 4.960629921259843:-3.1181102362204722 4.960629921259843;17.291338582677167 4.960629921259843:-3.1181102362204722 -4.960629921259843;17.291338582677167 -4.960629921259843*0 0 0 0.043308791684711995 0.6 10.0
 @F
-W3:1
+W9:1
 polyester-capacitor-50-45x72
 :-3.1181102362204722 -6.377952755905512;-3.1181102362204722 6.377952755905512:17.291338582677167 -6.377952755905512;17.291338582677167 6.377952755905512:-3.1181102362204722 6.377952755905512;17.291338582677167 6.377952755905512:-3.1181102362204722 -6.377952755905512;17.291338582677167 -6.377952755905512*0 0 0 0.043308791684711995 0.6 10.0
 @F
-W1:1
+W7:1
 polyester-capacitor-50-50x72
 :-3.1181102362204722 -7.086614173228346;-3.1181102362204722 7.086614173228346:17.291338582677167 -7.086614173228346;17.291338582677167 7.086614173228346:-3.1181102362204722 7.086614173228346;17.291338582677167 7.086614173228346:-3.1181102362204722 -7.086614173228346;17.291338582677167 -7.086614173228346*0 0 0 0.043308791684711995 0.6 10.0
 @F
-Vz:1
+W5:1
 polyester-capacitor-50-55x72
 :-3.1181102362204722 -7.7952755905511815;-3.1181102362204722 7.7952755905511815:17.291338582677167 -7.7952755905511815;17.291338582677167 7.7952755905511815:-3.1181102362204722 7.7952755905511815;17.291338582677167 7.7952755905511815:-3.1181102362204722 -7.7952755905511815;17.291338582677167 -7.7952755905511815*0 0 0 0.043308791684711995 0.6 10.0
 @F
-Vx:1
+W3:1
 polyester-capacitor-50-72x72
 :-3.1181102362204722 -10.204724409448819;-3.1181102362204722 10.204724409448819:17.291338582677167 -10.204724409448819;17.291338582677167 10.204724409448819:-3.1181102362204722 10.204724409448819;17.291338582677167 10.204724409448819:-3.1181102362204722 -10.204724409448819;17.291338582677167 -10.204724409448819*0 0 0 0.043308791684711995 0.6 10.0
 @F
-Vv:1
+W1:1
 polyester-capacitor-50-85x72
 :-3.1181102362204722 -12.047244094488189;-3.1181102362204722 12.047244094488189:17.291338582677167 -12.047244094488189;17.291338582677167 12.047244094488189:-3.1181102362204722 12.047244094488189;17.291338582677167 12.047244094488189:-3.1181102362204722 -12.047244094488189;17.291338582677167 -12.047244094488189*0 0 0 0.043308791684711995 0.6 10.0
 @F
-Vt:1
+Vz:1
 metallized-polyester-capacitor-50
 :18.0 25.2;39.6 25.2:18.0 18.0;39.6 18.0:39.6 25.2;39.6 18.0:18.0 25.2;18.0 18.0*0 0 0 0.17123287671232876 0.6 10.0
 @N
 
-Vs
+Vy
 @O
 2
-Vr
+Vx
 @O
 1
-Vq
+Vw
 @P
 A
 
@@ -25357,66 +26153,66 @@ J1s
 2
 
 @F
-X0:1
+X6:1
 mf50
 :21.6 16.2;23.4 16.2:14.4 21.6;21.6 21.6:21.6 27.0;21.6 16.2:25.2 18.0;46.8 18.0:23.4 16.2;25.2 18.0:25.2 25.2;46.8 25.2:23.4 27.0;25.2 25.2:21.6 27.0;23.4 27.0:50.4 27.0;48.6 27.0:48.6 27.0;46.8 25.2:50.4 16.2;48.6 16.2:48.6 16.2;46.8 18.0:50.4 27.0;50.4 16.2:57.6 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wy:1
+X4:1
 mf12-rect
 :26.1 18.9;38.7 18.9:21.6 21.6;26.1 21.6:26.1 24.3;26.1 18.9:26.1 24.3;38.7 24.3:38.7 24.3;38.7 18.9:43.2 21.6;38.7 21.6*0 0 0 1.0 0.6 10.0
 @F
-Ww:1
+X2:1
 mf25
 :26.1 18.0;27.9 18.0:21.6 21.6;26.1 21.6:26.1 25.2;26.1 18.0:28.8 18.9;43.2 18.9:27.9 18.0;28.8 18.9:28.8 24.3;43.2 24.3:27.9 25.2;28.8 24.3:26.1 25.2;27.9 25.2:45.9 25.2;44.1 25.2:44.1 25.2;43.2 24.3:45.9 18.0;44.1 18.0:44.1 18.0;43.2 18.9:45.9 25.2;45.9 18.0:50.4 21.6;45.9 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wu:1
+X0:1
 1206
 :-2.5511811023622046 2.5511811023622046;12.472440944881889 2.5511811023622046:-2.5511811023622046 -2.5511811023622046;12.472440944881889 -2.5511811023622046:12.472440944881889 2.5511811023622046;12.472440944881889 -2.5511811023622046:-2.5511811023622046 2.5511811023622046;-2.5511811023622046 -2.5511811023622046*0 0 0 1.0 0.6 10.0
 @F
-Ws:1
+Wy:1
 mf12
 :27.0 18.9;28.8 18.9:21.6 21.6;27.0 21.6:27.0 24.3;27.0 18.9:29.7 19.8;35.1 19.8:28.8 18.9;29.7 19.8:29.7 23.4;35.1 23.4:28.8 24.3;29.7 23.4:27.0 24.3;28.8 24.3:37.8 24.3;36.0 24.3:36.0 24.3;35.1 23.4:37.8 18.9;36.0 18.9:36.0 18.9;35.1 19.8:37.8 24.3;37.8 18.9:43.2 21.6;37.8 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wq:1
+Ww:1
 rc2512
 :7.086614173228346 18.4251968503937;35.43307086614173 18.4251968503937:35.43307086614173 26.929133858267715;7.086614173228346 26.929133858267715:7.086614173228346 26.929133858267715;7.086614173228346 18.4251968503937:35.43307086614173 26.929133858267715;35.43307086614173 18.4251968503937*0 0 0 1.0 0.6 10.0
 @F
-Wo:1
+Wu:1
 mf100-rect
 :14.4 14.4;50.4 14.4:7.2 21.6;14.4 21.6:14.4 28.8;14.4 14.4:14.4 28.8;50.4 28.8:50.4 28.8;50.4 14.4:57.6 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wm:1
+Ws:1
 subminiature-resistor
 :2.16 -2.52;2.16 2.52:2.16 2.52;12.24 2.52:2.16 -2.52;12.24 -2.52:12.24 2.52;12.24 -2.52:0.0 0.0;2.16 0.0:12.24 0.0;14.4 0.0*0 0 0 1.0 0.6 10.0
 @F
-Wk:1
+Wq:1
 mf50-rect
 :21.6 16.2;50.4 16.2:14.4 21.6;21.6 21.6:21.6 27.0;21.6 16.2:21.6 27.0;50.4 27.0:50.4 27.0;50.4 16.2:57.6 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wi:1
+Wo:1
 mf200
 :14.4 14.4;18.0 14.4:7.2 21.6;14.4 21.6:14.4 30.6;14.4 14.4:19.8 16.2;52.2 16.2:18.0 14.4;19.8 16.2:19.8 28.8;52.2 28.8:18.0 30.6;19.8 28.8:14.4 30.6;18.0 30.6:57.6 30.6;54.0 30.6:54.0 30.6;52.2 28.8:57.6 14.4;54.0 14.4:54.0 14.4;52.2 16.2:57.6 30.6;57.6 14.4:64.8 21.6;57.6 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wg:1
+Wm:1
 0805
 :-2.7 -2.7;-2.7 2.7:-2.7 -2.7;9.9 -2.7:-2.7 2.7;9.9 2.7:9.9 -2.7;9.9 2.7*0 0 0 1.0 0.6 10.0
 @F
-We:1
+Wk:1
 mf200-rect
 :14.4 14.4;57.6 14.4:7.2 21.6;14.4 21.6:14.4 30.6;14.4 14.4:14.4 30.6;57.6 30.6:57.6 30.6;57.6 14.4:64.8 21.6;57.6 21.6*0 0 0 1.0 0.6 10.0
 @F
-Wc:1
+Wi:1
 mf100
 :14.4 14.4;18.0 14.4:7.2 21.6;14.4 21.6:14.4 28.8;14.4 14.4:19.8 16.2;45.0 16.2:18.0 14.4;19.8 16.2:19.8 27.0;45.0 27.0:18.0 28.8;19.8 27.0:14.4 28.8;18.0 28.8:50.4 28.8;46.8 28.8:46.8 28.8;45.0 27.0:50.4 14.4;46.8 14.4:46.8 14.4;45.0 16.2:50.4 28.8;50.4 14.4:57.6 21.6;50.4 21.6*0 0 0 1.0 0.6 10.0
 @N
 
-Wb
+Wh
 @O
 1
-Wa
+Wg
 @O
 2
-WZ
+Wf
 @P
 B
 
@@ -25734,70 +26530,70 @@ J1s
 2
 
 @F
-Xr:D
+Xx:D
 so14
 :-1.5590551181102361 2.125984251968504;-1.5590551181102361 12.925984251968504:0.8851429334237102 3.933786200434558@1.0608788647117815 4.109522131722629 1.0608788647117815 4.394446372214379 0.8851429334237102 4.570182303502451@0.7094070021356387 4.745918234790522 0.4244827616438889 4.745918234790522 0.2487468303558174 4.570182303502451@0.07301089906774594 4.394446372214379 0.07301089906774583 4.109522131722629 0.2487468303558173 3.933786200434558@0.42448276164388876 3.7580502691464863 0.7094070021356387 3.7580502691464863 0.8851429334237102 3.9337862004345574:23.159055118110235 2.125984251968504;23.159055118110235 12.925984251968504:-1.5590551181102361 2.125984251968504;23.159055118110235 2.125984251968504:-1.5590551181102361 12.925984251968504;23.159055118110235 12.925984251968504*0 0 0 1.0 0.6 10.0
 @F
-Xd:D
+Xj:D
 so14-100mils-adapter
 :-2.88 46.8;-2.88 10.8:38.88 10.8;-2.88 10.8:38.88 10.8;38.88 46.8:-2.88 46.8;38.88 46.8*0 0 0 1.0 0.6 10.0
 @N
 4
-Xc
+Xi
 @N
 1
-Xc
+Xi
 @N
 2
-Xc
+Xi
 @N
 3
-Xc
+Xi
 @N
 
-Xb
+Xh
 @O
 5
-Xa
+Xg
 @O
 4
-XZ
+Xf
 @O
 2
-XY
+Xe
 @O
 8
-XX
+Xd
 @O
 9
-XW
+Xc
 @O
 13
-XV
+Xb
 @O
 3
-XU
+Xa
 @O
 11
-XT
+XZ
 @O
 14
-XS
+XY
 @O
 12
-XR
+XX
 @O
 7
-XQ
+XW
 @O
 10
-XP
+XV
 @O
 1
-XO
+XU
 @O
 6
-XN
+XT
 @P
 IN-
 2
