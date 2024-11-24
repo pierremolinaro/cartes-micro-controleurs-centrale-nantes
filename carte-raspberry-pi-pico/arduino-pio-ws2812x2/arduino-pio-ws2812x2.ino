@@ -2,6 +2,12 @@
   #error Sélectionner la carte "Raspberry Pi Pico"
 #endif
 
+//-----------------------------------------------------------------------------
+
+#if F_CPU != 133000000L
+  #error La frequence CPU doit etre 133 MHz
+#endif
+
 //-------------------------------------------------------------------------------------------------
 
 #include <LiquidCrystal.h>
@@ -81,20 +87,20 @@ static uint8_t gCouleur = 0 ;
 //-------------------------------------------------------------------------------------------------
 
 void loop() {
-// if (gEcheanceMode2 < millis ()) {
-//    gEcheanceMode2 += 20 ;
-//    gCouleur += 1 ;
-//    gCouleur &= 0x7F ;
-//    pio_ws2812_set_output (pio, stateMachine, gCouleur, gCouleur, gCouleur) ;
-//    pio_ws2812_set_output (pio, stateMachine, gCouleur, 0, 0) ;
-//  }
+if (gEcheanceMode2 < millis ()) {
+   gEcheanceMode2 += 20 ;
+   gCouleur += 1 ;
+   gCouleur &= 0x7F ;
+   pio_ws2812_set_output (pio, stateMachine, gCouleur, gCouleur, gCouleur) ;
+   pio_ws2812_set_output (pio, stateMachine, gCouleur, 0, 0) ;
+ }
   if (gDeadline < millis ()) {
     gDeadline += 1000 ;
     digitalWrite (LED_BUILTIN, !digitalRead (LED_BUILTIN)) ;
     lcd.setCursor (0, 1) ;
     lcd.print (gDeadline) ;
-    pio_ws2812_set_output (pio, stateMachine, 64, 0, 0) ;
-    pio_ws2812_set_output (pio, stateMachine, 0, 64, 0) ;
+    // pio_ws2812_set_output (pio, stateMachine, 64, 0, 0) ;
+    // pio_ws2812_set_output (pio, stateMachine, 0, 64, 0) ;
    }
  }
 
